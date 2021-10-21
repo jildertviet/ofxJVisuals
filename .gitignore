@@ -1,0 +1,4 @@
+README_AUTHOR.md
+**/*.app
+**/*.xcodeproj
+**/*.xcconfig
