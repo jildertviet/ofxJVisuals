@@ -12,6 +12,7 @@ Installation
 
 Dependencies
 ------------
+ofxAssimpModelLoader, ofxOsc  
 
 Compatibility
 ------------
