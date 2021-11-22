@@ -195,7 +195,7 @@ void JPhysarum::specificFunction(){
             
             ofEnableBlendMode(OF_BLENDMODE_ADD);
 
-            ofSetColor(255);
+            ofSetColor(255); // x
             mesh.draw();
 
             ofDisableBlendMode();
