@@ -14,6 +14,10 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     
     numParticles = (size.x*size.y)*0.15;
     
+//    m_density = min<float>(size.x,size.y) * 0.3;
+//    m_samples = ofxPoissonDiskSampling::sample2D(size.x,size.y, numParticles, false);
+//    numParticles = m_density;
+    
     string shadersFolder;
     if(ofIsGLProgrammableRenderer()){
         shadersFolder="shaders_gl3";
@@ -41,9 +45,16 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     for (int x = 0; x < textureRes; x++){
         for (int y = 0; y < textureRes; y++){
             int i = textureRes * y + x;
-            p.setColor(x, y, ofFloatColor((float)x / (float)textureRes,
-                                          (float)y / (float)textureRes,
-                                          1.0-pow(ofRandom(0.0001, 0.9), 10.0))
+//            cout << m_samples[i].x << endl;
+            if(i % (numParticles/1000) == 0){
+                m_samples = ofxPoissonDiskSampling::sample2D(size.x,size.y, numParticles/1000, false);
+            }
+            p.setColor(x, y, ofFloatColor(
+//                                          (float)x / (float)textureRes,
+//                                          (float)y / (float)textureRes,
+                                          m_samples[i % (numParticles/1000)].x / size.x, // Normalize?
+                                          m_samples[i % (numParticles/1000)].y / size.y,
+                                          1.0-pow(ofRandom(0.0001, 0.9), 2.0))
                        );
         }
     }
@@ -62,7 +73,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     ofClear(255, 0, 0); // All in one direction
     velPingPong.src->end();
     
-    renderPingPong.allocate(size.x, size.y, GL_RGBA);
+    renderPingPong.allocate(size.x, size.y, GL_RGBA32F);
     renderPingPong.src->begin();
     ofClear(0, 0);
     ofSetColor(0, 0, 255);

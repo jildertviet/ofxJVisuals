@@ -16,6 +16,8 @@
     #include "ofxGui.h"
 #endif
 
+#include "ofxPoissonDiskSampling.h"
+
 struct pingPongBuffer {
 public:
     void allocate( int _width, int _height, int _internalformat = GL_RGBA){
@@ -69,6 +71,9 @@ public:
     float balance = 0.5;
     float decay = 0.98;
     float blurMix;
+    
+    vector<ofVec2f> m_samples;
+    float m_density;
     
 private:
     ofShader    updatePos;

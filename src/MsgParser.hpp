@@ -14,7 +14,7 @@
 #include <map>
 #include <vector>
 #include "ofxOsc.h"
-#include "ofxJVisuals.hpp"
+//#include "ofxJVisuals.hpp"
 #include "JRectangle.hpp"
 #include "Event.hpp"
 #include "JVecField.hpp"
@@ -33,6 +33,8 @@
 #include "JPhysarum.hpp"
 
 using namespace std;
+
+class ofxJVisuals;
 
 class MsgParser{
 public:
