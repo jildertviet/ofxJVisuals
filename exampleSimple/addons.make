@@ -8,5 +8,6 @@ ofxMSAOpenCL
 ofxMidi
 ofxOpenCv
 ofxOsc
+ofxPoissonDiskSampling
 ofxPostProcessing
 ofxSyphon
