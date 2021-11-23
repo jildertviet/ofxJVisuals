@@ -97,6 +97,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 
 void JPhysarum::display(){
     ofSetColor(colors[0]);
+    
     renderPingPong.src->draw(loc.x, loc.y);
     
 //    velPingPong.src->draw(0, 0);
@@ -183,7 +184,8 @@ void JPhysarum::specificFunction(){
 
         glDisable(GL_BLEND);
         glBlendEquation(GL_FUNC_ADD);
-        glBlendFunc(GL_SRC_COLOR, GL_DST_COLOR);
+        glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+
     
         ofSetColor(255);
         alphaDecay.begin();
@@ -194,7 +196,7 @@ void JPhysarum::specificFunction(){
     
 //        ofSetColor(255, 0, 0, 255);
 //        ofDrawRectangle(ofGetFrameNum()%((int)renderPingPong.dst->getWidth()) * 2, 0, 2, 300);
-    
+            
         updateRender.begin();
             updateRender.setUniformTexture("posTex", posPingPong.src->getTexture(), 1);
             updateRender.setUniformTexture("alpha", velPingPong.src->getTexture(), 2);
@@ -206,10 +208,12 @@ void JPhysarum::specificFunction(){
             mesh.draw();
 
             ofDisableBlendMode();
-            glEnd();
+//            glEnd();
         updateRender.end();
     //    ofClearAlpha();
     renderPingPong.dst->end();
     
     renderPingPong.swap();
+    
+    ofEnableAlphaBlending();
 }

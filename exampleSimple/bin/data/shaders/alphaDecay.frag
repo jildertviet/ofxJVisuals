@@ -14,8 +14,8 @@ void main(){
         
 //    a -= 0.01;
     
-//    if(color.a < 0.0)
-//        color.a = 0.0;
+    if(a < 0.05)
+        a = 0.0;
     
 //    color = vec4(color.r, color.g, color.b, color.a);
 //    color = vec4(1.0, 1.0, 1.0, 1.0);

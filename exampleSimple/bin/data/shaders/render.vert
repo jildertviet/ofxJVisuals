@@ -13,6 +13,7 @@ void main() {
     // read position data from texture
     vec2 pos = texture2DRect(posTex, st).xy;
     float a = texture2DRect(alpha, st).b;
+    vec2 vel = texture2DRect(alpha, st).xy;
 //    float g = texture2DRect(alpha, st).y;
     
     // Maps the position from the texture (from 0.0 to 1.0) to

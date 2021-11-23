@@ -734,9 +734,9 @@ bool MsgParser::make(ofxOscMessage& m){
             v->addEvent(vP, FUNCTIONAL);
 //            vp->pl
             JVecField* vf = new JVecField();
-            vf->setSize(glm::vec2(1024, 1024));
+            vf->setSize(glm::vec2(4096, 4096));
             vf->setMode(VECFIELD_MODE::VIDEO);
-            vf->setDensity(glm::vec2(1024 / 10, 1024 / 10));
+            vf->setDensity(glm::vec2(4096 / 10, 4096 / 10));
             vf->video = &(vP->player);
 //            vf->vecTex.allocate(1024, 1024, GL_RGBA32F);
 //            vf->setPixelsToTest();
