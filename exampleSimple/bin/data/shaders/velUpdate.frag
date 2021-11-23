@@ -38,20 +38,22 @@ void main(void){
     vec2 st = gl_TexCoord[0].st;
     vec2 pos = texture2DRect(positionTex, st).xy;
     vec2 vel = texture2DRect(velocityTex, st).xy;
-//    float mass = texture2DRect(positionTex, st).b;
+    float mass = texture2DRect(positionTex, st).z;
     vec2 prevVel = vel;
     vel -= 0.5;
     vel *= 2.; // -1, 1 range now
     float alpha = 0.;
 
+    float sensorDistanceScaled = sensorDistance * (1. + mass);
+    
     vec3 sensorValues = vec3(0.0, 0.0, 0.0);
     vec2 rotatedVelocity = rotate(normalize(vel), radians(sensorAngle));
     vec2 rotatedVelocityNegative = rotate(normalize(vel), radians(-sensorAngle));
     
     for(int i=0; i<9; i++){
-        sensorValues[1] += texture2DRect(trailTex,  (vec2(resolution * pos) + (normalize(vel) * sensorDistance)) +          offsets[i].xy).a;
-        sensorValues[0] += texture2DRect(trailTex,   (vec2(resolution * pos) + (rotatedVelocity * sensorDistance)) +         offsets[i].xy).a;
-        sensorValues[2] += texture2DRect(trailTex,   (vec2(resolution * pos) + (rotatedVelocityNegative * sensorDistance)) + offsets[i].xy).a;
+        sensorValues[1] += texture2DRect(trailTex,  (vec2(resolution * pos) + (normalize(vel) * sensorDistanceScaled)) +          offsets[i].xy).a;
+        sensorValues[0] += texture2DRect(trailTex,   (vec2(resolution * pos) + (rotatedVelocity * sensorDistanceScaled)) +         offsets[i].xy).a;
+        sensorValues[2] += texture2DRect(trailTex,   (vec2(resolution * pos) + (rotatedVelocityNegative * sensorDistanceScaled)) + offsets[i].xy).a;
     }
 
     sensorValues /= 9.;

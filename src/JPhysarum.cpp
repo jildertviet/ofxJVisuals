@@ -14,10 +14,6 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     
     numParticles = (size.x*size.y)*0.15;
     
-//    m_density = min<float>(size.x,size.y) * 0.3;
-//    m_samples = ofxPoissonDiskSampling::sample2D(size.x,size.y, numParticles, false);
-//    numParticles = m_density;
-    
     string shadersFolder;
     if(ofIsGLProgrammableRenderer()){
         shadersFolder="shaders_gl3";
@@ -45,16 +41,9 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     for (int x = 0; x < textureRes; x++){
         for (int y = 0; y < textureRes; y++){
             int i = textureRes * y + x;
-//            cout << m_samples[i].x << endl;
-            if(i % (numParticles/1000) == 0){
-                m_samples = ofxPoissonDiskSampling::sample2D(size.x,size.y, numParticles/1000, false);
-            }
-            p.setColor(x, y, ofFloatColor(
-//                                          (float)x / (float)textureRes,
-//                                          (float)y / (float)textureRes,
-                                          m_samples[i % (numParticles/1000)].x / size.x, // Normalize?
-                                          m_samples[i % (numParticles/1000)].y / size.y,
-                                          1.0-pow(ofRandom(0.0001, 0.9), 2.0))
+            p.setColor(x, y, ofFloatColor((float)x / (float)textureRes,
+                                          (float)y / (float)textureRes,
+                                          1.0-pow(ofRandom(0.0001, 0.9), 3.0))
                        );
         }
     }
@@ -73,7 +62,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     ofClear(255, 0, 0); // All in one direction
     velPingPong.src->end();
     
-    renderPingPong.allocate(size.x, size.y, GL_RGBA32F);
+    renderPingPong.allocate(size.x, size.y, GL_RGBA);
     renderPingPong.src->begin();
     ofClear(0, 0);
     ofSetColor(0, 0, 255);
@@ -129,9 +118,11 @@ void JPhysarum::specificFunction(){
     velPingPong.dst->begin();
         ofClear(0);
         updateVel.begin();
-            updateVel.setUniformTexture("velocityTex", velPingPong.src->getTexture(), 0);
-            updateVel.setUniformTexture("positionTex", posPingPong.src->getTexture(), 1);
-            updateVel.setUniformTexture("trailTex", renderPingPong.src->getTexture(), 2);
+            updateVel.setUniformTexture("velocityTex", velPingPong.src->getTexture(), 0); // To read current vel
+            updateVel.setUniformTexture("positionTex", posPingPong.src->getTexture(), 1); // To read current pos
+            updateVel.setUniformTexture("trailTex", renderPingPong.src->getTexture(), 2); // To read what's happening around that pos
+            if(externalVelocity)
+                updateVel.setUniformTexture("externalVelocity", *externalVelocity, 3); // To read what's happening around that pos
 
             updateVel.setUniform1f("sensorAngle", sensorAngle);
             updateVel.setUniform1f("time", ofGetElapsedTimeMillis());
@@ -143,6 +134,11 @@ void JPhysarum::specificFunction(){
             updateVel.setUniform1f("balance", balance);
             updateVel.setUniform1f("depositAmount", (float)depositAmount);
             updateVel.setUniform1f("blurMix", (float)blurMix);
+    
+            bool bExternalVelocity = false;
+            if(externalVelocity)
+                bExternalVelocity = true;
+            updateVel.setUniform1i("bExternalVelocity", bExternalVelocity);
 
             velPingPong.src->draw(0, 0);
         updateVel.end();
@@ -206,7 +202,7 @@ void JPhysarum::specificFunction(){
             
             ofEnableBlendMode(OF_BLENDMODE_ADD);
 
-            ofSetColor(255); // x
+            ofSetColor(255);
             mesh.draw();
 
             ofDisableBlendMode();
