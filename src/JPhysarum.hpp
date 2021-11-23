@@ -70,6 +70,7 @@ public:
     float decay = 0.98;
     float blurMix;
     
+    ofTexture* externalVelocity = nullptr;
 private:
     ofShader    updatePos;
     ofShader    updateVel;
@@ -80,7 +81,6 @@ private:
     pingPongBuffer velPingPong;
     pingPongBuffer renderPingPong;
     
-    ofTexture* externalVelocity = nullptr;
     
     int numParticles;
     int textureRes;

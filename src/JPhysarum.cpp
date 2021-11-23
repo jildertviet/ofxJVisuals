@@ -138,7 +138,7 @@ void JPhysarum::specificFunction(){
             bool bExternalVelocity = false;
             if(externalVelocity)
                 bExternalVelocity = true;
-            updateVel.setUniform1i("bExternalVelocity", bExternalVelocity);
+            updateVel.setUniform1i("bExternalVelocity", (int)bExternalVelocity);
 
             velPingPong.src->draw(0, 0);
         updateVel.end();

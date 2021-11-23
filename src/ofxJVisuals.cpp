@@ -709,6 +709,45 @@ bool MsgParser::make(ofxOscMessage& m){
             glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
             cout << "Create JPhysarum w/ size: " << size << endl;
             e = new JPhysarum(glm::vec2(0, 0), size);
+            
+            JPhysarum* p = (JPhysarum*)e;
+            
+            
+//            ofFloatPixels pixels;
+//            pixels.allocate(1024, 1024, 3);
+//            for(int i=0; i<1024; i++){
+//                for(int j=0; j<1024; j++){
+//                    if(i < 512){
+//                        pixels.setColor(i, j, ofFloatColor(0.5, 0.5, 0.5));
+//                    } else{
+//                        pixels.setColor(i, j, ofFloatColor(0.0, 0.0, 0.0));
+//                    }
+//                }
+//            }
+//            ofTexture* t;
+//            t = new ofTexture;
+//            t->allocate(1024, 1024, GL_RGB32F);
+//            t->loadData(pixels);
+            
+            JVecField* vf = new JVecField();
+            vf->setSize(glm::vec2(1024, 1024));
+            vf->setMode(VECFIELD_MODE::PERLIN);
+            vf->setDensity(glm::vec2(1024 / 10, 1024 / 10));
+            
+//            vf->vecTex.allocate(1024, 1024, GL_RGBA32F);
+//            vf->setPixelsToTest();
+            vf->speed = 0.005;
+
+
+            vf->drawMode = VECFIELD_MODE::HIDE;
+            vf->setColor(ofColor(0,0));
+            vf->complexity = 30;
+            
+            v->addEvent((Event*)vf);
+
+//            p->externalVelocity = t;
+            p->externalVelocity = &(vf->vecTex);
+            
             break;
     }
     

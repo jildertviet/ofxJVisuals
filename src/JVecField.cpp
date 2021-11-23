@@ -179,7 +179,7 @@ void JVecField::setDensity(glm::vec2 d, char numChannels){
     vecTex.clear();
     p.allocate(d.x, d.y, numChannels);
     density = d;
-    resizeFbo.allocate(density.x, density.y, GL_RGBA);
+    resizeFbo.allocate(density.x, density.y, GL_RGBA32F);
     
 //    plane.set(density.x, density.y, 10, 10);
 //    plane.mapTexCoords(0, 0, resizeFbo.getWidth(), resizeFbo.getHeight());

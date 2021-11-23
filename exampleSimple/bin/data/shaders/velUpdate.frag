@@ -4,6 +4,7 @@
 uniform sampler2DRect velocityTex;
 uniform sampler2DRect positionTex;
 uniform sampler2DRect trailTex;
+uniform sampler2DRect externalVelocity;
 
 uniform float sensorDistance;
 uniform float sensorAngle;
@@ -14,6 +15,7 @@ uniform float depositAmount;
 uniform float time;
 uniform float balance;
 uniform float blurMix;
+uniform int bExternalVelocity;
 
 float random (vec2 st) {
     return fract(sin(dot(st.xy,
@@ -73,8 +75,17 @@ void main(void){
         vel = rotate(normalize(vel), radians(-turnAngle));
     }
     
-    vel /= 2.;
-    vel += 0.5;
+    if(bExternalVelocity == 1){
+        vec2 extForce = texture2DRect(externalVelocity, resolution * pos * 0.1).xy; // 0.1 for scale @ vecF
+        extForce -= 0.5; // 0 <> 1 --> -0.5 <> 0.5
+        extForce *= 2.; // -1 <> 1
+        vel = mix(vel * 2., extForce, 0.5);
+        vel /= 2.;
+        vel += 0.5;
+    } else{
+        vel /= 2.;
+        vel += 0.5;
+    }
     
 //    balance = balance * mass;
     vel = (prevVel * balance) + (vel * (1.-balance));

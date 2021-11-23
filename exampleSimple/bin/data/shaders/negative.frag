@@ -11,5 +11,5 @@ void main()
     vec4 color = texture2DRect(tex0, texCoordVarying);
     vec4 maskColor = texture2DRect(mask, texCoordVarying);
     
-    gl_FragColor = texel0;
+    gl_FragColor = color; // !?
 }
