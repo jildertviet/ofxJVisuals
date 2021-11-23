@@ -401,7 +401,7 @@ Event* ofxJVisuals::getEventById(int idToFind){
 void ofxJVisuals::getFreePointers(){
     unsigned short freeEvents[MAX_EVENTS_PTRS];
     unsigned short numFreeEvents = 0;
-    for(unsigned short i=1; i<MAX_EVENTS_PTRS; i++){ // Keep 0 free... 
+    for(unsigned short i=1; i<MAX_EVENTS_PTRS; i++){ // Keep 0 free...
         if(events[i] == nullptr){
             freeEvents[numFreeEvents] = i;
             numFreeEvents++;
