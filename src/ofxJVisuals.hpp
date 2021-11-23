@@ -43,6 +43,7 @@
 #include "cameraController.hpp"
 
 #include "JPhysarum.hpp"
+#include "MsgParser.hpp"
 
 enum VisualizerLayer {
     FUNCTIONAL,
@@ -125,6 +126,7 @@ typedef unsigned char uint8;
     float rotationAngle = 0;
     float rotationAngleIcrement = 0.1;
     
+    MsgParser* msgParser;
     ofxOscSender* SCsender;
     ofxOscReceiver receiver;
     
