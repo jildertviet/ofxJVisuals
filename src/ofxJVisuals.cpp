@@ -729,11 +729,15 @@ bool MsgParser::make(ofxOscMessage& m){
 //            t->allocate(1024, 1024, GL_RGB32F);
 //            t->loadData(pixels);
             
+            JVideoPlayer* vP = new JVideoPlayer();
+            vP->load("/Users/jildertviet/Downloads/max.mp4");
+            v->addEvent(vP, FUNCTIONAL);
+//            vp->pl
             JVecField* vf = new JVecField();
             vf->setSize(glm::vec2(1024, 1024));
-            vf->setMode(VECFIELD_MODE::PERLIN);
+            vf->setMode(VECFIELD_MODE::VIDEO);
             vf->setDensity(glm::vec2(1024 / 10, 1024 / 10));
-            
+            vf->video = &(vP->player);
 //            vf->vecTex.allocate(1024, 1024, GL_RGBA32F);
 //            vf->setPixelsToTest();
             vf->speed = 0.005;
