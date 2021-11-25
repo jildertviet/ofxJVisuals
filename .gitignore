@@ -2,3 +2,5 @@ README_AUTHOR.md
 **/*.app
 **/*.xcodeproj
 **/*.xcconfig
+**/data/*.mp4
+**/data/*.tiff
