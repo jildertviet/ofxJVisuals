@@ -730,7 +730,7 @@ bool MsgParser::make(ofxOscMessage& m){
 //            t->loadData(pixels);
             
             JVideoPlayer* vP = new JVideoPlayer();
-            vP->load("/Users/jildertviet/Downloads/max.mp4");
+            vP->load("/Users/jildertviet/Downloads/maxTrimmed.mp4");
             v->addEvent(vP, FUNCTIONAL);
 //            vp->pl
             JVecField* vf = new JVecField();
