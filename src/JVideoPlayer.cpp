@@ -10,11 +10,11 @@
 JVideoPlayer::JVideoPlayer(){
     setType("VideoPlayer");
     colors[0] = ofColor(255);
-    
+
     setMode(JVIDEO_MODE_NORMAL);
-    
+
 //    ofSetFullscreen(true);
-    
+
     font.load("Courier New Bold.ttf", 9);
     asciiCharacters =  string("  ..,,,'''``--_:;^^**""=+<>iv%&xclrs)/){}I?!][1taeo7zjLunT#@JCwfy325Fp6mqSghVd4EgXPGZbYkOA8U$KHDBWNMR0Q");
 }
@@ -26,14 +26,15 @@ void JVideoPlayer::ownDtor(){
 bool JVideoPlayer::load(string path){
     player.setLoopState(OF_LOOP_NORMAL);
     player.setPixelFormat(OF_PIXELS_RGB); // Needed?
-    player.load(path);
+    if(!player.load(path))
+      ofLog(OF_LOG_ERROR, "Video " + path + " not loaded");
     player.setVolume(0);
 //    frame.allocate(player.getWidth(), player.getHeight());
-    
+
     // HELLO!?
     play(0);
     playing = true;
-return true;
+    return true; // ?
 }
 
 void JVideoPlayer::customOne(){load(path);}
@@ -50,12 +51,12 @@ void JVideoPlayer::specificFunction(){
                 player.setFrame(loopPoints[0]);
             }
         }
-        
+
         for(int i=0; i<bins.size(); i++){
             bins[i]->update();
             bins[i]->specificFunction();
         }
-        
+
         player.update();
 
         if(player.getIsMovieDone()){
@@ -81,7 +82,7 @@ void JVideoPlayer::display(){
             case JVIDEO_MODE_ASCII:{
                 displayNormal();
                 ofPixelsRef pixelsRef = player.getPixels();
-                
+
                 ofSetHexColor(0xffffff);
                 ofPushMatrix();
                 ofRotateXDeg(180);
@@ -100,13 +101,13 @@ void JVideoPlayer::display(){
             }
                 break;
         }
-        
+
     }
 }
 
 void JVideoPlayer::displayNormal(){
 //    ofPushMatrix();
-    
+
 //    ofTranslate(loc + ofVec2f(0, -ofGetHeight()));
 //    ofRotateXDeg(180);
     ofSetColor(colors[0]);
@@ -120,7 +121,7 @@ void JVideoPlayer::displayCut(){
     for(int i=0; i<bins.size(); i++){
         bins[i]->display();
     }
-    
+
 //    ofSetColor(ofColor::red);
 //    ofDrawRectangle(100, 100, 3500, 2000);
 }
@@ -360,7 +361,7 @@ void Bin::doFade(float a, float s, float r){
     vector<float> values = {(float)colors[0].a, 0, 0, 255};
     vector<float> times = {a, s, r};
     addEnv(values, times, &colors[0]);
-    
+
 //    if(envelope==nullptr){
 //        envelope = new Envelope(a,s,r);
 //        envelope->triggerEnv();
@@ -372,7 +373,7 @@ void Bin::specificFunction(){
         vector<float> values = {0, 0, 255};
         vector<float> times = {1, 200};
         addEnv(values, times, &colors[0]);
-        
+
         xPos = newXPos;
         bSwitch = false;
     }
@@ -383,4 +384,3 @@ void Bin::doSwitch(int x){
     doFade(10,100,300);
     newXPos = x;
 }
-

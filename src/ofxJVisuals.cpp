@@ -11,9 +11,9 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
         events[i] = nullptr;
     for(int i=0; i<NUMLAYERS; i++)
         layers[i] = new JLayer(); // Dummy events
-    
+
     negative.load("shaders/negative");
-    
+
 #if USE_PP
     post.init(ofGetWidth(), ofGetHeight());
     noisePP = post.createPass<NoiseWarpPass>();
@@ -22,7 +22,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
     fxaaPP->setEnabled(false);
     rgbPP = post.createPass<RGBShiftPass>();
     rgbPP->setEnabled(false);
-    
+
     zoomPP = post.createPass<ZoomBlurPass>();
     zoomPP->setEnabled(false);
 #endif
@@ -31,16 +31,16 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
     alphaScreen->size = size;
     addEvent((Event*)alphaScreen, 0);
     setAlpha(255);
-    
+
     for(int i=0; i<9; i++)
         busses.push_back(new Bus());
-    
+
     loadLastMaskFile();
 
     verdana30.load("verdana.ttf", 50, true, true);
     verdana30.setLineHeight(34.0f);
     verdana30.setLetterSpacing(1.035);
-    
+
     cout << "ofxJVisuals made" << endl;
 #ifndef TARGET_RASPBERRY_PI
     ofFbo::Settings fs; // For export quality
@@ -56,7 +56,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
     renderFbo.allocate(size.x, size.y, GL_RGBA);
 #endif
     negativeMask.allocate(size.x, size.y, GL_RGB);
-    
+
     fbo.begin();
         ofClear(0, 0);
     fbo.end();
@@ -65,13 +65,13 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
         ofSetColor(255);
         ofDrawRectangle(negativeMask.getWidth()*0.25, 0, negativeMask.getWidth()*0.5, negativeMask.getHeight());
     negativeMask.end();
-    
+
     initCam();
-    
+
     receiver.setup(RECEIVER_PORT);
-    
+
     msgParser = new MsgParser(this);
-    
+
 //    sharedFbo.allocate(2560, 800, GL_RGBA);
 //    sharedFbo2.allocate(2560, 800, GL_RGBA);
 }
@@ -83,10 +83,10 @@ void ofxJVisuals::initCam(){
 //    cam.rotate(-180, ofVec3f(1,0,0));
 //    cam.setDistance(fbo.getWidth() * 0.25);
 //    cam.lookAt(ofVec3f(0,0,0));
-    
+
 //    cam.move(0, ofGetHeight() * -0.5, 0);
 //    cam.move(fbo.getWidth() * 0.5, fbo.getHeight() * 0.5, 0); // Temp for ADEtje
-    
+
     if(!camController){
         camController = new cameraController(&cam);
         addEvent((Event*)camController, 0);
@@ -112,25 +112,25 @@ void ofxJVisuals::update(){
         receiver.getNextMessage(m);
         msgParser->parseMsg(m);
     }
-    
+
     if(bRotate)
         rotationAngle += rotationAngleIcrement;
-    
+
     for(int i=0; i<NUMLAYERS; i++)
         layers[i]->updateMain();
     negativeLayer.updateMain();
-    
+
 //    glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA); // Found this on the OF forum
     // Goal: two grey area's should be brighter when they overlap, currently they merge in the same greyness
-    
+
 //    ofEnableBlendMode(OF_BLENDMODE_ADD);
 //    ofEnableDepthTest();
     negativeMask.begin();
         ofClear(0);
         negativeLayer.displayMain();
     negativeMask.end();
-    
-    
+
+
     fbo.begin();
 #if USE_PP
         glPushAttrib(GL_ENABLE_BIT);
@@ -167,8 +167,8 @@ void ofxJVisuals::update(){
         glPopAttrib();
 #endif
     fbo.end();
-    
-    
+
+
     renderFbo.begin();
     if(bNegativeShader){
         negative.begin();
@@ -227,18 +227,18 @@ Event* ofxJVisuals::addEvent(Event* e, int layerIndex, unsigned short index){ //
             return nullptr;
         }
     }
-    
+
     if(layerIndex>=0)
         layers[layerIndex]->addEvent(e);
     last = e;
     e->lastPtr = &last; // For setting to nullptr if event is deleted
-    
+
     numEvents++;
 //    cout << "event ID: " << e->id << endl; Used?
-    
+
 //    e->SCsender = SCsender;
     e->numEventsPtr = &numEvents;
-    
+
     e->events = events;
     e->id = index;
     e->mappersParent = &mappers;
@@ -290,15 +290,15 @@ void ofxJVisuals::killAll(){
     bPostProcessing = false;
 #endif
     bAddMirror = false;
-    
+
     for(uint8 i=0; i<NUMLAYERS-1; i++){
         if(layers[i]->next)
             layers[i]->next->deleteNext(); // Don't delete self, only next events
     }
     if(negativeLayer.next)
         negativeLayer.next->deleteNext();
-        
-    
+
+
     for(unsigned short i=0; i<MAX_EVENTS_PTRS; i++)
         events[i] = nullptr;
 }
@@ -354,7 +354,7 @@ ofxOscMessage ofxJVisuals::getAllEvents(){
             Event* lastRead = layers[i]->next; // First: A (skip dummy Event)
             m.addIntArg(lastRead->id);
             m.addStringArg(lastRead->type);
-            
+
             while(lastRead->next){ // Is there a B? Yes.
                 lastRead = lastRead->next; // So this is B.
                 m.addIntArg(lastRead->id);
@@ -378,7 +378,7 @@ Event* ofxJVisuals::getEventById(int idToFind){
     } else{
         return nullptr;
     }
-    
+
 //    if(last){
 //        if(last->id == idToFind){
 //            return last;
@@ -413,12 +413,12 @@ void ofxJVisuals::getFreePointers(){
         m.addInt32Arg(freeEvents[i]);
     }
     SCsender->sendMessage(m);
-    
+
     // [3, 4, 5 .. 512], when only 0, 1, 2 are still occupied / alive. numFreeEvents should 509
-    
+
     // So should have a 'blank list', of all ptrs[x] that are free...
     // @ Reset receive a bunch of numbers that are free, use that for setting new addresses @ SC...
-    
+
 }
 
 void ofxJVisuals::initCircularMaskFbo(glm::vec2 size, int num){
@@ -495,7 +495,7 @@ void ofxJVisuals::mousePressed(int x, int y, int button){
         meshVertices[indexOfClosest] = glm::vec3(x, y, 0);
         mesh.clear();
         mesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-        
+
         for(char i=0; i<4; i++){
             mesh.addTexCoord(texCoords[i]);
             mesh.addVertex(meshVertices[i]);
@@ -624,7 +624,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
             v->alphaScreen->setColor(c);
             v->alphaScreen->setActiveness(true);
             break;
-            
+
     }
     return false;
 }
@@ -709,10 +709,10 @@ bool MsgParser::make(ofxOscMessage& m){
             glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
             cout << "Create JPhysarum w/ size: " << size << endl;
             e = new JPhysarum(glm::vec2(0, 0), size);
-            
+
             JPhysarum* p = (JPhysarum*)e;
-            
-            
+
+
 //            ofFloatPixels pixels;
 //            pixels.allocate(1024, 1024, 3);
 //            for(int i=0; i<1024; i++){
@@ -728,16 +728,16 @@ bool MsgParser::make(ofxOscMessage& m){
 //            t = new ofTexture;
 //            t->allocate(1024, 1024, GL_RGB32F);
 //            t->loadData(pixels);
-            
-            JVideoPlayer* vP = new JVideoPlayer();
-            vP->load("/Users/jildertviet/Downloads/maxTrimmed.mp4");
-            v->addEvent(vP, FUNCTIONAL);
+
+            // JVideoPlayer* vP = new JVideoPlayer();
+            // vP->load("oil.mov");
+            // v->addEvent(vP, FUNCTIONAL);
 //            vp->pl
             JVecField* vf = new JVecField();
-            vf->setSize(glm::vec2(2048, 2048));
-            vf->setMode(VECFIELD_MODE::VIDEO);
-            vf->setDensity(glm::vec2(2048 / 10, 2048 / 10));
-            vf->video = &(vP->player);
+            vf->setSize(glm::vec2(4096,4096));
+            vf->setMode(VECFIELD_MODE::PERLIN);
+            vf->setDensity(glm::vec2(4096 / 10, 4096 / 10));
+            // vf->video = &(vP->player);
 //            vf->vecTex.allocate(1024, 1024, GL_RGBA32F);
 //            vf->setPixelsToTest();
             vf->speed = 0.005;
@@ -746,15 +746,15 @@ bool MsgParser::make(ofxOscMessage& m){
             vf->drawMode = VECFIELD_MODE::HIDE;
             vf->setColor(ofColor(0,0));
             vf->complexity = 30;
-            
+
             v->addEvent((Event*)vf);
 
 //            p->externalVelocity = t;
             p->externalVelocity = &(vf->vecTex);
-            
+
             break;
     }
-    
+
     e->id = m.getArgAsInt(1);
     if(m.getNumArgs() > 2){
         if(m.getArgType(2) == ofxOscArgType::OFXOSC_TYPE_STRING){
@@ -863,7 +863,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 if(m.getArgAsString(2) == "JVorm")
                     ((Vorm*)e)->change_maxspeed(m.getArgAsFloat(3), m.getArgAsFloat(4));
             }
-            
+
             case 14:{ // lijnMax
                 if(e->type == "Vorm")
                     ((Vorm*)e)->lijnmax = m.getArgAsFloat(2);
@@ -990,7 +990,7 @@ void MsgParser::addEnv(ofxOscMessage& m){
         return;
     vector<float> times = {m.getArgAsFloat(2), m.getArgAsFloat(3), m.getArgAsFloat(4)};
     vector<float> values = {m.getArgAsFloat(5), m.getArgAsFloat(6), m.getArgAsFloat(7), m.getArgAsFloat(8)};
-    
+
     bool bSave = m.getArgAsBool(10); // 9 is killArg
     switch(envValues[m.getArgAsString(1)]){
         case 1: // Width

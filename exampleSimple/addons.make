@@ -1,12 +1,7 @@
 ofxAssimpModelLoader
 ofxEasing
 ofxGui
-ofxJSON
 ofxJVisuals
-ofxMSAPingPong
-ofxMSAOpenCL
-ofxMidi
 ofxOpenCv
 ofxOsc
 ofxPostProcessing
-ofxSyphon
