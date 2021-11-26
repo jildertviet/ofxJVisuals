@@ -4,3 +4,5 @@ README_AUTHOR.md
 **/*.xcconfig
 **/data/*.mp4
 **/data/*.tiff
+*/addons.make
+*/config.make
