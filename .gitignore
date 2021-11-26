@@ -3,6 +3,7 @@ README_AUTHOR.md
 **/*.xcodeproj
 **/*.xcconfig
 **/data/*.mp4
+**/data/*.mov
 **/data/*.tiff
 */addons.make
 */config.make
