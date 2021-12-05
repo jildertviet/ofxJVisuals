@@ -8,7 +8,7 @@ ofPixels p;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1920, 1080);
-    visualizer = new ofxJVisuals(glm::vec2(1920, 1080));
+    visualizer = new ofxJVisuals(glm::vec2(3840, 2160));
 
 //    visualizer->addEvent((Event*)new JPhysarum(glm::vec2((1920-1024)/2, 0), glm::vec2(1024, 1024)), NON_CAM_FRONT);
 //    visualizer->getLast()->setColor(ofColor::white);
@@ -47,7 +47,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    f.draw(0,0, ofGetWidth()*2, ofGetHeight()*2); // ?
+    f.draw(0,0, ofGetWidth(), ofGetHeight()); // ?
 
 
     if(bExport){
@@ -64,7 +64,7 @@ void ofApp::draw(){
         exportImage.save(fileName);
 //        ofSaveFrame();
 //        ofSaveScreen("test.tiff");
-        if(ofGetFrameNum() >= startNum + (60 * 120)){
+        if(ofGetFrameNum() >= startNum + (60 * 60)){
             std::exit(0);
         }
     }

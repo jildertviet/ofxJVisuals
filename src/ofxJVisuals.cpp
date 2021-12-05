@@ -194,7 +194,7 @@ void ofxJVisuals::display(){
             }
             break;
         case 1: // Stretch
-            renderFbo.draw(0, 0, ofGetWidth(), ofGetHeight());
+            renderFbo.draw(0, 0);
             break;
         case 2: //
             cout << "Display mode not supported" << endl;
@@ -740,12 +740,12 @@ bool MsgParser::make(ofxOscMessage& m){
             // vf->video = &(vP->player);
 //            vf->vecTex.allocate(1024, 1024, GL_RGBA32F);
 //            vf->setPixelsToTest();
-            vf->speed = 0.005;
+            vf->speed = 0.001;
 
 
             vf->drawMode = VECFIELD_MODE::HIDE;
             vf->setColor(ofColor(0,0));
-            vf->complexity = 30;
+            vf->complexity = 20;
 
             v->addEvent((Event*)vf);
 

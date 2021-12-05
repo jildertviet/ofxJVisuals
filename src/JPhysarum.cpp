@@ -11,16 +11,16 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     setType("JPhysarum");
     this->size = size;
     this->loc = loc;
-    
+
     numParticles = (size.x*size.y)*0.15;
-    
+
     string shadersFolder;
     if(ofIsGLProgrammableRenderer()){
         shadersFolder="shaders_gl3";
     }else{
         shadersFolder="shaders";
     }
-    
+
     // Loading the Shaders
     if(ofIsGLProgrammableRenderer()){
         updatePos.load(shadersFolder+"/passthru.vert", shadersFolder+"/posUpdate.frag");
@@ -30,12 +30,12 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
         updateVel.load("",shadersFolder+"/velUpdate.frag");
         alphaDecay.load("", shadersFolder+"/alphaDecay.frag");
     }
-    
+
     updateRender.load(shadersFolder+"/render");
-    
+
     textureRes = (int)sqrt((float)numParticles);
     numParticles = textureRes * textureRes;
-    
+
     ofFloatPixels p;
     p.allocate(textureRes, textureRes, 3);
     for (int x = 0; x < textureRes; x++){
@@ -47,10 +47,10 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
                        );
         }
     }
-    
+
     ofImage img;
     img.setFromPixels(p);
-    
+
     posPingPong.allocate(textureRes, textureRes, GL_RGBA32F);
     posPingPong.src->begin();
     ofClear(255);
@@ -61,7 +61,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     velPingPong.src->begin();
     ofClear(255, 0, 0); // All in one direction
     velPingPong.src->end();
-    
+
     renderPingPong.allocate(size.x, size.y, GL_RGBA);
     renderPingPong.src->begin();
     ofClear(0, 0);
@@ -70,7 +70,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
         ofDrawRectangle(ofRandom(renderPingPong.src->getWidth()), ofRandom(renderPingPong.src->getHeight()), 10, 10);
     }
     renderPingPong.src->end();
-    
+
     renderPingPong.dst->begin();
         ofClear(0,0);
     renderPingPong.dst->end();
@@ -82,7 +82,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
             mesh.addTexCoord({x, y});
         }
     }
-    
+
 //    gui.setup();
 //    gui.add(sensorAngle.setup("sensorAngle", 45, 1, 360));
 //    gui.add(sensorDistance.setup("sensorDistance", 50, 1, 500));
@@ -97,14 +97,14 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 
 void JPhysarum::display(){
     ofSetColor(colors[0]);
-    
+
     renderPingPong.src->draw(loc.x, loc.y);
-    
+
 //    velPingPong.src->draw(0, 0);
 //    velPingPong.dst->draw(velPingPong.dst->getWidth(), 0);
 //    posPingPong.src->draw(0, velPingPong.dst->getHeight());
 //    posPingPong.dst->draw(velPingPong.dst->getWidth(), velPingPong.dst->getHeight());
-    
+
 //    if(bDrawGui){
 //        posPingPong.src->draw(0, 0);
 //        velPingPong.src->draw(0, posPingPong.src->getHeight());
@@ -135,7 +135,7 @@ void JPhysarum::specificFunction(){
             updateVel.setUniform1f("balance", balance);
             updateVel.setUniform1f("depositAmount", (float)depositAmount);
             updateVel.setUniform1f("blurMix", (float)blurMix);
-    
+
             bool bExternalVelocity = false;
             if(externalVelocity)
                 bExternalVelocity = true;
@@ -159,7 +159,7 @@ void JPhysarum::specificFunction(){
         updatePos.end();
     posPingPong.dst->end();
     posPingPong.swap();
-    
+
 //    renderPingPong.swap();
 //    renderPingPong.dst->begin();
 //        ofSetColor(0, 10);
@@ -174,34 +174,34 @@ void JPhysarum::specificFunction(){
 ////            renderPingPong.src->draw(0, 0);
 ////        alphaDecay.end();
 //    renderPingPong.dst->end();
-    
-        
+
+
 
     ofEnableAlphaBlending();
-    
+
     renderPingPong.dst->begin();
         ofClear(0, 0);
 
         glDisable(GL_BLEND);
         glBlendEquation(GL_FUNC_ADD);
-        glBlendFunc(GL_SRC_ALPHA, GL_DST_ALPHA);
+        glBlendFunc(GL_ONE, GL_ZERO);
+        // ofEnableBlendMode(OF_BLENDMODE_ADD);
 
-    
         ofSetColor(255);
         alphaDecay.begin();
             alphaDecay.setUniform1f("decay", decay);
             ofSetColor(255);
             renderPingPong.src->draw(0,0);
         alphaDecay.end();
-    
+
 //        ofSetColor(255, 0, 0, 255);
 //        ofDrawRectangle(ofGetFrameNum()%((int)renderPingPong.dst->getWidth()) * 2, 0, 2, 300);
-            
+
         updateRender.begin();
             updateRender.setUniformTexture("posTex", posPingPong.src->getTexture(), 1);
             updateRender.setUniformTexture("alpha", velPingPong.src->getTexture(), 2);
             updateRender.setUniform2f("screen", (float)size.x, (float)size.y);
-            
+
             ofEnableBlendMode(OF_BLENDMODE_ADD);
 
             ofSetColor(255);
@@ -212,8 +212,8 @@ void JPhysarum::specificFunction(){
         updateRender.end();
     //    ofClearAlpha();
     renderPingPong.dst->end();
-    
+
     renderPingPong.swap();
-    
+
     ofEnableAlphaBlending();
 }

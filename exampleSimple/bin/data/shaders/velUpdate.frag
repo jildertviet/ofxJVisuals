@@ -47,11 +47,11 @@ void main(void){
     float alpha = 0.;
 
     float sensorDistanceScaled = sensorDistance * (1. + mass);
-    
+
     vec3 sensorValues = vec3(0.0, 0.0, 0.0);
     vec2 rotatedVelocity = rotate(normalize(vel), radians(sensorAngle));
     vec2 rotatedVelocityNegative = rotate(normalize(vel), radians(-sensorAngle));
-    
+
     for(int i=0; i<9; i++){
         sensorValues[1] += texture2DRect(trailTex,  (vec2(resolution * pos) + (normalize(vel) * sensorDistanceScaled)) +          offsets[i].xy).a;
         sensorValues[0] += texture2DRect(trailTex,   (vec2(resolution * pos) + (rotatedVelocity * sensorDistanceScaled)) +         offsets[i].xy).a;
@@ -59,7 +59,7 @@ void main(void){
     }
 
     sensorValues /= 9.;
-    
+
     if(sensorValues[0]  < sensorValues[1] && sensorValues[1] > sensorValues[2]){
         alpha = depositAmount/255.;
 //        alpha = 1.0;
@@ -74,22 +74,24 @@ void main(void){
     } else if(sensorValues[0] > sensorValues[1] && sensorValues[1] > sensorValues[2]){
         vel = rotate(normalize(vel), radians(-turnAngle));
     }
-    
+
     if(bExternalVelocity == 1){
         vec2 extForce = texture2DRect(externalVelocity, resolution * pos * 0.1).xy; // 0.1 for scale @ vecF
         extForce -= 0.5; // 0 <> 1 --> -0.5 <> 0.5
         extForce *= 2.; // -1 <> 1
+        extForce *= 0.7;
         vel = mix(vel * 2., extForce, 0.5);
+        vel *= 0.5;
+
         vel /= 2.;
         vel += 0.5;
     } else{
         vel /= 2.;
         vel += 0.5;
     }
-    
+
 //    balance = balance * mass;
     vel = (prevVel * balance) + (vel * (1.-balance));
 
     gl_FragColor = vec4(vel.x, vel.y, alpha, 1.0);
 }
-
