@@ -21,6 +21,4 @@ class ofApp: public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
     ofxJVisuals* visualizer;
-    
-    ofFbo f;
 };
