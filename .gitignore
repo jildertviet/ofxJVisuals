@@ -8,3 +8,4 @@ README_AUTHOR.md
 */addons.make
 */config.make
 *.mp4
+/bin/exampleSimple
