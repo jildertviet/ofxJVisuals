@@ -7,6 +7,8 @@
 
 #include "JPhysarum.hpp"
 
+#ifdef JPhysarum_hpp
+
 JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     setType("JPhysarum");
     this->size = size;
@@ -217,3 +219,4 @@ void JPhysarum::specificFunction(){
 
     ofEnableAlphaBlending();
 }
+#endif
