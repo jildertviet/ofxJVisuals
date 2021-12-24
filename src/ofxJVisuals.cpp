@@ -911,6 +911,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                                                    );
                     ((JRectangle*)e)->setAlpha(m.getArgAsInt(14));
                 }
+#ifdef JPhysarum_hpp
             case 23:
                 if(e->type == "JPhysarum")
                     ((JPhysarum*)e)->sensorAngle = m.getArgAsFloat(2);
@@ -935,6 +936,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 if(e->type == "JPhysarum")
                     ((JPhysarum*)e)->balance = m.getArgAsFloat(2);
                 break;
+#endif
             case 29:
                 e->bFill = m.getArgAsBool(2);
                 break;
