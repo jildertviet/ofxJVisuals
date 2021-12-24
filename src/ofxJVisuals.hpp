@@ -43,7 +43,7 @@
 //    #define USE_PARTICLES true // Comment this to exclude the particles
     #include "JPhysarum.hpp"
 #else
-    class JPhysarum(){};
+    class JPhysarum;
 #endif
 
 #include "MsgParser.hpp"
