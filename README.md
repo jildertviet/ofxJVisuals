@@ -15,6 +15,7 @@ Dependencies
 - [ofxEasing](https://github.com/arturoc/ofxEasing)
 - ofxJVisuals
 - [ofxPostProcessing](https://github.com/neilmendoza/ofxPostProcessing)
+- [ofxOscBidirectional](https://github.com/elgiano/ofxOscBidirectional.git)
 
 Mac:  
 - [ofxSyphon](https://github.com/astellato/ofxSyphon)
@@ -24,7 +25,6 @@ Mac:
 Standard in OF:  
 - ofxGui
 - ofxJSON
-- ofxOsc
 - ofxMidi
 - ofxOpenCv
 - ofxAssimpModelLoader
