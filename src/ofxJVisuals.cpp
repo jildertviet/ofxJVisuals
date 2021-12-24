@@ -706,6 +706,7 @@ bool MsgParser::make(ofxOscMessage& m){
             return false;
             break;
         case 18:
+#ifdef JPhysarum_hpp
             glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
             cout << "Create JPhysarum w/ size: " << size << endl;
             e = new JPhysarum(glm::vec2(0, 0), size);
@@ -751,7 +752,7 @@ bool MsgParser::make(ofxOscMessage& m){
 
 //            p->externalVelocity = t;
             p->externalVelocity = &(vf->vecTex);
-
+#endif
             break;
     }
 
