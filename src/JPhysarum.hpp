@@ -5,7 +5,7 @@
 //  Created by Jildert Viet on 01-07-20.
 //
 
-#ifndef JPhysarum_hpp
+#if !defined(JPhysarum_hpp) && !defined(TARGET_RASPBERRY_PI)
 #define JPhysarum_hpp
 
 #define PHYSARUMGUI false
