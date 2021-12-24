@@ -8,10 +8,6 @@
 
 #define USE_PP  false // ofxPostProcessing
 
-#ifndef TARGET_RASPBERRY_PI
-//    #define USE_PARTICLES true // Comment this to exclude the particles
-#endif
-
 #ifdef USE_PARTICLES
 //    #include "particleSystem.hpp"
 #endif
@@ -43,7 +39,13 @@
 #include "Env.hpp"
 #include "cameraController.hpp"
 
-#include "JPhysarum.hpp"
+#ifndef TARGET_RASPBERRY_PI
+//    #define USE_PARTICLES true // Comment this to exclude the particles
+    #include "JPhysarum.hpp"
+#else
+    class JPhysarum(){};
+#endif
+
 #include "MsgParser.hpp"
 
 enum VisualizerLayer {
