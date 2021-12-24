@@ -3,5 +3,5 @@ ofxEasing
 ofxGui
 ofxJVisuals
 ofxOpenCv
-ofxOsc
+ofxOscBidirectional
 ofxPostProcessing

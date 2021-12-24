@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "ofMain.h"
 #include "Mapper.hpp"
-#include "ofxOsc.h"
+#include "ofxOscBidirectional.h"
 #include "Env.hpp" // USE_FRAMES_AS_CLOCK is set here
 
 //#define USE_FRAMES_AS_CLOCK false

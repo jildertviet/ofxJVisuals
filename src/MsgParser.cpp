@@ -9,6 +9,7 @@
 
 MsgParser::MsgParser(ofxJVisuals* v){
     this->v = v;
+    connectToSuperCollider();
     vector<string> commandKeys = {
         "make",
         "setVal",
@@ -118,3 +119,18 @@ MsgParser::MsgParser(ofxJVisuals* v){
 //void MsgParser::addEvent(Event* e){
 //    v->addEvent(e);
 //}
+
+void MsgParser::connectToSuperCollider(){
+    scClient.setup(6548,"localhost",57110);
+    ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
+    ofxOscMessage msg;
+    ofxOscMessage m;
+    msg.setAddress("/notify");
+    msg.addIntArg(1);
+    scClient.sendMessage(msg);
+}
+
+void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){
+  std::string address = m.getAddress();
+  std::cout << "RECVd " <<  address << std::endl;
+}

@@ -13,7 +13,7 @@
 #include "Event.hpp"
 #include "Env.hpp"
 //#include "ofxJSON.h"
-#include "ofxOsc.h"
+#include "ofxOscBidirectional.h"
 #include "ofxJVisuals.hpp"
 
 class Song{

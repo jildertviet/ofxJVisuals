@@ -13,7 +13,9 @@
 #include <iterator>
 #include <map>
 #include <vector>
-#include "ofxOsc.h"
+//#include "ofxOsc.h"
+#include "ofxOscBidirectional.h"
+
 //#include "ofxJVisuals.hpp"
 #include "JRectangle.hpp"
 #include "Event.hpp"
@@ -54,6 +56,9 @@ public:
     ofxOscSender* SCsender;
 private:
     ofxJVisuals* v = nullptr;
+    ofxOscSenderReceiver scClient;
+    void connectToSuperCollider();
+    void onSuperColliderMessageReceived(ofxOscMessage &m);
 };
 
 #endif /* MsgParser_hpp */

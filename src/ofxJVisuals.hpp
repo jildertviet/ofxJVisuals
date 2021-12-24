@@ -18,7 +18,8 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-#include "ofxOsc.h"
+//#include "ofxOsc.h"
+#include "ofxOscBidirectional.h"
 
 #if USE_PP
     #include "ofxPostProcessing.h"
