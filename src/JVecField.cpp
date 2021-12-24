@@ -179,7 +179,11 @@ void JVecField::setDensity(glm::vec2 d, char numChannels){
     vecTex.clear();
     p.allocate(d.x, d.y, numChannels);
     density = d;
+#ifndef TARGET_RASPBERRY_PI
     resizeFbo.allocate(density.x, density.y, GL_RGBA32F);
+#else
+    resizeFbo.allocate(density.x, density.y, GL_RGBA);
+#endif
     
 //    plane.set(density.x, density.y, 10, 10);
 //    plane.mapTexCoords(0, 0, resizeFbo.getWidth(), resizeFbo.getHeight());
