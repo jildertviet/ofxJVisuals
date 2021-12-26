@@ -3,7 +3,8 @@ ofxJVisuals
 
 Introduction
 ------------
-![ofxJVisuals](images/preview.png)
+<img src="images/preview.png" alt="ofxJVisuals preview" width="400"/>  
+
 License
 -------
 
