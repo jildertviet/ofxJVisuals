@@ -312,25 +312,25 @@ void ofxJVisuals::makeFit(glm::vec2 size){
     }
     this->size = size;
 }
+//
+//vector<float> ofxJVisuals::vec(float a){
+//    vector<float> v;
+//    v.push_back(a);
+//    return v;
+//}
 
-vector<float> ofxJVisuals::vec(float a){
-    vector<float> v;
-    v.push_back(a);
-    return v;
-}
-
-vector<float> ofxJVisuals::vec(float a, float b){
-    return vector<float>({a, b});
-}
-vector<float> ofxJVisuals::vec(float a, float b, float c){
-    return vector<float>({a, b, c});
-}
-vector<float> ofxJVisuals::vec(float a, float b, float c, float d){
-    return vector<float>({a, b, c, d});
-}
-vector<float> ofxJVisuals::vec(float a, float b, float c, float d, float e){
-    return vector<float>({a, b, c, d, e});
-}
+//vector<float> ofxJVisuals::vec(float a, float b){
+//    return vector<float>({a, b});
+//}
+//vector<float> ofxJVisuals::vec(float a, float b, float c){
+//    return vector<float>({a, b, c});
+//}
+//vector<float> ofxJVisuals::vec(float a, float b, float c, float d){
+//    return vector<float>({a, b, c, d});
+//}
+//vector<float> ofxJVisuals::vec(float a, float b, float c, float d, float e){
+//    return vector<float>({a, b, c, d, e});
+//}
 
 void ofxJVisuals::loadLastMaskFile(){
     ofFile f;

@@ -40,12 +40,12 @@ OnlyYours::OnlyYours(ofxJVisuals* v){
 
 
 void OnlyYours::F0(){ // Make small grid||
-    short int a[4] = {950, 750, 650, 950};
+    float a[4] = {950, 750, 650, 950};
     for(int i=0; i<logos.size(); i++){
         OnlyYoursLogo* l = logos[i];
         l->setEndTime(2000); l->active = true;
         for(unsigned char j=0; j<4; j++){
-            l->addEnv(v->vec(l->colors[j].a, 0), v->vec(a[j]), &l->colors[j]);
+            l->addEnv(vector<float>{float(l->colors[j].a), 0}, vector<float>{a[j]}, &l->colors[j]);
         }
     }
     logos.clear();
@@ -68,7 +68,7 @@ void OnlyYours::F0(){ // Make small grid||
             l->numLayers = 1;
             l->colors = colors;
             for(short int i=0; i<4; i++){
-                l->addEnv(v->vec(0, l->colors[i].a), v->vec(300), &l->colors[i]); // Fade in :)
+                l->addEnv(vector<float>{0, float(l->colors[i].a)}, vector<float>{300}, &l->colors[i]); // Fade in :)
             }
         }
     }
@@ -80,10 +80,10 @@ void OnlyYours::F1(){ // Make big grid ||
     for(int i=0; i<logos.size(); i++){
         OnlyYoursLogo* l = logos[i];
         l->setEndTime(2000); l->active = true;
-        l->addEnv(v->vec(l->colors[0].a, 0), v->vec(950), &l->colors[0]);
-        l->addEnv(v->vec(l->colors[1].a, 0), v->vec(750), &l->colors[1]);
-        l->addEnv(v->vec(l->colors[2].a, 0), v->vec(650), &l->colors[2]);
-        l->addEnv(v->vec(l->colors[3].a, 0), v->vec(950), &l->colors[3]);
+        l->addEnv(vector<float>{float(l->colors[0].a), 0}, vector<float>{950}, &l->colors[0]);
+        l->addEnv(vector<float>{float(l->colors[1].a), 0}, vector<float>{750}, &l->colors[1]);
+        l->addEnv(vector<float>{float(l->colors[2].a), 0}, vector<float>{650}, &l->colors[2]);
+        l->addEnv(vector<float>{float(l->colors[3].a), 0}, vector<float>{950}, &l->colors[3]);
     }
     logos.clear();
     
@@ -102,7 +102,7 @@ void OnlyYours::F1(){ // Make big grid ||
             l->mode = 1;
             l->numLayers = 1;
             for(short int i=0; i<4; i++){
-                l->addEnv(v->vec(0, l->colors[i].a), v->vec(300), &l->colors[i]); // Fade in :)
+                l->addEnv(vector<float>{0, float(l->colors[i].a)}, vector<float>{300}, &l->colors[i]); // Fade in :)
             }
         }
     }
@@ -114,11 +114,11 @@ void OnlyYours::F1(){ // Make big grid ||
 void OnlyYours::F2(){ // Env @ Bezier||
     for(int i=0; i<logos.size(); i++){
         for(short int j=0; j<4; j++){
-            short int start = logos[i]->bezierPoints[j].y;
-            logos[i]->addEnv(v->vec(start, start+(start*ofRandom(-2,2)), start), v->vec(100, 1000+ofRandom(1000)), &(logos[i]->bezierPoints[j].y));
+            float start = logos[i]->bezierPoints[j].y;
+            logos[i]->addEnv(vector<float>{start, (start+(start*ofRandom(-2,2))), start}, vector<float>{100, 1000+ofRandom(1000)}, &(logos[i]->bezierPoints[j].y));
             //            logos[i]->env.back()->loop = true;
             start = logos[i]->bezierPoints[j].x;
-            logos[i]->addEnv(v->vec(start, start+(start*ofRandom(-2,2)), start), v->vec(100, 1000+ofRandom(1000)), &(logos[i]->bezierPoints[j].x));
+            logos[i]->addEnv(vector<float>{start, start+(start*ofRandom(-2,2)), start}, vector<float>{100, 1000+ofRandom(1000)}, &(logos[i]->bezierPoints[j].x));
             //            logos[i]->env.back()->loop = true;
         }
     }
@@ -126,11 +126,11 @@ void OnlyYours::F2(){ // Env @ Bezier||
 
 void OnlyYours::F3(){ // Env @ loc.x||
     for(int i=0; i<logos.size(); i++){
-        int x = (logos[i]->loc.x);
+        float x = (logos[i]->loc.x);
         if(ofRandom(2)>1){
-            logos[i]->addEnv(v->vec(x, x+100, x), v->vec(50,ofRandom(500)+xPosRelease), &(logos[i]->loc.x));
+            logos[i]->addEnv(vector<float>{x, x+100, x}, vector<float>{50,ofRandom(500)+xPosRelease}, &(logos[i]->loc.x));
         } else{
-            logos[i]->addEnv(v->vec(x, x-100, x), v->vec(50,ofRandom(500)+xPosRelease), &(logos[i]->loc.x));
+            logos[i]->addEnv(vector<float>{x, x-100, x}, vector<float>{50,ofRandom(500)+xPosRelease}, &(logos[i]->loc.x));
         }
     }
 }
@@ -141,17 +141,17 @@ void OnlyYours::F4(){ // LOGO ||
 //    l = logos.back();
     l = (OnlyYoursLogo*)addEvent(new OnlyYoursLogo(), 3);
     l->setEndTime(1500*2); l->active = true;
-    short int a[4] = {950, 750, 650, 950};
+    float a[4] = {950, 750, 650, 950};
     for(unsigned char j=0; j<4; j++){
-        l->addEnv(v->vec(0, 255, 255, 0), v->vec(50, 100, a[j]*2), &(l->colors[j]));
+        l->addEnv(vector<float>{0, 255, 255, 0}, vector<float>{50, 100, a[j]*2}, &(l->colors[j]));
     }
 }
 
 void OnlyYours::F5(){ // Env @ loc.y one ||
     for(char i=0; i<3; i++){
         short index = ofRandom(logos.size()-1);
-        int y = logos[index]->loc.y;
-        logos[index]->addEnv(v->vec(y, y+ofRandom(200)+20 - 110, y), v->vec(200,300), &logos[index]->loc.y);
+        float y = logos[index]->loc.y;
+        logos[index]->addEnv(vector<float>{y, y+ofRandom(200)+20 - 110, y}, vector<float>{200,300}, &logos[index]->loc.y);
     }
 }
 
@@ -166,8 +166,8 @@ void OnlyYours::F6(){ // MODE||
 void OnlyYours::F7(){ // Env @ scale ||
     for(short int i=0; i<logos.size(); i++){
         OnlyYoursLogo* l = logos[i];
-        l->addEnv(v->vec(l->scale, l->scale*1.1, l->scale), v->vec(100,300), &(l->scale));
-        l->addEnv(v->vec(l->loc.x, l->loc.x-(100), l->loc.x), v->vec(100,300), &(l->loc.x));
+        l->addEnv(vector<float>{l->scale, float(l->scale*1.1), l->scale}, vector<float>{100,300}, &(l->scale));
+        l->addEnv(vector<float>{l->loc.x, l->loc.x-(100), l->loc.x}, vector<float>{100,300}, &(l->loc.x));
     }
 }
 
@@ -183,11 +183,11 @@ void OnlyYours::F8(){ // Move beziers slow ||
         
         // Add env (osc) to pos of bezier-curve points
         for(short int j=0; j<4; j++){
-            short int start = logos[i]->bezierPoints[j].y;
-            logos[i]->addEnv(v->vec(start, start+(start*ofRandom(-3,3)), start), v->vec(10000+ofRandom(3000), 10000+ofRandom(1000)), &(logos[i]->bezierPoints[j].y));
+            float start = logos[i]->bezierPoints[j].y;
+            logos[i]->addEnv(vector<float>{start, start+(start*ofRandom(-3,3)), start}, vector<float>{10000+ofRandom(3000), 10000+ofRandom(1000)}, &(logos[i]->bezierPoints[j].y));
             logos[i]->loopLastEnv();
             start = logos[i]->bezierPoints[j].x;
-            logos[i]->addEnv(v->vec(start, start+(start*ofRandom(-3,3)), start), v->vec(10000+ofRandom(3000), 10000+ofRandom(1000)), &(logos[i]->bezierPoints[j].x));
+            logos[i]->addEnv(vector<float>{start, start+(start*ofRandom(-3,3)), start}, vector<float>{10000+ofRandom(3000), 10000+ofRandom(1000)}, &(logos[i]->bezierPoints[j].x));
             logos[i]->loopLastEnv();
         }
     }
@@ -262,12 +262,12 @@ void OnlyYours::exit(){
     }
     bars.clear();
     
-    short a[4] = {950, 750, 650, 950};
+    float a[4] = {950, 750, 650, 950};
     for(int i=0; i<logos.size(); i++){
         OnlyYoursLogo* l = logos[i];
         l->setEndTime(2000); l->active = true;
         for(unsigned char j=0; j<4; j++){
-            l->addEnv(v->vec(l->colors[j].a, 0), v->vec(a[j]), &l->colors[j]);
+            l->addEnv(vector<float>{float(l->colors[j].a), 0}, vector<float>{a[j]}, &l->colors[j]);
         }
     }
     logos.clear();

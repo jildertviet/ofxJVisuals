@@ -11,26 +11,8 @@
 videoBars::videoBars(ofxJVisuals* v){
     setName("videoBars");
     this->v = v;
-//    addEvent(new VideoPlayer("Samsara/dust.mov"));
-//    addEvent(new VideoPlayer("./video/Naamloos.mp4"));
-//        addEvent(new VideoPlayer("/Users/Jildert/OF9/examples/video/videoPlayerExample/bin/data/movies/fingers.mov"));
-//    addEvent(new VideoPlayer("Animatie_noaudiotest.mov"));
-
-//    video = (VideoPlayer*)getLast();
-//    video->play();
-//    video->player.setVolume(0.f);
-//    videoPlayer->setEnvelope(1, (36)*1000, 100);
-//    videoPlayer->envelope->triggerEnv();
-//    video->setBins(50);
-//    for(int i=0; i<video->bins.size(); i++){
-//        video->bins[i]->colors[0].a = 0;
-//        video->bins[i]->doFade(2000); // Weird function, it's a fade dip / duck
-//    }
-//    video->addEnv(v->vec(0, 1, 0), v->vec(1000, 1000), &video->speed);
-    
     v->cam.reset();
     v->cam.lookAt(ofVec3f(0,0,0));
-//    v->cam.rotate(-180, ofVec3f(1,0,0));
     v->cam.setDistance(680);
     v->cam.move(ofGetWidth() * 0.5, ofGetHeight() * 0.5, 0);
 }
@@ -64,7 +46,7 @@ void videoBars::F5(){ // duck ||
     video->setMode(1);
     video->setBins(numBins);
     video->loc.z = duckZoom;
-    video->addEnv(v->vec(0, 255, 255, 0), v->vec(1000, 13000, 1000), &video->colors[0]);
+    video->addEnv(vector<float>{0, 255, 255, 0}, vector<float>{1000, 13000, 1000}, &video->colors[0]);
 }
 
 void videoBars::F6(){ // switchDilate(1) ||
@@ -125,8 +107,8 @@ void videoBars::F14(){ // Lines ||
         line->colors[0] = ofColor(255, 100);
         addEvent((Event*)line, 2);
         line->deleteWithFade(3000);
-        line->addEnv(v->vec(line->size.x, line->size.x * (ofRandom(4) + 1)), v->vec(3000), &line->size.x);
-        line->addEnv(v->vec(line->size.y, line->size.y - 300), v->vec(3000), &line->size.y);
+        line->addEnv(vector<float>{line->size.x, line->size.x * (ofRandom(4) + 1)}, vector<float>{3000}, &line->size.x);
+        line->addEnv(vector<float>{line->size.y, line->size.y - 300}, vector<float>{3000}, &line->size.y);
     }
 }
 

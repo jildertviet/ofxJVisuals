@@ -63,12 +63,12 @@ void MaybeTomorrow::F6(){ // Horizontal Noise||
     JNoise* n = (JNoise*)v->getLast();
     n->size = ofVec3f(1280*3, 800);
     n->addEnv(
-              v->vec(n->size.y, n->size.y + growAmount * 800),
-              v->vec(ofMap(growAmount, 0., 1.0, 50, 4000)),
+              vector<float>{n->size.y, n->size.y + growAmount * 800},
+              vector<float>{ofMap(growAmount, 0., 1.0, 50, 4000)},
               &(n->size.y));
     n->addEnv(
-              v->vec(n->loc.y, -growAmount*0.5 * 800),
-              v->vec(ofMap(growAmount, 0., 1.0, 50, 4000)),
+              vector<float>{n->loc.y, (float)(-growAmount*0.5 * 800)},
+              vector<float>{ofMap(growAmount, 0., 1.0, 50, 4000)},
               &(n->loc.y));
     n->setEnvelope(env[1], 100, env[0]);
 }
@@ -80,12 +80,12 @@ void MaybeTomorrow::F7(){ // Vertical Noise||
         JNoise* n = (JNoise*)v->getLast();
         n->offset = offsets[j];
         n->addEnv(
-                  v->vec(n->size.x, n->size.x + growAmount * 800),
-                  v->vec(ofMap(growAmount, 0., 1.0, 50, 4000)),
+                  vector<float>{n->size.x, n->size.x + growAmount * 800},
+                  vector<float>{ofMap(growAmount, 0., 1.0, 50, 4000)},
                   &(n->size.x));
         n->addEnv(
-                  v->vec(n->loc.x, -growAmount*0.5 * 800),
-                  v->vec(ofMap(growAmount, 0., 1.0, 50, 4000)),
+                  vector<float>{n->loc.x, (float)(-growAmount*0.5 * 800)},
+                  vector<float>{ofMap(growAmount, 0., 1.0, 50, 4000)},
                   &(n->loc.x));
         n->setEnvelope(env[1], 100, env[0]);
         n->seed = ofRandom(10000);

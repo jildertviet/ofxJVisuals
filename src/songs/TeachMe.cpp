@@ -66,7 +66,7 @@ void TeachMe::F1(){ // Horizontal bar ||
     bar->direction = ofVec2f(0,ofRandom(-1,1));
     bar->setColor(colors[ofRandom(colors.size())]);
 //    bar->setEnvelope(200, 0, 0, ofVec2f(0,100));
-    bar->addEnv(v->vec(0, 100), v->vec(300), &bar->colors[0]);
+    bar->addEnv(vector<float>{0, 100}, vector<float>{300}, &bar->colors[0]);
     bar->active = false;
 }
 

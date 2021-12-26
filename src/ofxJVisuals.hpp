@@ -132,13 +132,13 @@ typedef unsigned char uint8;
     MsgParser* msgParser;
     ofxOscSender* SCsender;
     ofxOscReceiver receiver;
-    
-//    vector<Pointer*> receivingPointers;
-    vector<float> vec(float a);
-    vector<float> vec(float a, float b);
-    vector<float> vec(float a, float b, float c);
-    vector<float> vec(float a, float b, float c, float d);
-    vector<float> vec(float a, float b, float c, float d, float e);
+//    
+////    vector<Pointer*> receivingPointers;
+//    vector<float> vec(float a);
+//    vector<float> vec(float a, float b);
+//    vector<float> vec(float a, float b, float c);
+//    vector<float> vec(float a, float b, float c, float d);
+//    vector<float> vec(float a, float b, float c, float d, float e);
 
 //    Wavetables wavetable;
     

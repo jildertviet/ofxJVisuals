@@ -23,7 +23,7 @@ void NewOpener::F0(){ // add String ||
     l->loc = ofVec3f(0, ofGetHeight()/2. + ofRandom(-300,300), ofRandom(zSpawnPos));
     lines.push_back(l);
     
-    l->addEnv(v->vec(0, 255), v->vec(1000), &(l->colors[0]), -2);
+    l->addEnv(vector<float>{0, 255}, vector<float>{1000}, &(l->colors[0]), -2);
     l->loc.x -= 100;
     l->balance = 0.5;
     l->size = ofVec2f((1280*3)*1.2, 1);
@@ -44,11 +44,11 @@ void NewOpener::F1(){ // Excite string ||
 }
 
 void NewOpener::F2(){ // Tilt ||
-    int heightOffset = ofRandom(100,200) * (((int)ofRandom(0,2)*2)-1); // 0 or 2, -1
+    float heightOffset = ofRandom(100,200) * (((int)ofRandom(0,2)*2)-1); // 0 or 2, -1
     for(int i=0; i<lines.size(); i++){
         lines[i]->addEnv(
-                         v->vec(lines[i]->heightOffset, heightOffset*3, 0),
-                         v->vec(200, ofRandom(tiltRelease*0.8,tiltRelease*1.2)*0.8), &(lines[i]->heightOffset), -2);
+                         vector<float>{(float)(lines[i]->heightOffset), heightOffset*3, 0},
+                         vector<float>{200, (float)(ofRandom(tiltRelease*0.8,tiltRelease*1.2)*0.8)}, &(lines[i]->heightOffset), -2);
     }
 }
 
@@ -77,7 +77,7 @@ void NewOpener::F3(){ // ||
         }
     }
     
-    int transitionTime = 800;
+    float transitionTime = 800;
     
     for(int i=0; i<lines.size(); i++){
         if(i>=maxNumLines){
@@ -85,12 +85,12 @@ void NewOpener::F3(){ // ||
         }
         lines[i]->mode = 1;
         lines[i]->loc = locations[i];
-        lines[i]->addEnv(v->vec(lines[i]->loc.x, locations[i].x), v->vec(transitionTime), &(lines[i]->loc.x), 0);
-        lines[i]->addEnv(v->vec(lines[i]->loc.y, locations[i].y), v->vec(transitionTime*0.9), &(lines[i]->loc.y), 2);
+        lines[i]->addEnv(vector<float>{lines[i]->loc.x, locations[i].x}, vector<float>{transitionTime}, &(lines[i]->loc.x), 0);
+        lines[i]->addEnv(vector<float>{lines[i]->loc.y, locations[i].y}, vector<float>{(float)(transitionTime*0.9)}, &(lines[i]->loc.y), 2);
         
         cout << sizes[i] << endl;
-        lines[i]->addEnv(v->vec(lines[i]->size.x, sizes[i].x), v->vec(transitionTime), &(lines[i]->size.x),0);
-        lines[i]->addEnv(v->vec(lines[i]->size.y, sizes[i].y), v->vec(transitionTime*0.9), &(lines[i]->size.y), -1);
+        lines[i]->addEnv(vector<float>{lines[i]->size.x, sizes[i].x}, vector<float>{transitionTime}, &(lines[i]->size.x),0);
+        lines[i]->addEnv(vector<float>{lines[i]->size.y, sizes[i].y}, vector<float>{(float)(transitionTime*0.9)}, &(lines[i]->size.y), -1);
         
         lines[i]->setEndTime(transitionTime);
         lines[i]->active = true;
@@ -104,8 +104,8 @@ void NewOpener::F3(){ // ||
         JRectangle* r = (JRectangle*)v->addEvent(new JRectangle(locations[i], sizes[i]));
         r->colors[0] = ofColor::white;
         r->bMove = false;
-//        r->requestEnvelopeDelay(v->vec(0, 255, 255, 0), v->vec(100, 1000, 10000), 0, new Pointer(&(r->colors[0])), transitionTime-100);
-        r->addEnv(v->vec(0,0,255,255,0), v->vec(transitionTime-100, 100, 1000, 10000), &(r->colors[0]), 0);
+//        r->requestEnvelopeDelay(vector<float>{0, 255, 255, 0), vector<float>{100, 1000, 10000), 0, new Pointer(&(r->colors[0])), transitionTime-100);
+        r->addEnv(vector<float>{0,0,255,255,0}, vector<float>{transitionTime-100, 100, 1000, 10000}, &(r->colors[0]), 0);
         r->bFill = false;
         
         JRectangle* back = (JRectangle*)v->addEvent(new JRectangle(locations[i], sizes[i]));
@@ -126,21 +126,21 @@ void NewOpener::F4(){ //  ||
     //Light 2 squares
     return;
     int i = ofRandom(rects.size());
-//    rects[i][1]->requestEnvelope(v->vec(0,maxBright,0), v->vec(10,squareReleaseOffset+ofRandom(200,400)), 0, new Pointer(&(rects[i][1]->colors[0])));
-    rects[i][1]->addEnv(v->vec(0,maxBright,0), v->vec(10,squareReleaseOffset+ofRandom(200,400)), &(rects[i][1]->colors[0]), 0);
+//    rects[i][1]->requestEnvelope(vector<float>{0,maxBright,0), vector<float>{10,squareReleaseOffset+ofRandom(200,400)), 0, new Pointer(&(rects[i][1]->colors[0])));
+    rects[i][1]->addEnv(vector<float>{0,(float)maxBright,0}, vector<float>{10,squareReleaseOffset+ofRandom(200,400)}, &(rects[i][1]->colors[0]), 0);
     int j = ofRandom(rects.size());
     while(j==i){
         j = ofRandom(rects.size());
     }
-//    rects[j][1]->requestEnvelope(v->vec(0,maxBright,0), v->vec(10,squareReleaseOffset+ofRandom(200,400)), 0, new Pointer(&(rects[j][1]->colors[0])));
-    rects[j][1]->addEnv(v->vec(0,maxBright,0), v->vec(10,squareReleaseOffset+ofRandom(200,400)), &(rects[j][1]->colors[0]), 0);
+//    rects[j][1]->requestEnvelope(vector<float>{0,maxBright,0), vector<float>{10,squareReleaseOffset+ofRandom(200,400)), 0, new Pointer(&(rects[j][1]->colors[0])));
+    rects[j][1]->addEnv(vector<float>{0,(float)maxBright,0}, vector<float>{10,squareReleaseOffset+ofRandom(200,400)}, &(rects[j][1]->colors[0]), 0);
 }
 
 void NewOpener::F5(){ // to Faith ||
     for(int i=0; i<lines.size(); i++){
         if(lines[i]->rotation==0)
-            lines[i]->addEnv(v->vec(0, 90), v->vec(10000), &(lines[i]->rotation));
-        lines[i]->addEnv(v->vec(lines[i]->loc.y, i*(ofGetHeight()/lines.size())), v->vec(10000), &(lines[i]->loc.y));
+            lines[i]->addEnv(vector<float>{0, 90}, vector<float>{10000}, &(lines[i]->rotation));
+        lines[i]->addEnv(vector<float>{lines[i]->loc.y, (float)(i*(ofGetHeight()/lines.size()))}, vector<float>{10000}, &(lines[i]->loc.y));
         //        lines.erase(lines.begin()+i);
     }
     cout << "Rot " << endl;
@@ -152,19 +152,19 @@ void NewOpener::F6(){ // Mikado ||
         JLine* l = (JLine*)addEvent(new JLine());
         l->loc = ofVec2f(0, ofGetHeight()/2. + ofRandom(-300,300));
         
-        l->addEnv(v->vec(0, 255, 0), v->vec(100, 800), &(l->colors[0]), -2);
+        l->addEnv(vector<float>{0, 255, 0}, vector<float>{100, 800}, &(l->colors[0]), -2);
         
         l->balance = ofRandom(0.3, 0.7);
         l->size = ofVec2f(ofGetWidth()*1.5, 1);
         l->loc.x -= 100;
         
-        int heightOffset = ofRandom(100,800) * (((int)ofRandom(0,2)*2)-1); // 0 or 2, -1
+        float heightOffset = ofRandom(100,800) * (((int)ofRandom(0,2)*2)-1); // 0 or 2, -1
         l->addEnv(
-                v->vec(l->heightOffset, heightOffset*1, 0),
-                v->vec(200, 5000), &(l->heightOffset), -2);
+                  vector<float>{(float)l->heightOffset, heightOffset*1, 0},
+                  vector<float>{200, 5000}, &(l->heightOffset), -2);
         l->addEnv(
-                  v->vec(l->loc.y, l->loc.y, l->loc.y + ofRandom(10,30)),
-                  v->vec(50, 800), &(l->loc.y), 0);
+                  vector<float>{l->loc.y, l->loc.y, l->loc.y + ofRandom(10,30)},
+                  vector<float>{50, 800}, &(l->loc.y), 0);
     }
 }
 
@@ -242,6 +242,6 @@ void NewOpener::exit(){
 //    rects.clear();
     for(int i=0; i<lines.size(); i++){
         lines[i]->deleteWithFade(20000);
-        lines[i]->addEnv(v->vec(lines[i]->loc.y, lines[i]->loc.y - 1000), v->vec(18000 + ofRandom(3000)), &(lines[i]->loc.y));
+        lines[i]->addEnv(vector<float>{lines[i]->loc.y, lines[i]->loc.y - 1000}, vector<float>{18000 + ofRandom(3000)}, &(lines[i]->loc.y));
     }
 }

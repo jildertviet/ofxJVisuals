@@ -27,13 +27,13 @@ void verses::rotSquares(int numRects){
         ofColor c = colors[0];
         c.a = 0.4 * 255;
         m->color = ofFloatColor(c);
-        m->addEnv(v->vec(0, ofMap(i, 0, numRects, 0.5, 0.01)), v->vec(ofMap(i, 0, numRects, 200, 10000)), &m->color.a);
+        m->addEnv(vector<float>{0, ofMap(i, 0, numRects, 0.5, 0.01)}, vector<float>{ofMap(i, 0, numRects, 200, 10000)}, &m->color.a);
         m->lineWidth = lineW;
         float speed;
         speed = ofMap(i, 0, numRects, 0.2, maxSpeed);
         speed = ((i/10. * 0.3 + 0.3)*0.3) * -1;
         speed *= 0.05;
-        m->addEnv(v->vec(speed, speed, speed * 0.5), v->vec(8000, 8000), &m->rotateSpeed);
+        m->addEnv(vector<float>{speed, speed, (float)(speed * 0.5)}, vector<float>{8000, 8000}, &m->rotateSpeed);
         addEvent((Event*) m, 3);
         rects.push_back(m);
     }
@@ -82,9 +82,9 @@ void verses::F3(){ // Squares ||
         r->rotateSpeed = 0;
         r->color = ofFloatColor(1,1,1);
         if(i==0){
-            r->addEnv(v->vec(0, 1), v->vec(5000), &r->color.a);
+            r->addEnv(vector<float>{0, 1}, vector<float>{5000}, &r->color.a);
         } else{
-            r->addEnv(v->vec(0, 0, 1), v->vec(1000 + ofRandom(5000), 5000), &r->color.a);
+            r->addEnv(vector<float>{0, 0, 1}, vector<float>{1000 + ofRandom(5000), 5000}, &r->color.a);
         }
         r->setPathWakersSpeed(ofMap(ofRandom(2), 0, 1, 0.35, 0.5));
         r->fillRatio = 0;
@@ -245,6 +245,6 @@ void verses::eightShort(){
             mt[i]->specificFunction();
             mt[i]->display();
         }
-        //        mt[i]->addEnv(v->vec(0, 0, 0.7), v->vec(6000, 3000 + ofRandom(10000)), &mt[i]->color.a);
+        //        mt[i]->addEnv(vector<float>{0, 0, 0.7), vector<float>{6000, 3000 + ofRandom(10000)), &mt[i]->color.a);
     }
 }

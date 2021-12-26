@@ -35,7 +35,7 @@ void model::F0(){ // Series ||
         
 //        mesh->offset = ofVec3f(500,0,0);
         mesh->rotationSpeed = ofVec3f(i * 0.02, 0, 0);
-        mesh->addEnv(v->vec(0, 10), v->vec(1000 + ofRandom(3000)), &mesh->colors[0]);
+        mesh->addEnv(vector<float>{0, 10}, vector<float>{1000 + ofRandom(3000)}, &mesh->colors[0]);
         
         addEvent((Event*)mesh);
         meshes.push_back(mesh);
@@ -56,7 +56,7 @@ void model::F1(){ // Rect ||
             mesh->m2 = m.getMesh(1);
             mesh->colors[0] = ofColor(255, 10);
             mesh->offset = ofVec3f(100 * i,j*100,0);
-            mesh->addEnv(v->vec(0, 10), v->vec(1000 + ofRandom(3000)), &mesh->colors[0]);
+            mesh->addEnv(vector<float>{0, 10}, vector<float>{1000 + ofRandom(3000)}, &mesh->colors[0]);
     //        mesh->rotationSpeed = ofVec3f(i * 0.02, 0, 0);
             
             addEvent((Event*)mesh);
@@ -69,16 +69,17 @@ void model::F2(){ // Random env||
     if(!meshes.size())
         return;
     int i = ofRandom(meshes.size());
-    meshes[i]->addEnv(v->vec(10, 0, 10), v->vec(attack, release), &(meshes[i]->colors[0]));
+    meshes[i]->addEnv(vector<float>{10, 0, 10}, vector<float>{(float)attack, (float)release}, &(meshes[i]->colors[0]));
 }
 
 void model::F3(){ // Env @ loc.x ||
     for(char i=0; i<meshes.size(); i++){
         meshes[i]->addEnv(
-                          v->vec(meshes[i]->offset.x, (ofRandom(300) + 100) * ((ofRandom(2)*2)-1), 0),
-                          v->vec((500 + ofRandom(500))*xPosAttackScale,
-                                 (500 + ofRandom(500))*xPosAttackScale
-                                 ),
+                          vector<float>{meshes[i]->offset.x, (ofRandom(300) + 100) * ((ofRandom(2)*2)-1), 0},
+                          vector<float>{
+                                (500 + ofRandom(500))*xPosAttackScale,
+                                (500 + ofRandom(500))*xPosAttackScale
+                            },
                           &(meshes[i]->offset.x));
     }
 }
