@@ -94,7 +94,8 @@ MsgParser::MsgParser(ofxJVisuals* v){
         "balance",
         "fill",
         "radius",
-        "evolve"
+        "evolve",
+        "zoom"
     };
     for(short i=0; i<valueKeys.size(); i++)
         values[valueKeys[i]] = i + 1;

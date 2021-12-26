@@ -128,6 +128,7 @@ public:
     ofVec3f rotation = ofVec3f(0, 0, 0);
     unsigned long getTimeMillis();
     void setStartTime();
+    float zoom = 1.f;
     
     struct {
             bool operator()(Env* a, Env* b) const { return a->value < b->value; }

@@ -14,25 +14,21 @@
 #include "Event.hpp"
 
 class JImage: public Event{
+    enum DrawMode{
+        DEFAULT
+    };
 public:
     JImage(string filename, ofVec2f loc = ofVec2f(0,0));
     JImage(){};
     ofImage image;
-    ofImage backGround;
-    ofMesh mesh;
     
     void display();
     void specificFunction();
-    void makeImageFit();
     
-    void createFullScreenCopy();
-    void meshSetup();
+    DrawMode drawMode = JImage::DrawMode::DEFAULT;
     
-    bool fillScreen = false;
-    bool drawImage=true;
-    bool drawMesh = 0;
-    
-    void loadImage(string path);
-    void center();
+    bool loadImage(string path);
+    bool bLoadSucces = false;
 };
 #endif /* JImage_hpp */
+

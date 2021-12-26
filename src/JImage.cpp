@@ -11,64 +11,43 @@
 JImage::JImage(string filename, ofVec2f loc){
     this->loc = loc;
     setType("JImage");
-    image.load(filename);
-//    image.mirror(true, false);
-//    cout << image.getImageType() << endl;
-//    image.setImageType(OF_IMAGE_COLOR_ALPHA);
-    size = ofVec2f(image.getWidth(), image.getHeight());
     
-    meshSetup();
+    bLoadSucces = loadImage(filename);
     colors[0] = ofColor(255,255);
-//    createFullScreenCopy();
 }
 
 void JImage::display(){
+    if(!bLoadSucces)
+        return;
     ofSetColor(colors[0]);
-    if(fillScreen)
-        backGround.draw(loc);
-    if(drawImage)
-        image.draw(loc);
-    if(drawMesh)
-        mesh.draw();
+    ofPushMatrix();
+    ofTranslate(loc);
+    if(zoom != 1.0){
+        ofTranslate(size.x * 0.5, size.y * 0.5);
+        ofScale(zoom);
+        ofTranslate(size.x * -0.5, size.y * -0.5);
+    }
+    
+    switch(drawMode){
+        case DEFAULT:
+            image.draw(0, 0, size.x, size.y);
+            break;
+    }
+    
+    ofPopMatrix();
 }
 
 void JImage::specificFunction(){
+    
 }
 
-void JImage::createFullScreenCopy(){
-    backGround.allocate(ofGetWindowWidth(), ofGetWindowHeight(), image.getImageType());
-    int numChannels = image.getPixels().getNumChannels();
-    for(int w=0; w<backGround.getWidth(); w++){
-        for(int h=0; h<backGround.getHeight(); h++){
-            for(int channels=0; channels<numChannels; channels++){
-                backGround.getPixels()[numChannels*(w+(h*backGround.getWidth()))+channels] =
-                image.getPixels()[numChannels*((w%(int)image.getWidth())+((int)((h%(int)image.getHeight())*image.getWidth())))+channels];
-            }
-        }
-    }
-    backGround.update();
-}
-
-void JImage::meshSetup(){
-    mesh.setMode(OF_PRIMITIVE_LINE_LOOP);
-    mesh.addVertex(loc);
-    mesh.addVertex(loc+ofVec2f(100,0));
-    mesh.addVertex(loc+ofVec2f(0,100));
-}
-
-void JImage::loadImage(string path){
+bool JImage::loadImage(string path){
     image.clear();
-    if(image.load(path))
+    if(image.load(path)){
         cout << "Image " << path << " loaded" << endl;
-    image.update();
-    size = ofVec2f(image.getWidth(), image.getHeight());
-}
-
-void JImage::makeImageFit(){
-    float ratio = image.getWidth() / image.getHeight();
-    image.resize(ofGetWindowWidth() * ratio, ofGetWindowHeight());
-}
-
-void JImage::center(){
-    loc.x = ofGetWindowWidth()/2. - image.getWidth()/2.;
+        size = glm::vec2(image.getWidth(), image.getHeight());
+        return true;
+    } else{
+        return false;
+    }
 }

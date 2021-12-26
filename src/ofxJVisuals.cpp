@@ -677,7 +677,7 @@ bool MsgParser::make(ofxOscMessage& m){
             e = new JMesh();
             break;
         case 11:
-            cout << m.getArgAsString(3) << endl;
+            cout << m.getArgAsString(2) << endl;
             e = new JImage(m.getArgAsString(3));
             break;
         case 12:
@@ -885,7 +885,11 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 ((jText*)e)->setText(m.getArgAsString(2));
                 break;
             case 18: // path
-                ((JVideoPlayer*)e)->path = m.getArgAsString(2);
+                if(e->type == "JImage"){
+                    ((JImage*)e)->loadImage(m.getArgAsString(2));
+                } else{
+                    ((JVideoPlayer*)e)->path = m.getArgAsString(2); // Also load!?
+                }
                 break;
             case 19: // rotation
                 e->rotation = ofVec3f(m.getArgAsFloat(2), m.getArgAsFloat(3), m.getArgAsFloat(4));
@@ -946,6 +950,9 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 break;
             case 31: // evolve
                 e->bEvolve = m.getArgAsBool(2);
+                break;
+            case 32: // Zoom
+                e->zoom = m.getArgAsFloat(2);
                 break;
         }
     } else{
