@@ -110,6 +110,7 @@ void ofxJVisuals::update(){
     while(receiver.hasWaitingMessages()){
         ofxOscMessage m;
         receiver.getNextMessage(m);
+        
         msgParser->parseMsg(m);
     }
 
