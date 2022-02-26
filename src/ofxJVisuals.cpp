@@ -12,7 +12,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
     for(int i=0; i<NUMLAYERS; i++)
         layers[i] = new JLayer(); // Dummy events
 
-    negative.load("shaders/negative");
+    negative.load("../../../../../addons/ofxJVisuals/libs/shaders/negative");
 
 #if USE_PP
     post.init(ofGetWidth(), ofGetHeight());
