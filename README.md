@@ -36,7 +36,6 @@ Compatibility
 Known issues
 ------------
 
-
 Version history
 ------------
 
