@@ -27,8 +27,6 @@ Vorm::Vorm(uint8 numSides, int sideDiv, float radius, ofVec2f loc, bool on_desti
     makeCoordinates(numSides, sideDiv, radius, on_destination); // Coordinates
 
     colors[0] = ofColor(255, 230);
-    
-    makeLinkTap("lijnmax", &lijnmax, ofVec2f(pow(40, 2), pow(110, 2)));
 }
 
 void Vorm::specificFunction(){

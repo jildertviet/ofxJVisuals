@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-#include "Mapper.hpp"
 #include "ofxOscBidirectional.h"
 #include "Env.hpp" // USE_FRAMES_AS_CLOCK is set here
+#include "mapValue.h"
 
 //#define USE_FRAMES_AS_CLOCK false
 
@@ -93,17 +93,7 @@ public:
     
     virtual void setAlpha(unsigned char alpha);
     virtual void setColor(ofColor color, int index=0);
-    
-    void makeLinkTap(string name, float* floatPtr, ofVec2f range);
-    void makeLinkTap(string name, int* intPtr, ofVec2f range);
-    void makeLinkTap(string name, ofColor* colorPtr, ofVec2f range=ofVec2f(0,255));
 
-    void printLinkTaps();
-    vector<linkTap*> linkTaps;
-    linkTap* getLinkTap(string name);
-    vector<Mapper*> mappers;
-    vector<Mapper*>* mappersParent = nullptr;
-    
     // To clear references made to this object
     vector<Event**> toClear;
     Event** lastPtr = nullptr;
@@ -133,6 +123,8 @@ public:
     struct {
             bool operator()(Env* a, Env* b) const { return a->value < b->value; }
         } customLess;
+    
+    mapValue* mapValues[16];
 private:
 
 };

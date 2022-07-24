@@ -131,20 +131,4 @@ MsgParser::~MsgParser(){
     ofSleepMillis(800); // Wait for the msg to get to server?
 }
 
-void MsgParser::connectToSuperCollider(){
-    synth.start();
-
-    scClient.setup(6548,"127.0.0.1",SC_PORT);
-    ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
-    ofSleepMillis(500);
-    
-    ofxOscMessage msg;
-    msg.setAddress("/notify");
-    msg.addIntArg(1);
-    scClient.sendMessage(msg);
-}
-
-void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){
-  std::string address = m.getAddress();
-  std::cout << "RECVd " <<  m << std::endl;
-}
+// The rest of the functions is in ofxJVisuals...

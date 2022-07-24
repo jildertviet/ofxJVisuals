@@ -32,9 +32,6 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
     addEvent((Event*)alphaScreen, 0);
     setAlpha(255);
 
-    for(int i=0; i<9; i++)
-        busses.push_back(new Bus());
-
     loadLastMaskFile();
 
     verdana30.load("verdana.ttf", 50, true, true);
@@ -98,8 +95,6 @@ ofxJVisuals::~ofxJVisuals(){
     // Delete all events?
     for(int i=0; i<NUMLAYERS; i++)
         layers[i][0].deleteNext();
-    for(int i=0; i<mappers.size(); i++)
-        delete mappers[i];
     delete msgParser;
 }
 
@@ -210,10 +205,6 @@ bool ofxJVisuals::checkIfNull(Event* e){
     return (bool)e;
 }
 
-bool ofxJVisuals::checkIfNullM(Mapper* m){
-    return (bool)m;
-}
-
 Event* ofxJVisuals::addEvent(Event* e, int layerIndex, unsigned short index){ // Index 0 means: don't save
     if(index){
         if(index < MAX_EVENTS_PTRS){
@@ -243,7 +234,6 @@ Event* ofxJVisuals::addEvent(Event* e, int layerIndex, unsigned short index){ //
 
     e->events = events;
     e->id = index;
-    e->mappersParent = &mappers;
 
 //    e->receivingPointers = &receivingPointers;
     return e;
@@ -280,10 +270,6 @@ void ofxJVisuals::setAlpha(int alpha, bool bDo){
 
 void ofxJVisuals::setBrightness(unsigned char b){
     brightness = b;
-}
-
-void ofxJVisuals::addMapper(Mapper* m){ // Not using this for >3 years I guess
-    mappers.push_back(m);
 }
 
 void ofxJVisuals::killAll(){
@@ -703,10 +689,6 @@ bool MsgParser::make(ofxOscMessage& m){
         case 16:
             e = new MultiMeshMaybeTomorrow();
             break;
-        case 17:
-            e = new IFLogo();
-            return false;
-            break;
         case 18:
 #ifdef JPhysarum_hpp
             glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
@@ -1059,5 +1041,26 @@ void MsgParser::addEnv(ofxOscMessage& m){
     if(bSave){ // Saves the envelope as a txt file when done.
         if(e->getLastEnv())
             e->getLastEnv()->setSave();
+    }
+}
+
+void MsgParser::connectToSuperCollider(){
+    synth.start();
+
+    scClient.setup(6548,"127.0.0.1",SC_PORT);
+    ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
+    ofSleepMillis(500);
+    
+    ofxOscMessage msg;
+    msg.setAddress("/notify");
+    msg.addIntArg(1);
+    scClient.sendMessage(msg);
+}
+
+void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){
+    std::string address = m.getAddress();
+    std::cout << "RECVd " <<  m << std::endl;
+    if(m.getAddress() == "/mapVal"){
+        v->getEventById(m.getArgAsInt(2))->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4));
     }
 }

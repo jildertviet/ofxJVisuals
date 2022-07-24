@@ -1,10 +1,12 @@
 #include "ofApp.h"
+using namespace glm;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1920, 1080);
-//    visualizer = new ofxJVisuals(glm::vec2(1920, 1080));
-//    auto e = JPhysarum(glm::vec2(0), glm::vec2(100));
+    auto r = new JRectangle(vec3(100, 100, 0), vec3(100, 100, 0));
+    r->setColor(ofColor::white);
+    visualizer.addEvent(r, VisualizerLayer::DEFAULT, 1);
 }
 
 //--------------------------------------------------------------

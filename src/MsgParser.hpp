@@ -35,7 +35,6 @@
 #include "JImage.hpp"
 #include "JDivisionGrid.hpp"
 #include "JVideoPlayer.hpp"
-#include "IFLogo.hpp"
 #include "JShaderTest.hpp"
 #include "MultiMeshMaybeTomorrow.hpp"
 #include "JPhysarum.hpp"

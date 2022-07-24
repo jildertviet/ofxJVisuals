@@ -35,9 +35,7 @@ void Song::doControlFunc(int note, int value){
     // Store values in Bus objects in Visualizer
     if(note < 48 || note > 56)
         return;
-    
-    v->busses[note-48]->value = ofMap(value, 0, 127, 0., 1.);
-    
+        
     switch(note){
         case 56:
             cout << "Set brightness" << endl;

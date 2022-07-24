@@ -9,10 +9,10 @@
 
 JRectangle::JRectangle(){
     setType("JRectangle");
+    mapValues[0] = new mapValue(&size.x);
 }
 
-JRectangle::JRectangle(float millisTime, ofVec2f loc, ofVec2f size, ofColor color, float attack, float release, ofVec2f direction, bool move){
-    setType("JRectangle");
+JRectangle::JRectangle(float millisTime, ofVec2f loc, ofVec2f size, ofColor color, float attack, float release, ofVec2f direction, bool move) : JRectangle(){
     setEndTime(millisTime);
     this->loc = loc; this->size = size;
     colors.clear();
@@ -25,8 +25,7 @@ JRectangle::JRectangle(float millisTime, ofVec2f loc, ofVec2f size, ofColor colo
     bMove = move;
 }
 
-JRectangle::JRectangle(ofVec3f loc, ofVec3f size){
-    setType("JRectangle");
+JRectangle::JRectangle(ofVec3f loc, ofVec3f size) : JRectangle(){
     this->loc = loc; this->size = size; active=false;
     bMove = false;
     direction = ofVec2f(-1,0);

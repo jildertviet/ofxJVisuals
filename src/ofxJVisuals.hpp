@@ -5,11 +5,6 @@
 
 #include "config.h"
 
-#define NUMLAYERS   7
-#define MAX_EVENTS_PTRS 1025
-
-#define USE_PP  false // ofxPostProcessing
-
 #ifdef USE_PARTICLES
 //    #include "particleSystem.hpp"
 #endif
@@ -40,7 +35,6 @@
 #include "RectangleMask.hpp"
 
 #include "AlphaBlackScreen.hpp"
-#include "Mapper.hpp"
 //#include "Wavetables.hpp"
 #include "Env.hpp"
 #include "cameraController.hpp"
@@ -62,8 +56,7 @@ enum VisualizerLayer {
     DEFAULT
 };
 
-class Bus;
-class JLayer: public Event{
+class JLayer: public Event{ // What does it do?
 public:
     JLayer(){};
 };
@@ -104,7 +97,6 @@ typedef unsigned char uint8;
     Event* lastCalled = nullptr;
     
     static bool checkIfNull(Event* e);
-    static bool checkIfNullM(Mapper* m);
     
     bool bMirror = false;
     bool bAddMirror = false;
@@ -113,11 +105,6 @@ typedef unsigned char uint8;
     void makeFit(glm::vec2 size);
     
     AlphaBlackScreen* alphaScreen = nullptr;
-    
-    vector<Mapper*> mappers;
-    void addMapper(Mapper* m);
-    
-    vector<Bus*> busses;
     
     // PostProcessing
 #if USE_PP
@@ -178,15 +165,6 @@ private:
     JLayer* layers[NUMLAYERS]; // linked list, use AddEvent to add
     JLayer negativeLayer;
     ofShader negative;
-};
-
-class Bus{
-public:
-    Bus(){
-        tap = new linkTap("value", &value, ofVec2f(0., 1.0));
-    }
-    float value = 0.5;
-    linkTap* tap;
 };
 
 #endif /* ofxJVisuals_hpp */

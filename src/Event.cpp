@@ -55,19 +55,6 @@ void Event::update(){
             }
         }
         
-        
-        cout << "Num mappers internal: " << mappers.size() << endl;
-//        cout << "Num mappers external: " << 
-        // Remove from 'vector<Mappers*> mappers' in Visualizer
-        for(int i=0; i<mappers.size(); i++){
-            for(int j=0; j<mappersParent->size(); j++){
-                if(mappersParent->at(j) == mappers[i]) {
-                    mappersParent->at(j) = nullptr;
-                    cout << "Deleting one Mapper in delete @ Event" << endl;
-                }
-            }
-        }
-        
         delete this;
         return;
     }
@@ -212,39 +199,12 @@ void Event::setColor(ofColor color, int index){
 //    cout << (int)index << " " << color << endl;
 }
 
-void Event::makeLinkTap(string name, float* floatPtr, ofVec2f range){
-    linkTaps.push_back(new linkTap(name, floatPtr, range));
-}
-
-void Event::makeLinkTap(string name, int* intPtr, ofVec2f range){
-    linkTaps.push_back(new linkTap(name, intPtr, range));
-}
-
-void Event::makeLinkTap(string name, ofColor* colorPtr, ofVec2f range){
-    linkTaps.push_back(new linkTap(name, colorPtr, range));
-}
-
-linkTap* Event::getLinkTap(string name){
-    for(int i=0; i<linkTaps.size(); i++){
-        if(linkTaps[i]->name == name){
-            return linkTaps[i];
-        }
-    }
-    return nullptr;
-}
-
 void Event::addPtr(Event** p){
     toClear.push_back(p);
 }
 
 void Event::setAlpha(unsigned char alpha){
     colors[0].a = alpha;
-}
-
-void Event::printLinkTaps(){
-    for(int i=0; i<linkTaps.size(); i++){
-        cout << linkTaps[i]->name << endl;
-    }
 }
 
 Env* Event::addEnv(Env* e){
