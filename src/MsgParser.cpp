@@ -9,7 +9,9 @@
 
 MsgParser::MsgParser(ofxJVisuals* v){
     this->v = v;
-//    connectToSuperCollider(); Test
+#ifdef USE_SC
+    connectToSuperCollider(); // Test
+#endif
     vector<string> commandKeys = {
         "make",
         "setVal",
@@ -121,11 +123,22 @@ MsgParser::MsgParser(ofxJVisuals* v){
 //    v->addEvent(e);
 //}
 
-void MsgParser::connectToSuperCollider(){
-    scClient.setup(6548,"localhost",57110);
-    ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
+MsgParser::~MsgParser(){
+    cout << "X" << endl;
     ofxOscMessage msg;
-    ofxOscMessage m;
+    msg.setAddress("/quit");
+    scClient.sendMessage(msg);
+    ofSleepMillis(800); // Wait for the msg to get to server?
+}
+
+void MsgParser::connectToSuperCollider(){
+    synth.start();
+
+    scClient.setup(6548,"127.0.0.1",SC_PORT);
+    ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
+    ofSleepMillis(500);
+    
+    ofxOscMessage msg;
     msg.setAddress("/notify");
     msg.addIntArg(1);
     scClient.sendMessage(msg);
@@ -133,5 +146,5 @@ void MsgParser::connectToSuperCollider(){
 
 void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){
   std::string address = m.getAddress();
-  std::cout << "RECVd " <<  address << std::endl;
+  std::cout << "RECVd " <<  m << std::endl;
 }

@@ -3,8 +3,8 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1920, 1080);
-    visualizer = new ofxJVisuals(glm::vec2(1920, 1080));
-    auto e = JPhysarum(glm::vec2(0), glm::vec2(100));
+//    visualizer = new ofxJVisuals(glm::vec2(1920, 1080));
+//    auto e = JPhysarum(glm::vec2(0), glm::vec2(100));
 }
 
 //--------------------------------------------------------------
@@ -14,17 +14,17 @@ void ofApp::update(){
 #else
 //    cout << ofGetFrameRate() << endl;
 #endif
-    visualizer->update();
+    visualizer.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    visualizer->display();
+    visualizer.display();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    visualizer->keyPressed(key);
+    visualizer.keyPressed(key);
 }
 
 //--------------------------------------------------------------

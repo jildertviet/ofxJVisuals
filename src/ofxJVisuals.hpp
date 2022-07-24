@@ -3,6 +3,8 @@
 #ifndef ofxJVisuals_hpp
 #define ofxJVisuals_hpp
 
+#include "config.h"
+
 #define NUMLAYERS   7
 #define MAX_EVENTS_PTRS 1025
 
@@ -14,8 +16,12 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-//#include "ofxOsc.h"
+
+#ifdef  USE_SC // SC link is handled in MsgParser
 #include "ofxOscBidirectional.h"
+#else
+#include "ofxOsc.h"
+#endif
 
 #if USE_PP
     #include "ofxPostProcessing.h"
@@ -65,7 +71,7 @@ public:
 class ofxJVisuals{
 public:
 typedef unsigned char uint8;
-    ofxJVisuals(glm::vec2 size);
+    ofxJVisuals(glm::vec2 size = glm::vec2(1920,1080));
     ~ofxJVisuals();
     ofFbo fbo, renderFbo;
     void deconstructor();

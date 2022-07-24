@@ -100,6 +100,7 @@ ofxJVisuals::~ofxJVisuals(){
         layers[i][0].deleteNext();
     for(int i=0; i<mappers.size(); i++)
         delete mappers[i];
+    delete msgParser;
 }
 
 void ofxJVisuals::deconstructor(){

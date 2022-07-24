@@ -13,8 +13,14 @@
 #include <iterator>
 #include <map>
 #include <vector>
-//#include "ofxOsc.h"
+
+#include "config.h"
+
+#ifdef USE_SC
 #include "ofxOscBidirectional.h"
+#else
+#include "ofxOsc.h"
+#endif
 
 //#include "ofxJVisuals.hpp"
 #include "JRectangle.hpp"
@@ -34,6 +40,8 @@
 #include "MultiMeshMaybeTomorrow.hpp"
 #include "JPhysarum.hpp"
 
+#include "scSynth.hpp"
+
 using namespace std;
 
 class ofxJVisuals;
@@ -41,6 +49,7 @@ class ofxJVisuals;
 class MsgParser{
 public:
     MsgParser(ofxJVisuals* v);
+    ~MsgParser();
     bool parseMsg(ofxOscMessage& m);
     bool make(ofxOscMessage& m);
     map<string, short> commands;
@@ -59,6 +68,7 @@ private:
     ofxOscSenderReceiver scClient;
     void connectToSuperCollider();
     void onSuperColliderMessageReceived(ofxOscMessage &m);
+    scSynth synth;
 };
 
 #endif /* MsgParser_hpp */
