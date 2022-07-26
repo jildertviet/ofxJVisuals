@@ -47,7 +47,7 @@ public:
     
     virtual void setLoc(ofVec3f loc);
     ofVec3f size, loc, direction;
-    vector<ofColor> colors = {ofColor(255,0)};
+    vector<ofColor> colors = {ofColor(255,255)}; // Make stuff visible by default
 
     float speed = 1.;
     virtual void setSpeed(float speed);

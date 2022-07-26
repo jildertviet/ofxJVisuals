@@ -124,11 +124,9 @@ MsgParser::MsgParser(ofxJVisuals* v){
 //}
 
 MsgParser::~MsgParser(){
-    cout << "X" << endl;
     ofxOscMessage msg;
     msg.setAddress("/quit");
     scClient.sendMessage(msg);
-    ofSleepMillis(800); // Wait for the msg to get to server?
 }
 
-// The rest of the functions is in ofxJVisuals...
+// The rest of the functions is in ofxJVisuals.hpp...
