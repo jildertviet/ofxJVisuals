@@ -49,7 +49,7 @@
 #include "MsgParser.hpp"
 
 enum VisualizerLayer {
-    FUNCTIONAL,
+    FUNCTIONAL, // Should be deleted?
     NON_CAM_BACK,
     NON_CAM_FRONT,
     NEGATIVE,

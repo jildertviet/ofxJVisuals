@@ -280,7 +280,7 @@ void ofxJVisuals::killAll(){
 #endif
     bAddMirror = false;
 
-    for(uint8 i=0; i<NUMLAYERS-1; i++){
+    for(uint8 i=1; i<NUMLAYERS-1; i++){ // Skip layer 0 'Functional'
         if(layers[i]->next)
             layers[i]->next->deleteNext(); // Don't delete self, only next events
     }
@@ -1047,13 +1047,11 @@ void MsgParser::addEnv(ofxOscMessage& m){
 
 void MsgParser::connectToSuperCollider(){
     synth.start();
-
     scClient.setup(6548,"127.0.0.1",SC_PORT);
     ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
 }
 
 void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id, 3: param id, 4: value, 5: (optional) type (r,g,b,a)
-    std::string address = m.getAddress();
     std::cout << "RECVd " <<  m << std::endl;
     if(m.getAddress() == "/mapVal"){
         Event* e = v->getEventById(m.getArgAsInt(2));
