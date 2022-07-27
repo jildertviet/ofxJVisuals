@@ -124,7 +124,7 @@ public:
             bool operator()(Env* a, Env* b) const { return a->value < b->value; }
         } customLess;
     
-    mapValue* mapValues[16];
+    mapValue* mapValues[24];
 private:
 
 };

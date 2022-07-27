@@ -103,10 +103,11 @@ void ofxJVisuals::deconstructor(){
 }
 
 void ofxJVisuals::update(){
+    msgParser->update();
+    
     while(receiver.hasWaitingMessages()){
         ofxOscMessage m;
-        receiver.getNextMessage(m);
-        
+        receiver.getNextMessage(m);    
         msgParser->parseMsg(m);
     }
 
@@ -1049,18 +1050,21 @@ void MsgParser::connectToSuperCollider(){
 
     scClient.setup(6548,"127.0.0.1",SC_PORT);
     ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
-    ofSleepMillis(500);
-    
-    ofxOscMessage msg;
-    msg.setAddress("/notify");
-    msg.addIntArg(1);
-    scClient.sendMessage(msg);
 }
 
-void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){
+void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id, 3: param id, 4: value, 5: (optional) type (r,g,b,a)
     std::string address = m.getAddress();
     std::cout << "RECVd " <<  m << std::endl;
     if(m.getAddress() == "/mapVal"){
-        v->getEventById(m.getArgAsInt(2))->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4));
+        Event* e = v->getEventById(m.getArgAsInt(2));
+        if(!e)
+            return;
+        if(m.getNumArgs() <= 5){
+            e->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4));
+        } else if(m.getNumArgs() > 5){
+            e->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4), m.getArgAsChar(5));
+        }
+    } else if(m.getAddress() == "/done" && m.getArgAsString(0) == "/notify"){
+        bIsNotified = true;
     }
 }

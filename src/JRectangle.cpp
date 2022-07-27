@@ -10,6 +10,20 @@
 JRectangle::JRectangle(){
     setType("JRectangle");
     mapValues[0] = new mapValue(&size.x);
+    mapValues[1] = new mapValue(&size.y);
+    mapValues[2] = new mapValue(&size.z);
+    mapValues[3] = new mapValue(&loc.x);
+    mapValues[4] = new mapValue(&loc.y);
+    mapValues[5] = new mapValue(&loc.z);
+    mapValues[6] = new mapValue(&colors[0]); // This will be accessed with an extra character, identifying a, r, g or b
+    mapValues[7] = new mapValue(&colors[0]);
+    mapValues[8] = new mapValue(&colors[0]);
+    mapValues[9] = new mapValue(&colors[0]);
+    mapValues[10] = new mapValue(&speed);
+    mapValues[11] = new mapValue(&direction.x);
+    mapValues[12] = new mapValue(&direction.y);
+    mapValues[13] = new mapValue(&direction.z);
+    mapValues[14] = new mapValue(&zoom);
 }
 
 JRectangle::JRectangle(float millisTime, ofVec2f loc, ofVec2f size, ofColor color, float attack, float release, ofVec2f direction, bool move) : JRectangle(){

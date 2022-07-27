@@ -50,6 +50,7 @@ public:
     MsgParser(ofxJVisuals* v);
     ~MsgParser();
     bool parseMsg(ofxOscMessage& m);
+    void update();
     bool make(ofxOscMessage& m);
     map<string, short> commands;
     map<string, short> types;
@@ -68,6 +69,7 @@ private:
     void connectToSuperCollider();
     void onSuperColliderMessageReceived(ofxOscMessage &m);
     scSynth synth;
+    bool bIsNotified = false;
 };
 
 #endif /* MsgParser_hpp */

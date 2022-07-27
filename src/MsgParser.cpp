@@ -130,3 +130,13 @@ MsgParser::~MsgParser(){
 }
 
 // The rest of the functions is in ofxJVisuals.hpp...
+void MsgParser::update(){
+    if(bIsNotified == false){
+        if(ofGetFrameNum() % 60 == 59){
+            ofxOscMessage msg;
+            msg.setAddress("/notify");
+            msg.addIntArg(1);
+            scClient.sendMessage(msg);
+        }
+    }
+}
