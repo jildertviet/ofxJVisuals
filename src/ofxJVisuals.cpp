@@ -1052,7 +1052,7 @@ void MsgParser::connectToSuperCollider(){
 }
 
 void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id, 3: param id, 4: value, 5: (optional) type (r,g,b,a)
-    std::cout << "RECVd " <<  m << std::endl;
+//    std::cout << "RECVd " <<  m << std::endl;
     if(m.getAddress() == "/mapVal"){
         Event* e = v->getEventById(m.getArgAsInt(2));
         if(!e)
