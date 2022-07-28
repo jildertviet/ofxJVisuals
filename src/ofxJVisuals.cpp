@@ -1060,7 +1060,7 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
         if(m.getNumArgs() <= 5){
             e->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4));
         } else if(m.getNumArgs() > 5){
-            e->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4), m.getArgAsChar(5));
+            e->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4), (char)m.getArgAsInt(5)); // Receives 97 i.e.
         }
     } else if(m.getAddress() == "/done" && m.getArgAsString(0) == "/notify"){
         bIsNotified = true;

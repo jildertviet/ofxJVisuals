@@ -97,7 +97,16 @@ void JRectangle::display(){
         if(size.z){
             ofDrawBox(0, 0, 0, size.x, size.y, size.z);
         } else{
+            ofPushStyle();
+            switch(mode){
+                case 0:
+                    break;
+                case 1:
+                    ofSetRectMode(OF_RECTMODE_CENTER);
+                    break;
+            }
             ofDrawRectangle(0, 0, size.x, size.y);
+            ofPopStyle();
         }
 //        ofTranslate(-size*0.5); // ?
 //        ofRotateZDeg(rotation.z);
