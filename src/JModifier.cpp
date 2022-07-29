@@ -1,0 +1,31 @@
+//
+//  JModifier.cpp
+//  exampleSimple
+//
+//  Created by Jildert Viet on 29/07/2022.
+//
+
+#include "JModifier.hpp"
+
+JModifier::JModifier(){
+    
+}
+
+void JModifier::display(JEvent* e, void (JEvent::*ptr) (void)){
+    
+}
+
+JModifierArray::JModifierArray(){
+    
+}
+
+void JModifierArray::display(JEvent* e, void (JEvent::*ptr) (void)){
+    for(int i=0; i<dimensions.x; i++){
+        for(int j=0; j<dimensions.y; j++){
+            ofPushMatrix();
+            ofTranslate(i * spacing.x, j * spacing.y);
+            (e->*ptr)();
+            ofPopMatrix();
+        }
+    }
+}

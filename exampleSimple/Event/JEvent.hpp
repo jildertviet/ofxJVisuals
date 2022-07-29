@@ -14,6 +14,7 @@
 #include "ofxOscBidirectional.h"
 #include "Env.hpp" // USE_FRAMES_AS_CLOCK is set here
 #include "mapValue.h"
+#include "JModifier.hpp"
 
 //#define USE_FRAMES_AS_CLOCK false
 
@@ -125,6 +126,8 @@ public:
         } customLess;
     
     mapValue* mapValues[24];
+    void setDefaultMappers();
+    vector<JModifier*> modifiers;
 private:
 
 };

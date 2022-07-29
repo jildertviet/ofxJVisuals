@@ -209,9 +209,11 @@ public:
     void customOne() override;
     void customTwo() override;
     void customThree() override;
+    void customFour() override;
     bool bSave = false;
     
     vector<JPoly*> polyVec;
+    void initRect();
     void generateRandomRects();
     void sortAndSplit();
     Env* addEnvRandomPoly(vector<float> values, vector<float> times);

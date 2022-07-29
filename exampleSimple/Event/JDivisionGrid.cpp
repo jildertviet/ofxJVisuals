@@ -17,7 +17,8 @@ bool sortByAreaSize(JPoly* a, JPoly* b){
 
 JDivisionGrid::JDivisionGrid(glm::vec2 size){
     this->size = glm::vec3(size, 0);
-    generateRandomRects();
+    initRect();
+//    generateRandomRects();
 }
 
 void JDivisionGrid::display(){
@@ -47,7 +48,7 @@ void JDivisionGrid::specificFunction(){
     }
 }
 
-void JDivisionGrid::generateRandomRects(){
+void JDivisionGrid::initRect(){
     polyVec.clear();
     JPoly* poly = new JPoly();
     polyVec.push_back(poly);
@@ -60,7 +61,9 @@ void JDivisionGrid::generateRandomRects(){
     p->lineTo(glm::vec3(padding, size.x - padding, 0));
     p->lineTo(glm::vec3(padding, padding, 0));
     poly->id = id;
-    
+}
+
+void JDivisionGrid::generateRandomRects(){ // call initRect first
     for(int i=0; i<32; i++)
         sortAndSplit();
     
@@ -122,6 +125,11 @@ void JDivisionGrid::customThree(){
             polyVec[i]->id = id + i;
         }
     }
+}
+
+void JDivisionGrid::customFour(){
+    for(int i=0; i<customOneArguments[0]; i++)
+        sortAndSplit();
 }
 
 void JDivisionGrid::setColor(ofColor c, int id){

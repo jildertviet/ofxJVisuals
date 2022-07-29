@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "JEvent.hpp"
 #include "JPrimitive.hpp"
+#include "JModifier.hpp"
 
 class JRectangle: public JPrimitive{ // Also inherits from Event
 public:
