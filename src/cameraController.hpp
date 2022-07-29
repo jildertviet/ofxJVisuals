@@ -4,7 +4,6 @@
 //
 //  Created by Jildert Viet on 24-01-18.
 //
-//
 
 #ifndef cameraController_hpp
 #define cameraController_hpp

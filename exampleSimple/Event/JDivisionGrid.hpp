@@ -202,7 +202,7 @@ public:
 
 class JDivisionGrid: public JEvent{
 public:
-    JDivisionGrid();
+    JDivisionGrid(glm::vec2 size = glm::vec2(1080));
     void display() override;
     void specificFunction() override;
     void setColor(ofColor c, int id) override;

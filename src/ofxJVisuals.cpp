@@ -669,8 +669,10 @@ bool MsgParser::make(ofxOscMessage& m){
             cout << m.getArgAsString(2) << endl;
             e = new JImage(m.getArgAsString(3));
             break;
-        case 12:
-            e = new JDivisionGrid();
+        case 12:{
+            glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
+            e = new JDivisionGrid(size);
+        }
             break;
         case 13:
             e = new JVideoPlayer();

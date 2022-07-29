@@ -15,8 +15,8 @@ bool sortByAreaSize(JPoly* a, JPoly* b){
     }
 };
 
-JDivisionGrid::JDivisionGrid(){
-    size = glm::vec3(1080, 1080, 0);
+JDivisionGrid::JDivisionGrid(glm::vec2 size){
+    this->size = glm::vec3(size, 0);
     generateRandomRects();
 }
 
