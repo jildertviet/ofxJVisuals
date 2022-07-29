@@ -22,7 +22,7 @@
     #include "ofxPostProcessing.h"
 #endif
 
-#include "Event.hpp"
+#include "JEvent.hpp"
 #include "Vorm.h"
 #include "JNoise.hpp"
 #include "JImage.hpp"
@@ -56,7 +56,7 @@ enum VisualizerLayer {
     DEFAULT
 };
 
-class JLayer: public Event{ // What does it do?
+class JLayer: public JEvent{ // What does it do?
 public:
     JLayer(){};
 };
@@ -82,21 +82,21 @@ typedef unsigned char uint8;
     void killAll();
 
     int numEvents = 0;
-    Event* last;
+    JEvent* last;
     ofxOscMessage getAllEvents();
     
-    Event* events[MAX_EVENTS_PTRS];
+    JEvent* events[MAX_EVENTS_PTRS];
     void getFreePointers();
     unsigned short numEventsAdded = 0;
     
-    Event* addEvent(Event* e, int layerIndex=1, unsigned short index = 0);
-    Event* addEvent(Event* e, VisualizerLayer l, unsigned short index = 0);
+    JEvent* addEvent(JEvent* e, int layerIndex=1, unsigned short index = 0);
+    JEvent* addEvent(JEvent* e, VisualizerLayer l, unsigned short index = 0);
     
-    Event* getLast(){return last;}
-    Event* getEventById(int id);
-    Event* lastCalled = nullptr;
+    JEvent* getLast(){return last;}
+    JEvent* getEventById(int id);
+    JEvent* lastCalled = nullptr;
     
-    static bool checkIfNull(Event* e);
+    static bool checkIfNull(JEvent* e);
     
     bool bMirror = false;
     bool bAddMirror = false;

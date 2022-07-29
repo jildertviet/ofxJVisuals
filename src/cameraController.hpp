@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-#include "Event.hpp"
+#include "JEvent.hpp"
 
-class cameraController: public Event{
+class cameraController: public JEvent{
 public:
     cameraController(ofEasyCam* c);
     ofEasyCam* cam;

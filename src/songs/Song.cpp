@@ -49,11 +49,11 @@ void Song::doControlFunc(int note, int value){
     } 
 }
 
-Event* Song::getLast(){
+JEvent* Song::getLast(){
     return v->getLast();
 }
 
-Event* Song::addEvent(Event* e, int index){
+JEvent* Song::addEvent(JEvent* e, int index){
     return v->addEvent(e, index);
 }
 

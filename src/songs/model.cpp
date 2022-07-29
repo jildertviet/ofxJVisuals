@@ -15,7 +15,7 @@ model::model(ofxJVisuals* v){
     v->cam.lookAt(ofVec3f(0, 0, 0));
     
     camController = new cameraController(&(v->cam));
-    v->addEvent((Event*)camController);
+    v->addEvent((JEvent*)camController);
     
     v->cam.setPosition(-3.07814, 121.163, 137.302);
     v->cam.setOrientation(ofQuaternion(-0.0788498, 0.393574, 0.888034, 0.22423));
@@ -37,7 +37,7 @@ void model::F0(){ // Series ||
         mesh->rotationSpeed = ofVec3f(i * 0.02, 0, 0);
         mesh->addEnv(vector<float>{0, 10}, vector<float>{1000 + ofRandom(3000)}, &mesh->colors[0]);
         
-        addEvent((Event*)mesh);
+        addEvent((JEvent*)mesh);
         meshes.push_back(mesh);
     }
 }
@@ -59,7 +59,7 @@ void model::F1(){ // Rect ||
             mesh->addEnv(vector<float>{0, 10}, vector<float>{1000 + ofRandom(3000)}, &mesh->colors[0]);
     //        mesh->rotationSpeed = ofVec3f(i * 0.02, 0, 0);
             
-            addEvent((Event*)mesh);
+            addEvent((JEvent*)mesh);
             meshes.push_back(mesh);
         }
     }

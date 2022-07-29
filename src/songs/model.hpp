@@ -15,7 +15,7 @@
 #include "meshWalker.hpp"
 #include "cameraController.hpp"
 
-class jMesh: public Event{
+class jMesh: public JEvent{
 public:
     jMesh(){};
     void specificFunction(){

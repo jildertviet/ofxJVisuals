@@ -10,7 +10,7 @@
 #define Song_hpp
 
 #include <stdio.h>
-#include "Event.hpp"
+#include "JEvent.hpp"
 #include "Env.hpp"
 //#include "ofxJSON.h"
 #include "ofxOscBidirectional.h"
@@ -61,8 +61,8 @@ public:
     
     virtual void exit();
     
-    Event* getLast();
-    Event* addEvent(Event* e, int index=1);
+    JEvent* getLast();
+    JEvent* addEvent(JEvent* e, int index=1);
     
     void key(int key);
     vector<ofColor> colors;

@@ -29,7 +29,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
 
     alphaScreen = new AlphaBlackScreen(true);
     alphaScreen->size = size;
-    addEvent((Event*)alphaScreen, 0);
+    addEvent((JEvent*)alphaScreen, 0);
     setAlpha(255);
 
     loadLastMaskFile();
@@ -86,7 +86,7 @@ void ofxJVisuals::initCam(){
 
     if(!camController){
         camController = new cameraController(&cam);
-        addEvent((Event*)camController, 0);
+        addEvent((JEvent*)camController, 0);
     }
 }
 
@@ -202,11 +202,11 @@ void ofxJVisuals::display(){
     drawMask();
 }
 
-bool ofxJVisuals::checkIfNull(Event* e){
+bool ofxJVisuals::checkIfNull(JEvent* e){
     return (bool)e;
 }
 
-Event* ofxJVisuals::addEvent(Event* e, int layerIndex, unsigned short index){ // Index 0 means: don't save
+JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, unsigned short index){ // Index 0 means: don't save
     if(index){
         if(index < MAX_EVENTS_PTRS){
             if(events[index]){
@@ -240,7 +240,7 @@ Event* ofxJVisuals::addEvent(Event* e, int layerIndex, unsigned short index){ //
     return e;
 }
 
-Event* ofxJVisuals::addEvent(Event* e, VisualizerLayer l, unsigned short index){
+JEvent* ofxJVisuals::addEvent(JEvent* e, VisualizerLayer l, unsigned short index){
     switch(l){
         case FUNCTIONAL:
             return addEvent(e, 0, index);
@@ -340,7 +340,7 @@ ofxOscMessage ofxJVisuals::getAllEvents(){
     for(unsigned short i=1; i<NUMLAYERS-1; i++){
         // A, B, C
         if(layers[i]->next){
-            Event* lastRead = layers[i]->next; // First: A (skip dummy Event)
+            JEvent* lastRead = layers[i]->next; // First: A (skip dummy Event)
             m.addIntArg(lastRead->id);
             m.addStringArg(lastRead->type);
 
@@ -357,7 +357,7 @@ ofxOscMessage ofxJVisuals::getAllEvents(){
     return m;
 }
 
-Event* ofxJVisuals::getEventById(int idToFind){
+JEvent* ofxJVisuals::getEventById(int idToFind){
     if(idToFind<MAX_EVENTS_PTRS){
         if(events[idToFind]){
             return events[idToFind];
@@ -375,7 +375,7 @@ Event* ofxJVisuals::getEventById(int idToFind){
 //    }
 //
 //    for(int i=0; i<NUMLAYERS; i++){
-//        Event* toCheck = layers[i]; // Dummy
+//        JEvent* toCheck = layers[i]; // Dummy
 //        while(toCheck->next){
 //            cout << "test: layer: " << i << " " << toCheck->next->id << endl;
 //            if(toCheck->next->id == idToFind){
@@ -511,7 +511,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
             addTo(m);
             break;
         case 6:{ // doFunc
-            Event* e = v->getEventById(m.getArgAsInt(0));
+            JEvent* e = v->getEventById(m.getArgAsInt(0));
             if(!e)
                 return false;
             switch(m.getArgAsInt(1)){
@@ -534,14 +534,14 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         }
             break;
         case 7:{ // addConnection
-            Event* e = v->getEventById(m.getArgAsInt(0));
+            JEvent* e = v->getEventById(m.getArgAsInt(0));
             if(e && e->type == "Vorm")
                 ((Vorm*)e)->addConnection((Vorm*)v->getEventById(m.getArgAsInt(1)));
         }
             break;
         case 8:{ // switchRadius
-            Event* e = v->getEventById(m.getArgAsInt(0));
-            Event* b = v->getEventById(m.getArgAsInt(1));
+            JEvent* e = v->getEventById(m.getArgAsInt(0));
+            JEvent* b = v->getEventById(m.getArgAsInt(1));
             if(e && e->type == "Vorm")
                 ((Vorm*)e)->switchRadiusses((Vorm*)b);
             if(m.getArgAsBool(2)){
@@ -553,7 +553,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         }
             break;
         case 9:{ // changeAngleOffset
-            Event* e = v->getEventById(m.getArgAsInt(0));
+            JEvent* e = v->getEventById(m.getArgAsInt(0));
             if(e){
                 if(e->type == "Vorm")
                     ((Vorm*)e)->changeAngleOffset(m.getArgAsFloat(1));
@@ -569,7 +569,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         }
             break;
         case 11:{ // linkVecField
-            Event* e = v->getEventById(m.getArgAsInt(0));
+            JEvent* e = v->getEventById(m.getArgAsInt(0));
 #if USE_PARTICLES
             if(e){
                 if(e->type == "particleSystem")
@@ -620,7 +620,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
 
 bool MsgParser::make(ofxOscMessage& m){
     cout << "Make " << m.getArgAsString(0) << " with ID: " << m.getArgAsInt(1) << endl;
-    Event* e = nullptr;
+    JEvent* e = nullptr;
     switch(types[m.getArgAsString(0)]){
         case 1: // JRectangle
             e = new JRectangle();
@@ -650,17 +650,17 @@ bool MsgParser::make(ofxOscMessage& m){
             e = new MultiMesh();
             break;
         case 8:{ // JParticles
-//            e = (Event*)new JParticles();
+//            e = (JEvent*)new JParticles();
 #ifdef USE_PARTICLES
-            e = (Event*)new particleSystem(m.getArgAsInt(4), ofVec2f(m.getArgAsInt(5),m.getArgAsInt(6)), ofColor::white, m.getArgAsInt(7));
+            e = (JEvent*)new particleSystem(m.getArgAsInt(4), ofVec2f(m.getArgAsInt(5),m.getArgAsInt(6)), ofColor::white, m.getArgAsInt(7));
 #endif
 //            int idToFind = m.getArgAsInt(5);
 //            ((particleSystem*)e)->setVecField((JVecField*)v->getEventById(m.getArgAsInt(5)));
         }
             break;
         case 9:
-            e = new jText(&(v->verdana30));
-            ((jText*)e)->bCamEnabled = &(v->bCam);
+            e = new JText(&(v->verdana30));
+            ((JText*)e)->bCamEnabled = &(v->bCam);
             break;
         case 10:
             e = new JMesh();
@@ -733,7 +733,7 @@ bool MsgParser::make(ofxOscMessage& m){
             vf->setColor(ofColor(0,0));
             vf->complexity = 20;
 
-            v->addEvent((Event*)vf);
+            v->addEvent((JEvent*)vf);
 
 //            p->externalVelocity = t;
             p->externalVelocity = &(vf->vecTex);
@@ -764,7 +764,7 @@ bool MsgParser::make(ofxOscMessage& m){
 //    ofxOscMessage n;
 //    n.setAddress("/makeConfirm");
 //    n.addIntArg(m.getArgAsInt(1)); // ID from SC
-//    long pointerToInt = reinterpret_cast<long>(e); // This int can later be casted to an Event*, but check if it's allocated/in use before using!
+//    long pointerToInt = reinterpret_cast<long>(e); // This int can later be casted to an JEvent*, but check if it's allocated/in use before using!
 //    int a = (int)(pointerToInt >> 32);
 //    int b = (int)pointerToInt;
 //    n.addIntArg(a);
@@ -774,10 +774,10 @@ return false;
 }
 
 void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 200
-    Event* e = v->getEventById(m.getArgAsInt(0));
-    // Default: /setVal, a, b, "size", 100, 200: a and b are two uint_32 forming a long together, that can be casted to a Event*
+    JEvent* e = v->getEventById(m.getArgAsInt(0));
+    // Default: /setVal, a, b, "size", 100, 200: a and b are two uint_32 forming a long together, that can be casted to a JEvent*
 //    long pointerAsInt = (long)m.getArgAsInt(1) << 32 | m.getArgAsInt(2) & 0xFFFFFFFFL;
-//    Event* f = reinterpret_cast<Event*>(pointerAsInt);
+//    JEvent* f = reinterpret_cast<JEvent*>(pointerAsInt);
     if(e){
         cout << "Event found, id: " << m.getArgAsInt(0) << ", addr: " << e << endl;
         switch (values[m.getArgAsString(1)]) {
@@ -867,7 +867,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 e->setMode(m.getArgAsInt(2));
                 break;
             case 17: // text
-                ((jText*)e)->setText(m.getArgAsString(2));
+                ((JText*)e)->setText(m.getArgAsString(2));
                 break;
             case 18: // path
                 if(e->type == "JImage"){
@@ -946,7 +946,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
 }
 
 void MsgParser::addTo(ofxOscMessage& m){
-    Event* e = v->getEventById(m.getArgAsInt(0));
+    JEvent* e = v->getEventById(m.getArgAsInt(0));
     if(e){
         switch (values[m.getArgAsString(1)]) {
             case 1:{ // color
@@ -980,7 +980,7 @@ void MsgParser::addTo(ofxOscMessage& m){
 }
 
 void MsgParser::addEnv(ofxOscMessage& m){
-    Event* e = v->getEventById(m.getArgAsInt(0));
+    JEvent* e = v->getEventById(m.getArgAsInt(0));
     if(!e)
         return;
     vector<float> times = {m.getArgAsFloat(2), m.getArgAsFloat(3), m.getArgAsFloat(4)};
@@ -1054,7 +1054,7 @@ void MsgParser::connectToSuperCollider(){
 void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id, 3: param id, 4: value, 5: (optional) type (r,g,b,a)
 //    std::cout << "RECVd " <<  m << std::endl;
     if(m.getAddress() == "/mapVal"){
-        Event* e = v->getEventById(m.getArgAsInt(2));
+        JEvent* e = v->getEventById(m.getArgAsInt(2));
         if(!e)
             return;
         if(m.getNumArgs() <= 5){

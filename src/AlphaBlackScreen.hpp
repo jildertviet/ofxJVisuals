@@ -1,6 +1,5 @@
 //
 //  AlphaBlackScreen.hpp
-//  Paul
 //
 //  Created by Jildert Viet on 14-02-16.
 //
@@ -10,9 +9,9 @@
 #define AlphaBlackScreen_hpp
 
 #include <stdio.h>
-#include "Event.hpp"
+#include "JEvent.hpp"
 
-class AlphaBlackScreen: public Event{
+class AlphaBlackScreen: public JEvent{
 public:
     AlphaBlackScreen(bool state = true);
     ~AlphaBlackScreen();
@@ -26,9 +25,6 @@ public:
     bool bGradient = false;
     ofColor gradientColor = ofColor(255);
     int gradientAlpha;
-    
-    void test(){cout<<"AlphaBlackScreen Test"<<endl;};
-    
 private:
     bool bDoAlphaBlend = false;
 

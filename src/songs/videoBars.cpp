@@ -105,7 +105,7 @@ void videoBars::F14(){ // Lines ||
         JRectangle* line = new JRectangle(3000, ofVec2f(x, ofGetHeight() * 0.5), ofVec2f(10, ofGetHeight() * (ofRandom(0.5) + 0.5)));
         line->bMove = false;
         line->colors[0] = ofColor(255, 100);
-        addEvent((Event*)line, 2);
+        addEvent((JEvent*)line, 2);
         line->deleteWithFade(3000);
         line->addEnv(vector<float>{line->size.x, line->size.x * (ofRandom(4) + 1)}, vector<float>{3000}, &line->size.x);
         line->addEnv(vector<float>{line->size.y, line->size.y - 300}, vector<float>{3000}, &line->size.y);

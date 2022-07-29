@@ -119,7 +119,7 @@ MsgParser::MsgParser(ofxJVisuals* v){
         envValues[envValueKeys[i]] = i + 1;
 }
 
-//void MsgParser::addEvent(Event* e){
+//void MsgParser::addEvent(JEvent* e){
 //    v->addEvent(e);
 //}
 

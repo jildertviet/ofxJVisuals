@@ -13,7 +13,7 @@ verses::verses(ofxJVisuals* v){
     colors.push_back(ofColor::white);
 //    geometricLandscape();
 //    camController = new cameraController(&(v->cam));
-//    v->addEvent((Event*)camController);
+//    v->addEvent((JEvent*)camController);
     
 //    v->cam.setPosition(-3.07814, 121.163, 137.302);
 //    v->cam.setOrientation(ofQuaternion(-0.0788498, 0.393574, 0.888034, 0.22423));
@@ -34,7 +34,7 @@ void verses::rotSquares(int numRects){
         speed = ((i/10. * 0.3 + 0.3)*0.3) * -1;
         speed *= 0.05;
         m->addEnv(vector<float>{speed, speed, (float)(speed * 0.5)}, vector<float>{8000, 8000}, &m->rotateSpeed);
-        addEvent((Event*) m, 3);
+        addEvent((JEvent*) m, 3);
         rects.push_back(m);
     }
 }
@@ -90,7 +90,7 @@ void verses::F3(){ // Squares ||
         r->fillRatio = 0;
         r->lineWidth = 1;
         //        r->setPathWakersSpeed(1);
-        addEvent((Event*) r, 2);
+        addEvent((JEvent*) r, 2);
         rects.push_back(r);
     }
 }
@@ -199,7 +199,7 @@ void verses::geometricLandscape(){
     l->setColor(ofColor(255,100));
     l->translate(ofVec3f(-l->size.x*0.5,-l->size.y*0.5,0));
     
-    addEvent((Event*)l);
+    addEvent((JEvent*)l);
     
     v->cam.setPosition(-0.759579, 30.1639, -1064.77);
     v->cam.setOrientation(ofQuaternion(-0.214214, -0.97677, -0.0033634, 0.00564715));
@@ -222,13 +222,13 @@ void verses::eightShort(){
     l->bDisplayFaces = false;
     l->setColor(ofColor(255,50));
     l->translate(ofVec3f(-l->size.x*0.5,-l->size.y*0.5,0));
-    addEvent((Event*)l);
+    addEvent((JEvent*)l);
     
     uint16 numLines = 8;
     
     for(uint16 i=0; i<numLines; i++){
         mt.push_back(new meshWalker(&l->m, l->size - ofVec2f(1,1)));
-        addEvent((Event*)mt.back());
+        addEvent((JEvent*)mt.back());
         mt[i]->locOnGrid = ofVec2f(0, mt[i]->dimensions.y * 0.5 + ((i+0.5)-numLines*0.5) * 512/8);
         mt[i]->bDrawCircles = false;
         mt[i]->getDestination(ofVec2f(0,0));
