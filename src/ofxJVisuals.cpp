@@ -1059,10 +1059,15 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
         JEvent* e = v->getEventById(m.getArgAsInt(2));
         if(!e)
             return;
-        if(m.getNumArgs() <= 5){
-            e->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4));
-        } else if(m.getNumArgs() > 5){
-            e->mapValues[m.getArgAsInt(3)]->setVal(m.getArgAsFloat(4), (char)m.getArgAsInt(5)); // Receives 97 i.e.
+//        if(m.getNumArgs() <= 5){
+        int numValues = m.getArgAsInt(3);
+        for(int i=0; i<numValues; i++){
+            ofxOscArgType type = m.getArgType(4+numValues+i);
+            if(type == ofxOscArgType::OFXOSC_TYPE_INT32){
+                e->mapValues[m.getArgAsInt(4+i)]->setVal(m.getArgAsInt32(4+numValues+i));
+            } else if(type == ofxOscArgType::OFXOSC_TYPE_FLOAT){
+                e->mapValues[m.getArgAsInt(4+i)]->setVal(m.getArgAsFloat(4+numValues+i));
+            }
         }
     } else if(m.getAddress() == "/done" && m.getArgAsString(0) == "/notify"){
         bIsNotified = true;

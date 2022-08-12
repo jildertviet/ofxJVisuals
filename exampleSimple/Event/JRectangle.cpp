@@ -10,7 +10,7 @@
 JRectangle::JRectangle(){
     setType("JRectangle");
 //    JModifier j;
-    modifiers.push_back((JModifier*)new JModifierArray());
+//    modifiers.push_back((JModifier*)new JModifierArray());
 }
 
 JRectangle::JRectangle(float millisTime, ofVec2f loc, ofVec2f size, ofColor color, float attack, float release, ofVec2f direction, bool move) : JRectangle(){

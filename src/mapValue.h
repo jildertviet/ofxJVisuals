@@ -11,27 +11,19 @@
 class mapValue{
 public:
     mapValue(){
-        
     }
     mapValue(float* v){
         floatPointer = v;
     }
-    mapValue(ofColor* v){
+    mapValue(ofColor* v, char type = 'a'){
         colorPtr = v;
+        this->type = type;
     }
     char type = 'f'; //
     float* floatPointer;
     int* intPointer;
     ofColor* colorPtr;
     void setVal(float v){
-        *floatPointer = v;
-    }
-    void setVal(int v){
-        *intPointer = v;
-    }
-    void setColor(float v, char type){
-        if(!colorPtr)
-            return;
         switch(type){
             case 'a':
                 colorPtr->a = v;
@@ -45,25 +37,12 @@ public:
             case 'b':
                 colorPtr->b = v;
                 break;
+            default:
+                *floatPointer = v;
         }
     }
-    void setVal(float v, char type){ // f, i, a, r, g, b
-        switch(type){
-            case 'f':
-                setVal(v);
-                break;
-            case 'i':
-                setVal((int)v);
-                break;
-            case 'a':
-            case 'r':
-            case 'g':
-            case 'b':{
-                setColor(v, type);
-            }
-                break;
-                
-        }
+    void setVal(int v){
+        *intPointer = v;
     }
     string name = "";
 };
