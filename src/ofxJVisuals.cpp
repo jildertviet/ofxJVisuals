@@ -387,7 +387,7 @@ JEvent* ofxJVisuals::getEventById(int idToFind){
 //    return nullptr;
 }
 
-void ofxJVisuals::getFreePointers(){
+void ofxJVisuals::getFreePointers(string ip, int port){
     unsigned short freeEvents[MAX_EVENTS_PTRS];
     unsigned short numFreeEvents = 0;
     for(unsigned short i=1; i<MAX_EVENTS_PTRS; i++){ // Keep 0 free...
@@ -400,6 +400,9 @@ void ofxJVisuals::getFreePointers(){
     m.setAddress("/freePointers");
     for(unsigned short i=0; i<numFreeEvents; i++){
         m.addInt32Arg(freeEvents[i]);
+    }
+    if(!SCsender){
+        SCsender = msgParser->initSCsender(ip, port);
     }
     SCsender->sendMessage(m);
 
@@ -579,7 +582,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         }
             break;
         case 12: // getFreePointers
-            v->getFreePointers(); // Sends to 6063, w/ SCsender
+            v->getFreePointers(m.getRemoteHost(), m.getArgAsInt(1)); // Sends to 6063, w/ SCsender
             break;
         case 13: // setMasterBrightness
             v->setBrightness(m.getArgAsInt(0));

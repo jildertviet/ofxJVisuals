@@ -38,7 +38,13 @@ public:
             if(!bDoOnce){
                 bDoOnce = true;
                 cout << "Starting a SuperCollider server in the thread" << endl;
+                vector<ofSoundDevice> devices = ofSoundStreamListDevices();
                 string cmd = ofToString(SC_FOLDER) + "scsynth -u " + ofToString(SC_PORT) + " -l 4 -i 0";
+                for(auto d : devices){
+                    if(d.name == "WH-1000XM4"){
+                        cmd += " -H Sony";
+                    }
+                }
                 string r = ofSystem(cmd.c_str());
                 cout << r << endl;
             }

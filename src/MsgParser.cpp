@@ -140,3 +140,11 @@ void MsgParser::update(){
         }
     }
 }
+
+ofxOscSender* MsgParser::initSCsender(string ip, int port){
+    SCsender = new ofxOscSender();
+    if(SCsender->setup(ip, port) == false){
+        SCsender = nullptr;
+    }
+    return SCsender;
+}

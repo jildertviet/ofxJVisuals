@@ -3,7 +3,7 @@ using namespace glm;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetWindowShape(1920, 1080);
+    ofSetWindowShape(1080, 1080);
 //    auto r = new JRectangle(vec3(100, 100, 0), vec3(100, 100, 0));
 //    visualizer.addEvent(r, VisualizerLayer::DEFAULT, 1);
 }

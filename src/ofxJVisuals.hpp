@@ -86,7 +86,7 @@ typedef unsigned char uint8;
     ofxOscMessage getAllEvents();
     
     JEvent* events[MAX_EVENTS_PTRS];
-    void getFreePointers();
+    void getFreePointers(string ip, int port);
     unsigned short numEventsAdded = 0;
     
     JEvent* addEvent(JEvent* e, int layerIndex=1, unsigned short index = 0);

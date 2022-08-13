@@ -62,7 +62,8 @@ public:
 //    void setValType(ofxOscMessage& m);
     void addEnv(ofxOscMessage& m);
     void addTo(ofxOscMessage& m);
-    ofxOscSender* SCsender;
+    ofxOscSender* SCsender = nullptr;
+    ofxOscSender* initSCsender(string ip, int port);
 private:
     ofxJVisuals* v = nullptr;
     ofxOscSenderReceiver scClient;
