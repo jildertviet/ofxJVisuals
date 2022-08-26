@@ -143,7 +143,9 @@ typedef unsigned char uint8;
     cameraController* camController;
     void initCam();
     
-    ofTrueTypeFont verdana30;
+    ofTrueTypeFont avenir30;
+    ofTrueTypeFont avenir300;
+    ofTrueTypeFont* selectedFont;
     
 //    ofFbo sharedFbo, sharedFbo2;
     ofFbo circularMask;
@@ -152,7 +154,6 @@ typedef unsigned char uint8;
     
     void initCircularMaskFbo(glm::vec2 size, int num=1);
     
-    bool bNegativeShader = true;
     ofFbo negativeMask;
     bool bEditMode = false;
     char fboDisplayMode = 1;

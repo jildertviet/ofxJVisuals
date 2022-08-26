@@ -60,7 +60,8 @@ MsgParser::MsgParser(ofxJVisuals* v){
         "JNoise",
         "JLinesFalling",
         "JIFLogo",
-        "JPhysarum"
+        "JPhysarum",
+        "JModifier"
     };
     for(short i=0; i<typeKeys.size(); i++)
         types[typeKeys[i]] = i + 1;

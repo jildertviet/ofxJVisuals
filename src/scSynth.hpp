@@ -41,10 +41,11 @@ public:
                 vector<ofSoundDevice> devices = ofSoundStreamListDevices();
                 string cmd = ofToString(SC_FOLDER) + "scsynth -u " + ofToString(SC_PORT) + " -l 4 -i 0";
                 for(auto d : devices){
-                    if(d.name == "WH-1000XM4"){
+                    if(ofStringTimesInString(d.name, "WH-1000XM4")){
                         cmd += " -H Sony";
                     }
                 }
+                cout << cmd << endl;
                 string r = ofSystem(cmd.c_str());
                 cout << r << endl;
             }

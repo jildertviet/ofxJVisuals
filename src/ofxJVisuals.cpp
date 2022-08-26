@@ -34,9 +34,13 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
 
     loadLastMaskFile();
 
-    verdana30.load("verdana.ttf", 50, true, true);
-    verdana30.setLineHeight(34.0f);
-    verdana30.setLetterSpacing(1.035);
+    avenir30.load("/System/Library/Fonts/avenir.ttc", 30, true, true);
+    avenir30.setLineHeight(34.0f);
+    avenir30.setLetterSpacing(1.035);
+    avenir300.load("/System/Library/Fonts/avenir.ttc", 300, true, true);
+    avenir300.setLineHeight(34.0f);
+    avenir300.setLetterSpacing(1.035);
+    selectedFont = &avenir300;
 
     cout << "ofxJVisuals made" << endl;
 #ifndef TARGET_RASPBERRY_PI
@@ -52,7 +56,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
     fbo.allocate(size.x, size.y, GL_RGBA);
     renderFbo.allocate(size.x, size.y, GL_RGBA);
 #endif
-    negativeMask.allocate(size.x, size.y, GL_RGB);
+    negativeMask.allocate(size.x, size.y, GL_RGBA);
 
     fbo.begin();
         ofClear(0, 0);
@@ -123,10 +127,12 @@ void ofxJVisuals::update(){
 
 //    ofEnableBlendMode(OF_BLENDMODE_ADD);
 //    ofEnableDepthTest();
-    negativeMask.begin();
-        ofClear(0);
-        negativeLayer.displayMain();
-    negativeMask.end();
+    if(negativeLayer.next){
+        negativeMask.begin();
+            ofClear(0);
+            negativeLayer.displayMain();
+        negativeMask.end();
+    }
 
 
     fbo.begin();
@@ -168,11 +174,11 @@ void ofxJVisuals::update(){
 
 
     renderFbo.begin();
-    if(bNegativeShader){
+    if(negativeLayer.next){
         negative.begin();
     }
         fbo.draw(0,0);
-    if(bNegativeShader){
+    if(negativeLayer.next){
         negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
         negative.end();
     }
@@ -624,6 +630,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
 bool MsgParser::make(ofxOscMessage& m){
     cout << "Make " << m.getArgAsString(0) << " with ID: " << m.getArgAsInt(1) << endl;
     JEvent* e = nullptr;
+    int layer = m.getArgAsInt(2);
     switch(types[m.getArgAsString(0)]){
         case 1: // JRectangle
             e = new JRectangle();
@@ -661,9 +668,12 @@ bool MsgParser::make(ofxOscMessage& m){
 //            ((particleSystem*)e)->setVecField((JVecField*)v->getEventById(m.getArgAsInt(5)));
         }
             break;
-        case 9:
-            e = new JText(&(v->verdana30));
-            ((JText*)e)->bCamEnabled = &(v->bCam);
+        case 9:{
+            e = new JText(v->selectedFont);
+            if(layer == VisualizerLayer::NON_CAM_BACK || layer == VisualizerLayer::NON_CAM_FRONT){
+                ((JText*)e)->bCamEnabled == false;
+            }
+               }
             break;
         case 10:
             e = new JMesh();
@@ -695,7 +705,7 @@ bool MsgParser::make(ofxOscMessage& m){
         case 16:
             e = new MultiMeshMaybeTomorrow();
             break;
-        case 18:
+        case 18:{
 #ifdef JPhysarum_hpp
             glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
             cout << "Create JPhysarum w/ size: " << size << endl;
@@ -743,7 +753,19 @@ bool MsgParser::make(ofxOscMessage& m){
 //            p->externalVelocity = t;
             p->externalVelocity = &(vf->vecTex);
 #endif
+        }
             break;
+        case 19:{ // JModifier
+            auto mod = JModifierFact::create(m.getArgAsInt(3));
+            vector<float> busses;
+            // [id, type, layer, parentID, val, val, val, val, etc]
+            for(int i=4; i<m.getNumArgs(); i++){
+                busses.push_back(m.getArgAsFloat(i));
+            }
+            mod->setViaBusses(busses);
+            v->getEventById(m.getArgAsInt(3))->modifiers.push_back(mod);
+            return true; // Don't add to layer
+        }
     }
 
     e->id = m.getArgAsInt(1);
@@ -759,8 +781,8 @@ bool MsgParser::make(ofxOscMessage& m){
                 v->addEvent(e, VisualizerLayer::NEGATIVE, e->id);
             }
         } else{
-            cout << "Add to layer: " << m.getArgAsInt(2) << endl;
-            v->addEvent(e, m.getArgAsInt(2), e->id); // Specific layer
+            cout << "Add to layer: " << layer << endl;
+            v->addEvent(e, layer, e->id); // Specific layer
         }
     } else{
         v->addEvent(e, 2, e->id); // Default layer

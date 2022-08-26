@@ -29,3 +29,9 @@ void JModifierArray::display(JEvent* e, void (JEvent::*ptr) (void)){
         }
     }
 }
+
+void JModifierArray::setViaBusses(vector<float> busses){
+    if(busses.size() < 4)
+        return;
+    
+}
