@@ -33,5 +33,8 @@ void JModifierArray::display(JEvent* e, void (JEvent::*ptr) (void)){
 void JModifierArray::setViaBusses(vector<float> busses){
     if(busses.size() < 4)
         return;
-    
+    dimensions.x = busses[0];
+    dimensions.x = busses[1];
+    spacing.x = busses[2];
+    spacing.y = busses[3];
 }

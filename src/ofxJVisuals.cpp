@@ -756,10 +756,10 @@ bool MsgParser::make(ofxOscMessage& m){
         }
             break;
         case 19:{ // JModifier
-            auto mod = JModifierFact::create(m.getArgAsInt(3));
+            auto mod = JModifierFact::create(m.getArgAsInt(4));
             vector<float> busses;
             // [id, type, layer, parentID, val, val, val, val, etc]
-            for(int i=4; i<m.getNumArgs(); i++){
+            for(int i=5; i<m.getNumArgs(); i++){
                 busses.push_back(m.getArgAsFloat(i));
             }
             mod->setViaBusses(busses);
