@@ -507,7 +507,6 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         case 1: // Make
             make(m);
         break;
-        case 23:
         case 2: // setVal
             setVal(m);
         break;
@@ -623,8 +622,6 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
             v->alphaScreen->setColor(c);
             v->alphaScreen->setActiveness(true);
             break;
-//        case 23: // setValMod (moved a few lines up, neer case 2:
-//            break;
 
     }
     return false;
@@ -969,6 +966,14 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 break;
             case 32: // Zoom
                 e->zoom = m.getArgAsFloat(2);
+                break;
+            case 33:{ // bus
+                vector<float> busses;
+                for(int i=2; i<m.getNumArgs(); i++){
+                    busses.push_back(m.getArgAsFloat(i));
+                    e->setViaBusses(busses); // First used for JModifier 08-2022
+                }
+            }
                 break;
         }
     } else{

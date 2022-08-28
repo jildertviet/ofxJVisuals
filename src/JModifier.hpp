@@ -16,7 +16,6 @@ class JModifier: public JEvent{
 public:
     JModifier();
     virtual void display(JEvent* e, void (JEvent::*ptr) (void));
-    virtual void setViaBusses(vector<float> busses){};
 };
 
 class JModifierArray: public JModifier{

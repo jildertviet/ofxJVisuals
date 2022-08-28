@@ -35,7 +35,6 @@ MsgParser::MsgParser(ofxJVisuals* v){
         "camRoll",
         "camRotateAround",
         "setBackground",
-        "setValMod"
     };
     for(short i=0; i<commandKeys.size(); i++){
         string key = "/";
@@ -99,7 +98,8 @@ MsgParser::MsgParser(ofxJVisuals* v){
         "fill",
         "radius",
         "evolve",
-        "zoom"
+        "zoom",
+        "bus"
     };
     for(short i=0; i<valueKeys.size(); i++)
         values[valueKeys[i]] = i + 1;

@@ -131,6 +131,7 @@ public:
     vector<JModifier*> modifiers;
     void displayModifier();
     void deleteModifiers();
+    virtual void setViaBusses(vector<float> busses){};
 private:
 
 };
