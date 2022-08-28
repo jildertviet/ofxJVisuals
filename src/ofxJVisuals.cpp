@@ -507,6 +507,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         case 1: // Make
             make(m);
         break;
+        case 23:
         case 2: // setVal
             setVal(m);
         break;
@@ -622,6 +623,8 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
             v->alphaScreen->setColor(c);
             v->alphaScreen->setActiveness(true);
             break;
+//        case 23: // setValMod (moved a few lines up, neer case 2:
+//            break;
 
     }
     return false;
@@ -763,8 +766,9 @@ bool MsgParser::make(ofxOscMessage& m){
                 busses.push_back(m.getArgAsFloat(i));
             }
             mod->setViaBusses(busses);
-            v->getEventById(m.getArgAsInt(3))->modifiers.push_back(mod);
-            return true; // Don't add to layer
+            mod->id = m.getArgAsInt(1);
+            v->getEventById(m.getArgAsInt(3))->modifiers.push_back(mod); // Add to parent
+            e = (JEvent*)mod;
         }
     }
 

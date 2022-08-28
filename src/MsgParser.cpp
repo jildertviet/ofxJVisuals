@@ -34,7 +34,8 @@ MsgParser::MsgParser(ofxJVisuals* v){
         "camPan",
         "camRoll",
         "camRotateAround",
-        "setBackground"
+        "setBackground",
+        "setValMod"
     };
     for(short i=0; i<commandKeys.size(); i++){
         string key = "/";

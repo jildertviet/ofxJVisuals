@@ -10,10 +10,9 @@
 
 #include <stdio.h>
 #include "ofMain.h"
+#include "JEvent.hpp"
 
-class JEvent;
-
-class JModifier{
+class JModifier: public JEvent{
 public:
     JModifier();
     virtual void display(JEvent* e, void (JEvent::*ptr) (void));

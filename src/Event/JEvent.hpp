@@ -14,9 +14,10 @@
 #include "ofxOscBidirectional.h"
 #include "Env.hpp" // USE_FRAMES_AS_CLOCK is set here
 #include "mapValue.h"
-#include "JModifier.hpp"
+//#include "JModifier.hpp"
 
 //#define USE_FRAMES_AS_CLOCK false
+class JModifier;
 
 class JEvent{
 public:
@@ -128,6 +129,8 @@ public:
     mapValue* mapValues[24];
     void setDefaultMappers();
     vector<JModifier*> modifiers;
+    void displayModifier();
+    void deleteModifiers();
 private:
 
 };

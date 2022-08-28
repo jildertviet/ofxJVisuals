@@ -27,10 +27,7 @@ JEvent::~JEvent(){
         next->previous = previous;
     }
     
-    for(int i=0; i<modifiers.size(); i++){
-        delete modifiers[i];
-    }
-    
+    deleteModifiers();
     
     if(events)
         events[id] = nullptr; // Only if it has this ptr! Child JEvents (inside an JEvent) don't hve this set...
@@ -96,9 +93,7 @@ void JEvent::displayMain(){
     if(next)
         next->displayMain();
     if(modifiers.size()){
-        for(int i=0; i<modifiers.size(); i++){
-            modifiers[i]->display(this, &JEvent::display);
-        }
+        displayModifier();
     } else{
         display();
     }
