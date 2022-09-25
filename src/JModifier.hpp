@@ -36,6 +36,7 @@ public:
                 return new JModifierArray();
                 break;
         }
+        return nullptr;
     };
 };
 #endif /* JModifier_hpp */

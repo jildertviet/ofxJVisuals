@@ -1,7 +1,5 @@
-ofxAssimpModelLoader
 ofxEasing
-ofxGui
 ofxJVisuals
-ofxOpenCv
 ofxOscBidirectional
-ofxPostProcessing
+ofxGui
+ofxAssimpModelLoader
