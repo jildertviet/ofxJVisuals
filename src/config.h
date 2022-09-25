@@ -16,7 +16,11 @@
 
 // SuperCollider
 #define USE_SC  true
+#ifdef __APPLE__
 #define SC_FOLDER "~/../../Applications/SuperCollider.app/Contents/Resources/"
+#else
+#define SC_FOLDER "/usr/bin/"
+#endif
 #define SC_PORT 9999
 
 #endif /* config_h */
