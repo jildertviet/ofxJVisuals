@@ -9,7 +9,7 @@
 
 MsgParser::MsgParser(ofxJVisuals* v){
     this->v = v;
-    connectToSuperCollider();
+//    connectToSuperCollider(); Test
     vector<string> commandKeys = {
         "make",
         "setVal",

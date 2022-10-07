@@ -18,9 +18,9 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 
     string shadersFolder;
     if(ofIsGLProgrammableRenderer()){
-        shadersFolder="shaders_gl3";
+        shadersFolder="../../../addons/ofxJVisuals/libs/shaders_gl3";
     }else{
-        shadersFolder="shaders";
+        shadersFolder="../../../../../addons/ofxJVisuals/libs/shaders";
     }
 
     // Loading the Shaders
