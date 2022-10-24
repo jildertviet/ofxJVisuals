@@ -12,9 +12,7 @@ Env::Env(){
     setStartTime();
 }
 
-Env::Env(vector<float> levels, vector<float> times){
-    this->levels = levels;
-    this->times = times;
+Env::Env(vector<float> levels, vector<float> times) : levels(levels), times(times){
     setStartTime();
     totalRunTime = times[0];
     getDirection();
@@ -32,7 +30,7 @@ Env::~Env(){
         }
         f.create(fileName); // What if there's already a file w/ that name?
         f.open(fileName, ofFile::Mode::WriteOnly);
-        
+
         string toSave = ofToString(*parentID);
         toSave += ",";
         for(int i=0; i<saveBufferWritePos; i++){
@@ -40,14 +38,14 @@ Env::~Env(){
             if(i < saveBufferWritePos - 1)
                 toSave += ",";
         }
-        
+
         ofBuffer b;
         b.append(toSave);
-        
+
         f.writeFromBuffer(b);
         f.close();
     }
-    
+
     if(saveBuffer)
         delete saveBuffer;
 }
@@ -82,7 +80,7 @@ Env::Env(vector<float> levels, vector<float> times, ofColor* c, char curve){
 Env::Env(vector<float> levels, vector<float> times, float* f, ofxeasing::function func){
     this->levels = levels; this->times = times; ptr = new Pointer(f);
     setStartTime();
-    
+
     totalRunTime = times[0]; getDirection();
     this->curveType = func;
     bEasingSet = true;
@@ -120,12 +118,12 @@ bool Env::process(bool bWrite){
             totalRunTime += times[timesIndex];
 //            cout << "totalRunTime: " << totalRunTime << endl;
         }
-        
+
         // Get ratio:
         float ratio;
         ratio = ((int)getTime() - startTime - totalRunTime + times[timesIndex]);
         ratio /= times[timesIndex];
-        
+
         float output;
         if(bEasingSet){
 #ifdef  ENV_EASING
@@ -138,9 +136,9 @@ bool Env::process(bool bWrite){
         if(ptr && bWrite)
             ptr->writeValue(output);
         value = output;
-                
+
 //        cout << (int)id << " " << value << endl;
-        
+
         if(bSave)
             saveValueToBuffer(output);
     }
@@ -193,12 +191,12 @@ void Env::setSave(){
      totalTime = 1 in sec
      numFrames = 1 * frameRate = 60 frames
      */
-    
+
     fileName = "envExport/";
 //    fileName += ofGetFrameNumStringWithZeroes();
     fileName += ".txt";
     cout << "toSave env: " << fileName << endl;
-    
+
     // Add zeroes to it
     // 0300env0.txt
     // How to identify the env? Env-id? Parent-id? <- better. Set custom fileName w/ setSave()? <-better?
@@ -209,7 +207,7 @@ void Env::setSave(){
     totalTime /= 1000.; // Now in seconds
     saveBufferSize  = totalTime * ofGetTargetFrameRate();
     saveBufferSize += 30; // Overhead
-    
+
     saveBuffer = new float[saveBufferSize];
 }
 

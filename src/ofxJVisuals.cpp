@@ -4,9 +4,8 @@
 
 #define RECEIVER_PORT   6061
 
-ofxJVisuals::ofxJVisuals(glm::vec2 size){
+ofxJVisuals::ofxJVisuals(glm::vec2 size, bool bUseSC) : size(size){
     initMesh();
-    this->size = size;
     for(int i=0; i<MAX_EVENTS_PTRS; i++)
         events[i] = nullptr;
     for(int i=0; i<NUMLAYERS; i++)
@@ -71,7 +70,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size){
 
     receiver.setup(RECEIVER_PORT);
 
-    msgParser = new MsgParser(this);
+    msgParser = new MsgParser(this, bUseSC);
 
 //    sharedFbo.allocate(2560, 800, GL_RGBA);
 //    sharedFbo2.allocate(2560, 800, GL_RGBA);
@@ -1087,7 +1086,7 @@ void MsgParser::addEnv(ofxOscMessage& m){
 }
 
 void MsgParser::connectToSuperCollider(){
-    if(USE_SC)
+    if(bUseSC)
       synth->start();
     scClient.setup(6548,"127.0.0.1",SC_PORT);
     ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);

@@ -47,7 +47,7 @@ class ofxJVisuals;
 
 class MsgParser{
 public:
-    MsgParser(ofxJVisuals* v);
+    MsgParser(ofxJVisuals* v, bool bUseSC);
     ~MsgParser();
     bool parseMsg(ofxOscMessage& m);
     void update();
@@ -66,6 +66,7 @@ public:
     ofxOscSender* initSCsender(string ip, int port);
 private:
     ofxJVisuals* v = nullptr;
+    bool bUseSC = false;
     ofxOscSenderReceiver scClient;
     void connectToSuperCollider();
     void onSuperColliderMessageReceived(ofxOscMessage &m);

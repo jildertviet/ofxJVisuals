@@ -64,7 +64,7 @@ public:
 class ofxJVisuals{
 public:
 typedef unsigned char uint8;
-    ofxJVisuals(glm::vec2 size = glm::vec2(1920,1080));
+    ofxJVisuals(glm::vec2 size = glm::vec2(1920,1080), bool bUseSC=true);
     ~ofxJVisuals();
     ofFbo fbo, renderFbo;
     void deconstructor();
@@ -72,40 +72,40 @@ typedef unsigned char uint8;
     void display();
     void keyPressed(int key);
     void mousePressed(int x, int y, int button);
-    
+
     glm::vec2 size;
-    
+
     void setAlpha(int alpha, bool bDo = true);
     void setBrightness(unsigned char b);
     int brightness = 255;
-    
+
     void killAll();
 
     int numEvents = 0;
     JEvent* last;
     ofxOscMessage getAllEvents();
-    
+
     JEvent* events[MAX_EVENTS_PTRS];
     void getFreePointers(string ip, int port);
     unsigned short numEventsAdded = 0;
-    
+
     JEvent* addEvent(JEvent* e, int layerIndex=1, unsigned short index = 0);
     JEvent* addEvent(JEvent* e, VisualizerLayer l, unsigned short index = 0);
-    
+
     JEvent* getLast(){return last;}
     JEvent* getEventById(int id);
     JEvent* lastCalled = nullptr;
-    
+
     static bool checkIfNull(JEvent* e);
-    
+
     bool bMirror = false;
     bool bAddMirror = false;
 
 //    void fitFadeScreen(glm::vec2 size = glm::vec2(0, 0));
     void makeFit(glm::vec2 size);
-    
+
     AlphaBlackScreen* alphaScreen = nullptr;
-    
+
     // PostProcessing
 #if USE_PP
     ofxPostProcessing post;
@@ -114,18 +114,18 @@ typedef unsigned char uint8;
     RGBShiftPass::Ptr rgbPP = nullptr;
     FxaaPass::Ptr fxaaPP = nullptr;
     NoiseWarpPass::Ptr noisePP = nullptr;
-    
+
     bool bPostProcessing = false;
 #endif
-    
+
     bool bRotate = false;
     float rotationAngle = 0;
     float rotationAngleIcrement = 0.1;
-    
+
     MsgParser* msgParser;
     ofxOscSender* SCsender;
     ofxOscReceiver receiver;
-//    
+//
 ////    vector<Pointer*> receivingPointers;
 //    vector<float> vec(float a);
 //    vector<float> vec(float a, float b);
@@ -134,7 +134,7 @@ typedef unsigned char uint8;
 //    vector<float> vec(float a, float b, float c, float d, float e);
 
 //    Wavetables wavetable;
-    
+
     bool bMask = false;
     ofImage mask;
     unsigned char maskBrightness = 0;
@@ -142,18 +142,18 @@ typedef unsigned char uint8;
     ofEasyCam cam;
     cameraController* camController;
     void initCam();
-    
+
     ofTrueTypeFont avenir30;
     ofTrueTypeFont avenir300;
     ofTrueTypeFont* selectedFont;
-    
+
 //    ofFbo sharedFbo, sharedFbo2;
     ofFbo circularMask;
     bool bDrawCirclularMask = false;
     void drawMask();
-    
+
     void initCircularMaskFbo(glm::vec2 size, int num=1);
-    
+
     ofFbo negativeMask;
     bool bEditMode = false;
     char fboDisplayMode = 1;

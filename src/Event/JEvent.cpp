@@ -16,7 +16,7 @@ JEvent::JEvent(){
 JEvent::~JEvent(){
     if(lastPtr)
         *lastPtr = nullptr;
-    
+
     if(numEventsPtr)
         *numEventsPtr = *numEventsPtr - 1;
     if(!next){
@@ -26,12 +26,12 @@ JEvent::~JEvent(){
         previous->next = next;
         next->previous = previous;
     }
-    
+
     deleteModifiers();
-    
+
     if(events)
         events[id] = nullptr; // Only if it has this ptr! Child JEvents (inside an JEvent) don't hve this set...
-    
+
     clearEnv();
 
     cout << "JEvent '" << type << "', id: " << id << " deleted!" << endl;
@@ -48,7 +48,7 @@ void JEvent::update(){
     if(getTimeMillis() > endTime && active){
         cout << "JEvent (id:"<<id<<") has passed!" << endl;
         ownDtor();
-        
+
         // Remove from 'vector<JEvent*> JEvents' in Visualizer (trying to remove, 05-03-19)
         if(parentContainer){
             for(int i=0; i<parentContainer->size(); i++){
@@ -57,11 +57,11 @@ void JEvent::update(){
                 }
             }
         }
-        
+
         delete this;
         return;
     }
-    
+
     for(int i=envelopes.size()-1; i>=0; i--){
         for(int j=envelopes[i].size()-1; j>=0; j--){
             if(!envelopes[i][j]->process()){ // Process
@@ -146,7 +146,7 @@ void JEvent::checkBorders(){
 }
 
 void JEvent::setType(string type){
-    this->type=type;
+  this->type = type;
     cout<<"Made an JEvent of type: " << type << endl;;
 };
 
@@ -218,7 +218,7 @@ Env* JEvent::addEnv(Env* e){
     e->id = getNumEnv();
     e->parentID = &id;
     lastEnv = e;
-    
+
     for(int i=0; i<envelopes.size(); i++){
         for(int j=0; j<envelopes[i].size(); j++){
             if(envelopes[i][j]->ptr->valF && envelopes[i][j]->ptr->valF == e->ptr->valF){
@@ -233,7 +233,7 @@ Env* JEvent::addEnv(Env* e){
             }
         }
     }
-    
+
     envelopes.push_back(vector<Env*>({e}));
     return e;
 }

@@ -7,12 +7,11 @@
 
 #include "MsgParser.hpp"
 
-MsgParser::MsgParser(ofxJVisuals* v){
-    this->v = v;
-#ifdef USE_SC
-    synth = new scSynth();
-    connectToSuperCollider(); // Test
-#endif
+MsgParser::MsgParser(ofxJVisuals* v, bool bUseSC) : v(v), bUseSC(bUseSC){
+    if(bUseSC){
+      synth = new scSynth();
+      connectToSuperCollider();
+    }
     vector<string> commandKeys = {
         "make",
         "setVal",
@@ -123,10 +122,6 @@ MsgParser::MsgParser(ofxJVisuals* v){
         envValues[envValueKeys[i]] = i + 1;
 }
 
-//void MsgParser::addEvent(JEvent* e){
-//    v->addEvent(e);
-//}
-
 MsgParser::~MsgParser(){
     ofxOscMessage msg;
     msg.setAddress("/quit");
@@ -135,7 +130,7 @@ MsgParser::~MsgParser(){
 
 // The rest of the functions is in ofxJVisuals.hpp...
 void MsgParser::update(){
-    if(bIsNotified == false){
+    if(bIsNotified == false && bUseSC){
         if(ofGetFrameNum() % 60 == 59){
             ofxOscMessage msg;
             msg.setAddress("/notify");
