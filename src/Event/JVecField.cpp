@@ -14,24 +14,24 @@ JVecField::JVecField(){
     setDensity(density);
     colors[0].a = 255;
     seed = ofRandom(1000);
-    
+
     if(!shader.load("shaders/brightnessAndSaturation")){
         cout << "Failed to load shader" << endl;
     }
-    
+
     if(DRAW_VID){
         video = new ofVideoPlayer;
         video->load("video/mc4.mp4");
         video->play();
         video->setLoopState(OF_LOOP_NORMAL);
         video->setVolume(0.);
-        
+
         ofPixels p; // Default
         p.allocate(1, 1, 4);
         p.setColor(0, 0, ofColor::red);
         vecTex.loadData(p);
     }
-    
+
 //    vecTex.allocate(size.x, size.y, GL_RGBA);
 }
 
@@ -51,7 +51,7 @@ void JVecField::specificFunction(){
         }
             break;
         case VECFIELD_MODE::TEST:{
-            
+
         }
             break;
         case VECFIELD_MODE::VIDEO:{
@@ -80,9 +80,9 @@ void JVecField::display(){
     if(mode == UNDERLAYING){
 //        if(vecTex.getWidth() != 1280)
 //            vecTex.allocate(1280, 800, GL_RGBA);
-        
+
 //        vecTex.loadScreenData(0, 0, 1280, 800); // Read screen content into fbo
-        
+
         resizeFbo.begin();
             ofClear(0,0);
             shader.begin();
@@ -93,13 +93,13 @@ void JVecField::display(){
                 underlayer->draw(0, 0, density.x, density.y);
             shader.end();
         resizeFbo.end();
-        
+
         vecTex = resizeFbo.getTexture();
-        
+
         // Draw or hide background:
         ofSetColor(colors[0]);
         ofDrawRectangle(0, 0, size.x, size.y);
-        
+
         // Monitor, debugging
 //        ofSetColor(255);
 //        vecTex.draw(0, 0, ofGetWidth(), ofGetHeight());
@@ -168,7 +168,7 @@ ofVec2f JVecField::getField(ofVec2f position) {
     float normy = ofNormalize(position.y, 0, ofGetViewportHeight());
     float u = ofNoise(t + phase, normx * complexity + phase, normy * complexity + phase);
     float v = ofNoise(t - phase, normx * complexity - phase, normy * complexity + phase);
-    
+
     u = ofLerp(0, 1, u);
     v = ofLerp(0, 1, v);
     return ofVec2f(u, v);
@@ -184,16 +184,16 @@ void JVecField::setDensity(glm::vec2 d, char numChannels){
 #else
     resizeFbo.allocate(density.x, density.y, GL_RGBA);
 #endif
-    
+
 //    plane.set(density.x, density.y, 10, 10);
 //    plane.mapTexCoords(0, 0, resizeFbo.getWidth(), resizeFbo.getHeight());
-    
+
 //    sizeMultiplier = ofVec2f(ofGetWidth() / p.getWidth(), ofGetHeight() / p.getHeight());
     sizeMultiplier = ofVec2f(size.x / p.getWidth(), size.y / p.getHeight());
     offset = sizeMultiplier * 0.5;
 }
 
-void JVecField::setSize(ofVec3f size){
+void JVecField::setSize(glm::vec3 size){
     this->size = size;
     setDensity(density);
 }

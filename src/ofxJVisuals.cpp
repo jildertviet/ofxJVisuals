@@ -108,10 +108,10 @@ void ofxJVisuals::deconstructor(){
 
 void ofxJVisuals::update(){
     msgParser->update();
-    
+
     while(receiver.hasWaitingMessages()){
         ofxOscMessage m;
-        receiver.getNextMessage(m);    
+        receiver.getNextMessage(m);
         msgParser->parseMsg(m);
     }
 
@@ -735,7 +735,7 @@ bool MsgParser::make(ofxOscMessage& m){
             // v->addEvent(vP, FUNCTIONAL);
 //            vp->pl
             JVecField* vf = new JVecField();
-            vf->setSize(glm::vec2(4096,4096));
+            vf->setSize(glm::vec3(4096,4096,0));
             vf->setMode(VECFIELD_MODE::PERLIN);
             vf->setDensity(glm::vec2(4096 / 10, 4096 / 10));
             // vf->video = &(vP->player);
@@ -767,6 +767,11 @@ bool MsgParser::make(ofxOscMessage& m){
             v->getEventById(m.getArgAsInt(3))->modifiers.push_back(mod); // Add to parent
             e = (JEvent*)mod;
         }
+        break;
+        case 20:{ // JCircle
+          e = (JEvent*)new JCircle();
+        }
+        break;
     }
 
     e->id = m.getArgAsInt(1);
@@ -1082,7 +1087,8 @@ void MsgParser::addEnv(ofxOscMessage& m){
 }
 
 void MsgParser::connectToSuperCollider(){
-    synth.start();
+    if(USE_SC)
+      synth->start();
     scClient.setup(6548,"127.0.0.1",SC_PORT);
     ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
 }

@@ -10,3 +10,7 @@ README_AUTHOR.md
 *.mp4
 /bin/exampleSimple
 *.DS_Store
+**.o
+**.d
+**.compiler_flags
+*.gch

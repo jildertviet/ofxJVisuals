@@ -215,7 +215,7 @@ void particleSystem::setColor(ofColor c, int index){
     customFour();
 }
 
-void particleSystem::setSize(ofVec3f size){
+void particleSystem::setSize(glm::vec3 size){
     dimensions = size;
     this->size = size;
 }

@@ -4,8 +4,11 @@ using namespace glm;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1080, 1080);
-//    auto r = new JRectangle(vec3(100, 100, 0), vec3(100, 100, 0));
-//    visualizer.addEvent(r, VisualizerLayer::DEFAULT, 1);
+    // auto i = new JImage("test_0.svg");
+    // i->setSize(glm::vec3(ofGetWidth()*0.5, 100,0));
+    // std::exit(0);
+   // auto r = new JRectangle(vec3(100, 100, 0), vec3(100, 100, 0));
+   visualizer.addEvent(i, VisualizerLayer::DEFAULT, 1);
 }
 
 //--------------------------------------------------------------

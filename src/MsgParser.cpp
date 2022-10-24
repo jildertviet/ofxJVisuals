@@ -10,6 +10,7 @@
 MsgParser::MsgParser(ofxJVisuals* v){
     this->v = v;
 #ifdef USE_SC
+    synth = new scSynth();
     connectToSuperCollider(); // Test
 #endif
     vector<string> commandKeys = {
@@ -41,7 +42,7 @@ MsgParser::MsgParser(ofxJVisuals* v){
         key += commandKeys[i];
         commands[key] = i + 1;
     }
-        
+
     vector<string> typeKeys = {
         "JRectangle",
         "JVecField",
@@ -61,11 +62,12 @@ MsgParser::MsgParser(ofxJVisuals* v){
         "JLinesFalling",
         "JIFLogo",
         "JPhysarum",
-        "JModifier"
+        "JModifier",
+        "JCircle"
     };
     for(short i=0; i<typeKeys.size(); i++)
         types[typeKeys[i]] = i + 1;
-    
+
     vector<string> valueKeys = {
         "color",
         "loc",
@@ -103,7 +105,7 @@ MsgParser::MsgParser(ofxJVisuals* v){
     };
     for(short i=0; i<valueKeys.size(); i++)
         values[valueKeys[i]] = i + 1;
-    
+
     vector<string> envValueKeys = {
         "width",
         "height",

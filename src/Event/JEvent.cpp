@@ -296,7 +296,7 @@ bool JEvent::checkIfEnvExists(char id){
     return false;
 }
 
-void JEvent::setSize(ofVec3f s){size = s;}
+void JEvent::setSize(glm::vec3 s){size = s;}
 void JEvent::setMode(char m){ mode = m; }
 void JEvent::setLoc(ofVec3f loc){this->loc = loc;}
 void JEvent::setSpeed(float speed){this->speed = speed;}

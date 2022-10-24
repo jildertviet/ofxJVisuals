@@ -89,7 +89,7 @@ void JMesh::prepareForSave(){
     
 }
 
-void JMesh::setSize(ofVec3f size){
+void JMesh::setSize(glm::vec3 size){
     m.clear();
     m = ofMesh::box(size.x, size.y, size.z);
     this->size = size;

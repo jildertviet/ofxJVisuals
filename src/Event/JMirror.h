@@ -40,6 +40,6 @@ public:
     void moveUp();
     bool move_up;
     float speed;
-    void setSize(ofVec3f s);
+    void setSize(glm::vec3 s);
 };
 #endif /* defined(JMirror_h) */

@@ -40,7 +40,7 @@ public:
                 cout << "Starting a SuperCollider server in the thread" << endl;
                 vector<ofSoundDevice> devices = ofSoundStreamListDevices();
                 #ifndef __APPLE__
-                  ofSystem("export SC_JACK_DEFAULT_INPUTS=system; export SC_JACK_DEFAULT_OUTPUTS=system");
+                    ofSystem("export SC_JACK_DEFAULT_INPUTS=system; export SC_JACK_DEFAULT_OUTPUTS=system");
                 #endif
                 string cmd = ofToString(SC_FOLDER) + "scsynth -u " + ofToString(SC_PORT) + " -l 4 -i 0";
                 for(auto d : devices){

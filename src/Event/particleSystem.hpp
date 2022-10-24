@@ -44,7 +44,7 @@ public:
     void customThree() override;
     void customFour() override;
     void customFive() override;
-    void setSize(ofVec3f size) override;
+    void setSize(glm::vec3 size) override;
     float traagheid = 0.9;
     float fadeTime = 0.001;
     float destAlpha = 0.4;

@@ -27,12 +27,10 @@ public:
 
 class JCircle: public JPrimitive{
 public:
-    JCircle(glm::vec2 loc, float r){
-        size = glm::vec2(r) * 2;
-        this->r = r;
+    JCircle(glm::vec2 loc = glm::vec2(0,0)){
+        // size = glm::vec2(r) * 2;
         this->loc = loc;
     }
-    float r;
     virtual void display() override{
         ofSetColor(colors[0]);
         if(bFill){
@@ -40,29 +38,32 @@ public:
         } else{
             ofNoFill();
         }
-        ofDrawCircle(loc.x, loc.y, r);
+        ofDrawCircle(loc.x, loc.y, size.x * 0.5);
     };
+    float r(){
+      return size.x * 0.5;
+    }
     void specificFunction() override{
         move(); // Also checks borders
     };
     void checkBorders() override {
         if(bCheckBordersH){
-            if((loc.x - r) < 0){
-                loc.x = r;
+            if((loc.x - r()) < 0){
+                loc.x = r();
                 direction.x *= -1;
             }
-            if((loc.x+r) > ofGetViewportWidth()){
-                loc.x = ofGetViewportWidth()-r;
+            if((loc.x+r()) > ofGetViewportWidth()){
+                loc.x = ofGetViewportWidth()-r();
                 direction.x *= -1;
             }
         }
         if(bCheckBordersV){
-            if((loc.y+r) > ofGetViewportHeight()){
-                loc.y = ofGetViewportHeight()-r;
+            if((loc.y+r()) > ofGetViewportHeight()){
+                loc.y = ofGetViewportHeight()-r();
                 direction.y *= -1;
             }
-            if((loc.y - r) < 0){
-                loc.y = r;
+            if((loc.y - r()) < 0){
+                loc.y = r();
                 direction.y *= -1;
             }
         }

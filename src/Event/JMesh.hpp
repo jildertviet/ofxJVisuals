@@ -26,7 +26,7 @@ public:
     void customTwo() override;
     void customThree() override;
     virtual void prepareForSave();
-    void setSize(ofVec3f size) override;
+    void setSize(glm::vec3 size) override;
     virtual void save();
     void createHollowRect(glm::vec3 dimensions, float width = 20);
 };

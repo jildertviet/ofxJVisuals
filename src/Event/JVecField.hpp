@@ -33,7 +33,7 @@ public:
     ofImage frame;
     void specificFunction() override;
     void display() override;
-    void setSize(ofVec3f size) override;
+    void setSize(glm::vec3 size) override;
     ofVec2f offset;
     ofVec2f sizeMultiplier;
     ofVec2f start, end; // For each line
@@ -54,11 +54,11 @@ public:
     void setMode(char m) override;
     void setPixelsToTest();
     int seed = 0;
-    
+
     ofFbo resizeFbo; // TEST
     ofFbo* underlayer;
     void customOne() override;
 private:
-    
+
 };
 #endif /* JVecField_hpp */

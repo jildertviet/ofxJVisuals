@@ -98,7 +98,7 @@ void JMirror::moveUp(){
     }
 }
 
-void JMirror::setSize(ofVec3f s){
+void JMirror::setSize(glm::vec3 s){
     size = s;
     texture.clear();
     texture.allocate(size.x, size.y, GL_RGBA);

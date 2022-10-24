@@ -57,7 +57,7 @@ public:
     map<string, short> values;
     map<string, short> envValues;
 //    void addEvent(Event* e);
-    
+
     void setVal(ofxOscMessage& m);
 //    void setValType(ofxOscMessage& m);
     void addEnv(ofxOscMessage& m);
@@ -69,7 +69,7 @@ private:
     ofxOscSenderReceiver scClient;
     void connectToSuperCollider();
     void onSuperColliderMessageReceived(ofxOscMessage &m);
-    scSynth synth;
+    scSynth* synth;
     bool bIsNotified = false;
 };
 
