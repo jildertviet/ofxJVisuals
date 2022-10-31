@@ -6,7 +6,7 @@
 //
 //
 
-#ifdef USE_PARTICLES
+#if USE_OPENCL
 
 #include "CounterParts.hpp"
 

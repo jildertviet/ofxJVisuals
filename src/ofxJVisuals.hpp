@@ -5,8 +5,10 @@
 
 #include "config.h"
 
-#ifdef USE_PARTICLES
-//    #include "particleSystem.hpp"
+#if USE_OPENCL
+   #include "particleSystemOpenCL.hpp"
+#else
+   #include "particleSystem.h"
 #endif
 
 #include <stdio.h>
@@ -40,7 +42,6 @@
 #include "cameraController.hpp"
 
 #ifndef TARGET_RASPBERRY_PI
-//    #define USE_PARTICLES true // Comment this to exclude the particles
     #include "JPhysarum.hpp"
 #else
     class JPhysarum;

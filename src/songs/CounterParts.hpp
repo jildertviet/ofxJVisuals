@@ -5,7 +5,7 @@
 //  Created by Jildert Viet on 20-01-17.
 //
 //
-#ifdef USE_PARTICLES
+#if USE_OPENCL
 
 #ifndef CounterParts_hpp
 #define CounterParts_hpp

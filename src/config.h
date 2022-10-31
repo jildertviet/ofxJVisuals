@@ -14,6 +14,8 @@
 
 #define USE_PP  false // ofxPostProcessing
 
+#define USE_OPENCL false // Comment this to exclude the particles (RPI?)
+
 // SuperCollider
 #define USE_SC  true
 #ifdef __APPLE__

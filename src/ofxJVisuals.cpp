@@ -578,7 +578,7 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
             break;
         case 11:{ // linkVecField
             JEvent* e = v->getEventById(m.getArgAsInt(0));
-#if USE_PARTICLES
+#if USE_OPENCL
             if(e){
                 if(e->type == "particleSystem")
                     ((particleSystem*)e)->setVecField((JVecField*)v->getEventById(m.getArgAsInt(1)));
@@ -627,9 +627,25 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
 }
 
 bool MsgParser::make(ofxOscMessage& m){
+    cout << m << endl;
     cout << "Make " << m.getArgAsString(0) << " with ID: " << m.getArgAsInt(1) << endl;
     JEvent* e = nullptr;
-    int layer = m.getArgAsInt(2);
+    int layer = 2; // Default
+    if(m.getNumArgs() > 2){
+        if(m.getArgType(2) == ofxOscArgType::OFXOSC_TYPE_STRING){
+            if(m.getArgAsString(2) == "nonCamFront"){
+                cout << "Add to nonCamFront layer" << endl;
+                layer = VisualizerLayer::NON_CAM_FRONT;
+            } else if(m.getArgAsString(2) == "nonCamBack"){
+                cout << "Add to nonCamBack layer" << endl;
+                layer = VisualizerLayer::NON_CAM_BACK;
+            } else if(m.getArgAsString(2) == "negative"){
+                layer = VisualizerLayer::NEGATIVE;
+            }
+        } else{
+          layer = m.getArgAsInt(2);
+        }
+    }
     switch(types[m.getArgAsString(0)]){
         case 1: // JRectangle
             e = new JRectangle();
@@ -660,7 +676,7 @@ bool MsgParser::make(ofxOscMessage& m){
             break;
         case 8:{ // JParticles
 //            e = (JEvent*)new JParticles();
-#ifdef USE_PARTICLES
+#if USE_OPENCL
             e = (JEvent*)new particleSystem(m.getArgAsInt(4), ofVec2f(m.getArgAsInt(5),m.getArgAsInt(6)), ofColor::white, m.getArgAsInt(7));
 #endif
 //            int idToFind = m.getArgAsInt(5);
@@ -734,9 +750,9 @@ bool MsgParser::make(ofxOscMessage& m){
             // v->addEvent(vP, FUNCTIONAL);
 //            vp->pl
             JVecField* vf = new JVecField();
-            vf->setSize(glm::vec3(4096,4096,0));
+            vf->setSize(glm::vec3(size.x,size.y,0));
             vf->setMode(VECFIELD_MODE::PERLIN);
-            vf->setDensity(glm::vec2(4096 / 10, 4096 / 10));
+            vf->setDensity(glm::vec2(size.x / 10, size.y / 10));
             // vf->video = &(vP->player);
 //            vf->vecTex.allocate(1024, 1024, GL_RGBA32F);
 //            vf->setPixelsToTest();
@@ -774,24 +790,8 @@ bool MsgParser::make(ofxOscMessage& m){
     }
 
     e->id = m.getArgAsInt(1);
-    if(m.getNumArgs() > 2){
-        if(m.getArgType(2) == ofxOscArgType::OFXOSC_TYPE_STRING){
-            if(m.getArgAsString(2) == "nonCamFront"){
-                cout << "Add to nonCamFront layer" << endl;
-                v->addEvent(e, VisualizerLayer::NON_CAM_FRONT, e->id);
-            } else if(m.getArgAsString(2) == "nonCamBack"){
-                cout << "Add to nonCamBack layer" << endl;
-                v->addEvent(e, VisualizerLayer::NON_CAM_BACK, e->id);
-            } else if(m.getArgAsString(2) == "negative"){
-                v->addEvent(e, VisualizerLayer::NEGATIVE, e->id);
-            }
-        } else{
-            cout << "Add to layer: " << layer << endl;
-            v->addEvent(e, layer, e->id); // Specific layer
-        }
-    } else{
-        v->addEvent(e, 2, e->id); // Default layer
-    }
+    v->addEvent(e, layer, e->id); // Default layer
+
     // Send back pointer (as long) to SC. Issue: this takes time. When you call event.create(); event.setLoc([0,0]); from SC that second call won't have this pointer yet...
 //    ofxOscMessage n;
 //    n.setAddress("/makeConfirm");
