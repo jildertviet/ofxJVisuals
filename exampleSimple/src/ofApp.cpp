@@ -4,7 +4,7 @@ using namespace glm;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1080, 1080);
-    visualizer = new ofxJVisuals(glm::vec2(1080), false); // Don't use SC
+    visualizer = new ofxJVisuals(glm::vec2(1080), true); // Don't use SC
     // auto i = new JImage("test_0.svg");
     // i->setSize(glm::vec3(ofGetWidth()*0.5, 100,0));
     // std::exit(0);

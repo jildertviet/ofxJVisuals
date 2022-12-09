@@ -21,8 +21,8 @@
 #ifdef __APPLE__
 #define SC_FOLDER "~/../../Applications/SuperCollider.app/Contents/Resources/"
 #else
-#define SC_FOLDER "/usr/bin/"
+#define SC_FOLDER "/usr/local/bin/"
 #endif
-#define SC_PORT 9999
+#define SC_PORT 9993
 
 #endif /* config_h */
