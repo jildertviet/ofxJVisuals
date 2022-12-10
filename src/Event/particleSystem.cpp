@@ -20,9 +20,9 @@ void particleSystem::init(int numParticles){
 
   string shadersFolder;
   if(ofIsGLProgrammableRenderer()){
-    shadersFolder="shaders_gl3";
+
   }else{
-    shadersFolder="shaders";
+    shadersFolder="../../../../../addons/ofxJVisuals/libs/shaders/particleSystem";
   }
 
   // Loading the Shaders
@@ -35,10 +35,10 @@ void particleSystem::init(int numParticles){
   }
 
   // Frag, Vert and Geo shaders for the rendering process of the spark image
-  updateRender.setGeometryInputType(GL_POINTS);
-updateRender.setGeometryOutputType(GL_TRIANGLE_STRIP);
-updateRender.setGeometryOutputCount(6);
-  updateRender.load(shadersFolder+"/render.vert",shadersFolder+"/render.frag",shadersFolder+"/render.geom");
+  // updateRender.setGeometryInputType(GL_POINTS);
+  // updateRender.setGeometryOutputType(GL_TRIANGLE_STRIP);
+  // updateRender.setGeometryOutputCount(6);
+  updateRender.load(shadersFolder+"/render");
 
   // Seting the textures where the information ( position and velocity ) will be
   textureRes = (int)sqrt((float)numParticles);
@@ -74,9 +74,6 @@ updateRender.setGeometryOutputCount(6);
   velPingPong.dst->getTexture().loadData(vel.data(), textureRes, textureRes, GL_RGB);
 
   // Loading and setings of the variables of the textures of the particles
-  sparkImg.load("spark.png");
-  imgWidth = sparkImg.getWidth();
-  imgHeight = sparkImg.getHeight();
 
   // Allocate the final
   renderFBO.allocate(width, height, GL_RGB32F);
@@ -164,15 +161,12 @@ void particleSystem::specificFunction(){
   // 3.   that then on the Fragment Shader is going to be filled with the pixels of sparkImg texture
   //
   renderFBO.begin();
-  ofClear(0,0,0,0);
+  ofClear(255,0,0,0);
   updateRender.begin();
   updateRender.setUniformTexture("posTex", posPingPong.dst->getTexture(), 0);
-  updateRender.setUniformTexture("sparkTex", sparkImg.getTexture() , 1);
   updateRender.setUniform1i("resolution", (float)textureRes);
   updateRender.setUniform2f("screen", (float)width, (float)height);
   updateRender.setUniform1f("size", (float)particleSize);
-  updateRender.setUniform1f("imgWidth", (float)sparkImg.getWidth());
-  updateRender.setUniform1f("imgHeight", (float)sparkImg.getHeight());
 
   ofPushStyle();
   ofEnableBlendMode( OF_BLENDMODE_ADD );
@@ -191,7 +185,6 @@ void particleSystem::specificFunction(){
 void particleSystem::display(){
   ofSetColor(100,255,255);
   renderFBO.draw(0,0);
-
   ofSetColor(255);
   ofDrawBitmapString("Fps: " + ofToString( ofGetFrameRate()), 15,15);
 }

@@ -4,12 +4,13 @@ using namespace glm;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1080, 1080);
-    visualizer = new ofxJVisuals(glm::vec2(1080), true); // Don't use SC
-    // auto i = new JImage("test_0.svg");
+    bool bSC = false;
+    visualizer = new ofxJVisuals(glm::vec2(1080), bSC); // Don't use SC
+    auto i = new particleSystem(1024, ofGetWindowSize());
     // i->setSize(glm::vec3(ofGetWidth()*0.5, 100,0));
     // std::exit(0);
    // auto r = new JRectangle(vec3(100, 100, 0), vec3(100, 100, 0));
-   // visualizer.addEvent(i, VisualizerLayer::DEFAULT, 1);
+   visualizer->addEvent(i, VisualizerLayer::DEFAULT, 1);
 }
 
 //--------------------------------------------------------------
