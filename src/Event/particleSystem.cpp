@@ -161,7 +161,7 @@ void particleSystem::specificFunction(){
   // 3.   that then on the Fragment Shader is going to be filled with the pixels of sparkImg texture
   //
   renderFBO.begin();
-  ofClear(255,0,0,0);
+  ofClear(0,0,0,0);
   updateRender.begin();
   updateRender.setUniformTexture("posTex", posPingPong.dst->getTexture(), 0);
   updateRender.setUniform1i("resolution", (float)textureRes);
@@ -183,7 +183,7 @@ void particleSystem::specificFunction(){
 }
 
 void particleSystem::display(){
-  ofSetColor(100,255,255);
+  ofSetColor(colors[0]);
   renderFBO.draw(0,0);
   ofSetColor(255);
   ofDrawBitmapString("Fps: " + ofToString( ofGetFrameRate()), 15,15);

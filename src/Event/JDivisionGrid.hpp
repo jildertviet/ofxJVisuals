@@ -19,10 +19,10 @@ public:
     float z = 100;
     float zOffset = 0;
     ofPolyline p;
-    
+
     ofPoint spawnPos;
     ofPoint endPoint;
-    
+
     int startSide;
     int endSide;
     glm::vec3 direction;
@@ -40,18 +40,18 @@ public:
             if(envelopes.size())
                 m.draw();
         }
-        
+
         return;
         ofSetColor(255);
         ofDrawBitmapString(ofToString(id) + " " + ofToString(p.getVertices().size()), p.getCentroid2D());
-        
+
         ofSetColor(255, 0, 0, 200);
         ofDrawCircle(spawnPos, 10);
         ofDrawLine(spawnPos, endPoint);
-        
+
         ofSetColor(255);
         ofDrawBitmapString(ofToString(id), spawnPos);
-        
+
         ofSetColor(255, 100, 0, 200);
         ofDrawCircle(endPoint, 10);
         ofSetColor(255);
@@ -61,19 +61,19 @@ public:
         ofDirectory d;
         if(!d.doesDirectoryExist(getDirectoryNameForFrame()))
             d.createDirectory(getDirectoryNameForFrame());
-        
+
         // Scale? Center?
         float scale = 0.01;
-        for(int i=0; i<m.getNumVertices(); i++){
+        for(unsigned int i=0; i<m.getNumVertices(); i++){
             m.setVertex(i, m.getVertex(i) - locAdjustmentForExport);
             m.setVertex(i, m.getVertex(i) * scale);
         }
     }
-    
+
     void save() override{
         m.save(getMeshName());
     }
-    
+
     void generateMesh(){
         z = ofNoise((float)(p.getCentroid2D().x * 0.001 + (ofGetFrameNum() * 0.001)), (float)(p.getCentroid2D().y * 0.001 + (ofGetFrameNum() * 0.001))) * 200. + zOffset;
         m.clear();
@@ -81,17 +81,17 @@ public:
         glm::vec2 center = p.getCentroid2D();
         glm::vec3 center3D = glm::vec3(center.x, center.y, z);
         m.setupIndicesAuto();
-        
+
         float scale = 1.0;
-        for(int i=0; i<p.getVertices().size()-1; i++){
+        for(unsigned int i=0; i<p.getVertices().size()-1; i++){
             m.addVertex(center3D * scale); // To center
             m.addVertex((p.getVertices()[i] + glm::vec3(0, 0, z)) * scale);
             m.addVertex((p.getVertices()[i + 1] + glm::vec3(0, 0, z)) * scale);
-            
+
             m.addVertex((p.getVertices()[i] + glm::vec3(0, 0, z)) * scale); // Down left
             m.addVertex((p.getVertices()[i + 1] + glm::vec3(0, 0, z)) * scale);
             m.addVertex((p.getVertices()[i]) * scale); //
-            
+
             m.addVertex((p.getVertices()[i]) * scale); //
             m.addVertex((p.getVertices()[i + 1]) * scale); //
             m.addVertex((p.getVertices()[i + 1] + glm::vec3(0, 0, z)) * scale);
@@ -101,20 +101,20 @@ public:
         int longestSideId = 0; // find longest line
         int secondLongestSideId = 0;
         float longestDistance = 0.;
-        for(int i=0; i<p.getVertices().size()-1; i++){
+        for(unsigned int i=0; i<p.getVertices().size()-1; i++){
             if(glm::distance(p.getVertices()[i], p.getVertices()[i+1]) > longestDistance){
                 longestDistance = glm::distance(p.getVertices()[i], p.getVertices()[i+1]);
                 longestSideId = i;
             }
         }
         startSide = longestSideId;
-        
+
         cout << "startSide: " << startSide << ", id: " << id << endl;
         glm::vec2 directionToPlaceSpawnPos = p.getVertices()[startSide+1] - p.getVertices()[startSide];
         directionToPlaceSpawnPos = glm::normalize(directionToPlaceSpawnPos);
         float distance = glm::distance(p.getVertices()[startSide+1], p.getVertices()[startSide]);
         spawnPos = p.getVertices()[startSide] + ((distance * (0.5)) * directionToPlaceSpawnPos);
-        
+
         // Take another segment as endpoint
         if(ofRandom(8.) <= 1.){ // Take random
             endSide = ofRandom(p.getVertices().size()-1);
@@ -123,8 +123,8 @@ public:
             }
         } else{ // Take second longest
             longestDistance = 0.;
-            for(int i=0; i<p.getVertices().size()-1; i++){
-                if(i == startSide)
+            for(unsigned int i=0; i<p.getVertices().size()-1; i++){
+                if((int)i == startSide)
                     continue;
                 if(glm::distance(p.getVertices()[i], p.getVertices()[i+1]) > longestDistance){
                     longestDistance = glm::distance(p.getVertices()[i], p.getVertices()[i+1]);
@@ -133,12 +133,12 @@ public:
             }
             endSide = secondLongestSideId;
         }
-        
+
         cout << "Endpoint segment: " << endSide << endl;
         cout << "Coordinates: " << p.getVertices()[endSide] << " " << p.getVertices()[endSide+1] << endl;
         endPoint = p.getVertices()[endSide] - (glm::normalize(p.getVertices()[endSide] - p.getVertices()[endSide+1]) * glm::distance(p.getVertices()[endSide], p.getVertices()[endSide+1]) * 0.5);
     }
-    
+
     bool split(vector<JPoly*>* rects){
         if(bBlock)
             return false;
@@ -167,7 +167,7 @@ public:
                 cout << "p.getVertices()[index]: " << p.getVertices()[index] << endl;
             }
         }
-        
+
         ofPolyline newLineTwo;
         newLineTwo.addVertex(spawnPos);
         newLineTwo.lineTo(endPoint);
@@ -190,7 +190,7 @@ public:
                 break;
             }
         }
-        
+
         p = newLineOne;
         JPoly* newRect = new JPoly();
         newRect->p = newLineTwo;
@@ -211,7 +211,7 @@ public:
     void customThree() override;
     void customFour() override;
     bool bSave = false;
-    
+
     vector<JPoly*> polyVec;
     void initRect();
     void generateRandomRects();

@@ -14,7 +14,7 @@ JLine::JLine(){
     colors[0] = ofColor(255);
     speed = 2;
     seed = ofRandom(1000);
-    loc = ofVec2f(0, ofGetHeight()/2); // Middle of screen
+    loc = glm::vec2(0, ofGetHeight()/2); // Middle of screen
 //    balance = ofRandom(1.0);
 //    heightOffset = 100;
     size = ofGetWindowSize();
@@ -53,7 +53,7 @@ void JLine::specificFunction(){
 void JLine::display(){
     ofSetColor(colors[0]);
     ofSetLineWidth(3);
-    
+
     if(rotation != 0){
         ofPushMatrix();
         ofTranslate(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
@@ -69,5 +69,14 @@ void JLine::display(){
 void JLine::toRect(ofVec2f loc, ofVec2f size){
     mode = 1;
     // Make env to move loc and size
-    
+}
+
+void JLine::fromVertices(ofxOscMessage* msg){
+  line.clear();
+  line.addVertex(msg->getArgAsFloat(0), msg->getArgAsFloat(1));
+  for(int i=1; i<(msg->getNumArgs()-1)/2; i++){
+    glm::vec2 v = glm::vec2(msg->getArgAsFloat(i*2), msg->getArgAsFloat(i*2+1));
+    line.curveTo(ofPoint(v));
+  }
+  line.addVertex(msg->getArgAsFloat(msg->getNumArgs()-2), msg->getArgAsFloat(msg->getNumArgs()-1));
 }
