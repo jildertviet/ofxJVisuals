@@ -37,7 +37,7 @@ void JMesh::specificFunction(){
     }
 }
 
-void JMesh::setLoc(ofVec3f loc){
+void JMesh::setLoc(glm::vec3 loc){
     // Add loc to all vertices? Now using ofTranslate :o
     this->loc = loc;
 }
@@ -57,7 +57,7 @@ string JMesh::getMeshName(){
     string toSave = "";
     toSave += getDirectoryNameForFrame();
     toSave += "/";
-    
+
     string zeroes = "";
     for(int j=0; j<4; j++)
         zeroes += "0";
@@ -65,7 +65,7 @@ string JMesh::getMeshName(){
     zeroes += ofToString(id);
     string newName = "m";
     newName += zeroes;
-    
+
     toSave += newName;
     toSave += ".ply";
     cout << toSave << endl;
@@ -86,7 +86,7 @@ void JMesh::customThree(){
 }
 
 void JMesh::prepareForSave(){
-    
+
 }
 
 void JMesh::setSize(glm::vec3 size){

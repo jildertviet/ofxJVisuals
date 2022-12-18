@@ -19,11 +19,11 @@ void Vorm::ownDtor(){
 Vorm::Vorm(uint8 numSides, int sideDiv, float radius, ofVec2f loc, bool on_destination){
     setType("Vorm");
     this->radius = radius;
-    
+
     this->loc = loc;
     loc = loc;
     size = ofVec2f(radius, radius);
-    
+
     makeCoordinates(numSides, sideDiv, radius, on_destination); // Coordinates
 
     colors[0] = ofColor(255, 230);
@@ -43,7 +43,7 @@ void Vorm::specificFunction(){
 
 void Vorm::display(){
     ofSetColor(colors[0]);
-    
+
 //    ofPushMatrix();
 //    ofTranslate(loc);
     connectParticles();
@@ -54,7 +54,7 @@ void Vorm::display(){
         }
         showFrame = false;
     }
-    
+
     if(particlesVisible){
         for(uint16 i=0; i<particles.size(); i++){
             particles[i]->display();
@@ -77,11 +77,11 @@ void Vorm::displayShape(int mode, float division){
                 }
                 ofEndShape();
                 break;
-                
+
             default:
                 break;
             case 1:
-                
+
                 // Display shape in n triangles
                 for(uint8 i=0; i<numSides; i++){
                     ofColor newcolor = colors[0];
@@ -96,7 +96,7 @@ void Vorm::displayShape(int mode, float division){
                         index_one_up = 0;
                     ofVec2f tempVec = coordinates[index];
                     tempVec -= loc;
-                    
+
                     tempVec.normalize();
 //                    cout << distance << endl;
                     ofVertex(loc.x+(distance*tempVec.x), loc.y+(distance*tempVec.y));
@@ -104,7 +104,7 @@ void Vorm::displayShape(int mode, float division){
                     ofVertex(coordinates[index_one_up].x, coordinates[index_one_up].y);
                     ofEndShape();
                 }
-                
+
                 for(uint8 i=0; i<numSides; i++){
                     ofColor newcolor = colors[0];
                     newcolor.setBrightness(colors[0].a+(15*(i+1)));
@@ -118,7 +118,7 @@ void Vorm::displayShape(int mode, float division){
                         index_one_up = 0;
                     ofVec2f tempVec = coordinates[index];
                     tempVec -= loc;
-                    
+
                     tempVec.normalize();
                     cout << distance << endl;
                     ofVertex(loc.x+(distance*tempVec.x), loc.y+(distance*tempVec.y));
@@ -196,17 +196,17 @@ void Vorm::customFive(){
 void Vorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onDestination){
     coordinates.clear();
     particles.clear();
-    
+
     this->numSides = numSides;
     this->sideDiv = sideDiv;
     radius = radius_; // radius of the circle on which the corner-points lay
     angle = 360. / numSides;
-    
+
     if(numSides == 1 || sideDiv == 0){
         coordinates[0] = loc;
         return;
     }
-    
+
     if(numSides<2 || sideDiv <2){
         cout << "Number of sides or side division is too low, number of sides should be >2, side division >2" << endl;
         if(numSides < 2){
@@ -216,7 +216,7 @@ void Vorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onDe
             sideDiv = 2;
         }
     }
-    
+
     switch(numSides){ // angle_offset is changed, so a rectangle will have horizontal and vertical sides
         case 4:
             angle_offset = 45;
@@ -225,7 +225,7 @@ void Vorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onDe
             angle_offset = -90;
             break;
     }
-    
+
     for(uint8 i=0; i<numSides; i++) { // calculate coordinates
         coordinates.push_back(
         ofVec2f(
@@ -235,9 +235,9 @@ void Vorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onDe
         );
         coordinates.back() *= circleRatio;
     }
-    
+
     tussenCoordinaten(); // Places points on lines
-    
+
     for(short i=0; i<coordinates.size(); i++){
         particles.push_back(new Particle(&(coordinates[i]), !onDestination));   // Particles
     }
@@ -247,7 +247,7 @@ void Vorm::setCenter(ofVec2f newloc){
     for(short i=0; i<coordinates.size(); i++){
         coordinates[i] -= loc;
     } // All around (0,0)
-    
+
     for(short i=0; i<coordinates.size(); i++){
         coordinates[i] += newloc;
     }
@@ -299,7 +299,7 @@ void Vorm::tussenCoordinaten(){
     for (uint8 i=0; i<numSides; i++) {
         for (uint8 j=0; j<sideDiv-1; j++) {
 //            int index = numSides+(   (i*((int)side_division-1))+j ); // KLOPT
-            
+
             ofVec2f delta = ofVec2f(coordinates[((i+1) % numSides)]) -  ofVec2f(coordinates[(i % numSides)]);
             delta = delta * ((1/sideDiv)*(j+1));
             coordinates.push_back(coordinates[i] + delta);
@@ -311,7 +311,7 @@ void Vorm::tussenCoordinaten(){
     for(short i=0; i<coordinates.size(); i++){
         temp.push_back(coordinates[i]);
     }
-    
+
     for(short i=1; i<particles.size(); i++){ // Start with i=1, because 0th stays 0th
         if(i%(int)sideDiv == 0){
             coordinates[i] = temp[i/(int)sideDiv];
@@ -436,7 +436,7 @@ void Vorm::drawLines(Particle *p1, Particle *p2){
     if(lijn_lengte < lijnmax && p1->connectable && p2->connectable){
         ofSetLineWidth(lineWidth);
         uint8 alpha = colors[0].a + alphaAdd;
-        
+
         ofSetColor(colors[0].r, colors[0].g, colors[0].b,
                    ofMap(lijn_lengte, 0, lijnmax, alpha, 0));
         ofDrawLine(p1->loc, p2->loc);
@@ -463,22 +463,22 @@ void Vorm::removeConnection(Vorm* v){
 }
 
 void Vorm::connectWith(){
-    // If A and B are not connected: draw lines from A to B, set both to 'connected' on both objects. B will do nothing with A. 
+    // If A and B are not connected: draw lines from A to B, set both to 'connected' on both objects. B will do nothing with A.
     for(int i=0; i<connections.size(); i++){
         if(connections[i].connected == false){
             // DRAW LINES (A to B)
             bDrawLines = true;
 //            cout << this << " bDrawLines = true" << endl;
-            
+
             // CONNECT
             // Returns the pointer from the other object, pointing to this object   (A finds A* in B)
             Vorm::connection* b = connections[i].vorm->findSelf(this);
-            
+
 //            cout << "B points to A with adress: " << b->vorm << " is this " << this << endl;
             b->connected = true; // B knows it is connected to A
             connections[i].connected = true; // A knows it is connected to B
         }
-        
+
         if(bDrawLines){
 //            cout << "Lines:" << endl;
             for(int j=0; j<particles.size(); j++){
@@ -495,7 +495,7 @@ void Vorm::addConnection(Vorm* vorm, bool repeat){ // repeat = true
     if(vorm==this || vorm == nullptr) // Can't connect with self or nullptr
         return;
     Vorm::connection c;
-    
+
     // Add to own reference
     c.vorm = vorm;
     c.connected = false;
@@ -572,8 +572,8 @@ void Vorm::setZ(int z){
         coordinates[i].z = z;
 }
 
-void Vorm::setLoc(ofVec3f newLoc){ // Get distance from new loc
-    ofVec3f diff = newLoc - loc;
+void Vorm::setLoc(glm::vec3 newLoc){ // Get distance from new loc
+    glm::vec3 diff = newLoc - loc;
     // Add this to all particles?
     for(short i=0; i<coordinates.size(); i++)
         coordinates[i] += diff;

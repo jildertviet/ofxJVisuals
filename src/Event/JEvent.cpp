@@ -298,7 +298,7 @@ bool JEvent::checkIfEnvExists(char id){
 
 void JEvent::setSize(glm::vec3 s){size = s;}
 void JEvent::setMode(char m){ mode = m; }
-void JEvent::setLoc(ofVec3f loc){this->loc = loc;}
+void JEvent::setLoc(glm::vec3 loc){this->loc = loc;}
 void JEvent::setSpeed(float speed){this->speed = speed;}
 
 unsigned long JEvent::getTimeMillis(){
@@ -333,4 +333,14 @@ void JEvent::setDefaultMappers(){
     mapValues[12] = new mapValue(&direction.y);
     mapValues[13] = new mapValue(&direction.z);
     mapValues[14] = new mapValue(&zoom);
+}
+
+void JEvent::fillBuffer(ofxOscMessage& m){
+  if(buffer.size()){
+    buffer.clear();
+  }
+  for(int i=1; i<m.getNumArgs(); i++){ // Skip 0: id of JEvent
+    buffer.push_back(m.getArgAsFloat(i));
+  }
+  // cout << buffer[0] << endl;
 }

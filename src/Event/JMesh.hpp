@@ -17,7 +17,7 @@ public:
     JMesh();
     void display() override;
     void specificFunction() override;
-    void setLoc(ofVec3f loc) override;
+    void setLoc(glm::vec3 loc) override;
     ofMesh m;
     bool bSave = false;
     string getDirectoryNameForFrame();

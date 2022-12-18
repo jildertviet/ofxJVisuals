@@ -47,7 +47,7 @@ public:
 
     JEvent* getEvent(int index);
 
-    virtual void setLoc(ofVec3f loc);
+    virtual void setLoc(glm::vec3 loc);
     ofVec3f size, loc, direction;
     vector<ofColor> colors = {ofColor(255,255)}; // Make stuff visible by default
 
@@ -114,6 +114,7 @@ public:
     virtual void customThree(){};
     virtual void customFour(){};
     virtual void customFive(){};
+
     float customOneArguments[5]; // Only use ptr?
     float customTwoArguments[5];
     JEvent** events = nullptr;
@@ -135,6 +136,8 @@ public:
     void displayModifier();
     void deleteModifiers();
     virtual void setViaBusses(vector<float> busses){};
+    void fillBuffer(ofxOscMessage& m);
+    vector<float> buffer;
 private:
 
 };

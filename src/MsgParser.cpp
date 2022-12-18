@@ -35,6 +35,7 @@ MsgParser::MsgParser(ofxJVisuals* v, bool bUseSC) : v(v), bUseSC(bUseSC){
         "camRoll",
         "camRotateAround",
         "setBackground",
+        "fillBuffer"
     };
     for(short i=0; i<commandKeys.size(); i++){
         string key = "/";
@@ -62,7 +63,8 @@ MsgParser::MsgParser(ofxJVisuals* v, bool bUseSC) : v(v), bUseSC(bUseSC){
         "JIFLogo",
         "JPhysarum",
         "JModifier",
-        "JCircle"
+        "JCircle",
+        "JLine"
     };
     for(short i=0; i<typeKeys.size(); i++)
         types[typeKeys[i]] = i + 1;

@@ -38,6 +38,7 @@
 #include "JShaderTest.hpp"
 #include "MultiMeshMaybeTomorrow.hpp"
 #include "JPhysarum.hpp"
+#include "JLine.hpp"
 
 #include "scSynth.hpp"
 

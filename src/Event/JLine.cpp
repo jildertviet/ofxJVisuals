@@ -21,9 +21,10 @@ JLine::JLine(){
 }
 
 void JLine::specificFunction(){
-    line.clear();
+    // line.clear();
     switch(mode){
         case 0:
+          line.clear();
         //    line.addVertex(ofVec2f(0, ofGetHeight()/2));
             line.curveTo(loc);
             for(int i=0; i<(numPoints+2); i++){
@@ -42,14 +43,11 @@ void JLine::specificFunction(){
             }
             break;
         case 1:
-            line.lineTo(loc.x, loc.y);
-            line.lineTo(loc.x+size.x, loc.y);
-            line.lineTo(loc.x+size.x, loc.y+size.y);
-            line.lineTo(loc.x, loc.y+size.y);
-            line.lineTo(loc.x, loc.y);
-            break;
+
+          break;
     }
 }
+
 void JLine::display(){
     ofSetColor(colors[0]);
     ofSetLineWidth(3);
@@ -62,7 +60,7 @@ void JLine::display(){
         line.draw();
         ofPopMatrix();
     } else{
-        line.draw();
+      line.draw();
     }
 }
 
@@ -71,12 +69,49 @@ void JLine::toRect(ofVec2f loc, ofVec2f size){
     // Make env to move loc and size
 }
 
-void JLine::fromVertices(ofxOscMessage* msg){
+void JLine::fromBuffer(){
+  mode = 2;
   line.clear();
-  line.addVertex(msg->getArgAsFloat(0), msg->getArgAsFloat(1));
-  for(int i=1; i<(msg->getNumArgs()-1)/2; i++){
-    glm::vec2 v = glm::vec2(msg->getArgAsFloat(i*2), msg->getArgAsFloat(i*2+1));
-    line.curveTo(ofPoint(v));
+  line.addVertex(buffer[0], buffer[1]);
+  for(int i=1; i<buffer.size()/2; i++){
+    glm::vec2 v = glm::vec2(buffer[i*2], buffer[i*2+1]);
+    line.lineTo(ofPoint(v));
   }
-  line.addVertex(msg->getArgAsFloat(msg->getNumArgs()-2), msg->getArgAsFloat(msg->getNumArgs()-1));
+  // line.addVertex(buffer[buffer.size()-2], buffer[buffer.size()-1]);
+  // for(int i=0; i<line.getVertices().size(); i++){
+    // cout << line.getVertices()[i][0] << ", " << line.getVertices()[i][1] << endl;
+  // }
+}
+
+void JLine::setLoc(glm::vec3 loc){
+  this->loc = loc;
+  calcLine();
+}
+
+void JLine::setSize(glm::vec3 size){
+  this->size = size;
+  calcLine();
+}
+
+void JLine::calcLine(){
+  switch(mode){
+    case 0:{
+
+    }
+    case 1:{
+      line.clear();
+      line.addVertex(loc.x, loc.y);
+      line.addVertex(loc.x + size.x, loc.y);
+      line.addVertex(loc.x + size.x, loc.y+size.y);
+      line.addVertex(loc.x, loc.y+size.y);
+      line.addVertex(loc.x, loc.y);
+    }
+    case 2:{
+
+    }
+  }
+}
+
+void JLine::customOne(){
+  fromBuffer();
 }

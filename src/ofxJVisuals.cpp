@@ -616,11 +616,18 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         case 21: // camRotateAround
             v->cam.rotateAroundDeg(m.getArgAsFloat(0), glm::vec3(m.getArgAsFloat(1), m.getArgAsFloat(2), m.getArgAsFloat(3)), glm::vec3(0, 0, 0));
             break;
-        case 22:
+        case 22:{ // setBackground
             ofColor c = ofColor(m.getArgAsInt(0), m.getArgAsInt(1), m.getArgAsInt(2));
             v->alphaScreen->setColor(c);
             v->alphaScreen->setActiveness(true);
+          }
             break;
+        case 23:{ // fillBuffer
+            JEvent* e = v->getEventById(m.getArgAsInt(0));
+            if(e)
+              e->fillBuffer(m);
+          }
+          break;
 
     }
     return false;
@@ -787,6 +794,10 @@ bool MsgParser::make(ofxOscMessage& m){
           e = (JEvent*)new JCircle();
         }
         break;
+        case 21:{ // JLine
+          e = (JEvent*)new JLine();
+        }
+        break;
     }
 
     e->id = m.getArgAsInt(1);
@@ -814,7 +825,6 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
         cout << "Event found, id: " << m.getArgAsInt(0) << ", addr: " << e << endl;
         switch (values[m.getArgAsString(1)]) {
             case 1: // color
-                cout << "setColor" << endl;
                 if(m.getNumArgs() == 6){ // Set first, global, color
                     e->setColor(ofColor(m.getArgAsInt(2), m.getArgAsInt(3), m.getArgAsInt(4), m.getArgAsInt(5)));
                 } else if (m.getNumArgs() == 7){ // Set color @ index of event

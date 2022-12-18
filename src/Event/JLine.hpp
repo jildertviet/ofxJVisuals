@@ -18,8 +18,8 @@ typedef unsigned char uint8;
 class JLine: public JEvent{
 public:
     JLine();
-    void display();
-    void specificFunction();
+    void display() override;
+    void specificFunction() override;
     ofPolyline line;
     int amplitude = 0;
     uint8 numPoints = 10;
@@ -32,7 +32,11 @@ public:
 
     void toRect(ofVec2f loc, ofVec2f size);
 
-    uint8 mode = 0;
-    void fromVertices(ofxOscMessage* msg);
+    void fromBuffer();
+    void setLoc(glm::vec3 loc) override;
+    void setSize(glm::vec3 size) override;
+    void calcLine();
+
+    void customOne() override;
 };
 #endif /* JLine_hpp */
