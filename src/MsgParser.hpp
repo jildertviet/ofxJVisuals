@@ -39,6 +39,8 @@
 #include "MultiMeshMaybeTomorrow.hpp"
 #include "JPhysarum.hpp"
 #include "JLine.hpp"
+#include "JShader.hpp"
+#include "JShaderLines.hpp"
 
 #include "scSynth.hpp"
 

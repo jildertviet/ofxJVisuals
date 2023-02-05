@@ -6,11 +6,14 @@ void ofApp::setup(){
     ofSetWindowShape(1080, 1080);
     bool bSC = false;
     visualizer = new ofxJVisuals(glm::vec2(1080), bSC); // Don't use SC
-    auto i = new particleSystem(1024, ofGetWindowSize());
-    // i->setSize(glm::vec3(ofGetWidth()*0.5, 100,0));
-    // std::exit(0);
-   // auto r = new JRectangle(vec3(100, 100, 0), vec3(100, 100, 0));
-   visualizer->addEvent(i, VisualizerLayer::DEFAULT, 1);
+
+    auto i = new JRectangle(glm::vec2(0,0), glm::vec2(100, 100));
+    i->setColor(ofColor::red);
+    visualizer->addEvent(i, VisualizerLayer::DEFAULT, 1);
+
+    i = new JRectangle(glm::vec2(50,0), glm::vec2(100, 100));
+    i->setColor(ofColor::blue);
+    visualizer->addEvent(i, VisualizerLayer::DEFAULT, 2);
 }
 
 //--------------------------------------------------------------

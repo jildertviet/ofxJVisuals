@@ -154,14 +154,14 @@ void ofxJVisuals::update(){
 //            ofScale(1, -1, 1);
 //            ofTranslate(-ofGetWidth()/2., -ofGetHeight()/2.);
 //        }
-        for(uint8 i=2; i<NUMLAYERS; i++) // Don't draw layer 0: nonCamFront
+        for(int i=2; i<NUMLAYERS; i++) // Don't draw layer 0: nonCamFront
             layers[i]->displayMain();
 //        if(bCam){
 //            cam.end();
 //            ofPopMatrix();
 //        }
 
-        layers[NUMLAYERS-1]->displayMain(); // Non-cam layer front
+        // layers[NUMLAYERS-1]->displayMain(); // Non-cam layer front
 
 //        ofClearAlpha();
 #if USE_PP
@@ -171,16 +171,21 @@ void ofxJVisuals::update(){
 #endif
     fbo.end();
 
-
     renderFbo.begin();
+    // for(const auto& s : shaders){
+    //   s->begin();
+    //   s->update();
+    // }
     if(negativeLayer.next){
         negative.begin();
     }
-        fbo.draw(0,0);
+    fbo.draw(0,0);
     if(negativeLayer.next){
         negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
         negative.end();
     }
+    // for(const auto& s : shaders)
+    //   s->end();
     renderFbo.end();
 }
 
@@ -796,6 +801,13 @@ bool MsgParser::make(ofxOscMessage& m){
         break;
         case 21:{ // JLine
           e = (JEvent*)new JLine();
+        }
+        break;
+        case 22:{
+          JShader* s = new JShader();
+          v->shaders.push_back(s);
+          e = (JEvent*)s;
+          ((JShader*)e)->load(m.getArgAsString(3));
         }
         break;
     }

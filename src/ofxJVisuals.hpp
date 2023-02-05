@@ -162,6 +162,7 @@ typedef unsigned char uint8;
     vector<glm::vec2> texCoords;
     ofMesh mesh;
     void initMesh();
+    vector<JShader*> shaders;
 private:
     void loadLastMaskFile();
     JLayer* layers[NUMLAYERS]; // linked list, use AddEvent to add

@@ -2,21 +2,17 @@
 #ifndef USE_OPENCL
 
 particleSystem::particleSystem(){
-    init(numParticles);
+  init(numParticles);
 }
 
 particleSystem::particleSystem(int numParticles, glm::vec2 size) : numParticles(numParticles){
-    init(numParticles);
+  this->size = size;
+  init(numParticles);
 }
 
 void particleSystem::init(int numParticles){
-  particleSize = 30.0f;
   timeStep = 0.005f;
   numParticles = 1000;
-
-  // Width and Heigth of the windows
-  width = ofGetWindowWidth();
-  height = ofGetWindowHeight();
 
   string shadersFolder;
   if(ofIsGLProgrammableRenderer()){
@@ -76,7 +72,7 @@ void particleSystem::init(int numParticles){
   // Loading and setings of the variables of the textures of the particles
 
   // Allocate the final
-  renderFBO.allocate(width, height, GL_RGB32F);
+  renderFBO.allocate(size[0], size[1], GL_RGB32F);
   renderFBO.begin();
   ofClear(0, 0, 0, 255);
   renderFBO.end();
@@ -119,7 +115,7 @@ void particleSystem::specificFunction(){
   updateVel.setUniformTexture("backbuffer", velPingPong.src->getTexture(), 0);   // passing the previus velocity information
   updateVel.setUniformTexture("posData", posPingPong.src->getTexture(), 1);  // passing the position information
   updateVel.setUniform1i("resolution", (int)textureRes);
-  updateVel.setUniform2f("screen", (float)width, (float)height);
+  updateVel.setUniform2f("screen", (float)size[0], (float)size[1]);
   updateVel.setUniform1f("timestep", (float)timeStep);
 
   // draw the source velocity texture to be updated
@@ -165,8 +161,7 @@ void particleSystem::specificFunction(){
   updateRender.begin();
   updateRender.setUniformTexture("posTex", posPingPong.dst->getTexture(), 0);
   updateRender.setUniform1i("resolution", (float)textureRes);
-  updateRender.setUniform2f("screen", (float)width, (float)height);
-  updateRender.setUniform1f("size", (float)particleSize);
+  updateRender.setUniform2f("screen", (float)size[0], (float)size[1]);
 
   ofPushStyle();
   ofEnableBlendMode( OF_BLENDMODE_ADD );
@@ -185,9 +180,8 @@ void particleSystem::specificFunction(){
 void particleSystem::display(){
   ofSetColor(colors[0]);
   renderFBO.draw(0,0);
-  ofSetColor(255);
-  ofDrawBitmapString("Fps: " + ofToString( ofGetFrameRate()), 15,15);
 }
+
 //
 // void particleSystem::customOne(){
 //     globalForce = glm::vec2(customOneArguments[0], customOneArguments[1]);

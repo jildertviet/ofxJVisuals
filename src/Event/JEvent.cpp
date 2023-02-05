@@ -90,13 +90,13 @@ void JEvent::updateMain(){
 }
 
 void JEvent::displayMain(){
-    if(next)
-        next->displayMain();
     if(modifiers.size()){
         displayModifier();
     } else{
         display();
     }
+    if(next)
+        next->displayMain();
 }
 
 void JEvent::setEnvelope(int attack, int sustain, int release, ofVec2f range){ // Link envelope to alpha of color & lifetime of object
