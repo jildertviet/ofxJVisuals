@@ -53,7 +53,13 @@ enum VisualizerLayer {
     FUNCTIONAL, // Should be deleted?
     NON_CAM_BACK,
     NON_CAM_FRONT,
-    NEGATIVE,
+    DUMMY0,
+    DUMMY1,
+    DUMMY2,
+    DUMMY3,
+    DUMMY4,
+    DUMMY5,
+    NEGATIVE, // Dummies, otherwise this would be 3, and override layer 3...
     DEFAULT
 };
 

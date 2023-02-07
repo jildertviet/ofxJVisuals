@@ -40,7 +40,7 @@ mat2 rotate2d(float _angle){
                 sin(_angle),cos(_angle));
 }
 
-void main (void){
+void main (){
     vec2 pos = texCoordVarying;
 
     vec3 src = texture(tex0, pos).rgb;

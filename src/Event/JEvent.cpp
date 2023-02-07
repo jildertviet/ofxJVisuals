@@ -1,11 +1,3 @@
-//
-//  JEvent.cpp
-//  AudioAnalyzer
-//
-//  Created by Jildert Viet on 24-01-16.
-//
-//
-
 #include "JEvent.hpp"
 
 JEvent::JEvent(){

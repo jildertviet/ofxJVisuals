@@ -172,10 +172,10 @@ void ofxJVisuals::update(){
     fbo.end();
 
     renderFbo.begin();
-    // for(const auto& s : shaders){
-    //   s->begin();
-    //   s->update();
-    // }
+    for(int i=0; i<shaders.size(); i++){
+      shaders[i]->begin();
+      shaders[i]->update();
+    }
     if(negativeLayer.next){
         negative.begin();
     }
@@ -184,8 +184,9 @@ void ofxJVisuals::update(){
         negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
         negative.end();
     }
-    // for(const auto& s : shaders)
-    //   s->end();
+    for(int i=0; i<shaders.size(); i++){
+      shaders[i]->end();
+    }
     renderFbo.end();
 }
 
@@ -232,8 +233,13 @@ JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, unsigned short index){ 
         }
     }
 
-    if(layerIndex>=0)
+    if(layerIndex>=0){
+      if(layerIndex == VisualizerLayer::NEGATIVE){
+        negativeLayer.addEvent(e);
+      } else{
         layers[layerIndex]->addEvent(e);
+      }
+    }
     last = e;
     e->lastPtr = &last; // For setting to nullptr if event is deleted
 
@@ -415,7 +421,7 @@ void ofxJVisuals::getFreePointers(string ip, int port){
         SCsender = msgParser->initSCsender(ip, port);
     }
     SCsender->sendMessage(m);
-
+    cout << "Reply with free pointers" << endl;
     // [3, 4, 5 .. 512], when only 0, 1, 2 are still occupied / alive. numFreeEvents should 509
 
     // So should have a 'blank list', of all ptrs[x] that are free...
@@ -804,16 +810,16 @@ bool MsgParser::make(ofxOscMessage& m){
         }
         break;
         case 22:{
-          JShader* s = new JShader();
+          JShaderLines* s = new JShaderLines();
           v->shaders.push_back(s);
           e = (JEvent*)s;
-          ((JShader*)e)->load(m.getArgAsString(3));
+          ((JShaderLines*)e)->load(m.getArgAsString(3));
         }
         break;
     }
 
     e->id = m.getArgAsInt(1);
-    v->addEvent(e, layer, e->id); // Default layer
+    v->addEvent(e, layer, e->id);
 
     // Send back pointer (as long) to SC. Issue: this takes time. When you call event.create(); event.setLoc([0,0]); from SC that second call won't have this pointer yet...
 //    ofxOscMessage n;
@@ -914,6 +920,10 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                     ((Vorm*)e)->lineWidth = m.getArgAsFloat(2);
                 } else if(e->type == "JVecField"){
                     ((JVecField*)e)->lineWidth = m.getArgAsFloat(2);
+                } else{
+                  cout << m << endl;
+                  e->lineWidth = m.getArgAsFloat(2);
+                  cout << "Why does this crash?" << endl;
                 }
             }
                 break;

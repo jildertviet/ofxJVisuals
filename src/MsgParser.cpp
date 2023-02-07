@@ -65,7 +65,7 @@ MsgParser::MsgParser(ofxJVisuals* v, bool bUseSC) : v(v), bUseSC(bUseSC){
         "JModifier",
         "JCircle",
         "JLine",
-        "JShader"
+        "JShaderLines"
     };
     for(short i=0; i<typeKeys.size(); i++)
         types[typeKeys[i]] = i + 1;

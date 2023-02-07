@@ -7,5 +7,5 @@ void main()
 {
     texCoordVarying = gl_MultiTexCoord0.xy;
     globalColor = gl_Color;
-	gl_Position = ftransform();
+	  gl_Position = ftransform();
 }

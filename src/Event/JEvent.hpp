@@ -55,6 +55,7 @@ public:
     virtual void setSpeed(float speed);
     bool bMove = false;
     bool bEvolve = false;
+    float lineWidth = 1;
 
     JEvent* next = nullptr;
     JEvent* previous = nullptr;

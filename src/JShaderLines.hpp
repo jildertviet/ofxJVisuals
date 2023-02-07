@@ -8,7 +8,7 @@
 class JShaderLines: public JShader{
   public:
     JShaderLines();
-    void update();
+    void update() override;
     float numLines = 108;
     float lineWidth = 1.65;
     float diagonalScale = 18.0;
