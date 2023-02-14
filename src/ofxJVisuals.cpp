@@ -61,9 +61,9 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size, bool bUseSC) : size(size){
         ofClear(0, 0);
     fbo.end();
     negativeMask.begin();
-        ofClear(0);
-        ofSetColor(255);
-        ofDrawRectangle(negativeMask.getWidth()*0.25, 0, negativeMask.getWidth()*0.5, negativeMask.getHeight());
+        ofClear(0, 0);
+        // ofSetColor(255);
+        // ofDrawRectangle(negativeMask.getWidth()*0.25, 0, negativeMask.getWidth()*0.5, negativeMask.getHeight());
     negativeMask.end();
 
     initCam();
@@ -72,6 +72,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size, bool bUseSC) : size(size){
 
     msgParser = new MsgParser(this, bUseSC);
 
+    ofSetCircleResolution(90);
 //    sharedFbo.allocate(2560, 800, GL_RGBA);
 //    sharedFbo2.allocate(2560, 800, GL_RGBA);
 }
@@ -111,6 +112,7 @@ void ofxJVisuals::update(){
     while(receiver.hasWaitingMessages()){
         ofxOscMessage m;
         receiver.getNextMessage(m);
+        cout << m << endl;
         msgParser->parseMsg(m);
     }
 
@@ -126,12 +128,10 @@ void ofxJVisuals::update(){
 
 //    ofEnableBlendMode(OF_BLENDMODE_ADD);
 //    ofEnableDepthTest();
-    if(negativeLayer.next){
-        negativeMask.begin();
-            ofClear(0);
-            negativeLayer.displayMain();
-        negativeMask.end();
-    }
+    negativeMask.begin();
+        ofClear(0, 255);
+        negativeLayer.displayMain();
+    negativeMask.end();
 
 
     fbo.begin();
@@ -178,11 +178,12 @@ void ofxJVisuals::update(){
     }
     if(negativeLayer.next){
         negative.begin();
-    }
-    fbo.draw(0,0);
-    if(negativeLayer.next){
         negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
+        fbo.draw(0,0);
         negative.end();
+        // negativeMask.draw(0, 0);
+    } else{
+      fbo.draw(0,0);
     }
     for(int i=0; i<shaders.size(); i++){
       shaders[i]->end();
@@ -420,7 +421,12 @@ void ofxJVisuals::getFreePointers(string ip, int port){
     if(!SCsender){
         SCsender = msgParser->initSCsender(ip, port);
     }
-    SCsender->sendMessage(m);
+    if(SCsender){
+      SCsender->sendMessage(m);
+    }
+    else{
+      cout << "Failed to init SC sender, with ip: " << ip << " and port: " << port << endl;
+    }
     cout << "Reply with free pointers" << endl;
     // [3, 4, 5 .. 512], when only 0, 1, 2 are still occupied / alive. numFreeEvents should 509
 
@@ -639,7 +645,9 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
               e->fillBuffer(m);
           }
           break;
-
+        case 24:{ // setBDrawNegative
+            v->bDrawNegativeLayer = m.getArgAsInt(0);
+         }
     }
     return false;
 }
@@ -921,9 +929,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 } else if(e->type == "JVecField"){
                     ((JVecField*)e)->lineWidth = m.getArgAsFloat(2);
                 } else{
-                  cout << m << endl;
                   e->lineWidth = m.getArgAsFloat(2);
-                  cout << "Why does this crash?" << endl;
                 }
             }
                 break;

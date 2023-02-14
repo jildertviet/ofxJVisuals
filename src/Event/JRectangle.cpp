@@ -64,27 +64,22 @@ void JRectangle::setQuadColor(ofColor a, ofColor b, ofColor c, ofColor d){
 
 void JRectangle::display(){
     ofSetColor(colors[0]);
-    
-    if(bFill){
-        ofFill();
-    } else{
-        ofNoFill();
-    }
-    
+
     ofPushMatrix();
-    
+
     if(!m){
         ofTranslate(loc + (size*0.5));
         ofRotateXDeg(rotation.x);
         ofRotateYDeg(rotation.y);
         ofRotateZDeg(rotation.z);
         ofTranslate(-(size*0.5));
-        
+
 //        ofTranslate(loc);
         if(size.z){
             ofDrawBox(0, 0, 0, size.x, size.y, size.z);
         } else{
             ofPushStyle();
+            ofSetLineWidth(10);
             switch(mode){
                 case 0:
                     break;
@@ -92,7 +87,21 @@ void JRectangle::display(){
                     ofSetRectMode(OF_RECTMODE_CENTER);
                     break;
             }
-            ofDrawRectangle(0, 0, size.x, size.y);
+
+            // convertRectToMesh(asOfRectangle(), lineWidth);
+            // mesh.drawWireframe();
+            // mesh = ofMesh::plane(100, 100, 1, 1);
+            // ofTranslate(loc);
+            // mesh.draw();
+            if(bFill){
+              ofDrawRectangle(0, 0, size.x, size.y);
+            } else{
+              ofPath path;
+              path.setFillColor(colors[0]);
+              path.rectangle(0, 0, size.x, size.y);
+              path.rectangle(lineWidth*0.5, lineWidth*0.5, size.x-(lineWidth), size.y-lineWidth);
+              path.draw();
+            }
             ofPopStyle();
         }
 //        ofTranslate(-size*0.5); // ?
@@ -104,12 +113,12 @@ void JRectangle::display(){
         ofRotateYDeg(rotation.y);
         ofRotateZDeg(rotation.z);
         ofTranslate(-(size*0.5));
-        
+
         m->draw();
     }
 
     ofPopMatrix();
-    
+
     ofFill();
 }
 
@@ -171,9 +180,9 @@ void JRectangle::divide(){
             c->speed = speed;
             c->colors[0] = color;
         }
-        
-        
-        
+
+
+
         newLoc = ofVec2f(newSize.x*2,0)+loc+ofVec2f(i*newSize.x, i*newSize.y);
         if(newLoc.x<ofGetWindowWidth() && newLoc.y<ofGetWindowHeight()){
             children.push_back(new JRectangle(newSize, newLoc));
@@ -187,7 +196,7 @@ void JRectangle::divide(){
             c->speed = speed;
             c->colors[0] = color;
         }
-        
+
         newLoc = ofVec2f(0, newSize.y*2)+loc+ofVec2f(i*newSize.x, i*newSize.y);
         if(newLoc.x<ofGetWindowWidth() && newLoc.y<ofGetWindowHeight()){
             children.push_back(new JRectangle(newSize, newLoc));
@@ -202,7 +211,7 @@ void JRectangle::divide(){
             c->colors[0] = color;
         }
     }
-    
+
     cout << "Num children: " << children.size() << endl;
 }
 
@@ -226,6 +235,11 @@ void JRectangle::removeFromVector(){
             }
         }
     }
+}
+
+ofRectangle JRectangle::asOfRectangle(){
+  ofRectangle r(vec2(0, 0), size.x, size.y);
+  return r;
 }
 
 void JRectangle::setHeight(int height){ size.y = height; }

@@ -8,15 +8,15 @@
 #include "JModifier.hpp"
 
 JModifier::JModifier(){
-    
+
 }
 
 void JModifier::display(JEvent* e, void (JEvent::*ptr) (void)){
-    
+
 }
 
 JModifierArray::JModifierArray(){
-    
+
 }
 
 void JModifierArray::display(JEvent* e, void (JEvent::*ptr) (void)){

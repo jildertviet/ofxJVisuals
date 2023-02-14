@@ -35,7 +35,8 @@ MsgParser::MsgParser(ofxJVisuals* v, bool bUseSC) : v(v), bUseSC(bUseSC){
         "camRoll",
         "camRotateAround",
         "setBackground",
-        "fillBuffer"
+        "fillBuffer",
+        "setBDrawNegative"
     };
     for(short i=0; i<commandKeys.size(); i++){
         string key = "/";

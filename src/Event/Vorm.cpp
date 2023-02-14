@@ -577,4 +577,5 @@ void Vorm::setLoc(glm::vec3 newLoc){ // Get distance from new loc
     // Add this to all particles?
     for(short i=0; i<coordinates.size(); i++)
         coordinates[i] += diff;
+    loc = newLoc;
 }

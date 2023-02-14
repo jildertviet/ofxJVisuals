@@ -10,7 +10,7 @@
 
 // Visuals
 #define NUMLAYERS   7
-#define MAX_EVENTS_PTRS 1025
+#define MAX_EVENTS_PTRS 1024
 
 #define USE_PP  false // ofxPostProcessing
 

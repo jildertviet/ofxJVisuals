@@ -130,7 +130,7 @@ typedef unsigned char uint8;
     float rotationAngleIcrement = 0.1;
 
     MsgParser* msgParser;
-    ofxOscSender* SCsender;
+    ofxOscSender* SCsender = nullptr;
     ofxOscReceiver receiver;
 //
 ////    vector<Pointer*> receivingPointers;
@@ -169,6 +169,7 @@ typedef unsigned char uint8;
     ofMesh mesh;
     void initMesh();
     vector<JShader*> shaders;
+    bool bDrawNegativeLayer = false;
 private:
     void loadLastMaskFile();
     JLayer* layers[NUMLAYERS]; // linked list, use AddEvent to add

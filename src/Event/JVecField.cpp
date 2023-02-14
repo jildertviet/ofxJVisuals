@@ -76,6 +76,8 @@ void JVecField::specificFunction(){
 }
 
 void JVecField::display(){
+    ofPushMatrix();
+    ofTranslate(loc);
     ofSetLineWidth(lineWidth);
     if(mode == UNDERLAYING){
 //        if(vecTex.getWidth() != 1280)
@@ -128,7 +130,6 @@ void JVecField::display(){
                 break;
             case CIRCLES:{
                 ofSetColor(colors[0]);
-                ofNoFill();
                 for(int i=0; i<vecTex.getWidth(); i++){ // Can be done in geom shader? ...
                     for(int j=0; j<vecTex.getHeight(); j++){
                         start = ofVec2f(i, j);
@@ -141,7 +142,18 @@ void JVecField::display(){
                         } else{
                             end += dir * lineLength;
                         }
-                        ofDrawCircle(start, dir.x * lineLength);
+
+                        if(bFill){
+                          ofFill();
+                          ofDrawCircle(start, dir.x * lineLength);
+                        } else{
+                          ofPath p;
+                          p.setCircleResolution(90);
+                          p.setFillColor(colors[0]);
+                          p.circle(start.x, start.y, dir.x*lineLength);
+                          p.circle(start.x, start.y, dir.x*lineLength-lineWidth);
+                          p.draw();
+                        }
     //                    ofDrawLine(start, end); // Or as one mesh?
                     }
                 }
@@ -161,6 +173,7 @@ void JVecField::display(){
             }
         }
     }
+    ofPopMatrix();
 }
 
 ofVec2f JVecField::getField(ofVec2f position) {
