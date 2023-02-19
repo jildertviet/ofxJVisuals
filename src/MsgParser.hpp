@@ -55,6 +55,7 @@ public:
     bool parseMsg(ofxOscMessage& m);
     void update();
     bool make(ofxOscMessage& m);
+    bool create(ofxOscMessage& m);
     map<string, short> commands;
     map<string, short> types;
     map<string, short> values;

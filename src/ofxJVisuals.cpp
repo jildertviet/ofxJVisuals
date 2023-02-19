@@ -648,6 +648,11 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
         case 24:{ // setBDrawNegative
             v->bDrawNegativeLayer = m.getArgAsInt(0);
          }
+         break;
+         case 25:{  // create
+           create(m);
+         }
+         break;
     }
     return false;
 }
@@ -840,6 +845,36 @@ bool MsgParser::make(ofxOscMessage& m){
 //    n.addIntArg(b);
 //    SCsender->sendMessage(n);
 return false;
+}
+
+bool MsgParser::create(ofxOscMessage& m){
+    cout << m << endl;
+    cout << "Create " << m.getArgAsString(0) << " with ID: " << m.getArgAsInt(1) << endl;
+    JEvent* e = nullptr;
+    int layer = 2; // Default
+    if(m.getNumArgs() > 2){
+        if(m.getArgType(2) == ofxOscArgType::OFXOSC_TYPE_STRING){
+            if(m.getArgAsString(2) == "nonCamFront"){
+                cout << "Add to nonCamFront layer" << endl;
+                layer = VisualizerLayer::NON_CAM_FRONT;
+            } else if(m.getArgAsString(2) == "nonCamBack"){
+                cout << "Add to nonCamBack layer" << endl;
+                layer = VisualizerLayer::NON_CAM_BACK;
+            } else if(m.getArgAsString(2) == "negative"){
+                layer = VisualizerLayer::NEGATIVE;
+            }
+        } else{
+          layer = m.getArgAsInt(2);
+        }
+    }
+    switch(types[m.getArgAsString(0)]){
+        case 1:
+            e = new JRectangle();
+            break;
+    }
+    e->id = m.getArgAsInt(1);
+    v->addEvent(e, layer, e->id);
+    return false;
 }
 
 void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 200

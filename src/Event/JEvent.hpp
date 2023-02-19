@@ -14,12 +14,14 @@
 #include "ofxOscBidirectional.h"
 #include "Env.hpp" // USE_FRAMES_AS_CLOCK is set here
 #include "mapValue.h"
+#include "JEventBase.hpp"
+
 //#include "JModifier.hpp"
 
 //#define USE_FRAMES_AS_CLOCK false
 class JModifier;
 
-class JEvent{
+class JEvent: public JEventBase{
 public:
     JEvent();
     ~JEvent();
