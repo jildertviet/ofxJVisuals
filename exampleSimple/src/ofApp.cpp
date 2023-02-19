@@ -4,16 +4,8 @@ using namespace glm;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1080, 1080);
-    bool bSC = false;
-    visualizer = new ofxJVisuals(glm::vec2(1080), bSC); // Don't use SC
-
-    auto i = new JRectangle(glm::vec2(0,0), glm::vec2(100, 100));
-    i->setColor(ofColor::red);
-    visualizer->addEvent(i, VisualizerLayer::DEFAULT, 1);
-
-    i = new JRectangle(glm::vec2(50,0), glm::vec2(100, 100));
-    i->setColor(ofColor::blue);
-    visualizer->addEvent(i, VisualizerLayer::DEFAULT, 2);
+    bool bSC = true;
+    visualizer = new ofxJVisuals(vec2(1080), bSC); // Don't use SC
 }
 
 //--------------------------------------------------------------

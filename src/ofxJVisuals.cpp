@@ -218,7 +218,7 @@ bool ofxJVisuals::checkIfNull(JEvent* e){
     return (bool)e;
 }
 
-JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, unsigned short index){ // Index 0 means: don't save
+JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, int index){ // Index 0 means: don't save
     if(index){
         if(index < MAX_EVENTS_PTRS){
             if(events[index]){
@@ -227,10 +227,11 @@ JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, unsigned short index){ 
                 events[index] = nullptr;
             }
             events[index] = e; // For accessing events later, with id
+            e->events = events;
             cout << "Added to ptrs[] w/ index: " << index << endl;
         } else{
-            cout << "Can't save new event, need a reset? SC should notice this and call killAll() ?" << endl;
-            return nullptr;
+            cout << "Can't save the eventID in the events[], because the ID is too big" << endl;
+            // return nullptr;
         }
     }
 
@@ -250,14 +251,13 @@ JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, unsigned short index){ 
 //    e->SCsender = SCsender;
     e->numEventsPtr = &numEvents;
 
-    e->events = events;
     e->id = index;
 
 //    e->receivingPointers = &receivingPointers;
     return e;
 }
 
-JEvent* ofxJVisuals::addEvent(JEvent* e, VisualizerLayer l, unsigned short index){
+JEvent* ofxJVisuals::addEvent(JEvent* e, VisualizerLayer l, int index){
     switch(l){
         case FUNCTIONAL:
             return addEvent(e, 0, index);
@@ -375,15 +375,30 @@ ofxOscMessage ofxJVisuals::getAllEvents(){
 }
 
 JEvent* ofxJVisuals::getEventById(int idToFind){
-    if(idToFind<MAX_EVENTS_PTRS){
-        if(events[idToFind]){
-            return events[idToFind];
-        } else{
-            return nullptr;
-        }
-    } else{
-        return nullptr;
+  if(getLast()->id == idToFind){
+    return getLast();
+  }
+  if(idToFind<MAX_EVENTS_PTRS){
+      if(events[idToFind]){
+          return events[idToFind];
+      } else{
+
+      }
+  } else{
+
+  }
+
+  for(int i=0; i<NUMLAYERS; i++){
+    JEvent* toCheck = layers[i]; // Dummy
+    while(toCheck->next){
+      // cout << "Layer: " << i << ", id: " << toCheck->next->id << endl;
+      if(toCheck->next->id == idToFind){
+        return toCheck->next;
+      }
+      toCheck = toCheck->next;
     }
+  }
+  return nullptr;
 
 //    if(last){
 //        if(last->id == idToFind){
@@ -649,10 +664,6 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
             v->bDrawNegativeLayer = m.getArgAsInt(0);
          }
          break;
-         case 25:{  // create
-           create(m);
-         }
-         break;
     }
     return false;
 }
@@ -849,32 +860,33 @@ return false;
 
 bool MsgParser::create(ofxOscMessage& m){
     cout << m << endl;
-    cout << "Create " << m.getArgAsString(0) << " with ID: " << m.getArgAsInt(1) << endl;
+    cout << "ID: " << m.getArgAsInt(0) << ", type: " << m.getArgAsInt(1) << endl;
     JEvent* e = nullptr;
-    int layer = 2; // Default
-    if(m.getNumArgs() > 2){
-        if(m.getArgType(2) == ofxOscArgType::OFXOSC_TYPE_STRING){
-            if(m.getArgAsString(2) == "nonCamFront"){
-                cout << "Add to nonCamFront layer" << endl;
-                layer = VisualizerLayer::NON_CAM_FRONT;
-            } else if(m.getArgAsString(2) == "nonCamBack"){
-                cout << "Add to nonCamBack layer" << endl;
-                layer = VisualizerLayer::NON_CAM_BACK;
-            } else if(m.getArgAsString(2) == "negative"){
-                layer = VisualizerLayer::NEGATIVE;
-            }
-        } else{
-          layer = m.getArgAsInt(2);
-        }
-    }
-    switch(types[m.getArgAsString(0)]){
-        case 1:
+
+    switch(m.getArgAsInt(1)){
+        case jevent::JRectangle:
             e = new JRectangle();
             break;
+        default:
+            return false;
     }
-    e->id = m.getArgAsInt(1);
-    v->addEvent(e, layer, e->id);
+
+    e->id = m.getArgAsInt(0);
+    v->addEvent(e, e->layerID, e->id);
+    return true;
+}
+
+bool MsgParser::kill(ofxOscMessage& m){
+  cout << "kill()" << endl;
+  JEvent* e = v->getEventById(m.getArgAsInt(0));
+  cout << e << endl;
+  if(e){
+    delete e;
+    cout << "Done" << endl;
+    return true;
+  } else{
     return false;
+  }
 }
 
 void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 200
@@ -1171,11 +1183,12 @@ void MsgParser::connectToSuperCollider(){
 }
 
 void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id, 3: param id, 4: value, 5: (optional) type (r,g,b,a)
-//    std::cout << "RECVd " <<  m << std::endl;
-    if(m.getAddress() == "/mapVal"){
+   // std::cout << "SC: " <<  m << std::endl;
+   string a = m.getAddress();
+    if(a == "/mapVal"){
         JEvent* e = v->getEventById(m.getArgAsInt(2));
         if(!e)
-            return;
+          return;
 //        if(m.getNumArgs() <= 5){
         int numValues = m.getArgAsInt(3);
         for(int i=0; i<numValues; i++){
@@ -1186,7 +1199,21 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
                 e->mapValues[m.getArgAsInt(4+i)]->setVal(m.getArgAsFloat(4+numValues+i));
             }
         }
-    } else if(m.getAddress() == "/done" && m.getArgAsString(0) == "/notify"){
+    } else if(a == "/update"){
+      float valuesToUpdate[NUM_BUSSES];
+      for(int i=0; i<NUM_BUSSES; i++){
+        // cout << m.getArgAsFloat(i+2) << endl;
+        valuesToUpdate[i] = m.getArgAsFloat(i+2); // Offset nodeID and replyID
+      }
+      JEvent* e = v->getEventById(m.getArgAsInt(0));
+      if(!e)
+        return;
+      e->setValuesFromFloatArray(valuesToUpdate);
+    } else if(a == "/done" && m.getArgAsString(0) == "/notify"){
         bIsNotified = true;
+    } else if(a == "/create"){
+      create(m);
+    } else if(a == "/n_end" || a == "/kill"){
+      kill(m);
     }
 }

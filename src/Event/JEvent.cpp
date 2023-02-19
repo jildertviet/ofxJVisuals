@@ -1,11 +1,13 @@
 #include "JEvent.hpp"
 
 JEvent::JEvent(){
+  color = ofColor::white;
     setStartTime();
     setDefaultMappers(); // Will this happen on subclasses?
 }
 
 JEvent::~JEvent(){
+  cout << "Start of ~JEvent()" << endl;
     if(lastPtr)
         *lastPtr = nullptr;
 
@@ -244,7 +246,6 @@ Env* JEvent::addEnv(vector<float> levels, vector<float> times, ofColor* c, char 
     addEnv(e);
     return e;
 }
-
 void JEvent::addEnvAlpha(vector<float> levels, vector<float> times, char curve){
     Env* e = new Env(levels, times, &color, curve);
     addEnv(e);

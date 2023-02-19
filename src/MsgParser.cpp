@@ -37,7 +37,6 @@ MsgParser::MsgParser(ofxJVisuals* v, bool bUseSC) : v(v), bUseSC(bUseSC){
         "setBackground",
         "fillBuffer",
         "setBDrawNegative",
-        "create"
     };
     for(short i=0; i<commandKeys.size(); i++){
         string key = "/";
