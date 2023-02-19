@@ -7,10 +7,10 @@
 
 #include "JShaderTest.hpp"
 
-JShaderTest::JShaderTest(ofVec2f size){
+JShaderTest::JShaderTest(glm::vec2 size){
     setType("JShaderTest");
     shader.load("shaders/shaderTest");
-    this->size = size;
+    this->size = glm::vec3(size, 0);
     mask.allocate(size.x * 0.5, size.y * 0.5, GL_RGBA);
     src.allocate(size.x, size.y, GL_RGBA);
     noiseSeed = ofRandom(1000);
@@ -20,12 +20,12 @@ JShaderTest::JShaderTest(ofVec2f size){
 void JShaderTest::specificFunction(){
     mask.begin();
     ofClear(0, 0, 0, 0);
-    ofSetColor(colors[0].a, 0 ,0);
+    ofSetColor(color.a, 0 ,0);
     ofPushMatrix();
 //    ofTranslate(size.x*0.25, size.y*0.25);
     //    ofRotateZDeg(ofNoise((float)(ofGetFrameNum()+300)*0.01)*10);
 //    ofTranslate(-size.x*0.25, -size.y*0.25);
-    
+
     for(int i=0; i<divisions.x; i++){
         int x, y;
         int w, h;
@@ -37,10 +37,10 @@ void JShaderTest::specificFunction(){
     }
     ofPopMatrix();
     mask.end();
-    
-    
+
+
     src.begin();
-    ofClear(colors[0].r, colors[0].g, colors[0].b, 0);
+    ofClear(color.r, color.g, color.b, 0);
     ofSetColor(0, 0, 0, 255);
     ofPushMatrix();
     ofTranslate(size.x*0.5, size.y*0.5);
@@ -56,7 +56,7 @@ void JShaderTest::specificFunction(){
         y -= (size.y * 0.50);
         ofDrawRectangle(x, y, w, h);
     }
-    
+
     ofPopMatrix();
     src.end();
 }

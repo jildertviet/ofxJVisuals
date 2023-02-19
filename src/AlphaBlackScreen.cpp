@@ -10,7 +10,7 @@
 
 AlphaBlackScreen::AlphaBlackScreen(bool state){
     setType("AlphaBlackScreen");
-    colors[0] = ofColor::black;
+    color = ofColor::black;
     setActiveness(state);
     setAlpha(255);
 }
@@ -28,7 +28,7 @@ void AlphaBlackScreen::display(){
             ofBackgroundGradient(center, edgeColor, OF_GRADIENT_CIRCULAR);
         } else{
             ofFill();
-            ofSetColor(colors[0]);
+            ofSetColor(color);
             ofDrawRectangle(0, 0, size.x, size.y);
         }
     } else{
@@ -44,7 +44,7 @@ void AlphaBlackScreen::setActiveness(bool state){ // Weird ... @02-2020
     } else{
         ofSetBackgroundAuto(true);
 //        ofDisableAlphaBlending();
-        ofBackground(colors[0]);
+        ofBackground(color);
     }
 }
 
@@ -52,14 +52,14 @@ void AlphaBlackScreen::setAlpha(int alpha){
     if(alpha>=255 || !bDoAlphaBlend)
         setActiveness(false);
     gradientAlpha = alpha;
-    colors[0].a = alpha;
+    color.a = alpha;
 }
 
 void AlphaBlackScreen::specificFunction(){
-//    cout << "Alpha: " << colors[0].a << endl;
+//    cout << "Alpha: " << color.a << endl;
 //    if(hasAlphaBlending){
 //        if(!alphaIs255){
-//            if(colors[0].a == 255){
+//            if(color.a == 255){
 //                alphaIs255 = true;
 //                
 //                ofSetBackgroundAuto(true);
@@ -67,7 +67,7 @@ void AlphaBlackScreen::specificFunction(){
 //                ofBackground(0);
 //            }
 //        } else{
-//            if(colors[0].a < 255){
+//            if(color.a < 255){
 //                alphaIs255 = false;
 //                
 //                ofSetBackgroundAuto(false);

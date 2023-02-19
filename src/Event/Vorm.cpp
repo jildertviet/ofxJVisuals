@@ -16,17 +16,17 @@ void Vorm::ownDtor(){
     unConnect();
 }
 
-Vorm::Vorm(uint8 numSides, int sideDiv, float radius, ofVec2f loc, bool on_destination){
+Vorm::Vorm(uint8 numSides, int sideDiv, float radius, glm::vec3 loc, bool on_destination){
     setType("Vorm");
     this->radius = radius;
 
     this->loc = loc;
     loc = loc;
-    size = ofVec2f(radius, radius);
+    size = glm::vec3(radius);
 
     makeCoordinates(numSides, sideDiv, radius, on_destination); // Coordinates
 
-    colors[0] = ofColor(255, 230);
+    color = ofColor(255, 230);
 }
 
 void Vorm::specificFunction(){
@@ -42,7 +42,7 @@ void Vorm::specificFunction(){
 }
 
 void Vorm::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
 
 //    ofPushMatrix();
 //    ofTranslate(loc);
@@ -69,7 +69,7 @@ void Vorm::displayShape(int mode, float division){
         switch (mode) {
             case 0:
                 // Display shape
-                ofSetColor(colors[0]);
+                ofSetColor(color);
                 ofBeginShape();
                 for(uint8 i=0; i<numSides; i++){
                     int index = i*sideDiv;
@@ -84,20 +84,21 @@ void Vorm::displayShape(int mode, float division){
 
                 // Display shape in n triangles
                 for(uint8 i=0; i<numSides; i++){
-                    ofColor newcolor = colors[0];
-                    newcolor.setBrightness(colors[0].a+(15*i));
+                    ofColor newcolor = color;
+                    newcolor.setBrightness(color.a+(15*i));
                     ofSetColor(newcolor);
                     ofBeginShape();
                     int index = i*sideDiv;
                     int index_one_up = (i+1)*sideDiv;
-                    float distance = loc.distance(coordinates[index]);
+                    float distance = glm::distance(loc, coordinates[index]);
+
                     distance *= division;
-                    if(index_one_up == particles.size())
+                    if(index_one_up == (int)particles.size())
                         index_one_up = 0;
-                    ofVec2f tempVec = coordinates[index];
+                    glm::vec3 tempVec = coordinates[index];
                     tempVec -= loc;
 
-                    tempVec.normalize();
+                    tempVec = glm::normalize(tempVec);
 //                    cout << distance << endl;
                     ofVertex(loc.x+(distance*tempVec.x), loc.y+(distance*tempVec.y));
                     ofVertex(coordinates[index].x, coordinates[index].y);
@@ -106,20 +107,20 @@ void Vorm::displayShape(int mode, float division){
                 }
 
                 for(uint8 i=0; i<numSides; i++){
-                    ofColor newcolor = colors[0];
-                    newcolor.setBrightness(colors[0].a+(15*(i+1)));
+                    ofColor newcolor = color;
+                    newcolor.setBrightness(color.a+(15*(i+1)));
                     ofSetColor(newcolor);
                     ofBeginShape();
                     int index = i*sideDiv;
                     int index_one_up = (i+1)*sideDiv;
-                    float distance = loc.distance(coordinates[index]);
+                    float distance = glm::distance(loc, coordinates[index]);
                     distance *= division;
                     if(index_one_up == particles.size())
                         index_one_up = 0;
-                    ofVec2f tempVec = coordinates[index];
+                    glm::vec3 tempVec = coordinates[index];
                     tempVec -= loc;
 
-                    tempVec.normalize();
+                    tempVec = glm::normalize(tempVec);
                     cout << distance << endl;
                     ofVertex(loc.x+(distance*tempVec.x), loc.y+(distance*tempVec.y));
                     ofVertex(loc.x, loc.y);
@@ -228,12 +229,12 @@ void Vorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onDe
 
     for(uint8 i=0; i<numSides; i++) { // calculate coordinates
         coordinates.push_back(
-        ofVec2f(
+        glm::vec3(
             loc.x + (cos((angle_offset + (angle*i)) * (PI/180.)) * radius), // xPos
-            loc.y + (sin((angle_offset + (angle*i)) * (PI/180.)) * radius) // yPos
+            loc.y + (sin((angle_offset + (angle*i)) * (PI/180.)) * radius), // yPos
+            0
             )
         );
-        coordinates.back() *= circleRatio;
     }
 
     tussenCoordinaten(); // Places points on lines
@@ -243,16 +244,12 @@ void Vorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onDe
     }
 }
 
-void Vorm::setCenter(ofVec2f newloc){
+void Vorm::setCenter(glm::vec3 newLoc){
     for(short i=0; i<coordinates.size(); i++){
-        coordinates[i] -= loc;
-    } // All around (0,0)
-
-    for(short i=0; i<coordinates.size(); i++){
-        coordinates[i] += newloc;
+        coordinates[i] += -loc + newLoc;
     }
 }
-void Vorm::addToCenter(ofVec2f add){
+void Vorm::addToCenter(glm::vec3 add){
     for(short i=0; i<coordinates.size(); i++){
         coordinates[i] += add;
     }
@@ -261,18 +258,16 @@ void Vorm::addToCenter(ofVec2f add){
 void Vorm::changeRadius(float radius_){ // Could be improved by only adding radius increasement to coordinates ...
 //    makeCoordinates(numSides, side_division, radius_);
     for(short i=0; i<coordinates.size(); i++){
-        coordinates[i] -= ofGetWindowSize()/2.;
-//        ofVec3f dir = coordinates[i];
-//        dir = dir.normalize();
+        coordinates[i] -= glm::vec3(ofGetWindowSize()/2., 0.0);
         float radiusDelta = radius_ / (float)this->radius;
         coordinates[i] *= (radiusDelta);
-        coordinates[i] += ofGetWindowSize()/2.;
+        coordinates[i] += glm::vec3(ofGetWindowSize()/2., 0.0);
     }
     radius = radius_;
 }
 
 void Vorm::rotateCoordinates(int places, int direction){
-    vector<ofVec3f> temp = coordinates;
+    vector<glm::vec3> temp = coordinates;
     if(direction > 0){
         rotate(coordinates.begin(),coordinates.begin()+(places % coordinates.size()),coordinates.end());
     } else{
@@ -286,11 +281,11 @@ void Vorm::rotateCoordinates(int places, int direction){
             }
         }
     }
-    vector<ofVec3f>().swap(temp);
+    vector<glm::vec3>().swap(temp);
     rotating = true;
 }
 
-void Vorm::moveCorner(int corner_, ofVec2f distance_){
+void Vorm::moveCorner(int corner_, glm::vec3 distance_){
     coordinates[corner_] += distance_;
     tussenCoordinaten();
 }
@@ -300,14 +295,14 @@ void Vorm::tussenCoordinaten(){
         for (uint8 j=0; j<sideDiv-1; j++) {
 //            int index = numSides+(   (i*((int)side_division-1))+j ); // KLOPT
 
-            ofVec2f delta = ofVec2f(coordinates[((i+1) % numSides)]) -  ofVec2f(coordinates[(i % numSides)]);
+            glm::vec3 delta = coordinates[((i+1) % numSides)] -  coordinates[(i % numSides)];
             delta = delta * ((1/sideDiv)*(j+1));
             coordinates.push_back(coordinates[i] + delta);
             // *(particlespointer+index) = new Particle(coordinates, index);
             // cout << "Coordinaten_" << index << " " << coordinates[index] << ", met i: " << i << " en j: " << j  << endl;
         }
     }
-    vector<ofVec3f> temp;
+    vector<glm::vec3> temp;
     for(short i=0; i<coordinates.size(); i++){
         temp.push_back(coordinates[i]);
     }
@@ -327,7 +322,7 @@ void Vorm::tussenCoordinaten(){
 //            cout << "Setting " << i << " to: " << coordinates[i] << endl;
         }
     }
-    vector<ofVec3f>().swap(temp);
+    vector<glm::vec3>().swap(temp);
 }
 
 void Vorm::change_maxspeed(float maxspeed_){
@@ -361,17 +356,12 @@ bool Vorm::checkIfInFormation(){
     float sum_distance = 0;
     if(ofGetFrameNum() % 2 == 1){
         for(int i=0; i<coordinates.size(); i++){
-            float distance = particles[i]->loc.distance((*(*(particles[i])).destination));
-            // cout << (*(*(particlespointer+array_index+i))).location << endl;
-            // cout << (*(*(*(particlespointer+array_index+i))).destination) << endl;
+            float distance = glm::distance(particles[i]->loc, (*(*(particles[i])).destination));
             sum_distance += distance;
         }
-        // cout << "Distance to destination for vorm " << vorm_index << " is: " << sum_distance/coordinates_amount     << endl;
         if(sum_distance/coordinates.size() < 4.){
-            // return true;
             return true;
         } else{
-            // return false;
             return false;
         }
     }
@@ -398,8 +388,8 @@ void Vorm::formVorm(){
 void Vorm::changeAngleOffset(float angle_){
     for(short i=0; i<coordinates.size(); i++){
         coordinates[i] -= loc;
-        ofVec2f c = coordinates[i];
-        c.rotate(angle_);
+        glm::vec3 c = coordinates[i];
+        c = glm::rotate(c, angle_, glm::vec3(0, 0, 1));
         coordinates[i] = c; // Klopt dit? ofVec2f naar ofVec3f, Z = 0 ?
         coordinates[i] += loc;
     }
@@ -432,12 +422,12 @@ void Vorm::connectParticles(){
 }
 
 void Vorm::drawLines(Particle *p1, Particle *p2){
-    float lijn_lengte = p1->loc.squareDistance( p2->loc );
+    float lijn_lengte = glm::distance(p1->loc,p2->loc); // Used squareDistance before, so lijnMax should be redefined?
     if(lijn_lengte < lijnmax && p1->connectable && p2->connectable){
         ofSetLineWidth(lineWidth);
-        uint8 alpha = colors[0].a + alphaAdd;
+        uint8 alpha = color.a + alphaAdd;
 
-        ofSetColor(colors[0].r, colors[0].g, colors[0].b,
+        ofSetColor(color.r, color.g, color.b,
                    ofMap(lijn_lengte, 0, lijnmax, alpha, 0));
         ofDrawLine(p1->loc, p2->loc);
     }
@@ -530,7 +520,7 @@ void Vorm::addNoiseToAllParticles(){
 
 void Vorm::makeVertLine(int x){
     for(int i=0; i<particles.size(); i++){
-        coordinates[i] = ofVec2f(x, i * (ofGetWindowHeight()/(particles.size()-1)));
+        coordinates[i] = glm::vec3(x, i * (ofGetWindowHeight()/(particles.size()-1)), 0);
     }
 }
 

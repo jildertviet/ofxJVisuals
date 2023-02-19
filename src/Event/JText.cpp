@@ -12,7 +12,7 @@ JText::JText(ofTrueTypeFont* f){
 }
 
 void JText::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     if(bCamEnabled == false){
         f->drawString(txt, loc.x, loc.y + f->getStringBoundingBox(txt, 0, 0).height);
     } else{

@@ -193,11 +193,11 @@ void particleSystem::customThree(){ // Set traagheid
 }
 
 void particleSystem::customFour(){ // Set alpha
-    float alpha = colors[0].a / 255.;
+    float alpha = color.a / 255.;
     cout << "Set alpha: " << alpha << endl;
     for(unsigned int i=0; i<numParticles; i++) {
         particleSystemParticle &p = particles[i];
-        particleCos[i].set(colors[0].r / 255., colors[0].g / 255., colors[0].b / 255., alpha);
+        particleCos[i].set(color.r / 255., color.g / 255., color.b / 255., alpha);
         p.alpha = alpha; // Takes this as a "fade in to" value
     }
 //    particleCos.initFromGLObject(cbo, numParticles);
@@ -211,7 +211,7 @@ void particleSystem::customFive(){
 }
 
 void particleSystem::setColor(ofColor c, int index){
-    colors[0] = c;
+    color = c;
     customFour();
 }
 

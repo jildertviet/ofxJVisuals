@@ -27,18 +27,18 @@ public:
 
 class JCircle: public JPrimitive{
 public:
-    JCircle(glm::vec2 loc = glm::vec2(0,0)){
+    JCircle(glm::vec3 loc = glm::vec3(0)){
         // size = glm::vec2(r) * 2;
         this->loc = loc;
     }
     virtual void display() override{
-        ofSetColor(colors[0]);
+        ofSetColor(color);
         if(bFill){
             ofFill();
         } else{
             ofNoFill();
         }
-        ofDrawCircle(loc.x, loc.y, size.x * 0.5);
+        ofDrawCircle(loc, size.x * 0.5);
     };
     float r(){
       return size.x * 0.5;

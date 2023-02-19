@@ -10,7 +10,7 @@
 MultiMesh::MultiMesh(int size, ofFloatColor color){
     setType("MultiMesh");
     numMeshes = size;
-    colors[0] = color;
+    color = color;
     
     colorAlphas = new float[numMeshes*4]; // 4 vertices
     for(int i=0; i<4*numMeshes; i++)
@@ -24,7 +24,7 @@ MultiMesh::MultiMesh(int size, ofFloatColor color){
 
 void MultiMesh::display(){
     for(char i=0; i<numMeshes; i++){
-        ofSetColor(colors[0]);
+        ofSetColor(color);
         meshes[i].draw();
     }
 }
@@ -550,10 +550,10 @@ void MultiMesh::setLocation(int index, int index2, ofVec2f loc){
 void MultiMesh::customOne(){
     switch((int)customOneArguments[0]){
         case 0: // Symmetric
-            generateSymmetricMeshes(customOneArguments[1], colors[0], customOneArguments[2]);
+            generateSymmetricMeshes(customOneArguments[1], color, customOneArguments[2]);
             break;
         case 1: // Free
-            generateRandomMeshes(customOneArguments[1], colors[0]);
+            generateRandomMeshes(customOneArguments[1], color);
             break;
     }
 }

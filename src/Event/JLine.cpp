@@ -11,13 +11,13 @@
 JLine::JLine(){
     setType("JLine");
 
-    colors[0] = ofColor(255);
+    color = ofColor(255);
     speed = 2;
     seed = ofRandom(1000);
-    loc = glm::vec2(0, ofGetHeight()/2); // Middle of screen
+    loc = glm::vec3(0, ofGetHeight()/2, 0); // Middle of screen
 //    balance = ofRandom(1.0);
 //    heightOffset = 100;
-    size = ofGetWindowSize();
+    size = glm::vec3(ofGetWindowSize(), 0);
 }
 
 void JLine::specificFunction(){
@@ -49,7 +49,7 @@ void JLine::specificFunction(){
 }
 
 void JLine::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     ofSetLineWidth(3);
 
     if(rotation != 0){

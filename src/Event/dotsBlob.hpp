@@ -31,7 +31,7 @@ public:
 typedef unsigned short uint16;
     float speed = 0;
     ofVec3f dir;
-    
+
     bool bOnlyLines = false;
     bool bDrawSphere = false;
     dotsBlob();
@@ -44,35 +44,37 @@ typedef unsigned short uint16;
     vector<dotsCircle> circles;
     void updateCircles();
     void drawCircles(ofColor c = ofColor(255, 30));
-    
+
     char numConnections = 0;
     char maxConnections = 8;
     void drawConnections(ofColor c = ofColor(255, 30));
     void calculateConnections();
 //    dotsConnectionLine* connections = nullptr;
-    
+
     ofPolyline* connectionL = nullptr;
     ofPolyline* connectionR = nullptr;
-    
+
     float range = 50;
     float startPointRotation = 0;
     float endPointRotation = 0;
-    
+
     bool bDisplayRange = true;
     float percent = 1.0;
-    
+
     float rotationLeft = 0;
     float rotationRight = 0;
     float seed;
     float minDistance = 50;
-    
+
     vector<float> distances;
 //    int lineDensity = 50;
     int segmentLength = 2;
-    
+
     void calcPolyBlob();
     ofPolyline polyBlob;
     void drawPolyBlob();
+
+    vector<ofColor> colors;
 };
 
 #endif /* dotsBlob_hpp */

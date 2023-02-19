@@ -9,7 +9,7 @@
 
 JVideoPlayer::JVideoPlayer(){
     setType("VideoPlayer");
-    colors[0] = ofColor(255);
+    color = ofColor(255);
 
     setMode(JVIDEO_MODE_NORMAL);
 
@@ -69,7 +69,7 @@ void JVideoPlayer::display(){
     if(!player.isLoaded())
         return;
     if(playing){
-        ofSetColor(colors[0]);
+        ofSetColor(color);
 //        ofSetColor(ofColor(255,100));
 //        ofDrawRectangle(0, 0, 100, 100);
         switch(mode){
@@ -110,7 +110,7 @@ void JVideoPlayer::displayNormal(){
 
 //    ofTranslate(loc + ofVec2f(0, -ofGetHeight()));
 //    ofRotateXDeg(180);
-    ofSetColor(colors[0]);
+    ofSetColor(color);
 //    ofDrawRectangle(0, 0, 400, 400);
     player.draw(0, 0, size.x, size.y);
 //    ofPopMatrix();
@@ -215,7 +215,7 @@ void JVideoPlayer::randomMirror(bool h, bool v){
 
 void JVideoPlayer::allRandomBrightness(int min, int max){
     for(int i=0; i<bins.size(); i++){
-        bins[i]->colors[0].a = ofRandom(min, max);
+        bins[i]->color.a = ofRandom(min, max);
     }
 }
 
@@ -319,7 +319,7 @@ void Bin::display(){
 //        return;
 //
 //    frame->setROI(xPosSource, 0, binWidth, frame->getHeight());
-//    ofSetColor(colors[0]);
+//    ofSetColor(color);
 //    if(bMirrorH)
 //        frame->mirror(0, 1);
 //    if(bMirrorV)
@@ -354,13 +354,13 @@ void Bin::display(){
 //    this->xPos = xPos;
 //    this->binWidth = binWidth;
 //    this->xPosSource = xPosSource;
-//    colors[0] = ofColor(255);
+//    color = ofColor(255);
 //}
 
 void Bin::doFade(float a, float s, float r){
-    vector<float> values = {(float)colors[0].a, 0, 0, 255};
+    vector<float> values = {(float)color.a, 0, 0, 255};
     vector<float> times = {a, s, r};
-    addEnv(values, times, &colors[0]);
+    addEnv(values, times, &color);
 
 //    if(envelope==nullptr){
 //        envelope = new Envelope(a,s,r);
@@ -372,7 +372,7 @@ void Bin::specificFunction(){
     if(bSwitch && envelopes.size() == 0){
         vector<float> values = {0, 0, 255};
         vector<float> times = {1, 200};
-        addEnv(values, times, &colors[0]);
+        addEnv(values, times, &color);
 
         xPos = newXPos;
         bSwitch = false;

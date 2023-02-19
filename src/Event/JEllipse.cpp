@@ -18,7 +18,7 @@ JEllipse::JEllipse(){
     ofSetCircleResolution(360);
     angle = ofRandom(360);
     originalAlpha = ofRandom(100)+20;
-    colors[0] = ofColor::white;
+    color = ofColor::white;
 }
 
 void JEllipse::specificFunction(){
@@ -48,7 +48,7 @@ void JEllipse::display(){
         ofSetColor(255, 20+alpha);
     }
     
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     ofDrawEllipse(0,0,radius*size.x, radius*size.y);
     if(oneFrameLarger){
         ofDrawEllipse(0,0,radius*size.x*1.4, radius*size.y*1.4);

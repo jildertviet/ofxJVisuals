@@ -18,7 +18,7 @@ class meshRectangle: public JEvent{
 public:
 typedef unsigned short uint16;
 typedef unsigned char uint8;
-    meshRectangle(ofVec2f size = ofVec2f(500,500), ofVec3f center = ofVec3f(0,0,0), bool bWithLines=false);
+    meshRectangle(glm::vec2 size = glm::vec2(500), glm::vec3 center = glm::vec3(0), bool bWithLines=false);
     void specificFunction();
     void display();
     ofFloatColor color;
@@ -28,7 +28,7 @@ typedef unsigned char uint8;
     ofMesh connectedLines;
     meshRectangle* connection = nullptr;
     void drawConnection();
-    ofVec3f a, b, c, d;
+    glm::vec3 a, b, c, d;
     vector<pathWalker*> pathWalkers;
     void setPathWakersSpeed(float speed);
     ofFloatColor fillColor = ofFloatColor(255,255,255,50);

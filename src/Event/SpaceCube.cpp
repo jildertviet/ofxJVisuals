@@ -20,7 +20,7 @@ SpaceCube::SpaceCube(ofVec3f loc_, ofVec3f size_, int points_amount_, int gridsi
     offset = ofVec3f(ofRandom(-size.x, size.x),ofRandom(-size.y, size.y),ofRandom(-size.z, size.z));
     offset *= 0.2;
     
-    colors[0].a = 25;
+    color.a = 25;
     
     for(int i=0; i<points_amount_; i++)
         placeNewPoint(ofVec3f(), true);
@@ -31,7 +31,7 @@ SpaceCube::SpaceCube(ofVec3f loc_, ofVec3f size_, int points_amount_, int gridsi
     
     randomChooseRotXorRotY();
 
-//    addEnv(vector<float>{0, 0.1}, vector<float>{4000}, &(colors[0].a));
+//    addEnv(vector<float>{0, 0.1}, vector<float>{4000}, &(color.a));
     
     ofSetLineWidth(lineWidth);
 }
@@ -82,7 +82,7 @@ void SpaceCube::display(){
     rotateY();
     rotateX();
 
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     mesh.draw();
     
     if(draw_line){

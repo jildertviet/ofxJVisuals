@@ -13,23 +13,24 @@ JRectangle::JRectangle(){
 //    modifiers.push_back((JModifier*)new JModifierArray());
 }
 
-JRectangle::JRectangle(float millisTime, ofVec2f loc, ofVec2f size, ofColor color, float attack, float release, ofVec2f direction, bool move) : JRectangle(){
+JRectangle::JRectangle(float millisTime, glm::vec3 loc, glm::vec3 size, ofColor color, float attack, float release, glm::vec3 direction, bool move) : JRectangle(){
     setEndTime(millisTime);
-    this->loc = loc; this->size = size;
-    colors.clear();
-    colors.push_back(color);
+    this->loc = loc;
+    this->size = size;
+    this->direction = direction;
+
     active=true;
 //    setEnvelope(attack, millisTime-attack-release,release);
-    addEnvAlpha(vector<float>{0, (float)colors[0].a, (float)colors[0].a, 0}, vector<float>{attack, millisTime-attack-release,release});
-    this->direction = direction;
+    addEnvAlpha(vector<float>{0, (float)color.a, (float)color.a, 0}, vector<float>{attack, millisTime-attack-release,release});
+
     speed = 1;
     bMove = move;
 }
 
-JRectangle::JRectangle(ofVec3f loc, ofVec3f size) : JRectangle(){
+JRectangle::JRectangle(glm::vec3 loc, glm::vec3 size) : JRectangle(){
     this->loc = loc; this->size = size; active=false;
     bMove = false;
-    direction = ofVec2f(-1,0);
+    direction = glm::vec3(-1,0,0);
     speed = 1;
 }
 
@@ -63,7 +64,7 @@ void JRectangle::setQuadColor(ofColor a, ofColor b, ofColor c, ofColor d){
 }
 
 void JRectangle::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
 
     ofPushMatrix();
 
@@ -97,7 +98,7 @@ void JRectangle::display(){
               ofDrawRectangle(0, 0, size.x, size.y);
             } else{
               ofPath path;
-              path.setFillColor(colors[0]);
+              path.setFillColor(color);
               path.rectangle(0, 0, size.x, size.y);
               path.rectangle(lineWidth*0.5, lineWidth*0.5, size.x-(lineWidth), size.y-lineWidth);
               path.draw();
@@ -125,30 +126,30 @@ void JRectangle::display(){
 void JRectangle::specificFunction(){
     if(getNumEnv()){
         if(m){
-            setAlpha(colors[0].a); // Transfer colors[0] alpha to mesh alpha
+            setAlpha(color.a); // Transfer color alpha to mesh alpha
         }
     }
     move();
     imageFloating(); // virtual
 }
 
-void JRectangle::jump(ofVec2f distance){
-    loc += distance;
+void JRectangle::jump(glm::vec2 distance){
+    loc += glm::vec3(distance, 0);
 }
 
 void JRectangle::noDank(){
     setEndTime(400);
-    loc = ofVec2f(ofRandomWidth(), 0);
-    size = ofVec2f(100, ofGetWindowHeight());
+    loc = glm::vec3(ofRandomWidth(), 0, 0);
+    size = glm::vec3(100, ofGetWindowHeight(), 0);
     active=true;
     int attack = 10;
     int release = 300;
     int millisTime = 400;
     addEnvAlpha(attack, millisTime-attack-release,release);
     if(ofRandom(-1,1)>0){
-        direction = ofVec2f(-1,0);
+        direction = glm::vec3(-1,0,0);
     } else{
-        direction = ofVec2f(1,0);
+        direction = glm::vec3(1,0,0);
     }
     speed = 1;
     bMove = true;
@@ -163,11 +164,10 @@ void JRectangle::addVector(vector<JRectangle*>* v){
 }
 
 void JRectangle::divide(){
-    ofVec2f newSize = size/2.;
-    ofColor color = colors[(int)ofRandom(colors.size())];
+    glm::vec3 newSize = size/2.;
     color.a = ofRandom(100)+100;
     for(int i=0; i<2; i++){
-        ofVec2f newLoc = loc+ofVec2f(i*newSize.x, i*newSize.y);
+        glm::vec3 newLoc = loc+glm::vec3(i*newSize.x, i*newSize.y, 0.0);
         if(newLoc.x<ofGetWindowWidth() && newLoc.y<ofGetWindowHeight()){
             children.push_back(new JRectangle(newSize, newLoc));
             numChildren++;
@@ -178,12 +178,11 @@ void JRectangle::divide(){
                 c->bMove = false;
             }
             c->speed = speed;
-            c->colors[0] = color;
+            c->color = color;
         }
 
 
-
-        newLoc = ofVec2f(newSize.x*2,0)+loc+ofVec2f(i*newSize.x, i*newSize.y);
+        newLoc = glm::vec3(newSize.x*2,0,0)+loc+glm::vec3(i*newSize.x, i*newSize.y, 0);
         if(newLoc.x<ofGetWindowWidth() && newLoc.y<ofGetWindowHeight()){
             children.push_back(new JRectangle(newSize, newLoc));
             numChildren++;
@@ -194,10 +193,10 @@ void JRectangle::divide(){
                 c->bMove = false;
             }
             c->speed = speed;
-            c->colors[0] = color;
+            c->color = color;
         }
 
-        newLoc = ofVec2f(0, newSize.y*2)+loc+ofVec2f(i*newSize.x, i*newSize.y);
+        newLoc = glm::vec3(0, newSize.y*2, 0.0) + loc + glm::vec3(i*newSize.x, i*newSize.y, 0.0);
         if(newLoc.x<ofGetWindowWidth() && newLoc.y<ofGetWindowHeight()){
             children.push_back(new JRectangle(newSize, newLoc));
             numChildren++;
@@ -208,7 +207,7 @@ void JRectangle::divide(){
                 c->bMove = false;
             }
             c->speed = speed;
-            c->colors[0] = color;
+            c->color = color;
         }
     }
 

@@ -8,18 +8,18 @@
 
 #include "JImage.hpp"
 
-JImage::JImage(string filename, ofVec2f loc){
+JImage::JImage(string filename, glm::vec3 loc){
     this->loc = loc;
     setType("JImage");
 
     bLoadSucces = loadImage(filename);
-    colors[0] = ofColor(255,255);
+    color = ofColor(255,255);
 }
 
 void JImage::display(){
     if(!bLoadSucces)
         return;
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     ofPushMatrix();
     ofTranslate(loc);
     if(zoom != 1.0){
@@ -49,7 +49,7 @@ void JImage::specificFunction(){
 bool JImage::loadImage(string path){
   if(ofStringTimesInString(path, ".svg") != 0){
     svg = new JSvg(path);
-    size = glm::vec2(svg->svg.getWidth(),svg->svg.getHeight());
+    size = glm::vec3(svg->svg.getWidth(),svg->svg.getHeight(), 0.0);
     cout << "Img is SVG" << endl;
     return true;
   } else{
@@ -60,7 +60,7 @@ bool JImage::loadImage(string path){
     image.clear();
     if(image.load(path)){
         cout << "Image " << path << " loaded" << endl;
-        size = glm::vec2(image.getWidth(), image.getHeight());
+        size = glm::vec3(image.getWidth(), image.getHeight(), 0.0);
         return true;
     } else{
         return false;

@@ -10,19 +10,16 @@
 typedef unsigned int uint32;
 void meshLandscape::addFace(ofMesh& mesh, ofVec3f a, ofVec3f b, ofVec3f c) {
     a *= widthBetweenNodes; b*=widthBetweenNodes; c*= widthBetweenNodes;
-    
+
     if(!bUseNormalImage){
         ofVec3f normal = ((b - a).cross(c - a)).normalize();
         for(char i=0; i<3; i++)
             mesh.addNormal(normal);
     }
-    
+
     mesh.addVertex(a);
     mesh.addVertex(b);
     mesh.addVertex(c);
-    
-    colors.push_back(ofColor::white);
-//    cout << a << endl;
 }
 
 void meshLandscape::addFace(ofMesh& mesh, ofVec3f a, ofVec3f b, ofVec3f c, ofVec3f d) {
@@ -77,7 +74,7 @@ meshLandscape::meshLandscape(string img1, string normalImg, int height, int widt
     } else{
         bUseNormalImage = false;
     }
-    
+
     ofSetVerticalSync(true);
     //    img.setImageType(OF_IMAGE_GRAYSCALE);
     //    img.load("TexturesCom_Asphalt5_1024_height.tif");
@@ -86,11 +83,11 @@ meshLandscape::meshLandscape(string img1, string normalImg, int height, int widt
     //    img3.load("TexturesCom_Sand3_1024_2x2_albedo.tif");
     //    img2.load("TexturesCom_Asphalt5_1024_normal.tif");
     //    img3.load("TexturesCom_Asphalt5_1024_albedo.tif");
-    
-    size = ofVec2f(img.getWidth() * widthBetweenNodes, img.getHeight() * widthBetweenNodes);
-    
+
+    size = glm::vec3(img.getWidth() * widthBetweenNodes, img.getHeight() * widthBetweenNodes, 0);
+
     m.setMode(OF_PRIMITIVE_TRIANGLES);
-    
+
     int width = img.getWidth();
     int h = img.getHeight();
 //    size = ofVec2f(width / skip, h / skip);
@@ -111,24 +108,24 @@ meshLandscape::meshLandscape(string img1, string normalImg, int height, int widt
             }
         }
     }
-    
+
 //    light.enable();
 //    light.setPosition(500, 0, 0);
-    
+
 //    glEnable(GL_DEPTH_TEST);
 }
 
 void meshLandscape::specificFunction(){
-    
+
 }
 
 void meshLandscape::display(){
     if(bDisplayFaces){
-        ofSetColor(colors[0]);
+        ofSetColor(color);
         m.draw();
     }
     if(bDisplayWireFrame){
-        ofSetColor(colors[1]);
+        ofSetColor(color);
         m.drawWireframe();
     }
 }

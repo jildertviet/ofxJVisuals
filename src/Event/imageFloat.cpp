@@ -16,7 +16,7 @@ imageFloat::imageFloat(string src){
 imageFloater::imageFloater(imageFloat* src){
     setType("imageFloater");
     img = src;
-    colors[0] = ofColor::white;
+    color = ofColor::white;
     
     size = ofVec3f(200, 200, 0);
     bMove = true;
@@ -26,7 +26,7 @@ imageFloater::imageFloater(imageFloat* src){
 }
 
 void imageFloater::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     img->drawSubsection(loc.x, loc.y, loc.z, size.x, size.y, roi.x, roi.y);
 }
 

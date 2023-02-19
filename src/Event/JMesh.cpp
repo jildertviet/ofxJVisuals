@@ -15,7 +15,7 @@ JMesh::JMesh(){
 }
 
 void JMesh::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     ofPushMatrix();
     ofTranslate(loc);
     m.draw();

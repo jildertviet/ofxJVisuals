@@ -2,6 +2,7 @@
 #define JEventBase_hpp
 
 #include "glm.hpp"
+#include "ofColor.h"
 
 #define NUM_BUSSES  32
 
@@ -10,10 +11,10 @@ public:
   JEventBase(){};
 
   float* values[NUM_BUSSES];
+  ofColor color;
 
   glm::vec3 loc = {0,0,0};
   glm::vec3 size = {100, 100, 100};
-  glm::vec3 color = {255, 255, 255};
   float brightness = 1;
   float layerID = 2; // 11
 

@@ -15,32 +15,32 @@
 
 class Particle: public JEvent{
 public:
-    
+
     Particle();
-    Particle(ofVec2f destination);
-    Particle(ofVec3f* destination, bool startAtDest=false);
-    
+    Particle(glm::vec3 destination);
+    Particle(glm::vec3* destination, bool startAtDest=false);
+
     void display();
     void update();
     void changeMode();
     void locationIsDestination();
-    
-    ofVec2f size = ofVec2f(1,1);
+
+    glm::vec2 size = glm::vec2(1,1);
     float topspeed = ofRandom(2.)+1.;
-    ofVec3f* destination;
-    ofVec3f direction = ofVec2f(   ((int)ofRandom(-8,8)) *0.25,  ((int)ofRandom(-8, 8))*0.25   );
-    ofVec3f velocity = ofVec2f(0,0);
-    ofVec3f acceleration;
-    
+    glm::vec3* destination;
+    glm::vec3 direction = glm::vec3(((int)ofRandom(-8,8)) *0.25, ((int)ofRandom(-8, 8))*0.25, 0);
+    glm::vec3 velocity = glm::vec3(0);
+    glm::vec3 acceleration;
+
     bool state = false;
     bool connectable = true;
     bool addNoise = false;
     float noise_max = 5.5;
-        
+
     void connectParticle(Particle* p);
     bool checkIfConnected(Particle* p);
     void clearConnectedParticles();
-    
+
 private:
 //    float r = 1;
     vector<Particle*> connectedParticles;

@@ -20,10 +20,10 @@ public:
 typedef unsigned char uint8;
 typedef unsigned short uint16;
     ~Vorm();
-    Vorm(uint8 numSides = 3, int sideDiv=3, float r=100, ofVec2f center=ofVec2f(ofGetWidth()/2., ofGetHeight()/2.), bool onDest=true);
+    Vorm(uint8 numSides = 3, int sideDiv=3, float r=100, glm::vec3 center=glm::vec3(ofGetWidth()/2., ofGetHeight()/2., 0), bool onDest=true);
 
     vector<Particle*> particles;
-    vector<ofVec3f> coordinates;
+    vector<glm::vec3> coordinates;
     uint8 numSides;
     float sideDiv;
     uint16 getNumParticles();
@@ -39,16 +39,16 @@ typedef unsigned short uint16;
     void customFive() override;
 
     void makeCoordinates(uint8 numSides, int sideDiv, float r, bool onDestination = true);
-    void setCenter(ofVec2f);
-    void addToCenter(ofVec2f);
-    void changeRadius(float radius);
+    void setCenter(glm::vec3 v);
+    void addToCenter(glm::vec3 v);
+    void changeRadius(float r);
     void rotateCoordinates(int steps, int direction);
-    void moveCorner(int, ofVec2f);
+    void moveCorner(int, glm::vec3);
     void tussenCoordinaten();
     void change_maxspeed(float);
     void change_maxspeed(float, float);
     void change_state_of_particles(bool);
-    void setState(bool state);
+    void setState(bool s);
 
     void instantFormVorm();
     bool checkIfInFormation();
@@ -111,8 +111,6 @@ typedef unsigned short uint16;
     void addVector(vector<Vorm*>* v);
     vector<Vorm*>* v = nullptr; // Zou ook nog in een vector van pointers naar vector<rect*> kunnen...
     void removeFromVector();
-
-    ofVec2f circleRatio = ofVec2f(1,1);
 
     void setZ(int z);
     void setLoc(glm::vec3 newLoc) override;

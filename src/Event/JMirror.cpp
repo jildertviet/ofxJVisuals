@@ -13,13 +13,13 @@ JMirror::JMirror(){
     ySpeed = ofRandom(1.0);
     view = ofVec2f(100+ofRandom(ofGetWindowWidth()-size.x-100), 100+ofRandom(ofGetWindowHeight()-size.y-100));
     speed = ofRandom(0.3, 0.5);
-    colors[0] = ofColor(255, 255, 255, 0);
+    color = ofColor(255, 255, 255, 0);
 }
 
-JMirror::JMirror(ofVec2f size_, ofVec2f loc_){
+JMirror::JMirror(glm::vec2 size, glm::vec3 loc){
     setType("JMirror");
-    size = size_;
-    loc = loc_;
+    this->size = glm::vec3(size, 0);
+    this->loc = loc;
 //    image.allocate(size.x, size.y, OF_IMAGE_GRAYSCALE);
     texture.clear();
     texture.allocate(size.x, size.y, GL_RGBA);
@@ -49,7 +49,7 @@ void JMirror::display(){
     ofRotateYDeg(angle);
     ofTranslate(-(loc.x+(size.x/2.)),0);
 
-    ofSetColor(colors[0]);
+    ofSetColor(color);
 //    if(bDisplayMirror)
     texture.draw(loc);
     if(draw_sides){
@@ -79,7 +79,7 @@ void JMirror::moveTriangle(){
 }
 
 void JMirror::reSpawn(){
-    loc = ofVec2f(ofGetWindowWidth(), ofRandom(ofGetWindowHeight()));
+    loc = glm::vec3(ofGetWindowWidth(), ofRandom(ofGetWindowHeight()), 0.0);
 }
 
 void JMirror::displayView(){
@@ -91,7 +91,7 @@ void JMirror::displayView(){
 
 void JMirror::moveUp(){
     if(bMove){
-        loc += ofVec2f(0,speed);
+        loc += glm::vec3(0,speed,0);
         if(loc.y+size.y > ofGetWindowHeight() || loc.y < 0){
             speed *= -1;
         }

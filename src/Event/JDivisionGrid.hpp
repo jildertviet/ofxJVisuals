@@ -32,7 +32,7 @@ public:
     bool bHasEnv = false;
     bool bDrawWireframe = false;
     void display() override{
-        ofSetColor(colors[0]);
+        ofSetColor(color);
         ofSetLineWidth(1);
         p.draw();
         if(bDrawWireframe){
@@ -205,7 +205,7 @@ public:
     JDivisionGrid(glm::vec2 size = glm::vec2(1080));
     void display() override;
     void specificFunction() override;
-    void setColor(ofColor c, int id) override;
+    void setColor(ofColor c) override;
     void customOne() override;
     void customTwo() override;
     void customThree() override;

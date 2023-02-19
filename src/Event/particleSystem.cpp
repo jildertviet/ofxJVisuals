@@ -6,7 +6,7 @@ particleSystem::particleSystem(){
 }
 
 particleSystem::particleSystem(int numParticles, glm::vec2 size) : numParticles(numParticles){
-  this->size = size;
+  this->size = glm::vec3(size, 0);
   init(numParticles);
 }
 
@@ -178,7 +178,7 @@ void particleSystem::specificFunction(){
 }
 
 void particleSystem::display(){
-  ofSetColor(colors[0]);
+  ofSetColor(color);
   renderFBO.draw(0,0);
 }
 
@@ -196,11 +196,11 @@ void particleSystem::display(){
 // }
 //
 // void particleSystem::customFour(){ // Write alpha to fbo...
-// //     float alpha = colors[0].a / 255.;
+// //     float alpha = color.a / 255.;
 // //     cout << "Set alpha: " << alpha << endl;
 // //     for(unsigned int i=0; i<numParticles; i++) {
 // //         particleSystemParticle &p = particles[i];
-// //         particleCos[i].set(colors[0].r / 255., colors[0].g / 255., colors[0].b / 255., alpha);
+// //         particleCos[i].set(color.r / 255., color.g / 255., color.b / 255., alpha);
 // //         p.alpha = alpha; // Takes this as a "fade in to" value
 // //     }
 // // //    particleCos.initFromGLObject(cbo, numParticles);
@@ -214,7 +214,7 @@ void particleSystem::display(){
 // }
 //
 // void particleSystem::setColor(ofColor c, int index){
-//     colors[0] = c;
+//     color = c;
 //     customFour();
 // }
 //

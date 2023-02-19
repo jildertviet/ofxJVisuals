@@ -10,19 +10,19 @@
 
 JNoise::JNoise(float duration, ofColor color, char mode, short int linesAmount){
     this->mode = mode;
-    colors[0] = color;
+    color = color;
     this->linesAmount = linesAmount;
     setType("Jnoise");
     setEndTime(duration);
     active = true;
     generateSeed();
-    colors[0].a = ofRandom(25,255);
+    color.a = ofRandom(25,255);
 
     float attack = 10; float release = 800;
     addEnvAlpha(attack, duration-attack-release,release);
-    
-    loc = ofVec2f(0,0);
-    size = ofGetWindowSize();
+
+    loc = glm::vec3(0);
+    size = glm::vec3(ofGetWindowSize(), 0);
 }
 
 void JNoise::display(){
@@ -38,17 +38,15 @@ void JNoise::display(){
 }
 
 void JNoise::horizontalNoise(int l){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     for(float i=seed; i<seed+(l*0.5); i++){
-//        ofSetColor(colors[((int)(i+seed)) % (colors.size()-1)]);
         float noiseVal = ofNoise((float)i*2.);
-//        cout << noiseVal << endl;
         ofDrawLine(loc.x, loc.y+noiseVal*this->size.y, loc.x+this->size.x, loc.y+noiseVal*this->size.y);
     }
 }
 
 void JNoise::verticalNoise(int l){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     ofPushMatrix();
     ofTranslate(offset);
     for(float i=seed; i<seed+l; i+=2){

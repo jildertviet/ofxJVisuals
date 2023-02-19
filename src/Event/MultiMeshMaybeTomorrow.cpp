@@ -30,7 +30,7 @@ MultiMeshMaybeTomorrow::MultiMeshMaybeTomorrow(int num, ofFloatColor color){
 }
 
 void MultiMeshMaybeTomorrow::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     ofPushMatrix();
     ofTranslate(loc);
     for(short i=0; i<numMeshes; i++)

@@ -35,7 +35,7 @@ class JImage: public JEvent{
         DEFAULT
     };
 public:
-    JImage(string filename, ofVec2f loc = ofVec2f(0,0));
+    JImage(string filename, glm::vec3 loc = glm::vec3(0.0));
     JImage(){};
     ofImage image;
 

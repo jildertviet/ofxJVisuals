@@ -14,7 +14,7 @@
 
 class JShaderTest: public JEvent{
 public:
-    JShaderTest(ofVec2f size = ofVec2f(1280, 800));
+    JShaderTest(glm::vec2 size = glm::vec2(1280, 800));
     void specificFunction() override;
     void display() override;
     ofShader shader;

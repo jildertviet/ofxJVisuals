@@ -66,17 +66,17 @@ void JDivisionGrid::initRect(){
 void JDivisionGrid::generateRandomRects(){ // call initRect first
     for(int i=0; i<32; i++)
         sortAndSplit();
-    
+
     for(int i=0; i<4; i++){
         int index = ofRandom(polyVec.size());
         while(polyVec[index]->bBlock)
             index = ofRandom(polyVec.size());
         polyVec[index]->bBlock = true;
     }
-    
+
     for(int i=0; i<1024; i++)
         sortAndSplit();
-    
+
     for(int i=0; i<polyVec.size(); i++){ // Apply white noise to heights
         polyVec[i]->zOffset = ofRandom(30);
     }
@@ -85,7 +85,7 @@ void JDivisionGrid::generateRandomRects(){ // call initRect first
 
 void JDivisionGrid::sortAndSplit(){
     sort(polyVec.begin(), polyVec.end(), sortByAreaSize);
-    
+
     int toSplit = 0;
     if(ofRandom(5.) < 1.0){ // Split the same poly multiple times
         for(int i=0; i<3; i++){
@@ -132,15 +132,15 @@ void JDivisionGrid::customFour(){
         sortAndSplit();
 }
 
-void JDivisionGrid::setColor(ofColor c, int id){
+void JDivisionGrid::setColor(ofColor c){
     for(int i=0; i<polyVec.size(); i++)
-        polyVec[i]->colors[0] = c;
+        polyVec[i]->color = c;
 }
 
 Env* JDivisionGrid::addEnvRandomPoly(vector<float> values, vector<float> times){
     int index = ofRandom(polyVec.size());
     polyVec[index]->bHasEnv = true;
-    return polyVec[index]->addEnv(values, times, &(polyVec[index]->colors[0]));
+    return polyVec[index]->addEnv(values, times, &(polyVec[index]->color));
 }
 
 Env* JDivisionGrid::addEnvSelectedPoly(vector<float> values, vector<float> times){
@@ -148,5 +148,5 @@ Env* JDivisionGrid::addEnvSelectedPoly(vector<float> values, vector<float> times
     if(index >= polyVec.size() || index < 0)
         index = 0;
     polyVec[index]->bHasEnv = true;
-    return polyVec[index]->addEnv(values, times, &(polyVec[index]->colors[0]));
+    return polyVec[index]->addEnv(values, times, &(polyVec[index]->color));
 }

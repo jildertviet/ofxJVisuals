@@ -63,14 +63,14 @@ void dotsBlob::drawCircles(ofColor c){
 
 void dotsBlob::display(){
 //    ofSetLineWidth(2.0);
-    ofSetColor(colors[0]);
+    ofSetColor(color);
     if(!bOnlyLines)
         ofDrawSphere(loc, 10);
     
-    ofColor cLines = colors[0]; // For lines and rotating circles (less bright)
+    ofColor cLines = color; // For lines and rotating circles (less bright)
     cLines.a *= 0.4;
     if(!bOnlyLines)
-        drawCircles(colors[0]);
+        drawCircles(color);
     ofSetColor(cLines); // Two lines
     
     ofDrawLine(loc.x, -ofGetWindowHeight(), loc.x, ofGetWindowHeight());
@@ -84,7 +84,7 @@ void dotsBlob::display(){
         if(bDrawSphere)
             ofDrawSphere(loc, range);
 //        offill();
-        ofColor t = colors[0];
+        ofColor t = color;
         t.a *= 0.6;
         ofSetColor(t);
 //        ofNoFill();

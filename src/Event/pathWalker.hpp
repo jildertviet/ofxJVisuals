@@ -16,10 +16,10 @@
 class pathWalker: public meshWalker{
 public:
 	typedef unsigned short uint16;
-    pathWalker(vector<ofVec3f> path);
+    pathWalker(vector<glm::vec3> path);
     void specificFunction();
     void display();
-    vector<ofVec3f> path;
+    vector<glm::vec3> path;
     void displayTrail();
 
 };

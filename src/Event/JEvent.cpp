@@ -92,7 +92,7 @@ void JEvent::displayMain(){
 }
 
 void JEvent::setEnvelope(int attack, int sustain, int release, ofVec2f range){ // Link envelope to alpha of color & lifetime of object
-    Env* e = new Env(vector<float>{range.x, range.y, range.y, range.x}, vector<float>{(float)attack, (float)sustain, (float)release}, &colors[0], 0);
+    Env* e = new Env(vector<float>{range.x, range.y, range.y, range.x}, vector<float>{(float)attack, (float)sustain, (float)release}, &color, 0);
     int totalTime = attack + sustain + release;
     setEndTime(totalTime);
     addEnv(e);
@@ -188,14 +188,13 @@ void JEvent::addEventAsFirst(JEvent* toAdd){
 }
 
 void JEvent::deleteWithFade(short int releaseTime){
-    addEnvAlpha(vector<float>{(float)colors[0].a, 0}, vector<float>{(float)releaseTime});
+    addEnvAlpha(vector<float>{(float)color.a, 0}, vector<float>{(float)releaseTime});
     endTime = getTimeMillis() + releaseTime;
     active = true;
 }
 
-void JEvent::setColor(ofColor color, int index){
-    colors[index] = color;
-//    cout << (int)index << " " << color << endl;
+void JEvent::setColor(ofColor color){
+    this->color = color;
 }
 
 void JEvent::addPtr(JEvent** p){
@@ -203,7 +202,7 @@ void JEvent::addPtr(JEvent** p){
 }
 
 void JEvent::setAlpha(unsigned char alpha){
-    colors[0].a = alpha;
+    color.a = alpha;
 }
 
 Env* JEvent::addEnv(Env* e){
@@ -247,15 +246,15 @@ Env* JEvent::addEnv(vector<float> levels, vector<float> times, ofColor* c, char 
 }
 
 void JEvent::addEnvAlpha(vector<float> levels, vector<float> times, char curve){
-    Env* e = new Env(levels, times, &colors[0], curve);
+    Env* e = new Env(levels, times, &color, curve);
     addEnv(e);
 }
 
 void JEvent::addEnvAlpha(float a, float s, float r, float alpha){
     Env* e = new Env(
-                     vector<float>{0, (float)colors[0].a, (float)colors[0].a, 0},
+                     vector<float>{0, (float)color.a, (float)color.a, 0},
                      vector<float>{a, s, r},
-                     &colors[0], 0);
+                     &color, 0);
     addEnv(e);
 }
 
@@ -316,10 +315,10 @@ void JEvent::setDefaultMappers(){
     mapValues[3] = new mapValue(&loc.x);
     mapValues[4] = new mapValue(&loc.y);
     mapValues[5] = new mapValue(&loc.z);
-    mapValues[6] = new mapValue(&colors[0], 'a'); // = 'a'; // This will be accessed with an extra character, identifying a, r, g or b
-    mapValues[7] = new mapValue(&colors[0], 'r');
-    mapValues[8] = new mapValue(&colors[0], 'g');
-    mapValues[9] = new mapValue(&colors[0], 'b');
+    mapValues[6] = new mapValue(&color, 'a'); // = 'a'; // This will be accessed with an extra character, identifying a, r, g or b
+    mapValues[7] = new mapValue(&color, 'r');
+    mapValues[8] = new mapValue(&color, 'g');
+    mapValues[9] = new mapValue(&color, 'b');
     mapValues[10] = new mapValue(&speed);
     mapValues[11] = new mapValue(&direction.x);
     mapValues[12] = new mapValue(&direction.y);

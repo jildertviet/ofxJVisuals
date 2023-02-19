@@ -27,7 +27,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size, bool bUseSC) : size(size){
 #endif
 
     alphaScreen = new AlphaBlackScreen(true);
-    alphaScreen->size = size;
+    alphaScreen->size = glm::vec3(size, 0.0);
     addEvent((JEvent*)alphaScreen, 0);
     setAlpha(255);
 
@@ -312,7 +312,7 @@ void ofxJVisuals::killAll(){
 void ofxJVisuals::makeFit(glm::vec2 size){
     if(this->size == size)
         return;
-    alphaScreen->size = size;
+    alphaScreen->size = glm::vec3(size, 0.0);
     if(fbo.getWidth() != size.x || fbo.getHeight() != size.y){
         fbo.allocate(size.x, size.y, fbo.getTexture().getTextureData().glInternalFormat);
     }
@@ -886,11 +886,11 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
         cout << "Event found, id: " << m.getArgAsInt(0) << ", addr: " << e << endl;
         switch (values[m.getArgAsString(1)]) {
             case 1: // color
-                if(m.getNumArgs() == 6){ // Set first, global, color
+                // if(m.getNumArgs() == 6){ // Set first, global, color
                     e->setColor(ofColor(m.getArgAsInt(2), m.getArgAsInt(3), m.getArgAsInt(4), m.getArgAsInt(5)));
-                } else if (m.getNumArgs() == 7){ // Set color @ index of event
-                    e->setColor(ofColor(m.getArgAsInt(2), m.getArgAsInt(3), m.getArgAsInt(4), m.getArgAsInt(5)), m.getArgAsInt(6));
-                }
+                // } else if (m.getNumArgs() == 7){ // Set color @ index of event
+                    // e->setColor(ofColor(m.getArgAsInt(2), m.getArgAsInt(3), m.getArgAsInt(4), m.getArgAsInt(5)), m.getArgAsInt(6));
+                // }
             break;
             case 2: // loc
                 if(m.getNumArgs() == 4){ // 2D
@@ -914,8 +914,13 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
 //                e->speed = m.getArgAsFloat(2);
                 e->setSpeed(m.getArgAsFloat(2));
                 break;
-            case 6: // Direction
-                e->direction = ofVec2f(m.getArgAsFloat(2), m.getArgAsFloat(3));
+            case 6: {// Direction
+                if(m.getNumArgs() >= 5){
+                  e->direction = glm::vec3(m.getArgAsFloat(2), m.getArgAsFloat(3), m.getArgAsFloat(4));
+                } else{
+                  e->direction = glm::vec3(m.getArgAsFloat(2), m.getArgAsFloat(3), 0.0);
+                }
+              }
                 break;
             case 7:{ // lineLength
                 // JVecField?
@@ -1063,7 +1068,7 @@ void MsgParser::addTo(ofxOscMessage& m){
     if(e){
         switch (values[m.getArgAsString(1)]) {
             case 1:{ // color
-                ofColor c = e->colors[0];
+                ofColor c = e->color;
                 c += ofColor(m.getArgAsInt(2), m.getArgAsInt(3), m.getArgAsInt(4), m.getArgAsInt(5));
                 e->setColor(c);
             }
@@ -1110,7 +1115,7 @@ void MsgParser::addEnv(ofxOscMessage& m){
         case 3:{ // Brightness
             for(int i=0; i<values.size(); i++){ // Replace -1 with current alpha value
                 if(values[i] == -1)
-                    values[i] = e->colors[0].a;
+                    values[i] = e->color.a;
             }
             e->addEnvAlpha(values, times);
         }

@@ -9,26 +9,26 @@
 #include "Particle.h"
 
 Particle::Particle(){
-    
+
 }
 
-Particle::Particle(ofVec3f *destination, bool startAtDest){
+Particle::Particle(glm::vec3 *destination, bool startAtDest){
     this->destination = destination;
 
     if(startAtDest){
-        loc = ofVec2f(ofRandom(ofGetWindowWidth()),ofRandom(ofGetWindowHeight()));
+        loc = glm::vec3(ofRandomWidth(), ofRandomHeight(), 0.0);
         switch((int)ofRandom(4)){
             case 0:
                 loc.x = 0;
                 break;
             case 1:
-                loc.x = ofGetWindowWidth();
+                loc.x = ofGetWidth();
                 break;
             case 2:
                 loc.y = 0;
                 break;
             case 3:
-                loc.y = ofGetWindowHeight();
+                loc.y = ofGetHeight();
                 break;
         }
     } else{
@@ -36,8 +36,8 @@ Particle::Particle(ofVec3f *destination, bool startAtDest){
     }
 }
 
-Particle::Particle(ofVec2f destination){
-    loc = ofVec2f(ofRandom(ofGetWindowWidth()), ofRandom(ofGetWindowHeight()));
+Particle::Particle(glm::vec3 destination){
+    loc = glm::vec3(ofRandomWidth(), ofRandomHeight(), 0.0);
     *(this->destination) = destination;
 }
 
@@ -48,64 +48,42 @@ void Particle::display(){
 
 void Particle::update(){
     if(!state){ // Free
-            direction.normalize();
-            acceleration = direction * 0.5;
-            velocity += acceleration;
-            velocity.limit(topspeed);
-            loc += velocity;
+      direction = glm::normalize(direction);
+      acceleration = direction * 0.5;
+      velocity += acceleration;
+      if(glm::length(velocity) > topspeed){
+        velocity = glm::normalize(velocity) * topspeed;
+      }
+      loc += velocity;
 //            checkBorders();
-
     } else{ // In formation
-            ofVec2f dir2 = *destination - loc;
-            dir2.normalize();
-            dir2 *= 0.4;
-            
-            acceleration = dir2;
-            velocity += acceleration;
-            if(addNoise){
-                loc += ofVec2f(ofRandom(-noise_max, noise_max), ofRandom(-noise_max, noise_max));
-                addNoise = false;
-            }
-            
-            velocity.limit(topspeed);
-            loc += velocity;
-        
-            // So it doesn't vibrate when in formation
-            float distance = loc.squareDistance(*destination);
-            if(distance < 100)
-                velocity *= 0.001;
+      glm::vec3 dir2 = *destination - loc;
+      dir2 = glm::normalize(dir2);
+      dir2 *= 0.4;
+
+      acceleration = dir2;
+      velocity += acceleration;
+      if(addNoise){
+          loc += glm::vec3(ofRandom(-noise_max, noise_max), ofRandom(-noise_max, noise_max), 0.0);
+          addNoise = false;
+      }
+
+      if(glm::length(velocity) > topspeed){
+        velocity = glm::normalize(velocity) * topspeed;
+      }
+      loc += velocity;
+
+      // So it doesn't vibrate when in formation
+      float distance = glm::dot(loc, *destination);
+      if(distance < 100)
+          velocity *= 0.001;
     }
-    
-    
-//    checkBorders();
-    
-//    if(loc.x > ofGetViewportWidth()) {
-////        cout << ofGetViewportWidth() << endl;
-//        velocity.x *= -1;
-//        direction.x *= -1;
-//        return;
-//    }
-//    if(loc.x < 0){
-//        velocity.x *= -1;
-//        direction.x *= -1;
-//        return;
-//    }
-//    if (loc.y > ofGetViewportHeight()) {
-//        direction.y *= -1;
-//        velocity.y *= -1;
-//        return;
-//    }
-//    if(loc.y < 0){
-//        direction.y *= -1;
-//        velocity.y *= -1;
-//        return;
-//    }
 }
 
 void Particle::changeMode(){
     state = !state;
     if(state)
-        direction = ofVec2f(   ((int)ofRandom(-8,8)) *0.25,  ((int)ofRandom(-8, 8))*0.25   );
+        direction = glm::vec3(((int)ofRandom(-8,8)), ((int)ofRandom(-8, 8)), 0.0) * 0.25;
 }
 
 void Particle::locationIsDestination(){

@@ -11,8 +11,8 @@
 
 JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     setType("JPhysarum");
-    this->size = size;
-    this->loc = loc;
+    this->size = glm::vec3(size, 0);
+    this->loc = glm::vec3(loc,0);
 
     numParticles = (size.x*size.y)*0.15;
 
@@ -98,7 +98,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 }
 
 void JPhysarum::display(){
-    ofSetColor(colors[0]);
+    ofSetColor(color);
 
     renderPingPong.src->draw(loc.x, loc.y);
 

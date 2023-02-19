@@ -17,16 +17,17 @@
 class JRectangle: public JPrimitive, public JThickLine{ // Also inherits from Event
 public:
     JRectangle();
-    JRectangle(float millisTime, ofVec2f loc, ofVec2f size, ofColor color=ofColor(255,255), float attack=100, float release=100, ofVec2f direction=ofVec2f(-1,0), bool move=true); // Temporary
+    JRectangle(float millisTime, glm::vec3 loc, glm::vec3 size, ofColor color=ofColor(255,255), float attack=100, float release=100, glm::vec3 direction=glm::vec3(-1,0,0), bool move=true); // Temporary
 
-    JRectangle(ofVec3f loc, ofVec3f size=ofGetWindowSize()); // Infite
+    JRectangle(glm::vec3 loc, glm::vec3 size=glm::vec3(ofGetWindowSize(), 0.0)); // Infite
+    JRectangle(glm::vec2 loc, glm::vec2 size){JRectangle(glm::vec3(loc, 0.0), glm::vec3(size, 0.0));};
     void ownDtor() override;
 
     virtual void display() override;
     void specificFunction() override;
 
     float topspeed = 1.0;
-    void jump(ofVec2f distance);
+    void jump(glm::vec2 distance);
 
     void noDank();
     virtual void imageFloating(){};

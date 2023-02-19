@@ -10,7 +10,7 @@
 
 RectangleMask::RectangleMask(){
     setType("RectangleMask");
-    colors[0] = ofColor(0,0,0,255);
+    color = ofColor(0,0,0,255);
 }
 
 RectangleMask::RectangleMask(JRectangle* r){
@@ -31,49 +31,49 @@ void RectangleMask::display(){
 //    cout << "RectangleMask display()" << endl;
 //    return;
     if(rects.size()==0){ // Black
-        ofSetColor(colors[0]);
+        ofSetColor(color);
         ofDrawRectangle(0,0,ofGetWindowWidth(), ofGetWindowHeight());
         return;
     }
-    
+
     if(rects.size()==1){
         JRectangle* r = rects[0];
-        ofSetColor(colors[0]);
-        
+        ofSetColor(color);
+
         ofDrawRectangle(0, 0, r->loc.x, ofGetWindowHeight()); // From left side
         ofDrawRectangle(r->loc.x+r->size.x, 0, ofGetWindowWidth(), ofGetWindowHeight()); // From right side
-        
-        int alpha = colors[0].a - rects[0]->colors[0].a;
+
+        int alpha = color.a - rects[0]->color.a;
         if(alpha < 0)
             alpha = 0;
         ofSetColor(0, alpha);
         ofDrawRectangle(r->loc.x, r->loc.y, r->size.x, r->size.y);
         return;
     }
-    
-    ofSetColor(colors[0]);
-    
+
+    ofSetColor(color);
+
     // Left side
     ofRectangle r = ofRectangle(ofVec2f(0,0), ofVec2f(lefts[0], ofGetWindowHeight()));
     ofDrawRectangle(r);
-    
+
     for(int i=0; i<lefts.size()-1; i++){
         r = ofRectangle(ofVec2f(rights[i], 0), ofVec2f(lefts[i+1], ofGetWindowHeight()));
         ofDrawRectangle(r);
     }
-    
+
     // Right side
     r = ofRectangle(ofVec2f(rights.back(),0), ofVec2f(ofGetWindowWidth(), ofGetWindowHeight()));
     ofDrawRectangle(r);
-    
+
     for(int i=0; i<rects.size(); i++){
         // Draw envelope of rect @ locations of rects
-        int alpha = colors[0].a - rects[i]->colors[0].a;
+        int alpha = color.a - rects[i]->color.a;
         if(alpha < 0)
             alpha = 0;
         ofSetColor(0, alpha);
         ofDrawRectangle(rects[i]->loc.x, rects[i]->loc.y, rects[i]->size.x, rects[i]->size.y);
-        ofSetColor(colors[0]);
+        ofSetColor(color);
     }
 
 }
@@ -99,9 +99,9 @@ void RectangleMask::randomizeSpeeds(){
 void RectangleMask::randomizeDirections(){
     for(int i=0; i<rects.size(); i++){
         if(ofRandom(-1,1)>0){
-            rects[i]->direction = ofVec2f(-1,0);
+            rects[i]->direction = glm::vec3(-1,0,0);
         } else{
-            rects[i]->direction = ofVec2f(1,0);
+            rects[i]->direction = glm::vec3(1,0,0);
         }
     }
 }
@@ -116,24 +116,24 @@ bool RectangleMask::checkIfNull(JRectangle* r){
 
 void RectangleMask::findLeftAndRight(){
     rects.erase( std::remove_if( rects.begin(), rects.end(), RectangleMask::checkIfNull ), rects.end() );
-    
+
     vector<int>().swap(lefts);
     vector<int>().swap(rights);
-    
+
     for(int i=0; i<rects.size(); i++){
         lefts.push_back(rects[i]->loc.x);
         rights.push_back(rects[i]->loc.x+rects[i]->size.x);
     }
-    
+
     // Order vector, based on position
     std::sort (lefts.begin(), lefts.end());
     std::sort (rights.begin(), rights.end());
-    
+
     // Find overlap
     if(rights.size()>1 && lefts.size()>1){ // Only when there are 2
         bool bOverlap = true;
         ofVec2f toDelete;
-        
+
         while(bOverlap==true){
             if(rights.size()>1 && lefts.size()>1){
                 for(int i=0; i<lefts.size()-1; i++){
@@ -156,21 +156,21 @@ void RectangleMask::findLeftAndRight(){
                 bOverlap = false;
             }
         }
-        
+
 //        cout << "Lefts:\t";
 //        for(int i=0; i<lefts.size(); i++){
 //            cout << lefts[i] << "\t";
 //        }
 //        cout << endl;
-        
+
 //        cout << "Rights:\t";
 //        for(int i=0; i<rights.size(); i++){
 //            cout << rights[i] << "\t";
 //        }
 //        cout << endl;
-        
+
     }
-    
+
     std::sort (lefts.begin(), lefts.end());
     std::sort (rights.begin(), rights.end());
 }

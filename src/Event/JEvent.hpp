@@ -50,8 +50,7 @@ public:
     JEvent* getEvent(int index);
 
     virtual void setLoc(glm::vec3 loc);
-    ofVec3f size, loc, direction;
-    vector<ofColor> colors = {ofColor(255,255)}; // Make stuff visible by default
+    // color = ofColor::white; // Make stuff visible by default
 
     float speed = 1.;
     virtual void setSpeed(float speed);
@@ -97,7 +96,7 @@ public:
     virtual void checkBorders();
 
     virtual void setAlpha(unsigned char alpha);
-    virtual void setColor(ofColor color, int index=0);
+    virtual void setColor(ofColor color);
 
     // To clear references made to this object
     vector<JEvent**> toClear;

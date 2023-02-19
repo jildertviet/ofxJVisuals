@@ -8,26 +8,26 @@
 
 #include "pathWalker.hpp"
 
-pathWalker::pathWalker(vector<ofVec3f> path){
+pathWalker::pathWalker(vector<glm::vec3> path){
     this->path = path;
     destination = path[1];
     loc = path[0];
 
     direction = destination - loc; // (2,2) - (1,1), direction: (1,1) /////   (4,0) - (0,0) = direction(4,0).norm -> (1,0)
     direction.normalize();
-    
+
     travelDistance = loc.distance(destination);
     numSteps = travelDistance / speed;
     numStepsStart = numSteps;
-    
-    
+
+
     trail.setMode(OF_PRIMITIVE_LINES);
     trail.enableColors();
 
     speed = ofRandom(3, 7) * 0.3;
 
     locOnGrid = ofVec2f(0,0);
-    
+
 }
 
 void pathWalker::specificFunction(){
@@ -36,26 +36,26 @@ void pathWalker::specificFunction(){
         numSteps--;
     } else if(numSteps <= 1){
         loc = destination;
-        
+
         locOnGrid.x ++;
         destination = path[locOnGrid.x];
-        
+
         direction = destination - loc; // (2,2) - (1,1), direction: (1,1) /////   (4,0) - (0,0) = direction(4,0).norm -> (1,0)
         direction.normalize();
-        
+
         travelDistance = loc.distance(destination);
         numSteps = travelDistance / speed;
         numStepsStart = numSteps;
-        
+
         if(trailPoints.size() >= trailLength)
             trailPoints.erase(trailPoints.begin());
         trailPoints.push_back(loc);
     }
-//    
+//
 //    for(int i=0; i<trailPoints.size(); i++){
 //        cout << trailPoints[i] << endl;
 //    }
-    
+
 }
 
 void pathWalker::display(){
@@ -67,34 +67,34 @@ void pathWalker::display(){
 
 void pathWalker::displayTrail(){
     trail.clear();
-    
+
     if(trailPoints.size() > 1){
         float ratio = (1 - numSteps/(float)numStepsStart);
-        
-        ofVec3f p = trailPoints[1] - trailPoints[0];
+
+        glm::vec3 p = trailPoints[1] - trailPoints[0];
         p *= ratio;
-        
+
         trail.addVertex(trailPoints[0] + p);
-        
+
         for(uint16 i=1; i<trailPoints.size(); i++){
             trail.addVertex(trailPoints[i]);
         }
-        
+
         trail.addVertex(loc);
-        
+
         for(uint16 i=0; i<trail.getNumVertices()-1; i++){
             trail.addIndex(i);
             trail.addIndex(i+1);
         }
-        
+
         ofFloatColor c = color;
         c.a = 0;
         trail.addColor(c);
-        
+
         for(uint16 i=1; i<trail.getNumVertices(); i++)
             trail.addColor(color);
-        
-        
+
+
         float totalLength = 0;
         vector<float> distances;
         if(trail.getNumVertices() > 1){
@@ -117,7 +117,7 @@ void pathWalker::displayTrail(){
         //        for(uint16 i=0; i<trail.getNumVertices(); i++)
         //            ofDrawCircle(trail.getVertex(i), 4);
     }
-    
+
     if(bDrawCircles){
         ofSetColor(255);
         for(uint16 i=0; i<trailPoints.size(); i++)
@@ -126,7 +126,7 @@ void pathWalker::displayTrail(){
         ofDrawCircle(loc, 4);
         //        cout << "Loc: " << loc << endl;
     }
-    
+
 //    ofSetColor(255,0,0);
     trail.draw();
 }

@@ -10,9 +10,9 @@
 
 JVecField::JVecField(){
     setType("JVecField");
-    size = ofVec2f(ofGetWidth(), ofGetHeight());
+    size = glm::vec3(ofGetWidth(), ofGetHeight(), 0);
     setDensity(density);
-    colors[0].a = 255;
+    color.a = 255;
     seed = ofRandom(1000);
 
     if(!shader.load("shaders/brightnessAndSaturation")){
@@ -31,7 +31,6 @@ JVecField::JVecField(){
         p.setColor(0, 0, ofColor::red);
         vecTex.loadData(p);
     }
-
 //    vecTex.allocate(size.x, size.y, GL_RGBA);
 }
 
@@ -99,7 +98,7 @@ void JVecField::display(){
         vecTex = resizeFbo.getTexture();
 
         // Draw or hide background:
-        ofSetColor(colors[0]);
+        ofSetColor(color);
         ofDrawRectangle(0, 0, size.x, size.y);
 
         // Monitor, debugging
@@ -108,7 +107,7 @@ void JVecField::display(){
     } else{
         switch(drawMode){
             case LINES:{
-                ofSetColor(colors[0]);
+                ofSetColor(color);
                 for(int i=0; i<vecTex.getWidth(); i++){ // Can be done in geom shader? ...
                     for(int j=0; j<vecTex.getHeight(); j++){
                         start = ofVec2f(i, j);
@@ -129,7 +128,7 @@ void JVecField::display(){
             }
                 break;
             case CIRCLES:{
-                ofSetColor(colors[0]);
+                ofSetColor(color);
                 for(int i=0; i<vecTex.getWidth(); i++){ // Can be done in geom shader? ...
                     for(int j=0; j<vecTex.getHeight(); j++){
                         start = ofVec2f(i, j);
@@ -149,7 +148,7 @@ void JVecField::display(){
                         } else{
                           ofPath p;
                           p.setCircleResolution(90);
-                          p.setFillColor(colors[0]);
+                          p.setFillColor(color);
                           p.circle(start.x, start.y, dir.x*lineLength);
                           p.circle(start.x, start.y, dir.x*lineLength-lineWidth);
                           p.draw();
@@ -163,12 +162,12 @@ void JVecField::display(){
     //            video->draw(0, 0, ofGetWidth(), ofGetHeight());
                 if(DRAW_VID)
                     frame.draw(0, 0, ofGetWidth(), ofGetHeight());
-                ofSetColor(colors[0]);
+                ofSetColor(color);
                 ofDrawRectangle(0, 0, size.x, size.y);
             }
                 break;
             case TEXTURE:{
-                ofSetColor(colors[0]);
+                ofSetColor(color);
                 vecTex.draw(0, 0, size.x, size.y);
             }
         }
