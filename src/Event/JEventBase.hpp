@@ -42,6 +42,13 @@ public:
 
     values[14] = &bMove;
     values[15] = &layerID;
+
+    values[16] = &rgba.r;
+    values[17] = &rgba.g;
+    values[18] = &rgba.b;
+    values[19] = &rgba.a;
+
+    values[20] = &bFill;
   }
 
   float* values[NUM_BUSSES];
@@ -63,6 +70,7 @@ public:
       if(values[i])
         *values[i] = a[i];
     }
+    color = ofColor(rgba[0], rgba[1], rgba[2], rgba[3] * 255);
   }
 
   glm::vec3 loc = {0,0,0};
@@ -75,7 +83,10 @@ public:
 
   float bMove = true;
   float layerID = 2;
+  float bFill = true;
 
-  ofColor color; // SC-version!!!
+  ofColor color; // There's a SC-version!!!
+  glm::vec4 rgba = {255, 255, 255, 1.0};
+  unsigned int subID = 0;
 };
 #endif // JEventBase

@@ -219,21 +219,23 @@ bool ofxJVisuals::checkIfNull(JEvent* e){
 }
 
 JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, int index){ // Index 0 means: don't save
-    if(index){
-        if(index < MAX_EVENTS_PTRS){
-            if(events[index]){
-                cout << "Position in array is occupied, delete" << endl;
-                delete events[index]; // Sets events[index] to nullptr? Doesn't matter...
-                events[index] = nullptr;
-            }
-            events[index] = e; // For accessing events later, with id
-            e->events = events;
-            cout << "Added to ptrs[] w/ index: " << index << endl;
-        } else{
-            cout << "Can't save the eventID in the events[], because the ID is too big" << endl;
-            // return nullptr;
-        }
-    }
+    // if(index){
+    //     if(index < MAX_EVENTS_PTRS){
+    //         if(events[index]){
+    //             cout << "Position in array is occupied, delete" << endl;
+    //             This deletes multiple J_UGens w/ the same ID (from Synth)...
+    //
+    //             delete events[index]; // Sets events[index] to nullptr? Doesn't matter...
+    //             events[index] = nullptr;
+    //         }
+    //         events[index] = e; // For accessing events later, with id
+    //         e->events = events;
+    //         cout << "Added to ptrs[] w/ index: " << index << endl;
+    //     } else{
+    //         cout << "Can't save the eventID in the events[], because the ID is too big" << endl;
+    //         // return nullptr;
+    //     }
+    // }
 
     if(layerIndex>=0){
       if(layerIndex == VisualizerLayer::NEGATIVE){
@@ -374,25 +376,30 @@ ofxOscMessage ofxJVisuals::getAllEvents(){
     return m;
 }
 
-JEvent* ofxJVisuals::getEventById(int idToFind){
-  if(getLast()->id == idToFind){
-    return getLast();
+JEvent* ofxJVisuals::getEventById(unsigned int idToFind, unsigned int subID){
+  if(getLastAdded() && getLastAdded()->id == idToFind && getLastAdded()->subID == subID){
+    return getLastAdded();
   }
-  if(idToFind<MAX_EVENTS_PTRS){
-      if(events[idToFind]){
-          return events[idToFind];
-      } else{
-
-      }
-  } else{
-
+  if(getLastFound() && getLastFound()->id == idToFind && getLastFound()->subID == subID){
+    return getLastFound();
   }
+
+  // if(idToFind<MAX_EVENTS_PTRS){
+  //     if(events[idToFind]){
+  //         return events[idToFind];
+  //     } else{
+  //
+  //     }
+  // } else{
+  //
+  // }
 
   for(int i=0; i<NUMLAYERS; i++){
     JEvent* toCheck = layers[i]; // Dummy
     while(toCheck->next){
       // cout << "Layer: " << i << ", id: " << toCheck->next->id << endl;
-      if(toCheck->next->id == idToFind){
+      if(toCheck->next->id == idToFind && toCheck->next->subID == subID){
+        lastFound = toCheck->next;
         return toCheck->next;
       }
       toCheck = toCheck->next;
@@ -858,12 +865,24 @@ bool MsgParser::make(ofxOscMessage& m){
 return false;
 }
 
+char encodedIntToChar(int i, char index){
+  return (*(((char*)&i)+index));
+}
+
 bool MsgParser::create(ofxOscMessage& m){
     cout << m << endl;
-    cout << "ID: " << m.getArgAsInt(0) << ", type: " << m.getArgAsInt(1) << endl;
+
+    // char encodedBytes[4];
+    // int encodedInt = m.getArgAsInt(1);
+    // memcpy(encodedBytes, &encodedInt, sizeof(int));
+    // char type = encodedBytes[0];
+    // char subID = encodedBytes[1];
+
+
+    cout << "ID: " << m.getArgAsInt(0) << ", type: " << (int)encodedIntToChar(m.getArgAsInt(1), 0) << ", subID: " << (int)encodedIntToChar(m.getArgAsInt(1), 1) << endl;
     JEvent* e = nullptr;
 
-    switch(m.getArgAsInt(1)){
+    switch(encodedIntToChar(m.getArgAsInt(1), 0)){
         case jevent::JRectangle:
             e = new JRectangle();
             break;
@@ -871,14 +890,18 @@ bool MsgParser::create(ofxOscMessage& m){
             return false;
     }
 
+
+
     e->id = m.getArgAsInt(0);
+    e->subID = encodedIntToChar(m.getArgAsInt(1), 1);
     v->addEvent(e, e->layerID, e->id);
     return true;
 }
 
 bool MsgParser::kill(ofxOscMessage& m){
   cout << "kill()" << endl;
-  JEvent* e = v->getEventById(m.getArgAsInt(0));
+  cout << m << endl;
+  JEvent* e = v->getEventById(m.getArgAsInt(0), m.getArgAsInt(1));
   cout << e << endl;
   if(e){
     delete e;
@@ -1205,7 +1228,7 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
         // cout << m.getArgAsFloat(i+2) << endl;
         valuesToUpdate[i] = m.getArgAsFloat(i+2); // Offset nodeID and replyID
       }
-      JEvent* e = v->getEventById(m.getArgAsInt(0));
+      JEvent* e = v->getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
       if(!e)
         return;
       e->setValuesFromFloatArray(valuesToUpdate);
@@ -1213,7 +1236,7 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
         bIsNotified = true;
     } else if(a == "/create"){
       create(m);
-    } else if(a == "/n_end" || a == "/kill"){
+    } else if(a == "/kill"){
       kill(m);
     }
 }

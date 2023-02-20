@@ -3,6 +3,17 @@ using namespace glm;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    //
+    // char t[4];
+    // t[0] = 2;
+    // t[1] = 3;
+    // int a;
+    // memcpy(&a, t, sizeof(int));
+    // cout << a << endl;
+    // cout << (int)(*((char*)&a)) << endl;
+    // cout << (int)(*(((char*)&a)+1)) << endl;
+    //
+    // std::exit(0);
     ofSetWindowShape(1080, 1080);
     bool bSC = true;
     visualizer = new ofxJVisuals(vec2(1080), bSC); // Don't use SC

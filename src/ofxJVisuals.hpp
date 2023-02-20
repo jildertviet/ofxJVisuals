@@ -68,6 +68,8 @@ public:
     JLayer(){};
 };
 
+char encodedIntToChar(int i, char index = 0);
+
 class ofxJVisuals{
 public:
 typedef unsigned char uint8;
@@ -89,7 +91,8 @@ typedef unsigned char uint8;
     void killAll();
 
     int numEvents = 0;
-    JEvent* last;
+    JEvent* last = nullptr;
+    JEvent* lastFound = nullptr;
     ofxOscMessage getAllEvents();
 
     JEvent* events[MAX_EVENTS_PTRS];
@@ -99,8 +102,9 @@ typedef unsigned char uint8;
     JEvent* addEvent(JEvent* e, int layerIndex=1, int index = 0);
     JEvent* addEvent(JEvent* e, VisualizerLayer l, int index = 0);
 
-    JEvent* getLast(){return last;}
-    JEvent* getEventById(int id);
+    JEvent* getLastAdded(){return last;}
+    JEvent* getLastFound(){return lastFound;}
+    JEvent* getEventById(unsigned int id, unsigned int subID=0);
     JEvent* lastCalled = nullptr;
 
     static bool checkIfNull(JEvent* e);

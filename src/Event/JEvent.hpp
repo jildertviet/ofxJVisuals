@@ -52,11 +52,9 @@ public:
     virtual void setLoc(glm::vec3 loc);
     // color = ofColor::white; // Make stuff visible by default
 
-    float speed = 1.;
     virtual void setSpeed(float speed);
-    bool bMove = false;
+    // bool bMove = false;
     bool bEvolve = false;
-    float lineWidth = 1;
 
     JEvent* next = nullptr;
     JEvent* previous = nullptr;
@@ -104,8 +102,6 @@ public:
     virtual void addPtr(JEvent** p);
 
     vector<JEvent*>* parentContainer = nullptr;
-
-    bool bFill = true;
 
     virtual void setSize(glm::vec3 s);
     virtual void setSize(glm::vec2 s){
