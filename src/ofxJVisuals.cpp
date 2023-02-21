@@ -218,24 +218,23 @@ bool ofxJVisuals::checkIfNull(JEvent* e){
     return (bool)e;
 }
 
-JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, int index){ // Index 0 means: don't save
-    // if(index){
-    //     if(index < MAX_EVENTS_PTRS){
-    //         if(events[index]){
-    //             cout << "Position in array is occupied, delete" << endl;
-    //             This deletes multiple J_UGens w/ the same ID (from Synth)...
-    //
-    //             delete events[index]; // Sets events[index] to nullptr? Doesn't matter...
-    //             events[index] = nullptr;
-    //         }
-    //         events[index] = e; // For accessing events later, with id
-    //         e->events = events;
-    //         cout << "Added to ptrs[] w/ index: " << index << endl;
-    //     } else{
-    //         cout << "Can't save the eventID in the events[], because the ID is too big" << endl;
-    //         // return nullptr;
-    //     }
-    // }
+JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, int index, bool bOldVersion){ // Index 0 means: don't save
+    if(index && bOldVersion){
+        if(index < MAX_EVENTS_PTRS){
+            if(events[index]){
+                cout << "Position in array is occupied, delete" << endl;
+                // This deletes multiple J_UGens w/ the same ID (from Synth)...
+                delete events[index]; // Sets events[index] to nullptr? Doesn't matter...
+                events[index] = nullptr;
+            }
+            events[index] = e; // For accessing events later, with id
+            e->events = events;
+            cout << "Added to ptrs[] w/ index: " << index << endl;
+        } else{
+            cout << "Can't save the eventID in the events[], because the ID is too big" << endl;
+            // return nullptr;
+        }
+    }
 
     if(layerIndex>=0){
       if(layerIndex == VisualizerLayer::NEGATIVE){
@@ -828,6 +827,7 @@ bool MsgParser::make(ofxOscMessage& m){
             }
             mod->setViaBusses(busses);
             mod->id = m.getArgAsInt(1);
+            HIER
             v->getEventById(m.getArgAsInt(3))->modifiers.push_back(mod); // Add to parent
             e = (JEvent*)mod;
         }
@@ -869,16 +869,21 @@ char encodedIntToChar(int i, char index){
   return (*(((char*)&i)+index));
 }
 
+bool MsgParser::updateValues(ofxOscMessage& m){
+  float valuesToUpdate[NUM_BUSSES];
+  for(int i=0; i<NUM_BUSSES; i++){
+    // cout << m.getArgAsFloat(i+2) << endl;
+    valuesToUpdate[i] = m.getArgAsFloat(i+2); // Offset nodeID and replyID
+  }
+  JEvent* e = v->getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
+  if(!e)
+    return false;
+  e->setValuesFromFloatArray(valuesToUpdate);
+  return true;
+}
+
 bool MsgParser::create(ofxOscMessage& m){
     cout << m << endl;
-
-    // char encodedBytes[4];
-    // int encodedInt = m.getArgAsInt(1);
-    // memcpy(encodedBytes, &encodedInt, sizeof(int));
-    // char type = encodedBytes[0];
-    // char subID = encodedBytes[1];
-
-
     cout << "ID: " << m.getArgAsInt(0) << ", type: " << (int)encodedIntToChar(m.getArgAsInt(1), 0) << ", subID: " << (int)encodedIntToChar(m.getArgAsInt(1), 1) << endl;
     JEvent* e = nullptr;
 
@@ -890,11 +895,10 @@ bool MsgParser::create(ofxOscMessage& m){
             return false;
     }
 
-
-
     e->id = m.getArgAsInt(0);
     e->subID = encodedIntToChar(m.getArgAsInt(1), 1);
-    v->addEvent(e, e->layerID, e->id);
+    v->addEvent(e, e->layerID, e->id, false);
+    updateValues(m);
     return true;
 }
 
@@ -1223,15 +1227,7 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
             }
         }
     } else if(a == "/update"){
-      float valuesToUpdate[NUM_BUSSES];
-      for(int i=0; i<NUM_BUSSES; i++){
-        // cout << m.getArgAsFloat(i+2) << endl;
-        valuesToUpdate[i] = m.getArgAsFloat(i+2); // Offset nodeID and replyID
-      }
-      JEvent* e = v->getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
-      if(!e)
-        return;
-      e->setValuesFromFloatArray(valuesToUpdate);
+      updateValues(m);
     } else if(a == "/done" && m.getArgAsString(0) == "/notify"){
         bIsNotified = true;
     } else if(a == "/create"){

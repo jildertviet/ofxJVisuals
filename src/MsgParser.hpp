@@ -57,6 +57,7 @@ public:
     bool make(ofxOscMessage& m);
     bool create(ofxOscMessage& m);
     bool kill(ofxOscMessage& m);
+    bool updateValues(ofxOscMessage& m);
     map<string, short> commands;
     map<string, short> types;
     map<string, short> values;

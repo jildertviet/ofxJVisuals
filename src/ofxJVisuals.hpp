@@ -99,7 +99,7 @@ typedef unsigned char uint8;
     void getFreePointers(string ip, int port);
     unsigned short numEventsAdded = 0;
 
-    JEvent* addEvent(JEvent* e, int layerIndex=1, int index = 0);
+    JEvent* addEvent(JEvent* e, int layerIndex=1, int index = 0, bool bOldVersion = true);
     JEvent* addEvent(JEvent* e, VisualizerLayer l, int index = 0);
 
     JEvent* getLastAdded(){return last;}
