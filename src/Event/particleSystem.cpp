@@ -184,15 +184,15 @@ void particleSystem::display(){
 
 //
 // void particleSystem::customOne(){
-//     globalForce = glm::vec2(customOneArguments[0], customOneArguments[1]);
+//     globalForce = glm::vec2(busses[0], busses[1]);
 // }
 //
 // void particleSystem::customTwo(){
-//     forceMultiplier = glm::vec2(customOneArguments[2], customOneArguments[3]);
+//     forceMultiplier = glm::vec2(busses[2], busses[3]);
 // }
 //
 // void particleSystem::customThree(){ // Set traagheid
-//     traagheid = customOneArguments[4];
+//     traagheid = busses[4];
 // }
 //
 // void particleSystem::customFour(){ // Write alpha to fbo...
@@ -210,7 +210,7 @@ void particleSystem::display(){
 // }
 //
 // void particleSystem::customFive(){
-//     fadeTime = customOneArguments[0];
+//     fadeTime = busses[0];
 // }
 //
 // void particleSystem::setColor(ofColor c, int index){

@@ -118,7 +118,7 @@ void JDivisionGrid::customTwo(){
 }
 
 void JDivisionGrid::customThree(){
-    bSave = customOneArguments[0];
+    bSave = busses[0];
     if(bSave){
         for(int i=0; i<polyVec.size(); i++){
             polyVec[i]->locAdjustmentForExport = glm::vec3(size.x, size.y, 0) * 0.5;
@@ -128,7 +128,7 @@ void JDivisionGrid::customThree(){
 }
 
 void JDivisionGrid::customFour(){
-    for(int i=0; i<customOneArguments[0]; i++)
+    for(int i=0; i<busses[0]; i++)
         sortAndSplit();
 }
 
@@ -144,7 +144,7 @@ Env* JDivisionGrid::addEnvRandomPoly(vector<float> values, vector<float> times){
 }
 
 Env* JDivisionGrid::addEnvSelectedPoly(vector<float> values, vector<float> times){
-    int index = customOneArguments[0] * polyVec.size();
+    int index = busses[0] * polyVec.size();
     if(index >= polyVec.size() || index < 0)
         index = 0;
     polyVec[index]->bHasEnv = true;

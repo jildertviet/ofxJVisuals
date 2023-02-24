@@ -82,7 +82,7 @@ void JMesh::customTwo(){
 }
 
 void JMesh::customThree(){
-    createHollowRect(glm::vec3(customOneArguments[0], customOneArguments[1], customOneArguments[2]), customOneArguments[3]);
+    createHollowRect(glm::vec3(busses[0], busses[1], busses[2]), busses[3]);
 }
 
 void JMesh::prepareForSave(){

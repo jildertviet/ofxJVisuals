@@ -153,7 +153,7 @@ void Vorm::changeShape(uint8 numSides, int sideDiv, float r){ //particles.size()
 }
 
 void Vorm::customOne(){
-    makeCoordinates(customOneArguments[0], customOneArguments[1], customOneArguments[2], true);
+    makeCoordinates(busses[0], busses[1], busses[2], true);
 }
 
 void Vorm::customTwo(){

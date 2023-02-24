@@ -22,7 +22,7 @@ JLine::JLine(){
 
 void JLine::specificFunction(){
     // line.clear();
-    switch(mode){
+    switch((int)mode){
         case 0:
           line.clear();
         //    line.addVertex(ofVec2f(0, ofGetHeight()/2));
@@ -94,7 +94,7 @@ void JLine::setSize(glm::vec3 size){
 }
 
 void JLine::calcLine(){
-  switch(mode){
+  switch((int)mode){
     case 0:{
 
     }

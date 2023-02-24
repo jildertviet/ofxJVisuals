@@ -43,11 +43,11 @@ public:
                     ofSystem("export SC_JACK_DEFAULT_INPUTS=system; export SC_JACK_DEFAULT_OUTPUTS=system");
                 #endif
                 string cmd = ofToString(SC_FOLDER) + "scsynth -u " + ofToString(SC_PORT) + " -l 4 -i 0";
-                for(auto d : devices){
-                    if(ofStringTimesInString(d.name, "WH-1000XM4")){
-                        cmd += " -H Sony";
-                    }
-                }
+                // for(auto d : devices){
+                    // if(ofStringTimesInString(d.name, "WH-1000XM4")){
+                        // cmd += " -H Sony";
+                    // }
+                // }
                 cout << cmd << endl;
                 string r = ofSystem(cmd.c_str());
                 cout << r << endl;

@@ -29,7 +29,7 @@ particleSystem::particleSystem(int numParticles, ofVec2f size, ofFloatColor colo
     this->numParticles = numParticles;
     this->color = color;
     dimensions = size;
-    customOneArguments[0] = testIndex;
+    busses[0] = testIndex;
     init(numParticles);
     clImage.initWithTexture(128, 80, GL_RGBA);
     clImage.getTexture().setTextureMinMagFilter(GL_LINEAR, GL_LINEAR); // Remove this later :
@@ -181,15 +181,15 @@ void particleSystem::display(){
 }
 
 void particleSystem::customOne(){
-    globalForce = float2(customOneArguments[0], customOneArguments[1]);
+    globalForce = float2(busses[0], busses[1]);
 }
 
 void particleSystem::customTwo(){
-    forceMultiplier = float2(customOneArguments[2], customOneArguments[3]);
+    forceMultiplier = float2(busses[2], busses[3]);
 }
 
 void particleSystem::customThree(){ // Set traagheid
-    traagheid = customOneArguments[4];
+    traagheid = busses[4];
 }
 
 void particleSystem::customFour(){ // Set alpha
@@ -207,7 +207,7 @@ void particleSystem::customFour(){ // Set alpha
 }
 
 void particleSystem::customFive(){
-    fadeTime = customOneArguments[0];
+    fadeTime = busses[0];
 }
 
 void particleSystem::setColor(ofColor c, int index){

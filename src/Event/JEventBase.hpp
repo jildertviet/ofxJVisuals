@@ -8,7 +8,8 @@
 
 namespace jevent{
   enum JEventType{
-    JRectangle
+    JRectangle,
+    JModifierArray
   };
 };
 
@@ -49,6 +50,7 @@ public:
     values[19] = &rgba.a;
 
     values[20] = &bFill;
+    values[21] = &mode;
   }
 
   float* values[NUM_BUSSES];
@@ -84,9 +86,14 @@ public:
   float bMove = true;
   float layerID = 2;
   float bFill = true;
+  float mode = 0;
 
   ofColor color; // There's a SC-version!!!
   glm::vec4 rgba = {255, 255, 255, 1.0};
   unsigned int subID = 0;
+
+  jevent::JEventType type;
+
+  float busses[5];
 };
 #endif // JEventBase

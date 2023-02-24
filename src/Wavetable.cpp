@@ -35,7 +35,7 @@ float Wavetable::process(){
 }
 
 void Wavetable::setMode(int mode){ // 0: sin, 1: cos, 2 square, 3 impulse, 4 triangle
-    switch(mode){
+    switch((int)mode){
         case 0:
             for(int i=0; i<DENSITY; i++){
                 wavetable[i] = sin((i*(1.0/(float)DENSITY))*TWO_PI);

@@ -73,5 +73,5 @@ void JShaderTest::display(){
 }
 
 void JShaderTest::customOne(){
-    divisions = ofVec2f((int)customOneArguments[0], (int)customOneArguments[1]);
+    divisions = ofVec2f((int)busses[0], (int)busses[1]);
 }

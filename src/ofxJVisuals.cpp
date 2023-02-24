@@ -827,7 +827,7 @@ bool MsgParser::make(ofxOscMessage& m){
             }
             mod->setViaBusses(busses);
             mod->id = m.getArgAsInt(1);
-            HIER
+            // HIER
             v->getEventById(m.getArgAsInt(3))->modifiers.push_back(mod); // Add to parent
             e = (JEvent*)mod;
         }
@@ -888,9 +888,8 @@ bool MsgParser::create(ofxOscMessage& m){
     JEvent* e = nullptr;
 
     switch(encodedIntToChar(m.getArgAsInt(1), 0)){
-        case jevent::JRectangle:
-            e = new JRectangle();
-            break;
+        case jevent::JRectangle: e = new JRectangle(); break;
+        case jevent::JModifierArray: e = new JModifierArray(); break;
         default:
             return false;
     }
@@ -984,7 +983,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
             }
                 break;
             case 11:{ // customArg
-                e->customOneArguments[m.getArgAsInt(2)] = m.getArgAsFloat(3);
+                e->busses[m.getArgAsInt(2)] = m.getArgAsFloat(3);
             }
                 break;
             case 12:{ // bForm

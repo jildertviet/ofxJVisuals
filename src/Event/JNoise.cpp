@@ -61,5 +61,5 @@ void JNoise::generateSeed(){
 }
 
 void JNoise::customOne(){
-    linesAmount = customOneArguments[0];
+    linesAmount = busses[0];
 }

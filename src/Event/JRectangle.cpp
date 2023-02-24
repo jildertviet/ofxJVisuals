@@ -65,35 +65,29 @@ void JRectangle::setQuadColor(ofColor a, ofColor b, ofColor c, ofColor d){
 
 void JRectangle::display(){
     ofSetColor(color);
-
     ofPushMatrix();
 
     if(!m){
-        ofTranslate(loc + (size*0.5));
-        ofRotateXDeg(rotation.x);
-        ofRotateYDeg(rotation.y);
-        ofRotateZDeg(rotation.z);
-        ofTranslate(-(size*0.5));
+      switch((int)mode){
+        case 0:
+          ofTranslate(loc + (size*0.5));
+          ofRotateXDeg(rotation.x);
+          ofRotateYDeg(rotation.y);
+          ofRotateZDeg(rotation.z);
+          ofTranslate(-(size*0.5));
+          break;
+        case 1:
+          ofTranslate(loc);
+          ofRotateXDeg(rotation.x);
+          ofRotateYDeg(rotation.y);
+          ofRotateZDeg(rotation.z);
 
-//        ofTranslate(loc);
+          ofTranslate(size*-0.5);
+          break;
+      }
         if(size.z){
             ofDrawBox(0, 0, 0, size.x, size.y, size.z);
         } else{
-            ofPushStyle();
-            ofSetLineWidth(10);
-            switch(mode){
-                case 0:
-                    break;
-                case 1:
-                    ofSetRectMode(OF_RECTMODE_CENTER);
-                    break;
-            }
-
-            // convertRectToMesh(asOfRectangle(), lineWidth);
-            // mesh.drawWireframe();
-            // mesh = ofMesh::plane(100, 100, 1, 1);
-            // ofTranslate(loc);
-            // mesh.draw();
             if(bFill){
               ofDrawRectangle(0, 0, size.x, size.y);
             } else{
@@ -103,11 +97,7 @@ void JRectangle::display(){
               path.rectangle(lineWidth*0.5, lineWidth*0.5, size.x-(lineWidth), size.y-lineWidth);
               path.draw();
             }
-            ofPopStyle();
         }
-//        ofTranslate(-size*0.5); // ?
-//        ofRotateZDeg(rotation.z);
-//        ofTranslate(size*0.5);
     } else{
         ofTranslate(loc + (size*0.5)); // This wasn't here before... (13-01-2021_
         ofRotateXDeg(rotation.x);

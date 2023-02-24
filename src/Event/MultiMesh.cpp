@@ -548,32 +548,32 @@ void MultiMesh::setLocation(int index, int index2, ofVec2f loc){
 }
 
 void MultiMesh::customOne(){
-    switch((int)customOneArguments[0]){
+    switch((int)busses[0]){
         case 0: // Symmetric
-            generateSymmetricMeshes(customOneArguments[1], color, customOneArguments[2]);
+            generateSymmetricMeshes(busses[1], color, busses[2]);
             break;
         case 1: // Free
-            generateRandomMeshes(customOneArguments[1], color);
+            generateRandomMeshes(busses[1], color);
             break;
     }
 }
 
 void MultiMesh::customTwo(){
-    doMorph(customOneArguments[0], customOneArguments[1]);
+    doMorph(busses[0], busses[1]);
 }
 
 void MultiMesh::customThree(){
-    setFrequency(customOneArguments[0], customOneArguments[1], customOneArguments[2], customOneArguments[3]);
+    setFrequency(busses[0], busses[1], busses[2], busses[3]);
 }
 
 void MultiMesh::customFour(){
-    float r = customOneArguments[0];
-    ofColor c = ofColor(customOneArguments[1], customOneArguments[2], customOneArguments[3], customOneArguments[4]);
+    float r = busses[0];
+    ofColor c = ofColor(busses[1], busses[2], busses[3], busses[4]);
     addRandomMesh(r, c);
 }
 
 void MultiMesh::customFive(){
-    bGrowRadius = customOneArguments[0];
+    bGrowRadius = busses[0];
 }
 
 void MultiMesh::setSpeed(float speed){

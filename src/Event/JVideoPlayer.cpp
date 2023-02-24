@@ -39,7 +39,7 @@ bool JVideoPlayer::load(string path){
 
 void JVideoPlayer::customOne(){load(path);}
 void JVideoPlayer::customTwo(){
-    player.setPosition(customOneArguments[0]);
+    player.setPosition(busses[0]);
 }
 
 void JVideoPlayer::specificFunction(){
@@ -72,7 +72,7 @@ void JVideoPlayer::display(){
         ofSetColor(color);
 //        ofSetColor(ofColor(255,100));
 //        ofDrawRectangle(0, 0, 100, 100);
-        switch(mode){
+        switch((int)mode){
             case JVIDEO_MODE_NORMAL: // Normal mode
                 displayNormal();
             break; // Cut mode
@@ -133,7 +133,7 @@ void JVideoPlayer::play(float pct){
 }
 
 void JVideoPlayer::setMode(int mode){
-    switch(mode){
+    switch((int)mode){
         case 0:
             this->mode = 0;
         break;

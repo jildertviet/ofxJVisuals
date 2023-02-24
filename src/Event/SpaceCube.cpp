@@ -40,8 +40,8 @@ void SpaceCube::ownDtor(){ removeFromVector(); }
 
 
 void SpaceCube::customOne(){
-    bool bAdd = customOneArguments[0];
-    int num = customOneArguments[1];
+    bool bAdd = busses[0];
+    int num = busses[1];
     for(int i=0; i<num; i++){
         if(bAdd){
 //            if(mesh.getNumVertices() < 7)
@@ -66,10 +66,10 @@ void SpaceCube::customFour(){
 }
 
 void SpaceCube::customFive(){ // Resize
-    size.x = customOneArguments[0];
-    size.y = customOneArguments[1];
-    pointsAmount = customOneArguments[2];
-    gridsize = customOneArguments[3];
+    size.x = busses[0];
+    size.y = busses[1];
+    pointsAmount = busses[2];
+    gridsize = busses[3];
     mesh.clear();
     for(int i=0; i<pointsAmount; i++)
         placeNewPoint(ofVec3f(), true);

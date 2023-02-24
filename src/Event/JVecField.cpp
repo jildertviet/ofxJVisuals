@@ -35,7 +35,7 @@ JVecField::JVecField(){
 }
 
 void JVecField::specificFunction(){
-    switch(mode){
+    switch((int)mode){
         case VECFIELD_MODE::PERLIN:{
             t = ofGetFrameNum() * speed + seed;
             for (int i = 0; i < p.getWidth(); i++){
@@ -225,5 +225,5 @@ void JVecField::setMode(char m){
 }
 
 void JVecField::customOne(){
-    shaderContrast = customOneArguments[0];
+    shaderContrast = busses[0];
 }

@@ -113,13 +113,13 @@ public:
     virtual void customFour(){};
     virtual void customFive(){};
 
-    float customOneArguments[5]; // Only use ptr?
+    // float busses[5]; // Only use ptr?
     float customTwoArguments[5];
     JEvent** events = nullptr;
 
     virtual void setMode(char m);
-    char mode = 0;
-    ofVec3f rotation = ofVec3f(0, 0, 0);
+    // char mode = 0;
+    // ofVec3f rotation = ofVec3f(0, 0, 0);
     unsigned long getTimeMillis();
     void setStartTime();
     float zoom = 1.f;
