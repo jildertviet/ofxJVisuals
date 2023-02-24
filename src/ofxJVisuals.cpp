@@ -262,24 +262,17 @@ JEvent* ofxJVisuals::addEvent(JEvent* e, VisualizerLayer l, int index){
     switch(l){
         case FUNCTIONAL:
             return addEvent(e, 0, index);
-            break;
         case NON_CAM_BACK: // Is draw first
             return addEvent(e, 1, index);
-            break;
         case NON_CAM_FRONT: // Drawn as last
             return addEvent(e,NUMLAYERS-1, index);
-            break;
         case DEFAULT:
             return addEvent(e, 2, index);
-            break;
         case NEGATIVE:
             negativeLayer.addEvent(e);
             return addEvent(e, -1, index); // Don't store it in a layer again
-            break;
-        default:
-            break;
     }
-return nullptr;
+    return nullptr;
 }
 
 void ofxJVisuals::setAlpha(int alpha, bool bDo){
@@ -490,18 +483,10 @@ void ofxJVisuals::drawMask(){
 
 void ofxJVisuals::keyPressed(int key){
     switch(key){
-        case 'q':
-            fboDisplayMode = 0;
-            break;
-        case 'w':
-            fboDisplayMode = 1;
-            break;
-        case 'e':
-            fboDisplayMode = 2;
-            break;
-        case 'a':
-            bEditMode = !bEditMode;
-            break;
+        case 'q': fboDisplayMode = 0; break;
+        case 'w': fboDisplayMode = 1; break;
+        case 'e': fboDisplayMode = 2; break;
+        case 'a': bEditMode = !bEditMode; break;
     }
 }
 

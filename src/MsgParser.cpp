@@ -314,19 +314,13 @@ bool MsgParser::make(ofxOscMessage& m){
         }
     }
     switch(types[m.getArgAsString(0)]){
-        case 1: // JRectangle
-            e = new JRectangle();
-            break;
+        case 1: e = new JRectangle(); break;
         case 2: // vecField
             e = new JVecField();
             ((JVecField*)e)->underlayer = getFbo();
             break;
-        case 3: // JMirror
-            e = new JMirror();
-            break;
-        case 4: // JEllipse
-            e = new JEllipse();
-            break;
+        case 3: e = new JMirror(); break;
+        case 4: e = new JEllipse(); break;
         case 5: // JVorm
             if(m.getNumArgs() > 3){
                 // Specific constructor ?
@@ -335,12 +329,8 @@ bool MsgParser::make(ofxOscMessage& m){
                 e = new Vorm();
             }
             break;
-        case 6: // JSpaceCube
-            e = new SpaceCube();
-            break;
-        case 7: // JMultiMesh
-            e = new MultiMesh();
-            break;
+        case 6: e = new SpaceCube(); break;
+        case 7: e = new MultiMesh(); break;
         case 8:{ // JParticles
 //            e = (JEvent*)new JParticles();
 #if USE_OPENCL
@@ -357,9 +347,7 @@ bool MsgParser::make(ofxOscMessage& m){
             }
                }
             break;
-        case 10:
-            e = new JMesh();
-            break;
+        case 10: e = new JMesh(); break;
         case 11:
             cout << m.getArgAsString(2) << endl;
             e = new JImage(m.getArgAsString(3));
@@ -369,9 +357,7 @@ bool MsgParser::make(ofxOscMessage& m){
             e = new JDivisionGrid(size);
         }
             break;
-        case 13:
-            e = new JVideoPlayer();
-            break;
+        case 13: e = new JVideoPlayer(); break;
         case 14:{
             glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
             cout << "Size: " << size << endl;
@@ -380,13 +366,9 @@ bool MsgParser::make(ofxOscMessage& m){
 //            ((JShaderTest*)e)->src = &(v->sharedFbo2);
         }
             break;
-        case 15:
-            e = new JNoise();
-            break;
+        case 15: e = new JNoise(); break;
         default:
-        case 16:
-            e = new MultiMeshMaybeTomorrow();
-            break;
+        case 16: e = new MultiMeshMaybeTomorrow(); break;
         case 18:{
 #ifdef JPhysarum_hpp
             glm::vec2 size = glm::vec2(m.getArgAsFloat(3), m.getArgAsFloat(4));
@@ -451,14 +433,8 @@ bool MsgParser::make(ofxOscMessage& m){
             e = (JEvent*)mod;
         }
         break;
-        case 20:{ // JCircle
-          e = (JEvent*)new JCircle();
-        }
-        break;
-        case 21:{ // JLine
-          e = (JEvent*)new JLine();
-        }
-        break;
+        case 20: e = (JEvent*)new JCircle(); break;
+        case 21: e = (JEvent*)new JLine(); break;
         case 22:{
           JShaderLines* s = new JShaderLines();
           getShaders()->push_back(s);
@@ -757,7 +733,6 @@ void MsgParser::addEnv(ofxOscMessage& m){
 }
 
 void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id, 3: param id, 4: value, 5: (optional) type (r,g,b,a)
-   // std::cout << "SC: " <<  m << std::endl;
    string a = m.getAddress();
     if(a == "/mapVal"){
         JEvent* e = getEventById(m.getArgAsInt(2));
@@ -782,7 +757,8 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
     } else if(a == "/kill"){
       kill(m);
     } else if(a == "/connect"){
-
+      std::cout << "SC: " <<  m << std::endl;
+      connect(m);
     }
 }
 
@@ -817,4 +793,19 @@ bool MsgParser::create(ofxOscMessage& m){
     addEvent(e, e->layerID, e->id, false);
     updateValues(m);
     return true;
+}
+
+bool MsgParser::connect(ofxOscMessage& m){
+  JEvent* e = getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
+  if(!e)
+    return false;
+
+  if((int)m.getArgAsFloat(2) == jevent::ConnectionType::Modifier){
+    cout << "Target id: " << m.getArgAsInt(3) << endl;
+    JEvent* target = getEventById(m.getArgAsInt(0), m.getArgAsInt(3));
+    if(target){
+      cout << "Event " << e << " (mod) finds target: " << target << endl;
+    }
+  }
+  return true;
 }
