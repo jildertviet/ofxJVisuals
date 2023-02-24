@@ -41,10 +41,27 @@
 #include "JLine.hpp"
 #include "JShader.hpp"
 #include "JShaderLines.hpp"
+#include "Vorm.h"
+#include "JNoise.hpp"
+#include "AlphaBlackScreen.hpp"
 
 #include "scSynth.hpp"
 
 using namespace std;
+
+enum VisualizerLayer {
+    FUNCTIONAL, // Should be deleted?
+    NON_CAM_BACK,
+    NON_CAM_FRONT,
+    DUMMY0,
+    DUMMY1,
+    DUMMY2,
+    DUMMY3,
+    DUMMY4,
+    DUMMY5,
+    NEGATIVE, // Dummies, otherwise this would be 3, and override layer 3...
+    DEFAULT
+};
 
 class ofxJVisuals;
 
@@ -70,6 +87,24 @@ public:
     void addTo(ofxOscMessage& m);
     ofxOscSender* SCsender = nullptr;
     ofxOscSender* initSCsender(string ip, int port);
+
+    // Defined in ofxJVisuals
+    JEvent* getEventById(unsigned int id, unsigned int subID=0);
+    JEvent* addEvent(JEvent* e, int layerIndex=1, int index = 0, bool bOldVersion = true);
+    ofTrueTypeFont* getSelectedFont();
+    vector<JShader*>* getShaders();
+    ofFbo* getFbo();
+    void killAll();
+
+    void getFreePointers(string host, int port); // Sends to 6063, w/ SCsender
+    void setBrightness(float b);
+    void setCam();
+    void initCam();
+    void setAlpha(float a);
+    void setCirclularMaskState(bool bState);
+    void setCameraState(bool bState);
+    ofEasyCam* getCam();
+    AlphaBlackScreen* getAlphaScreen();
 private:
     ofxJVisuals* v = nullptr;
     bool bUseSC = false;

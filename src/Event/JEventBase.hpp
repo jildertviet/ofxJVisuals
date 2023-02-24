@@ -11,7 +11,11 @@ namespace jevent{
     JRectangle,
     JModifierArray
   };
+  enum ConnectionType{
+    Modifier
+  };
 };
+
 
 class JEventBase{
 public:
@@ -51,6 +55,12 @@ public:
 
     values[20] = &bFill;
     values[21] = &mode;
+
+    values[22] = &busses[1];
+    values[23] = &busses[2];
+    values[24] = &busses[3];
+    values[25] = &busses[4];
+    values[26] = &busses[5];
   }
 
   float* values[NUM_BUSSES];
