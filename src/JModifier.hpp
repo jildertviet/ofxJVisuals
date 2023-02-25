@@ -21,10 +21,10 @@ public:
 class JModifierArray: public JModifier{
 public:
     JModifierArray();
-    glm::vec2 dimensions = glm::vec2(2, 2);
-    glm::vec2 spacing = glm::vec2(200, 200);
+    float* dimensions[2];
+    float* spacing[2];
     void display(JEvent* e, void (JEvent::*ptr) (void)) override;
-    void setViaBusses(vector<float> busses) override;
+    // void setViaBusses(vector<float> busses) override;
 };
 
 class JModifierFact{

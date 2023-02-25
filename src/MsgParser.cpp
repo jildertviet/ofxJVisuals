@@ -805,6 +805,8 @@ bool MsgParser::connect(ofxOscMessage& m){
     JEvent* target = getEventById(m.getArgAsInt(0), m.getArgAsInt(3));
     if(target){
       cout << "Event " << e << " (mod) finds target: " << target << endl;
+      target->modifiers.push_back((JModifier*)e);
+      // Modifier (e) is already set in /create (by using busses[5]);
     }
   }
   return true;
