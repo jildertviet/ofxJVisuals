@@ -163,13 +163,15 @@ void MsgParser::connectToSuperCollider(){
     ofAddListener(ofxOscEvent::packetIn, this, &MsgParser::onSuperColliderMessageReceived);
 }
 
-bool MsgParser::updateValues(ofxOscMessage& m){
+bool MsgParser::updateValues(ofxOscMessage& m, JEvent* e){
+  if(m.getNumArgs() < NUM_BUSSES)
+    return false; // No values[] added to msg, ignore
   float valuesToUpdate[NUM_BUSSES];
   for(int i=0; i<NUM_BUSSES; i++){
-    // cout << m.getArgAsFloat(i+2) << endl;
-    valuesToUpdate[i] = m.getArgAsFloat(i+2); // Offset nodeID and replyID
+      valuesToUpdate[i] = m.getArgAsFloat(i+2); // Offset nodeID and replyID
   }
-  JEvent* e = getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
+  if(!e)
+    e = getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
   if(!e)
     return false;
   e->setValuesFromFloatArray(valuesToUpdate);
@@ -199,28 +201,28 @@ bool MsgParser::parseMsg(ofxOscMessage& m){
             break;
         case 7:{ // addConnection
             JEvent* e = getEventById(m.getArgAsInt(0));
-            if(e && e->type == "Vorm")
-                ((Vorm*)e)->addConnection((Vorm*)getEventById(m.getArgAsInt(1)));
+            if(e && e->type == "JVorm")
+                ((JVorm*)e)->addConnection((JVorm*)getEventById(m.getArgAsInt(1)));
         }
             break;
         case 8:{ // switchRadius
             JEvent* e = getEventById(m.getArgAsInt(0));
             JEvent* b = getEventById(m.getArgAsInt(1));
-            if(e && e->type == "Vorm")
-                ((Vorm*)e)->switchRadiusses((Vorm*)b);
+            if(e && e->type == "JVorm")
+                ((JVorm*)e)->switchRadiusses((JVorm*)b);
             if(m.getArgAsBool(2)){
                 if(e)
-                    ((Vorm*)e)->instantFormVorm();
+                    ((JVorm*)e)->instantFormJVorm();
                 if(b)
-                    ((Vorm*)b)->instantFormVorm();
+                    ((JVorm*)b)->instantFormJVorm();
             }
         }
             break;
         case 9:{ // changeAngleOffset
             JEvent* e = getEventById(m.getArgAsInt(0));
             if(e){
-                if(e->type == "Vorm")
-                    ((Vorm*)e)->changeAngleOffset(m.getArgAsFloat(1));
+                if(e->type == "JVorm")
+                    ((JVorm*)e)->changeAngleOffset(m.getArgAsFloat(1));
             }
         }
             break;
@@ -324,9 +326,9 @@ bool MsgParser::make(ofxOscMessage& m){
         case 5: // JVorm
             if(m.getNumArgs() > 3){
                 // Specific constructor ?
-                e = new Vorm();
+                e = new JVorm();
             } else{
-                e = new Vorm();
+                e = new JVorm();
             }
             break;
         case 6: e = new SpaceCube(); break;
@@ -533,22 +535,22 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 break;
             case 12:{ // bForm
                 if(m.getArgAsString(2) == "JVorm")
-                    ((Vorm*)e)->setState(m.getArgAsBool(3));
+                    ((JVorm*)e)->setState(m.getArgAsBool(3));
             }
                 break;
             case 13:{ // maxSpeed
                 if(m.getArgAsString(2) == "JVorm")
-                    ((Vorm*)e)->change_maxspeed(m.getArgAsFloat(3), m.getArgAsFloat(4));
+                    ((JVorm*)e)->change_maxspeed(m.getArgAsFloat(3), m.getArgAsFloat(4));
             }
 
             case 14:{ // lijnMax
-                if(e->type == "Vorm")
-                    ((Vorm*)e)->lijnmax = m.getArgAsFloat(2);
+                if(e->type == "JVorm")
+                    *(((JVorm*)e)->maxDistance) = m.getArgAsFloat(2);
             }
                 break;
             case 15:{ // lineWidth
-                if(e->type == "Vorm"){
-                    ((Vorm*)e)->lineWidth = m.getArgAsFloat(2);
+                if(e->type == "JVorm"){
+                    ((JVorm*)e)->lineWidth = m.getArgAsFloat(2);
                 } else if(e->type == "JVecField"){
                     ((JVecField*)e)->lineWidth = m.getArgAsFloat(2);
                 } else{
@@ -700,8 +702,8 @@ void MsgParser::addEnv(ofxOscMessage& m){
         }
             break;
         case 4:{ // lijnMax
-            if(e->type == "Vorm")
-                ((Vorm*)e)->addEnv(values, times, &((Vorm*)e)->lijnmax);
+            if(e->type == "JVorm")
+                ((JVorm*)e)->addEnv(values, times, ((JVorm*)e)->maxDistance);
         }
             break;
         case 5: e->addEnv(values, times, &(e->loc.x)); break; // x
@@ -757,8 +759,9 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
     } else if(a == "/kill"){
       kill(m);
     } else if(a == "/connect"){
-      std::cout << "SC: " <<  m << std::endl;
       connect(m);
+    } else if(a == "/trigger"){
+      trigger(m);
     }
 }
 
@@ -781,17 +784,23 @@ bool MsgParser::create(ofxOscMessage& m){
     cout << "ID: " << m.getArgAsInt(0) << ", type: " << (int)encodedIntToChar(m.getArgAsInt(1), 0) << ", subID: " << (int)encodedIntToChar(m.getArgAsInt(1), 1) << endl;
     JEvent* e = nullptr;
 
+    bool bInit = false;
     switch(encodedIntToChar(m.getArgAsInt(1), 0)){
         case jevent::JRectangle: e = new JRectangle(); break;
         case jevent::JModifierArray: e = new JModifierArray(); break;
+        case jevent::JVorm: e = new JVorm(); bInit = true; break;
         default:
             return false;
     }
 
+    updateValues(m, e);
+
     e->id = m.getArgAsInt(0);
     e->subID = encodedIntToChar(m.getArgAsInt(1), 1);
     addEvent(e, e->layerID, e->id, false);
-    updateValues(m);
+
+    if(bInit)
+      e->init();
     return true;
 }
 
@@ -800,14 +809,41 @@ bool MsgParser::connect(ofxOscMessage& m){
   if(!e)
     return false;
 
-  if((int)m.getArgAsFloat(2) == jevent::ConnectionType::Modifier){
-    cout << "Target id: " << m.getArgAsInt(3) << endl;
+  switch((int)m.getArgAsFloat(2)){
+    case jevent::ConnectionType::Modifier:{
     JEvent* target = getEventById(m.getArgAsInt(0), m.getArgAsInt(3));
     if(target){
-      cout << "Event " << e << " (mod) finds target: " << target << endl;
       target->modifiers.push_back((JModifier*)e);
       // Modifier (e) is already set in /create (by using busses[5]);
     }
   }
+  break;
+  }
   return true;
+}
+
+bool MsgParser::trigger(ofxOscMessage& m){
+  cout << m << endl;
+  // for(int i=0; i<m.getNumArgs(); i++)
+    // cout << m.getArgAsInt(i) << endl;
+  int targetID;
+  float targetIDf = m.getArgAsFloat(2);
+  memcpy(&targetID, &targetIDf, sizeof(float));
+  cout << "Target: " << targetID << ", " << m.getArgAsInt(3) << endl; // ID, subID
+  JEvent* target = getEventById(targetID, m.getArgAsInt(3));
+  if(target){
+    cout << target << endl;
+    int numArguments = m.getNumArgs()-5;
+    float* arguments = new float[numArguments]; // 10 - 5 = 5
+    for(int i=0; i<numArguments; i++){
+      arguments[i] = m.getArgAsFloat(i+5);
+    }
+    target->doFunc(m.getArgAsInt(4), arguments);
+    delete arguments;
+    // target->doFunc(m.getArgAsInt(4), arguments);
+  } else{
+    cout << "Target not found, " << m.getArgAsFloat(2) << ", " << m.getArgAsInt(3) << endl;
+    return false;
+  }
+  return false;
 }

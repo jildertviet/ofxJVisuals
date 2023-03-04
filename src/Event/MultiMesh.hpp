@@ -79,10 +79,10 @@ public:
     
     void setLocation(int index, int index2, ofVec2f loc);
     
-    void customOne() override;
-    void customTwo() override;
-    void customThree() override;
-    void customFour() override;
-    void customFive() override;
+    void customOne(float* v = nullptr) override;
+    void customTwo(float* v = nullptr) override;
+    void customThree(float* v = nullptr) override;
+    void customFour(float* v = nullptr) override;
+    void customFive(float* v = nullptr) override;
 };
 #endif /* MultiMesh_hpp */

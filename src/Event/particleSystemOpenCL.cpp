@@ -180,19 +180,19 @@ void particleSystem::display(){
 //    glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
 }
 
-void particleSystem::customOne(){
+void particleSystem::customOne(float* v){
     globalForce = float2(busses[0], busses[1]);
 }
 
-void particleSystem::customTwo(){
+void particleSystem::customTwo(float* v){
     forceMultiplier = float2(busses[2], busses[3]);
 }
 
-void particleSystem::customThree(){ // Set traagheid
+void particleSystem::customThree(float* v){ // Set traagheid
     traagheid = busses[4];
 }
 
-void particleSystem::customFour(){ // Set alpha
+void particleSystem::customFour(float* v){ // Set alpha
     float alpha = color.a / 255.;
     cout << "Set alpha: " << alpha << endl;
     for(unsigned int i=0; i<numParticles; i++) {
@@ -206,13 +206,13 @@ void particleSystem::customFour(){ // Set alpha
     destAlpha = alpha;
 }
 
-void particleSystem::customFive(){
+void particleSystem::customFive(float* v){
     fadeTime = busses[0];
 }
 
 void particleSystem::setColor(ofColor c, int index){
     color = c;
-    customFour();
+    customFour(float* v);
 }
 
 void particleSystem::setSize(glm::vec3 size){

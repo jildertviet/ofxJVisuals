@@ -37,8 +37,8 @@ bool JVideoPlayer::load(string path){
     return true; // ?
 }
 
-void JVideoPlayer::customOne(){load(path);}
-void JVideoPlayer::customTwo(){
+void JVideoPlayer::customOne(float* v){load(path);}
+void JVideoPlayer::customTwo(float* v){
     player.setPosition(busses[0]);
 }
 

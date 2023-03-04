@@ -65,11 +65,11 @@ public:
     
     int lineWidth = 3;
     
-    void customOne() override;
-    void customTwo() override;
-    void customThree() override;
-    void customFour() override;
-    void customFive() override;
+    void customOne(float* v = nullptr) override;
+    void customTwo(float* v = nullptr) override;
+    void customThree(float* v = nullptr) override;
+    void customFour(float* v = nullptr) override;
+    void customFive(float* v = nullptr) override;
     int pointsAmount = 0;
 private:
     void rotateY();

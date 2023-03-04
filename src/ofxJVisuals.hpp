@@ -25,7 +25,7 @@
 #endif
 
 #include "JEvent.hpp"
-#include "Vorm.h"
+#include "JVorm.h"
 #include "JNoise.hpp"
 #include "JImage.hpp"
 #include "SpaceCube.h"

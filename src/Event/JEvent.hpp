@@ -20,6 +20,7 @@
 
 //#define USE_FRAMES_AS_CLOCK false
 class JModifier;
+class ofxJVisuals;
 
 class JEvent: public JEventBase{
 public:
@@ -33,8 +34,9 @@ public:
     virtual void display(){};
         void displayMain();
 
-    virtual void test();
     virtual void ownDtor(){};
+    virtual void init(){};
+
     unsigned int startTime = 0;
     unsigned int endTime = 1000;
 
@@ -107,12 +109,12 @@ public:
     virtual void setSize(glm::vec2 s){
       setSize(glm::vec3(s, 0));
     }
-    virtual void customOne(){};
-    virtual void customTwo(){};
-    virtual void customThree(){};
-    virtual void customFour(){};
-    virtual void customFive(){};
-
+    virtual void customOne(float* v = nullptr){};
+    virtual void customTwo(float* v = nullptr){};
+    virtual void customThree(float* v = nullptr){};
+    virtual void customFour(float* v = nullptr){};
+    virtual void customFive(float* v = nullptr){};
+    void doFunc(int id, float* arguments = nullptr);
     // float busses[5]; // Only use ptr?
     float customTwoArguments[5];
     JEvent** events = nullptr;
@@ -136,6 +138,9 @@ public:
     virtual void setViaBusses(vector<float> busses){};
     void fillBuffer(ofxOscMessage& m);
     vector<float> buffer;
+
+    ofxJVisuals* v;
+    JEvent* getEventById(unsigned int id, unsigned int subID=0);
 private:
 
 };

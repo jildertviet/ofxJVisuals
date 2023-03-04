@@ -22,9 +22,9 @@ public:
     bool bSave = false;
     string getDirectoryNameForFrame();
     string getMeshName();
-    void customOne() override;
-    void customTwo() override;
-    void customThree() override;
+    void customOne(float* v = nullptr) override;
+    void customTwo(float* v = nullptr) override;
+    void customThree(float* v = nullptr) override;
     virtual void prepareForSave();
     void setSize(glm::vec3 size) override;
     virtual void save();

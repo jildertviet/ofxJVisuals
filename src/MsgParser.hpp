@@ -41,7 +41,7 @@
 #include "JLine.hpp"
 #include "JShader.hpp"
 #include "JShaderLines.hpp"
-#include "Vorm.h"
+#include "JVorm.h"
 #include "JNoise.hpp"
 #include "AlphaBlackScreen.hpp"
 
@@ -75,7 +75,8 @@ public:
     bool create(ofxOscMessage& m);
     bool kill(ofxOscMessage& m);
     bool connect(ofxOscMessage& m);
-    bool updateValues(ofxOscMessage& m);
+    bool trigger(ofxOscMessage& m);
+    bool updateValues(ofxOscMessage& m, JEvent* e = nullptr);
     map<string, short> commands;
     map<string, short> types;
     map<string, short> values;

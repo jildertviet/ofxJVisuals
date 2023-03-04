@@ -112,6 +112,6 @@ void JLine::calcLine(){
   }
 }
 
-void JLine::customOne(){
+void JLine::customOne(float* v){
   fromBuffer();
 }

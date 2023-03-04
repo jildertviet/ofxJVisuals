@@ -104,12 +104,12 @@ void JDivisionGrid::sortAndSplit(){
     }
 }
 
-void JDivisionGrid::customOne(){
+void JDivisionGrid::customOne(float* v){
     for(int i=0; i<polyVec.size(); i++)
         polyVec[i]->bDrawWireframe = true;
 }
 
-void JDivisionGrid::customTwo(){
+void JDivisionGrid::customTwo(float* v){
     for(int i=0; i<polyVec.size(); i++){
         polyVec[i]->locAdjustmentForExport = glm::vec3(size.x, size.y, 0) * 0.5;
         polyVec[i]->id = id + i;
@@ -117,7 +117,7 @@ void JDivisionGrid::customTwo(){
     }
 }
 
-void JDivisionGrid::customThree(){
+void JDivisionGrid::customThree(float* v){
     bSave = busses[0];
     if(bSave){
         for(int i=0; i<polyVec.size(); i++){
@@ -127,7 +127,7 @@ void JDivisionGrid::customThree(){
     }
 }
 
-void JDivisionGrid::customFour(){
+void JDivisionGrid::customFour(float* v){
     for(int i=0; i<busses[0]; i++)
         sortAndSplit();
 }

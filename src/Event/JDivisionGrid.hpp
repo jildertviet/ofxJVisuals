@@ -206,10 +206,10 @@ public:
     void display() override;
     void specificFunction() override;
     void setColor(ofColor c) override;
-    void customOne() override;
-    void customTwo() override;
-    void customThree() override;
-    void customFour() override;
+    void customOne(float* v = nullptr) override;
+    void customTwo(float* v = nullptr) override;
+    void customThree(float* v = nullptr) override;
+    void customFour(float* v = nullptr) override;
     bool bSave = false;
 
     vector<JPoly*> polyVec;

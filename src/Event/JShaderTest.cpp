@@ -72,6 +72,6 @@ void JShaderTest::display(){
     ofPopMatrix();
 }
 
-void JShaderTest::customOne(){
+void JShaderTest::customOne(float* v){
     divisions = ofVec2f((int)busses[0], (int)busses[1]);
 }

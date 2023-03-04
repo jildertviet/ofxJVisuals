@@ -29,7 +29,7 @@ public:
     ofColor localColor;
     ofVec2f offset = ofVec2f(0, 0);
     float seed;
-    void customOne() override;
+    void customOne(float* v = nullptr) override;
 private:
 };
 #endif /* JNoise_hpp */

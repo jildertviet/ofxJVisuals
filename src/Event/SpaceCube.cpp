@@ -39,7 +39,7 @@ SpaceCube::SpaceCube(ofVec3f loc_, ofVec3f size_, int points_amount_, int gridsi
 void SpaceCube::ownDtor(){ removeFromVector(); }
 
 
-void SpaceCube::customOne(){
+void SpaceCube::customOne(float* v){
     bool bAdd = busses[0];
     int num = busses[1];
     for(int i=0; i<num; i++){
@@ -53,19 +53,19 @@ void SpaceCube::customOne(){
     }
 }
 
-void SpaceCube::customTwo(){
+void SpaceCube::customTwo(float* v){
     randomChooseRotXorRotY();
 }
 
-void SpaceCube::customThree(){
+void SpaceCube::customThree(float* v){
     blink();
 }
 
-void SpaceCube::customFour(){
+void SpaceCube::customFour(float* v){
     draw_line = true;
 }
 
-void SpaceCube::customFive(){ // Resize
+void SpaceCube::customFive(float* v){ // Resize
     size.x = busses[0];
     size.y = busses[1];
     pointsAmount = busses[2];

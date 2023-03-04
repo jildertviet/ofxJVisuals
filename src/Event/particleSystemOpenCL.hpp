@@ -39,11 +39,11 @@ public:
     float2 forceMultiplier = float2(1, 1);
     bool bMirrorMouse = false;
     void setVecField(JVecField* vF);
-    void customOne() override;
-    void customTwo() override;
-    void customThree() override;
-    void customFour() override;
-    void customFive() override;
+    void customOne(float* v = nullptr) override;
+    void customTwo(float* v = nullptr) override;
+    void customThree(float* v = nullptr) override;
+    void customFour(float* v = nullptr) override;
+    void customFive(float* v = nullptr) override;
     void setSize(glm::vec3 size) override;
     float traagheid = 0.9;
     float fadeTime = 0.001;

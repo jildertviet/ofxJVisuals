@@ -37,6 +37,6 @@ public:
     void setSize(glm::vec3 size) override;
     void calcLine();
 
-    void customOne() override;
+    void customOne(float* v = nullptr) override;
 };
 #endif /* JLine_hpp */

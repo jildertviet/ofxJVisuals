@@ -253,6 +253,7 @@ JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, int index, bool bOldVer
     e->numEventsPtr = &numEvents;
 
     e->id = index;
+    e->v = this;
 
 //    e->receivingPointers = &receivingPointers;
     return e;
@@ -538,3 +539,5 @@ void MsgParser::setCirclularMaskState(bool bState){v->bDrawCirclularMask = bStat
 void MsgParser::setCameraState(bool bState){v->bCam = bState;}
 ofEasyCam* MsgParser::getCam(){return &(v->cam);}
 AlphaBlackScreen* MsgParser::getAlphaScreen(){return v->alphaScreen;}
+
+JEvent* JEvent::getEventById(unsigned int id, unsigned int subID){return v->getEventById(id, subID);}

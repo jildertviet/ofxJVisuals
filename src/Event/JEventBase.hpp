@@ -9,10 +9,12 @@
 namespace jevent{
   enum JEventType{
     JRectangle,
-    JModifierArray
+    JModifierArray,
+    JVorm,
+    JFunctionTrigger
   };
   enum ConnectionType{
-    Modifier
+    Modifier,
   };
 };
 
@@ -61,6 +63,11 @@ public:
     values[24] = &busses[2];
     values[25] = &busses[3];
     values[26] = &busses[4];
+    values[27] = &busses[5];
+    values[28] = &busses[6];
+    values[29] = &busses[7];
+    values[30] = &busses[8];
+    values[31] = &busses[9];
   }
 
   float* values[NUM_BUSSES];
@@ -104,6 +111,6 @@ public:
 
   jevent::JEventType type;
 
-  float busses[5];
+  float busses[10];
 };
 #endif // JEventBase

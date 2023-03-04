@@ -22,6 +22,6 @@ public:
     ofFbo src;
     int noiseSeed;
     ofVec2f divisions = ofVec2f(16, 16);
-    void customOne() override;
+    void customOne(float* v = nullptr) override;
 };
 #endif /* JShaderTest_hpp */

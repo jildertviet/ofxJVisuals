@@ -547,7 +547,7 @@ void MultiMesh::setLocation(int index, int index2, ofVec2f loc){
     locations[index][index2] = loc;
 }
 
-void MultiMesh::customOne(){
+void MultiMesh::customOne(float* v){
     switch((int)busses[0]){
         case 0: // Symmetric
             generateSymmetricMeshes(busses[1], color, busses[2]);
@@ -558,21 +558,21 @@ void MultiMesh::customOne(){
     }
 }
 
-void MultiMesh::customTwo(){
+void MultiMesh::customTwo(float* v){
     doMorph(busses[0], busses[1]);
 }
 
-void MultiMesh::customThree(){
+void MultiMesh::customThree(float* v){
     setFrequency(busses[0], busses[1], busses[2], busses[3]);
 }
 
-void MultiMesh::customFour(){
+void MultiMesh::customFour(float* v){
     float r = busses[0];
     ofColor c = ofColor(busses[1], busses[2], busses[3], busses[4]);
     addRandomMesh(r, c);
 }
 
-void MultiMesh::customFive(){
+void MultiMesh::customFive(float* v){
     bGrowRadius = busses[0];
 }
 

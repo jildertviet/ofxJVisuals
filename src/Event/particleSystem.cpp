@@ -183,19 +183,19 @@ void particleSystem::display(){
 }
 
 //
-// void particleSystem::customOne(){
+// void particleSystem::customOne(float* v){
 //     globalForce = glm::vec2(busses[0], busses[1]);
 // }
 //
-// void particleSystem::customTwo(){
+// void particleSystem::customTwo(float* v){
 //     forceMultiplier = glm::vec2(busses[2], busses[3]);
 // }
 //
-// void particleSystem::customThree(){ // Set traagheid
+// void particleSystem::customThree(float* v){ // Set traagheid
 //     traagheid = busses[4];
 // }
 //
-// void particleSystem::customFour(){ // Write alpha to fbo...
+// void particleSystem::customFour(float* v){ // Write alpha to fbo...
 // //     float alpha = color.a / 255.;
 // //     cout << "Set alpha: " << alpha << endl;
 // //     for(unsigned int i=0; i<numParticles; i++) {
@@ -209,13 +209,13 @@ void particleSystem::display(){
 // //     destAlpha = alpha;
 // }
 //
-// void particleSystem::customFive(){
+// void particleSystem::customFive(float* v){
 //     fadeTime = busses[0];
 // }
 //
 // void particleSystem::setColor(ofColor c, int index){
 //     color = c;
-//     customFour();
+//     customFour(float* v);
 // }
 //
 // void particleSystem::setSize(glm::vec3 size){

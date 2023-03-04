@@ -60,6 +60,6 @@ void JNoise::generateSeed(){
     seed = ofGetElapsedTimef();
 }
 
-void JNoise::customOne(){
+void JNoise::customOne(float* v){
     linesAmount = busses[0];
 }

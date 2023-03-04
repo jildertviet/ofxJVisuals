@@ -224,6 +224,6 @@ void JVecField::setMode(char m){
     mode = m;
 }
 
-void JVecField::customOne(){
+void JVecField::customOne(float* v){
     shaderContrast = busses[0];
 }

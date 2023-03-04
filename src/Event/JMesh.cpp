@@ -72,16 +72,16 @@ string JMesh::getMeshName(){
     return toSave;
 }
 
-void JMesh::customOne(){
+void JMesh::customOne(float* v){
     bSave = true;
 }
 
-void JMesh::customTwo(){
+void JMesh::customTwo(float* v){
     prepareForSave();
     save();
 }
 
-void JMesh::customThree(){
+void JMesh::customThree(float* v){
     createHollowRect(glm::vec3(busses[0], busses[1], busses[2]), busses[3]);
 }
 

@@ -57,7 +57,7 @@ public:
 
     ofFbo resizeFbo; // TEST
     ofFbo* underlayer;
-    void customOne() override;
+    void customOne(float* v = nullptr) override;
 private:
 
 };

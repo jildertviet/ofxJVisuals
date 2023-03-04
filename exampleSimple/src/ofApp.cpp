@@ -3,16 +3,34 @@ using namespace glm;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    // int a = 67109896;
+    int b = 67109895;
+    // int c = 67109894;
+    // int d = 67109893;
+    // int e = 67109892;
+    // float aF = a;
+    // float bF = b;
+    // float cF = c;
+    // float dF = d;
+    // float eF = e;
+    // cout << aF << ", " << bF << ", " << cF << ", " << dF << ", " << eF << endl;
+    // int aI = aF;
+    // int bI = bF;
+    // int cI = cF;
+    // int dI = dF;
+    // int eI = eF;
+    // cout << aI << ", " << bI << ", " << cI << ", " << dI << ", " << eI << endl;
+    // float x;
+    // memcpy(&x, &b, 4);
+    // cout << x << endl;
+    // int y;
+    // memcpy(&y, &x, 4);
+    // cout << y << endl;
     //
-    // char t[4];
-    // t[0] = 2;
-    // t[1] = 3;
-    // int a;
-    // memcpy(&a, t, sizeof(int));
-    // cout << a << endl;
-    // cout << (int)(*((char*)&a)) << endl;
-    // cout << (int)(*(((char*)&a)+1)) << endl;
-    //
+    // int d = 1000;
+    // float z;
+    // memcpy(&z, &d, 4);
+    // cout << z << endl;
     // std::exit(0);
     ofSetWindowShape(1080, 1080);
     bool bSC = true;

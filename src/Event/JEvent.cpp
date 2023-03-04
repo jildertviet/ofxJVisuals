@@ -144,10 +144,6 @@ void JEvent::setType(string type){
     cout<<"Made an JEvent of type: " << type << endl;;
 };
 
-void JEvent::test(){
-        cout << "JEvent test()" << endl;
-}
-
 JEvent* JEvent::getEvent(int index){
     JEvent* JEvent = this;
     for(int i=0; i<index; i++){
@@ -335,4 +331,14 @@ void JEvent::fillBuffer(ofxOscMessage& m){
     buffer.push_back(m.getArgAsFloat(i));
   }
   // cout << buffer[0] << endl;
+}
+
+void JEvent::doFunc(int id, float* v){
+  switch(id){
+    case 0: customOne(v); break;
+    case 1: customTwo(v); break;
+    case 2: customThree(v); break;
+    case 3: customFour(v); break;
+    case 4: customFive(v); break;
+  }
 }

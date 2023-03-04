@@ -114,8 +114,8 @@ public:
     string asciiCharacters;
     ofTrueTypeFont  font;
     
-    void customOne() override;
-    void customTwo() override;
+    void customOne(float* v = nullptr) override;
+    void customTwo(float* v = nullptr) override;
 };
 
 #endif /* JVideoPlayer_hpp */
