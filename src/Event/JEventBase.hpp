@@ -11,7 +11,8 @@ namespace jevent{
     JRectangle,
     JModifierArray,
     JVorm,
-    JFunctionTrigger
+    JFunctionTrigger,
+    JBufferSender
   };
   enum ConnectionType{
     Modifier,

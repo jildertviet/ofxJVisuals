@@ -540,7 +540,7 @@ void MsgParser::setVal(ofxOscMessage& m){ // Default: /setVal, 0, "size", 100, 2
                 break;
             case 13:{ // maxSpeed
                 if(m.getArgAsString(2) == "JVorm")
-                    ((JVorm*)e)->change_maxspeed(m.getArgAsFloat(3), m.getArgAsFloat(4));
+                    ((JVorm*)e)->changeMaxspeed(m.getArgAsFloat(3), m.getArgAsFloat(4));
             }
 
             case 14:{ // lijnMax
@@ -762,6 +762,8 @@ void MsgParser::onSuperColliderMessageReceived(ofxOscMessage &m){ // 2: event id
       connect(m);
     } else if(a == "/trigger"){
       trigger(m);
+    } else if(a == "/buffer"){
+      setBuffer(m);
     }
 }
 
@@ -826,9 +828,9 @@ bool MsgParser::trigger(ofxOscMessage& m){
   cout << m << endl;
   // for(int i=0; i<m.getNumArgs(); i++)
     // cout << m.getArgAsInt(i) << endl;
-  int targetID;
-  float targetIDf = m.getArgAsFloat(2);
-  memcpy(&targetID, &targetIDf, sizeof(float));
+    int targetID;
+    float targetIDf = m.getArgAsFloat(2);
+    memcpy(&targetID, &targetIDf, sizeof(float));
   cout << "Target: " << targetID << ", " << m.getArgAsInt(3) << endl; // ID, subID
   JEvent* target = getEventById(targetID, m.getArgAsInt(3));
   if(target){
@@ -841,6 +843,24 @@ bool MsgParser::trigger(ofxOscMessage& m){
     target->doFunc(m.getArgAsInt(4), arguments);
     delete arguments;
     // target->doFunc(m.getArgAsInt(4), arguments);
+  } else{
+    cout << "Target not found, " << m.getArgAsFloat(2) << ", " << m.getArgAsInt(3) << endl;
+    return false;
+  }
+  return false;
+}
+
+bool MsgParser::setBuffer(ofxOscMessage& m){
+  int targetID;
+  float targetIDf = m.getArgAsFloat(2);
+  memcpy(&targetID, &targetIDf, sizeof(float));
+  JEvent* target = getEventById(targetID, m.getArgAsInt(3));
+  if(target){
+    int numFrames = m.getNumArgs()-2;
+    target->buffer.clear();
+    for(int i=0; i<numFrames; i++){
+      target->buffer.push_back(m.getArgAsFloat(i+2));
+    }
   } else{
     cout << "Target not found, " << m.getArgAsFloat(2) << ", " << m.getArgAsInt(3) << endl;
     return false;

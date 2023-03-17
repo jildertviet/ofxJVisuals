@@ -17,6 +17,7 @@ class meshWalker: public JEvent{
 public:
 typedef unsigned int uint32;
 typedef unsigned short uint16;
+
     meshWalker(){};
     meshWalker(ofMesh* m, ofVec2f dimensions);
     void specificFunction();
@@ -35,19 +36,19 @@ typedef unsigned short uint16;
     uint32 numSteps;
     uint32 numStepsStart;
     ofVec3f getPerlinDirection();
-    
+
     ofVec3f getDirection();
     ofVec3f globalDirection = ofVec3f(1,1);
-    
+
     float perlinReadPoint = 0;
-    
+
     vector<ofVec3f> trailPoints;
     uint16 trailLength = 80;
     uint16 fadeLength = 40;
-    
+
     ofMesh trail;
     ofFloatColor color = ofFloatColor(1.0, 1.0, 1.0, 1.0);
-    
+
     bool bDrawCircles = false;
     float trainLengthRatio = 0.5;
 //    float segmentLength;

@@ -10,12 +10,11 @@
 
 JEllipse::JEllipse(){
     setType("JEllipse");
-    
+
     radius = ((int)ofRandom(8)+3)*2.5;
     speed = (0.00229) * ((int)ofRandom(16)+1)/16.;
-    size = ofVec2f(radius, radius);
+    size = glm::vec3(radius, radius, 0);
     originalSize = size;
-    ofSetCircleResolution(360);
     angle = ofRandom(360);
     originalAlpha = ofRandom(100)+20;
     color = ofColor::white;
@@ -37,9 +36,8 @@ void JEllipse::display(){
     ofPushMatrix();
     ofTranslate(ofGetWindowWidth()/2.0, ofGetWindowHeight()/2.);
     ofRotateDeg(angle);
-    
+
     if(fill_oneFrame){
-        cout << "Joe" << endl;
         ofFill();
         fill_oneFrame = false;
         ofSetColor(255, 20);
@@ -47,12 +45,12 @@ void JEllipse::display(){
         ofNoFill();
         ofSetColor(255, 20+alpha);
     }
-    
+
     ofSetColor(color);
     ofDrawEllipse(0,0,radius*size.x, radius*size.y);
     if(oneFrameLarger){
         ofDrawEllipse(0,0,radius*size.x*1.4, radius*size.y*1.4);
-        ofSetColor(255, 20);
+        ofSetColor(color);
         ofDrawEllipse(0,0,radius*size.x*2, radius*size.y*2);
         oneFrameLarger = false;
     }

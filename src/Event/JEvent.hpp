@@ -137,7 +137,7 @@ public:
     void deleteModifiers();
     virtual void setViaBusses(vector<float> busses){};
     void fillBuffer(ofxOscMessage& m);
-    vector<float> buffer;
+    vector<float> buffer; // For JLine
 
     ofxJVisuals* v;
     JEvent* getEventById(unsigned int id, unsigned int subID=0);

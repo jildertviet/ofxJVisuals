@@ -76,6 +76,7 @@ public:
     bool kill(ofxOscMessage& m);
     bool connect(ofxOscMessage& m);
     bool trigger(ofxOscMessage& m);
+    bool setBuffer(ofxOscMessage& m);
     bool updateValues(ofxOscMessage& m, JEvent* e = nullptr);
     map<string, short> commands;
     map<string, short> types;

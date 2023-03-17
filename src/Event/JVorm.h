@@ -46,15 +46,15 @@ typedef unsigned short uint16;
     void rotateCoordinates(int steps, int direction);
     void moveCorner(int, glm::vec3);
     void tussenCoordinaten();
-    void change_maxspeed(float);
-    void change_maxspeed(float, float);
-    void change_state_of_particles(bool);
+    void changeMaxspeed(float v);
+    void changeMaxspeed(float min, float max);
+    void changeStateOfParticles(bool);
     void setState(bool s);
 
     void instantFormJVorm();
     bool checkIfInFormation();
 
-    float radius, angle, angle_offset;
+    float radius, angle, angleOffset;
 
     bool particlesVisible = false;
 
@@ -64,12 +64,9 @@ typedef unsigned short uint16;
     void switchConnectableness();
     void mirror();
     void formJVorm();
-    void changeAngleOffset(float angle_);
+    void changeAngleOffset(float angle);
     bool isConnectable();
 
-    bool shape_visible = false;
-
-    void displayShape(int mode, float division);
     void connectParticles();
 
     float* maxDistance;

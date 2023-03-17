@@ -31,7 +31,7 @@ JVorm::JVorm(uint8 numSides, int sideDiv, float radius, glm::vec3 loc, bool on_d
 void JVorm::init(){
   // makeCoordinates(numSides, sideDiv, radius, on_destination);
   makeCoordinates(busses[0], busses[1], busses[2], busses[3]);
-  change_maxspeed(speed);
+  changeMaxspeed(speed);
 }
 
 void JVorm::specificFunction(){
@@ -117,20 +117,20 @@ void JVorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onD
         }
     }
 
-    switch(numSides){ // angle_offset is changed, so a rectangle will have horizontal and vertical sides
+    switch(numSides){ // angleOffset is changed, so a rectangle will have horizontal and vertical sides
         case 4:
-            angle_offset = 45;
+            angleOffset = 45;
             break;
         default:
-            angle_offset = -90;
+            angleOffset = -90;
             break;
     }
 
     for(uint8 i=0; i<numSides; i++) { // calculate coordinates
         coordinates.push_back(
         glm::vec3(
-            loc.x + (cos((angle_offset + (angle*i)) * (PI/180.)) * radius), // xPos
-            loc.y + (sin((angle_offset + (angle*i)) * (PI/180.)) * radius), // yPos
+            loc.x + (cos((angleOffset + (angle*i)) * (PI/180.)) * radius), // xPos
+            loc.y + (sin((angleOffset + (angle*i)) * (PI/180.)) * radius), // yPos
             0
             )
         );
@@ -225,7 +225,7 @@ void JVorm::tussenCoordinaten(){
     vector<glm::vec3>().swap(temp);
 }
 
-void JVorm::change_maxspeed(float maxspeed_){
+void JVorm::changeMaxspeed(float maxspeed_){
     // for(int i=0; i<particles.size(); i++)
       speed = maxspeed_;
 }
@@ -236,13 +236,11 @@ void JVorm::switchConnectableness(){
     }
 }
 
-void JVorm::change_maxspeed(float minspeed_, float maxspeed_){
-    // for(int i=0; i<particles.size(); i++){
-        speed = ofRandom(minspeed_, maxspeed_);
-    // }
+void JVorm::changeMaxspeed(float minspeed_, float maxspeed_){
+    speed = ofRandom(minspeed_, maxspeed_);
 }
 
-void JVorm::change_state_of_particles(bool state){
+void JVorm::changeStateOfParticles(bool state){
     for(int i=0; i<particles.size(); i++)
         particles[i]->state = state;
 }
@@ -282,7 +280,7 @@ void JVorm::mirror(){
 }
 
 void JVorm::formJVorm(){
-    change_state_of_particles(1);
+    changeStateOfParticles(1);
 }
 
 void JVorm::changeAngleOffset(float angle_){
