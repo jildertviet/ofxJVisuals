@@ -70,6 +70,7 @@ void JLine::toRect(ofVec2f loc, ofVec2f size){
 }
 
 void JLine::fromBuffer(){
+  cout << "Fill from buffer" << endl;
   mode = 2;
   line.clear();
   line.addVertex(buffer[0], buffer[1]);
@@ -77,10 +78,11 @@ void JLine::fromBuffer(){
     glm::vec2 v = glm::vec2(buffer[i*2], buffer[i*2+1]);
     line.lineTo(ofPoint(v));
   }
+
   // line.addVertex(buffer[buffer.size()-2], buffer[buffer.size()-1]);
-  // for(int i=0; i<line.getVertices().size(); i++){
-    // cout << line.getVertices()[i][0] << ", " << line.getVertices()[i][1] << endl;
-  // }
+  for(int i=0; i<line.getVertices().size(); i++){
+    cout << line.getVertices()[i][0] << ", " << line.getVertices()[i][1] << endl;
+  }
 }
 
 void JLine::setLoc(glm::vec3 loc){

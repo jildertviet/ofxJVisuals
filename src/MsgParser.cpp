@@ -791,6 +791,7 @@ bool MsgParser::create(ofxOscMessage& m){
         case jevent::JRectangle: e = new JRectangle(); break;
         case jevent::JModifierArray: e = new JModifierArray(); break;
         case jevent::JVorm: e = new JVorm(); bInit = true; break;
+        case jevent::JLine: e = new JLine(); break;
         default:
             return false;
     }
@@ -844,25 +845,27 @@ bool MsgParser::trigger(ofxOscMessage& m){
     delete arguments;
     // target->doFunc(m.getArgAsInt(4), arguments);
   } else{
-    cout << "Target not found, " << m.getArgAsFloat(2) << ", " << m.getArgAsInt(3) << endl;
+    cout << "Target not found, " << targetID << ", " << m.getArgAsInt(3) << endl;
     return false;
   }
   return false;
 }
 
 bool MsgParser::setBuffer(ofxOscMessage& m){
+  cout << m << endl;
   int targetID;
   float targetIDf = m.getArgAsFloat(2);
   memcpy(&targetID, &targetIDf, sizeof(float));
   JEvent* target = getEventById(targetID, m.getArgAsInt(3));
   if(target){
-    int numFrames = m.getNumArgs()-2;
+    int numFrames = m.getNumArgs()-4;
     target->buffer.clear();
     for(int i=0; i<numFrames; i++){
-      target->buffer.push_back(m.getArgAsFloat(i+2));
+      cout << "Add frame: " << m.getArgAsFloat(i+4) << endl;
+      target->buffer.push_back(m.getArgAsFloat(i+4));
     }
   } else{
-    cout << "Target not found, " << m.getArgAsFloat(2) << ", " << m.getArgAsInt(3) << endl;
+    cout << "Target not found, " << targetID << ", " << m.getArgAsInt(3) << endl;
     return false;
   }
   return false;
