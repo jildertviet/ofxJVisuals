@@ -32,7 +32,6 @@
 #include "JMirror.h"
 #include "MultiMesh.hpp"
 #include "MultiMeshMaybeTomorrow.hpp"
-#include "JEllipse.h"
 #include "JRectangle.hpp"
 #include "RectangleMask.hpp"
 

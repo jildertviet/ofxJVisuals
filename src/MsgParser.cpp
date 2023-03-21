@@ -322,7 +322,7 @@ bool MsgParser::make(ofxOscMessage& m){
             ((JVecField*)e)->underlayer = getFbo();
             break;
         case 3: e = new JMirror(); break;
-        case 4: e = new JEllipse(); break;
+        
         case 5: // JVorm
             if(m.getNumArgs() > 3){
                 // Specific constructor ?

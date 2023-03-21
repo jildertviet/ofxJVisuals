@@ -38,7 +38,8 @@ public:
         } else{
             ofNoFill();
         }
-        ofDrawCircle(loc, size.x * 0.5);
+        ofDrawEllipse(loc, size.x, size.y);
+        // ofDrawCircle(loc, size.x * 0.5);
     };
     float r(){
       return size.x * 0.5;

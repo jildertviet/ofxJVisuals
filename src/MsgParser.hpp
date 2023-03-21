@@ -27,7 +27,6 @@
 #include "JEvent.hpp"
 #include "JVecField.hpp"
 #include "JMirror.h"
-#include "JEllipse.h"
 #include "SpaceCube.h"
 #include "MultiMesh.hpp"
 #include "JText.hpp"
