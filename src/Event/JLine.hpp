@@ -32,11 +32,12 @@ public:
 
     void toRect(ofVec2f loc, ofVec2f size);
 
-    void fromBuffer();
+    void fromBuffer(int bufferMode = 0);
     void setLoc(glm::vec3 loc) override;
     void setSize(glm::vec3 size) override;
     void calcLine();
 
     void customOne(float* v = nullptr) override;
+    void customTwo(float* v = nullptr) override;
 };
 #endif /* JLine_hpp */

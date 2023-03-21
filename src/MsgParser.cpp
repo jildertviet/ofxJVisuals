@@ -861,7 +861,7 @@ bool MsgParser::setBuffer(ofxOscMessage& m){
     int numFrames = m.getNumArgs()-4;
     target->buffer.clear();
     for(int i=0; i<numFrames; i++){
-      cout << "Add frame: " << m.getArgAsFloat(i+4) << endl;
+      // cout << "Add frame: " << m.getArgAsFloat(i+4) << endl;
       target->buffer.push_back(m.getArgAsFloat(i+4));
     }
   } else{

@@ -69,14 +69,28 @@ void JLine::toRect(ofVec2f loc, ofVec2f size){
     // Make env to move loc and size
 }
 
-void JLine::fromBuffer(){
-  cout << "Fill from buffer" << endl;
+void JLine::fromBuffer(int bufferMode){
+  // cout << "Fill from buffer" << endl;
   mode = 2;
   line.clear();
-  line.addVertex(buffer[0], buffer[1]);
-  for(int i=1; i<buffer.size()/2; i++){
-    glm::vec2 v = glm::vec2(buffer[i*2], buffer[i*2+1]);
-    line.lineTo(ofPoint(v));
+  switch(bufferMode){
+    case 0:{
+      line.addVertex(buffer[0], buffer[1]);
+      for(int i=1; i<buffer.size()/2; i++){
+        glm::vec2 v = glm::vec2(buffer[i*2], buffer[i*2+1]);
+        line.lineTo(ofPoint(v));
+      }
+    }
+    break;
+    case 1:{
+      for(int i=0; i<buffer.size(); i++){
+        float x = size.x / buffer.size();
+        x *= i;
+        glm::vec2 v = glm::vec2(x, buffer[i]);
+        line.lineTo(ofPoint(v));
+      }
+    }
+    break;
   }
 
   // line.addVertex(buffer[buffer.size()-2], buffer[buffer.size()-1]);
@@ -114,6 +128,5 @@ void JLine::calcLine(){
   }
 }
 
-void JLine::customOne(float* v){
-  fromBuffer();
-}
+void JLine::customOne(float* v){fromBuffer(0);}
+void JLine::customTwo(float* v){fromBuffer(1);}
