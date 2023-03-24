@@ -13,6 +13,7 @@
 
 class scSynth: public ofThread{
 public:
+    string r = "";
     bool bDoOnce = false;
     ~scSynth(){
         stop();
@@ -30,6 +31,7 @@ public:
     void stop(){
         std::unique_lock<std::mutex> lck(mutex); // Test to see if this does something
         stopThread();
+        cout << r << endl;
 //        condition.notify_all();
     }
 
@@ -49,8 +51,7 @@ public:
                     // }
                 // }
                 cout << cmd << endl;
-                string r = ofSystem(cmd.c_str());
-                cout << r << endl;
+                r = ofSystem(cmd.c_str());
             }
         }
     }

@@ -94,9 +94,9 @@ void JLine::fromBuffer(int bufferMode){
   }
 
   // line.addVertex(buffer[buffer.size()-2], buffer[buffer.size()-1]);
-  for(int i=0; i<line.getVertices().size(); i++){
-    cout << line.getVertices()[i][0] << ", " << line.getVertices()[i][1] << endl;
-  }
+  // for(int i=0; i<line.getVertices().size(); i++){
+    // cout << line.getVertices()[i][0] << ", " << line.getVertices()[i][1] << endl;
+  // }
 }
 
 void JLine::setLoc(glm::vec3 loc){

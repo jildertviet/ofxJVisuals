@@ -180,6 +180,7 @@ bool MsgParser::updateValues(ofxOscMessage& m, JEvent* e){
 
 bool MsgParser::parseMsg(ofxOscMessage& m){
 //    cout << m.getAddress() << endl;
+    // cout << m << endl;
     switch(commands[m.getAddress()]){
         case 1: make(m); break; // Make
         case 2: setVal(m); break; // setVal
@@ -322,7 +323,7 @@ bool MsgParser::make(ofxOscMessage& m){
             ((JVecField*)e)->underlayer = getFbo();
             break;
         case 3: e = new JMirror(); break;
-        
+
         case 5: // JVorm
             if(m.getNumArgs() > 3){
                 // Specific constructor ?
@@ -826,16 +827,16 @@ bool MsgParser::connect(ofxOscMessage& m){
 }
 
 bool MsgParser::trigger(ofxOscMessage& m){
-  cout << m << endl;
+  // cout << m << endl;
   // for(int i=0; i<m.getNumArgs(); i++)
     // cout << m.getArgAsInt(i) << endl;
     int targetID;
     float targetIDf = m.getArgAsFloat(2);
     memcpy(&targetID, &targetIDf, sizeof(float));
-  cout << "Target: " << targetID << ", " << m.getArgAsInt(3) << endl; // ID, subID
+  // cout << "Target: " << targetID << ", " << m.getArgAsInt(3) << endl; // ID, subID
   JEvent* target = getEventById(targetID, m.getArgAsInt(3));
   if(target){
-    cout << target << endl;
+    // cout << target << endl;
     int numArguments = m.getNumArgs()-5;
     float* arguments = new float[numArguments]; // 10 - 5 = 5
     for(int i=0; i<numArguments; i++){
@@ -852,20 +853,20 @@ bool MsgParser::trigger(ofxOscMessage& m){
 }
 
 bool MsgParser::setBuffer(ofxOscMessage& m){
-  cout << m << endl;
   int targetID;
-  float targetIDf = m.getArgAsFloat(2);
+  float targetIDf = m.getArgAsFloat(0);
   memcpy(&targetID, &targetIDf, sizeof(float));
-  JEvent* target = getEventById(targetID, m.getArgAsInt(3));
+  JEvent* target = getEventById(targetID, m.getArgAsInt(1));
   if(target){
-    int numFrames = m.getNumArgs()-4;
     target->buffer.clear();
-    for(int i=0; i<numFrames; i++){
-      // cout << "Add frame: " << m.getArgAsFloat(i+4) << endl;
-      target->buffer.push_back(m.getArgAsFloat(i+4));
+    ofBuffer b = m.getArgAsBlob(2); // Parse as floats
+    for(int i=0; i<b.size()/sizeof(float); i++){
+      float v;
+      memcpy(&v, b.getData()+(i*sizeof(float)), sizeof(float));
+      target->buffer.push_back(v);
     }
   } else{
-    cout << "Target not found, " << targetID << ", " << m.getArgAsInt(3) << endl;
+    cout << "Target not found, " << targetID << ", " << m.getArgAsInt(1) << endl;
     return false;
   }
   return false;
