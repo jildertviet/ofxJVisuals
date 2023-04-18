@@ -11,7 +11,8 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size, bool bUseSC) : size(size){
     for(int i=0; i<NUMLAYERS; i++)
         layers[i] = new JLayer(); // Dummy events
 
-    negative.load("../../../../../addons/ofxJVisuals/libs/shaders/negative");
+    negative.load((string)SHADER_PATH + "/negative");
+    brightnessAndSaturation.load((string)SHADER_PATH + "/brightnessAndSaturation");
 
 #if USE_PP
     post.init(ofGetWidth(), ofGetHeight());
@@ -147,7 +148,11 @@ void ofxJVisuals::update(){
         ofClear(0,0);
 //        ofEnableSmoothing();
         alphaScreen->displayMain();
-//        layers[0]->displayMain(); // alphaScreen and more. Call explicitly, as above
+
+        brightnessAndSaturation.begin();
+        brightnessAndSaturation.setUniform1f("brightness", ofMap(ofGetMouseX(), 0, ofGetWidth(),-1, 1)); // 0 = normal
+        brightnessAndSaturation.setUniform1f("contrast", 1.0); // 1 = normal
+        brightnessAndSaturation.setUniform1f("saturation", ofMap(ofGetMouseY(), 0, ofGetHeight(), 0, 4)); // 1 = normal
 
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         layers[1]->displayMain(); // Non-cam layer back
@@ -174,6 +179,7 @@ void ofxJVisuals::update(){
         // set gl state back to original
         glPopAttrib();
 #endif
+    brightnessAndSaturation.end();
     fbo.end();
 
     renderFbo.begin();

@@ -4,11 +4,11 @@ uniform sampler2DRect tex0;
 
 //uniform sampler2DRect tex1;
 //uniform sampler2DRect tex2;
-uniform vec2 size;
-uniform float numLines;
-uniform float lineWidth;
-uniform float diagonalScale;
-uniform float diagonalPow;
+uniform vec2 size = vec2(1920.0, 1080.0);
+uniform float numLines = 100.0;
+uniform float lineWidth = 1.0;
+uniform float diagonalScale = 1.0;
+uniform float diagonalPow = 1.0;
 
 in vec2 texCoordVarying;
 
@@ -78,6 +78,6 @@ void main (){
 
     vec3 result = vertical + diagonal + blackOrWhite;
 
-    // fragColor = vec4(result, 1.0);
-    fragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    fragColor = vec4(result, 1.0);
+    // fragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }

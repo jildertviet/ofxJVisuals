@@ -15,6 +15,7 @@
 #include "Env.hpp" // USE_FRAMES_AS_CLOCK is set here
 #include "mapValue.h"
 #include "JEventBase.hpp"
+#include "config.h"
 
 //#include "JModifier.hpp"
 

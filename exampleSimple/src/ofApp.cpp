@@ -7,6 +7,12 @@ void ofApp::setup(){
     bool bSC = true;
     visualizer = new ofxJVisuals(vec2(1080), bSC); // Don't use SC
     visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(100,100), glm::vec2(100, 100)));
+    visualizer->last->color = ofColor(255, 0, 0, 100);
+    visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(150,100), glm::vec2(100, 100)));
+    visualizer->last->color = ofColor(0, 0, 255, 100);
+
+    visualizer->shaders.push_back(new JShader());
+    visualizer->shaders.back()->load("lines");
 }
 
 //--------------------------------------------------------------

@@ -15,6 +15,7 @@
 #define USE_PP  false // ofxPostProcessing
 
 #define USE_OPENCL false // Comment this to exclude the particles (RPI?)
+#define SHADER_PATH "../../../../../addons/ofxJVisuals/libs/shaders"
 
 // SuperCollider
 #define USE_SC  true

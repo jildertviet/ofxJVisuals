@@ -164,6 +164,7 @@ private:
     JLayer* layers[NUMLAYERS]; // linked list, use AddEvent to add
     JLayer negativeLayer;
     ofShader negative;
+    ofShader brightnessAndSaturation;
 };
 
 #endif /* ofxJVisuals_hpp */

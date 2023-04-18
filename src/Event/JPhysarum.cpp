@@ -16,7 +16,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 
     numParticles = (size.x*size.y)*0.15;
 
-    string shadersFolder ="../../../../../addons/ofxJVisuals/libs/shaders";
+    string shadersFolder = SHADER_PATH;
 
     // Loading the Shaders
     updatePos.load("",shadersFolder+"/JPhysarum/posUpdate.frag");
