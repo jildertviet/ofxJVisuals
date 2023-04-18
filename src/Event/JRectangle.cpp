@@ -9,8 +9,6 @@
 
 JRectangle::JRectangle(){
     setType("JRectangle");
-//    JModifier j;
-//    modifiers.push_back((JModifier*)new JModifierArray());
 }
 
 JRectangle::JRectangle(float millisTime, glm::vec3 loc, glm::vec3 size, ofColor color, float attack, float release, glm::vec3 direction, bool move) : JRectangle(){
@@ -24,15 +22,18 @@ JRectangle::JRectangle(float millisTime, glm::vec3 loc, glm::vec3 size, ofColor 
     addEnvAlpha(vector<float>{0, (float)color.a, (float)color.a, 0}, vector<float>{attack, millisTime-attack-release,release});
 
     speed = 1;
-    bMove = move;
 }
 
 JRectangle::JRectangle(glm::vec3 loc, glm::vec3 size) : JRectangle(){
     this->loc = loc; this->size = size; active=false;
-    bMove = false;
     direction = glm::vec3(-1,0,0);
+    bMove = false;
     speed = 1;
 }
+
+JRectangle::JRectangle(glm::vec2 loc, glm::vec2 size) : JRectangle(glm::vec3(loc, 0.0), glm::vec3(size, 0.0)){
+
+};
 
 void JRectangle::ownDtor(){
     removeFromVector();
@@ -125,24 +126,6 @@ void JRectangle::specificFunction(){
 
 void JRectangle::jump(glm::vec2 distance){
     loc += glm::vec3(distance, 0);
-}
-
-void JRectangle::noDank(){
-    setEndTime(400);
-    loc = glm::vec3(ofRandomWidth(), 0, 0);
-    size = glm::vec3(100, ofGetWindowHeight(), 0);
-    active=true;
-    int attack = 10;
-    int release = 300;
-    int millisTime = 400;
-    addEnvAlpha(attack, millisTime-attack-release,release);
-    if(ofRandom(-1,1)>0){
-        direction = glm::vec3(-1,0,0);
-    } else{
-        direction = glm::vec3(1,0,0);
-    }
-    speed = 1;
-    bMove = true;
 }
 
 void JRectangle::addPtr(JRectangle** p){

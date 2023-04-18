@@ -5,7 +5,14 @@ int main(){
 	// can be OF_WINDOW or OF_FULLSCREEN
 	// pass in width and height too:
 
-	ofSetupOpenGL(1920, 1080, OF_WINDOW);
+	// ofSetupOpenGL(1920, 1080, OF_WINDOW);
+
+	ofGLWindowSettings settings;
+	settings.setGLVersion(3,3);
+	settings.setSize(1920, 1080);
+	// settings.height = 1080;
+	ofCreateWindow(settings);
+
 
 	ofRunApp(new ofApp());
 }

@@ -27,7 +27,7 @@ JEvent::~JEvent(){
         events[id] = nullptr; // Only if it has this ptr! Child JEvents (inside an JEvent) don't hve this set...
 
     clearEnv();
-
+    printf("dtor %p\n", this); // in destructor
     cout << "JEvent '" << type << "', id: " << id << " deleted!" << endl;
 }
 
@@ -141,7 +141,7 @@ void JEvent::checkBorders(){
 
 void JEvent::setType(string type){
   this->type = type;
-    cout<<"Made an JEvent of type: " << type << endl;;
+  cout<<"Made an JEvent of type: " << type << endl;
 };
 
 JEvent* JEvent::getEvent(int index){

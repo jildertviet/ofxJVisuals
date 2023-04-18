@@ -20,7 +20,7 @@ public:
     JRectangle(float millisTime, glm::vec3 loc, glm::vec3 size, ofColor color=ofColor(255,255), float attack=100, float release=100, glm::vec3 direction=glm::vec3(-1,0,0), bool move=true); // Temporary
 
     JRectangle(glm::vec3 loc, glm::vec3 size=glm::vec3(ofGetWindowSize(), 0.0)); // Infite
-    JRectangle(glm::vec2 loc, glm::vec2 size){JRectangle(glm::vec3(loc, 0.0), glm::vec3(size, 0.0));};
+    JRectangle(glm::vec2 loc, glm::vec2 size);
     void ownDtor() override;
 
     virtual void display() override;
@@ -29,7 +29,6 @@ public:
     float topspeed = 1.0;
     void jump(glm::vec2 distance);
 
-    void noDank();
     virtual void imageFloating(){};
 
     void addPtr(JRectangle** p);

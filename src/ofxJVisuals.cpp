@@ -73,6 +73,8 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size, bool bUseSC) : size(size){
     msgParser = new MsgParser(this, bUseSC);
 
     ofSetCircleResolution(90);
+    ofEnableAlphaBlending();
+    // ofEnableDepthTest();
 //    sharedFbo.allocate(2560, 800, GL_RGBA);
 //    sharedFbo2.allocate(2560, 800, GL_RGBA);
 }
@@ -146,6 +148,8 @@ void ofxJVisuals::update(){
 //        ofEnableSmoothing();
         alphaScreen->displayMain();
 //        layers[0]->displayMain(); // alphaScreen and more. Call explicitly, as above
+
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         layers[1]->displayMain(); // Non-cam layer back
 
 //        if(bCam){
@@ -156,6 +160,7 @@ void ofxJVisuals::update(){
 //        }
         for(int i=2; i<NUMLAYERS; i++) // Don't draw layer 0: nonCamFront
             layers[i]->displayMain();
+        ofDisableDepthTest();
 //        if(bCam){
 //            cam.end();
 //            ofPopMatrix();

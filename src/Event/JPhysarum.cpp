@@ -16,22 +16,12 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 
     numParticles = (size.x*size.y)*0.15;
 
-    string shadersFolder;
-    if(ofIsGLProgrammableRenderer()){
-        shadersFolder="../../../addons/ofxJVisuals/libs/shaders_gl3";
-    }else{
-        shadersFolder="../../../../../addons/ofxJVisuals/libs/shaders";
-    }
+    string shadersFolder ="../../../../../addons/ofxJVisuals/libs/shaders";
 
     // Loading the Shaders
-    if(ofIsGLProgrammableRenderer()){
-        updatePos.load(shadersFolder+"/passthru.vert", shadersFolder+"/posUpdate.frag");
-        updateVel.load(shadersFolder+"/passthru.vert", shadersFolder+"/velUpdate.frag");
-    } else{
-        updatePos.load("",shadersFolder+"/posUpdate.frag");
-        updateVel.load("",shadersFolder+"/velUpdate.frag");
-        alphaDecay.load("", shadersFolder+"/alphaDecay.frag");
-    }
+    updatePos.load("",shadersFolder+"/JPhysarum/posUpdate.frag");
+    updateVel.load("",shadersFolder+"/JPhysarum/velUpdate.frag");
+    alphaDecay.load("", shadersFolder+"/JPhysarum/alphaDecay.frag");
 
     updateRender.load(shadersFolder+"/render");
 
