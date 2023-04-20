@@ -14,29 +14,28 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     this->size = glm::vec3(size, 0);
     this->loc = glm::vec3(loc,0);
 
-    numParticles = (size.x*size.y)*0.15;
+    numParticles = (size.x*size.y)*0.5;
 
     string shadersFolder = SHADER_PATH;
 
     // Loading the Shaders
-    updatePos.load("",shadersFolder+"/JPhysarum/posUpdate.frag");
-    updateVel.load("",shadersFolder+"/JPhysarum/velUpdate.frag");
-    alphaDecay.load("", shadersFolder+"/JPhysarum/alphaDecay.frag");
+    updatePos.load(shadersFolder+"/JPhysarum/posUpdate");
+    updateVel.load(shadersFolder+"/JPhysarum/velUpdate");
+    alphaDecay.load(shadersFolder+"/JPhysarum/alphaDecay");
 
-    updateRender.load(shadersFolder+"/render");
+    updateRender.load(shadersFolder+"/JPhysarum/render");
 
     textureRes = (int)sqrt((float)numParticles);
     numParticles = textureRes * textureRes;
 
     ofFloatPixels p;
     p.allocate(textureRes, textureRes, 3);
-    for (int x = 0; x < textureRes; x++){
-        for (int y = 0; y < textureRes; y++){
+    for (float x = 0; x < textureRes; x++){
+        for (float y = 0; y < textureRes; y++){
             int i = textureRes * y + x;
-            p.setColor(x, y, ofFloatColor((float)x / (float)textureRes,
-                                          (float)y / (float)textureRes,
-                                          1.0-pow(ofRandom(0.0001, 0.9), 3.0))
-                       );
+            p.setColor(x, y,
+              ofFloatColor(x / (float)textureRes, y / (float)textureRes, 1.0-pow(ofRandom(0.0001, 0.9), 3.0))
+            );
         }
     }
 
@@ -45,9 +44,10 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 
     posPingPong.allocate(textureRes, textureRes, GL_RGBA32F);
     posPingPong.src->begin();
-    ofClear(255);
+    ofClear(0);
     img.draw(0,0);
     posPingPong.src->end();
+
 
     velPingPong.allocate(textureRes, textureRes, GL_RGBA32F);
     velPingPong.src->begin();
@@ -88,13 +88,19 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
 }
 
 void JPhysarum::display(){
+    ofFill();
     ofSetColor(color);
+    renderPingPong.src->draw(0, 0);
+    ofNoFill();
+    ofSetColor(255, 100);
+    ofDrawRectangle(0, 0, renderPingPong.src->getWidth(), renderPingPong.src->getHeight());
 
-    renderPingPong.src->draw(loc.x, loc.y);
-
-//    velPingPong.src->draw(0, 0);
+   // velPingPong.src->draw(0, 0);
 //    velPingPong.dst->draw(velPingPong.dst->getWidth(), 0);
-//    posPingPong.src->draw(0, velPingPong.dst->getHeight());
+   posPingPong.src->draw(0, velPingPong.dst->getHeight() * 3);
+
+
+   // posPingPong.src->draw(0, 0);
 //    posPingPong.dst->draw(velPingPong.dst->getWidth(), velPingPong.dst->getHeight());
 
 //    if(bDrawGui){
@@ -143,66 +149,37 @@ void JPhysarum::specificFunction(){
         updatePos.begin();
             updatePos.setUniformTexture("velocityTex", velPingPong.src->getTexture(), 1);
             updatePos.setUniformTexture("positionTex", posPingPong.src->getTexture(), 0);
-            updatePos.setUniformTexture("trailTex", renderPingPong.src->getTexture(), 2);
-
+            // updatePos.setUniformTexture("trailTex", renderPingPong.src->getTexture(), 2);
             updatePos.setUniform1f("speedMul", speed);
-
             posPingPong.src->draw(0, 0);
         updatePos.end();
     posPingPong.dst->end();
     posPingPong.swap();
 
-//    renderPingPong.swap();
-//    renderPingPong.dst->begin();
-//        ofSetColor(0, 10);
-//        ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
-//        renderPingPong.src->draw(0,0); // If I call this in the below draw-pass it's a texture? test.
-//
-//////        if(ofGetFrameNum() > 1)
-//////            ofClear(0, decay * 255);
-////        alphaDecay.begin();
-////            alphaDecay.setUniformTexture("src", renderPingPong.src->getTexture(), 0); // Tex bound by draw() call?
-////            alphaDecay.setUniform1f("decay", decay);
-////            renderPingPong.src->draw(0, 0);
-////        alphaDecay.end();
-//    renderPingPong.dst->end();
 
 
-
-    ofEnableAlphaBlending();
 
     renderPingPong.dst->begin();
         ofClear(0, 0);
 
-        glDisable(GL_BLEND);
-        glBlendEquation(GL_FUNC_ADD);
-        glBlendFunc(GL_ONE, GL_ZERO);
-        // ofEnableBlendMode(OF_BLENDMODE_ADD);
-
-        ofSetColor(255);
+        ofEnableAlphaBlending();
         alphaDecay.begin();
-            alphaDecay.setUniform1f("decay", decay);
-            ofSetColor(255);
-            renderPingPong.src->draw(0,0);
+          alphaDecay.setUniform1f("decay", decay);
+          ofSetColor(255);
+          renderPingPong.src->draw(0,0);
         alphaDecay.end();
 
-//        ofSetColor(255, 0, 0, 255);
-//        ofDrawRectangle(ofGetFrameNum()%((int)renderPingPong.dst->getWidth()) * 2, 0, 2, 300);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
         updateRender.begin();
-            updateRender.setUniformTexture("posTex", posPingPong.src->getTexture(), 1);
-            updateRender.setUniformTexture("alpha", velPingPong.src->getTexture(), 2);
+            updateRender.setUniformTexture("posTex", posPingPong.src->getTexture(), 0);
+            updateRender.setUniformTexture("alpha", velPingPong.src->getTexture(), 1);
             updateRender.setUniform2f("screen", (float)size.x, (float)size.y);
-
-            ofEnableBlendMode(OF_BLENDMODE_ADD);
-
             ofSetColor(255);
             mesh.draw();
-
-            ofDisableBlendMode();
-//            glEnd();
         updateRender.end();
-    //    ofClearAlpha();
+        glDisable(GL_BLEND);
     renderPingPong.dst->end();
 
     renderPingPong.swap();

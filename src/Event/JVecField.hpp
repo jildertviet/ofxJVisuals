@@ -25,10 +25,9 @@ enum VECFIELD_MODE{
 class JVecField: public JEvent{
 public:
     JVecField();
-    ofShader shader;
 //    ofPlanePrimitive plane;
-    float shaderContrast = 1.0f;
-    float shaderBrightnessAdd = 0.f;;
+    // float shaderContrast = 1.0f;
+    // float shaderBrightnessAdd = 0.f;;
     ofVideoPlayer* video;
     ofImage frame;
     void specificFunction() override;
@@ -57,7 +56,7 @@ public:
 
     ofFbo resizeFbo; // TEST
     ofFbo* underlayer;
-    void customOne(float* v = nullptr) override;
+    // void customOne(float* v = nullptr) override;
 private:
 
 };

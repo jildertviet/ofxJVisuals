@@ -149,10 +149,10 @@ void ofxJVisuals::update(){
 //        ofEnableSmoothing();
         alphaScreen->displayMain();
 
-        brightnessAndSaturation.begin();
-        brightnessAndSaturation.setUniform1f("brightness", ofMap(ofGetMouseX(), 0, ofGetWidth(),-1, 1)); // 0 = normal
-        brightnessAndSaturation.setUniform1f("contrast", 1.0); // 1 = normal
-        brightnessAndSaturation.setUniform1f("saturation", ofMap(ofGetMouseY(), 0, ofGetHeight(), 0, 4)); // 1 = normal
+        // brightnessAndSaturation.begin();
+        // brightnessAndSaturation.setUniform1f("brightness", 0); // 0 = normal
+        // brightnessAndSaturation.setUniform1f("contrast", 1.0); // 1 = normal
+        // brightnessAndSaturation.setUniform1f("saturation", 1); // 1 = normal
 
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         layers[1]->displayMain(); // Non-cam layer back
@@ -179,7 +179,7 @@ void ofxJVisuals::update(){
         // set gl state back to original
         glPopAttrib();
 #endif
-    brightnessAndSaturation.end();
+    // brightnessAndSaturation.end();
     fbo.end();
 
     renderFbo.begin();

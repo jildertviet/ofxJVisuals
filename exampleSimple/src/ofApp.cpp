@@ -4,16 +4,19 @@ using namespace glm;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetWindowShape(1080, 1080);
-    bool bSC = true;
+    bool bSC = false;
     visualizer = new ofxJVisuals(vec2(1080), bSC); // Don't use SC
-    visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(100,100), glm::vec2(100, 100)));
-    visualizer->last->color = ofColor(255, 0, 0, 100);
-    visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(150,100), glm::vec2(100, 100)));
-    visualizer->last->color = ofColor(0, 0, 255, 100);
+    // visualizer->addEvent((JEvent*)new JPhysarum(glm::vec2(0,0), glm::vec2(512,512)));
+    // visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(100,100), glm::vec2(100, 100)));
+    // visualizer->last->color = ofColor(255, 0, 0, 255);
+    // visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(200,100), glm::vec2(100, 100)));
+    // visualizer->last->color = ofColor(0, 255, 0, 255);
 
-    visualizer->shaders.push_back(new JShader());
-    visualizer->shaders.back()->load("lines");
+    // visualizer->shaders.push_back(new JShader());
+    // visualizer->shaders.back()->load("lines");
+    // s.load("../../../../../addons/ofxJVisuals/libs/shaders/JPhysarum/posUpdate");
 }
+
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -27,7 +30,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    visualizer->display();
+  visualizer->display();
+  // visualizer->last->displayMain();
+  // s.begin();
+  // ofSetColor(255);
+  // ofDrawRectangle(0,0,100,100);
+  // s.end();
 }
 
 //--------------------------------------------------------------

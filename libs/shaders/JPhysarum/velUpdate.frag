@@ -1,4 +1,4 @@
-#version 120
+#version 150
 #extension GL_ARB_texture_rectangle : enable
 
 uniform sampler2DRect velocityTex;
@@ -16,6 +16,8 @@ uniform float time;
 uniform float balance;
 uniform float blurMix;
 uniform int bExternalVelocity;
+
+in vec2 texCoord;
 
 float random (vec2 st) {
     return fract(sin(dot(st.xy,
@@ -37,7 +39,8 @@ uniform vec2 offsets[9] = vec2[9](
                           );
 
 void main(void){
-    vec2 st = gl_TexCoord[0].st;
+    // vec2 st = gl_TexCoord[0].st;
+    vec2 st = gl_FragCoord.xy;
     vec2 pos = texture2DRect(positionTex, st).xy;
     vec2 vel = texture2DRect(velocityTex, st).xy;
     float mass = texture2DRect(positionTex, st).z;
@@ -90,6 +93,9 @@ void main(void){
         vel += 0.5;
     }
 
+    if(random(vec2(1.0)) > 0.1){
+      alpha += 100.0 / 255.0;
+    }
 //    balance = balance * mass;
     vel = (prevVel * balance) + (vel * (1.-balance));
 

@@ -7,8 +7,8 @@ uniform sampler2DRect tex0;
 uniform vec2 size = vec2(1920.0, 1080.0);
 uniform float numLines = 100.0;
 uniform float lineWidth = 1.0;
-uniform float diagonalScale = 1.0;
-uniform float diagonalPow = 1.0;
+uniform float diagonalScale = 10.0;
+uniform float diagonalPow = 7.0;
 
 in vec2 texCoordVarying;
 

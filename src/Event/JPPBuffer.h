@@ -3,7 +3,7 @@
 
 struct pingPongBuffer {
 public:
-    void allocate( int _width, int _height, int _internalformat = GL_RGBA){
+    void allocate( int _width, int _height, int _internalformat = GL_RGBA32F){
         // Allocate
         for(int i = 0; i < 2; i++){
             FBOs[i].allocate(_width,_height, _internalformat );

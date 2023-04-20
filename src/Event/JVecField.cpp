@@ -15,9 +15,9 @@ JVecField::JVecField(){
     color.a = 255;
     seed = ofRandom(1000);
 
-    if(!shader.load("shaders/brightnessAndSaturation")){
-        cout << "Failed to load shader" << endl;
-    }
+    // if(!shader.load("shaders/brightnessAndSaturation")){
+        // cout << "Failed to load shader" << endl;
+    // }
 
     if(DRAW_VID){
         video = new ofVideoPlayer;
@@ -86,13 +86,13 @@ void JVecField::display(){
 
         resizeFbo.begin();
             ofClear(0,0);
-            shader.begin();
-                shader.setUniform1f("contrast", shaderContrast);
-                shader.setUniform1f("brightness", shaderBrightnessAdd); // All color counts, so background as well :o
+            // shader.begin();
+                // shader.setUniform1f("contrast", shaderContrast);
+                // shader.setUniform1f("brightness", shaderBrightnessAdd); // All color counts, so background as well :o
 //                ofSetColor(255);
 //                vecTex.draw(0, 0, density.x, density.y);
                 underlayer->draw(0, 0, density.x, density.y);
-            shader.end();
+            // shader.end();
         resizeFbo.end();
 
         vecTex = resizeFbo.getTexture();
@@ -222,8 +222,4 @@ void JVecField::setPixelsToTest(){
 
 void JVecField::setMode(char m){
     mode = m;
-}
-
-void JVecField::customOne(float* v){
-    shaderContrast = busses[0];
 }
