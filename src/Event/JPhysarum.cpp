@@ -54,7 +54,7 @@ JPhysarum::JPhysarum(glm::vec2 loc, glm::vec2 size){
     ofClear(255, 0, 0); // All in one direction
     velPingPong.src->end();
 
-    renderPingPong.allocate(size.x, size.y, GL_RGBA);
+    renderPingPong.allocate(size.x, size.y, GL_RGBA16F);
     renderPingPong.src->begin();
     ofClear(0, 0);
     ofSetColor(0, 0, 255);
@@ -160,17 +160,31 @@ void JPhysarum::specificFunction(){
 
 
     renderPingPong.dst->begin();
-        ofClear(0, 0);
+        ofClear(0, 255);
 
-        ofEnableAlphaBlending();
+        // ofEnableAlphaBlending();
         alphaDecay.begin();
           alphaDecay.setUniform1f("decay", decay);
           ofSetColor(255);
           renderPingPong.src->draw(0,0);
         alphaDecay.end();
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+        // ofEnableAlphaBlending();
+        // glEnable(GL_BLEND);
+        ofEnableBlendMode(OF_BLENDMODE_ADD);
+
+        // ofSetColor(255);
+        // ofPushMatrix();
+        // ofTranslate(ofGetWidth()*0.5, ofGetHeight()*0.5);
+        // ofRotateDeg(ofGetFrameNum()*0.3);
+        // ofDrawLine(0, 0, ofGetWidth()*0.5, 0);
+        // ofPopMatrix();
+
+
+        // glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        // glBlendFunc(GL_ONE, GL_ZERO);
+
 
         updateRender.begin();
             updateRender.setUniformTexture("posTex", posPingPong.src->getTexture(), 0);
@@ -179,11 +193,14 @@ void JPhysarum::specificFunction(){
             ofSetColor(255);
             mesh.draw();
         updateRender.end();
-        glDisable(GL_BLEND);
+
     renderPingPong.dst->end();
 
     renderPingPong.swap();
 
-    ofEnableAlphaBlending();
+
+    // glDisable(GL_BLEND);
+    ofDisableBlendMode();
+    // ofDisableAlphaBlending();
 }
 #endif

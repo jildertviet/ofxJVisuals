@@ -1,4 +1,5 @@
 #version 150
+precision highp float;
 
 uniform sampler2DRect src;
 uniform float decay;
@@ -8,8 +9,7 @@ void main(){
     vec2 st = gl_FragCoord.xy;
     vec4 color = texture2DRect(src, st);
 
-    float a = color.a;
-    a *= decay; 
+    color.a *= decay;
 
-    outColor = vec4(color.rgb, a);
+    outColor = vec4(color);
 }
