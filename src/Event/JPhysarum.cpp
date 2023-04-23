@@ -91,13 +91,13 @@ void JPhysarum::display(){
     ofFill();
     ofSetColor(color);
     renderPingPong.src->draw(0, 0);
-    ofNoFill();
-    ofSetColor(255, 100);
-    ofDrawRectangle(0, 0, renderPingPong.src->getWidth(), renderPingPong.src->getHeight());
+    // ofNoFill();
+    // ofSetColor(255, 100);
+    // ofDrawRectangle(0, 0, renderPingPong.src->getWidth(), renderPingPong.src->getHeight());
 
    // velPingPong.src->draw(0, 0);
 //    velPingPong.dst->draw(velPingPong.dst->getWidth(), 0);
-   posPingPong.src->draw(0, velPingPong.dst->getHeight() * 3);
+   // posPingPong.src->draw(0, velPingPong.dst->getHeight() * 3);
 
 
    // posPingPong.src->draw(0, 0);
@@ -169,10 +169,9 @@ void JPhysarum::specificFunction(){
           renderPingPong.src->draw(0,0);
         alphaDecay.end();
 
-
+        ofEnableBlendMode(OF_BLENDMODE_ADD);
         // ofEnableAlphaBlending();
         // glEnable(GL_BLEND);
-        ofEnableBlendMode(OF_BLENDMODE_ADD);
 
         // ofSetColor(255);
         // ofPushMatrix();

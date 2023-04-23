@@ -93,10 +93,10 @@ void main(void){
         vel += 0.5;
     }
 
-    // if(random(vec2(1.0)) > 0.1){
-      // alpha += 100.0 / 255.0;
-    // }
-    
+    if(random(vec2(1.0)) > 0.1){
+      alpha += (1.0 / 255.0);
+    }
+
 //    balance = balance * mass;
     vel = (prevVel * balance) + (vel * (1.-balance));
 

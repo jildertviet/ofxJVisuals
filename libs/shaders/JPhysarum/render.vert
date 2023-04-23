@@ -14,6 +14,7 @@ void main() {
     // Read position data from texture.
     vec4 pixPos = texture(posTex, texcoord);
     float a = texture(alpha, texcoord).b;
+    float v = texture(alpha, texcoord).r;
 
     pixPos *= 2.f;
     pixPos -= 1.f;
@@ -24,5 +25,5 @@ void main() {
     // pixPos.y *= screen.y;
 
     gl_Position = vec4(pixPos.x, pixPos.y, 0.0, 1.0);
-    vertexColor = vec4(1.0, 1.0, 1.0, a);
+    vertexColor = vec4(1.0, v, v, a);
 }
