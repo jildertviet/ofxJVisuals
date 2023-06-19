@@ -1,26 +1,26 @@
+// //
+// //  pathWalker.hpp
+// //  versesVideo
+// //
+// //  Created by Jildert Viet on 29-01-18.
+// //
+// //
 //
-//  pathWalker.hpp
-//  versesVideo
+// #ifndef pathWalker_hpp
+// #define pathWalker_hpp
 //
-//  Created by Jildert Viet on 29-01-18.
+// #include <stdio.h>
+// #include "ofMain.h"
+// #include "meshWalker.hpp"
 //
+// class pathWalker: public meshWalker{
+// public:
+// 	typedef unsigned short uint16;
+//     pathWalker(vector<glm::vec3> path);
+//     void specificFunction();
+//     void display();
+//     vector<glm::vec3> path;
+//     void displayTrail();
 //
-
-#ifndef pathWalker_hpp
-#define pathWalker_hpp
-
-#include <stdio.h>
-#include "ofMain.h"
-#include "meshWalker.hpp"
-
-class pathWalker: public meshWalker{
-public:
-	typedef unsigned short uint16;
-    pathWalker(vector<glm::vec3> path);
-    void specificFunction();
-    void display();
-    vector<glm::vec3> path;
-    void displayTrail();
-
-};
-#endif /* pathWalker_hpp */
+// };
+// #endif /* pathWalker_hpp */
