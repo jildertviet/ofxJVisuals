@@ -1,5 +1,4 @@
 ofxSvg
-ofxEasing
 ofxJVisuals
 ofxPostProcessing
 ofxOscBidirectional
