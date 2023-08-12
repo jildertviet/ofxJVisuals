@@ -9,6 +9,10 @@ README_AUTHOR.md
 */config.make
 *.mp4
 /bin/exampleSimple
+
+*/bin
+!*/bin/data
+
 *.DS_Store
 **.o
 **.d

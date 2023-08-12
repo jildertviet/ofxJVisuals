@@ -10,6 +10,8 @@ JEvent::~JEvent(){
   cout << "Start of ~JEvent()" << endl;
     if(lastPtr)
         *lastPtr = nullptr;
+    if(lastFound)
+        *lastFound = nullptr;
 
     if(numEventsPtr)
         *numEventsPtr = *numEventsPtr - 1;

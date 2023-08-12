@@ -44,7 +44,7 @@ public:
                 #ifndef __APPLE__
                     ofSystem("export SC_JACK_DEFAULT_INPUTS=system; export SC_JACK_DEFAULT_OUTPUTS=system");
                 #endif
-                string cmd = ofToString(SC_FOLDER) + "scsynth -u " + ofToString(SC_PORT) + " -l 4 -i 0";
+                string cmd = "pw-jack " + ofToString(SC_FOLDER) + "scsynth -u " + ofToString(SC_PORT) + " -l 4 -i 0";
                 // for(auto d : devices){
                     // if(ofStringTimesInString(d.name, "WH-1000XM4")){
                         // cmd += " -H Sony";

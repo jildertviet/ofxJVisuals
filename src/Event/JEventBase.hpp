@@ -1,7 +1,11 @@
 #ifndef JEventBase_hpp
 #define JEventBase_hpp
 
-#include "glm.hpp"
+// Should only be included in SC / cmake, right?
+#ifndef  OF_VERSION_MAJOR
+  #include "glm.hpp"
+#endif
+
 #include "ofColor.h"
 
 #define NUM_BUSSES  32

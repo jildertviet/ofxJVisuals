@@ -256,6 +256,7 @@ JEvent* ofxJVisuals::addEvent(JEvent* e, int layerIndex, int index, bool bOldVer
     }
     last = e;
     e->lastPtr = &last; // For setting to nullptr if event is deleted
+    e->lastFound = &lastFound;
 
     numEvents++;
 //    cout << "event ID: " << e->id << endl; Used?
