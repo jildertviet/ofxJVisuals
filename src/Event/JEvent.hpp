@@ -102,6 +102,7 @@ public:
     // To clear references made to this object
     vector<JEvent**> toClear;
     JEvent** lastPtr = nullptr;
+    JEvent** lastFound = nullptr;
     virtual void addPtr(JEvent** p);
 
     vector<JEvent*>* parentContainer = nullptr;
