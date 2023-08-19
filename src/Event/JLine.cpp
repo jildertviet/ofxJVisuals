@@ -49,19 +49,24 @@ void JLine::specificFunction(){
 }
 
 void JLine::display(){
-    ofSetColor(color);
-    ofSetLineWidth(3);
+  ofSetColor(color);
+  ofSetLineWidth(3);
 
-    if(rotation != 0){
-        ofPushMatrix();
-        ofTranslate(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
-        ofRotateDeg(rotation);
-        ofTranslate(-ofGetWindowWidth()/2, -ofGetWindowHeight()/2);
-        line.draw();
-        ofPopMatrix();
-    } else{
+  if(mode == 3){
+    path.draw();
+    return;
+  }
+
+  if(rotation != 0){
+      ofPushMatrix();
+      ofTranslate(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
+      ofRotateDeg(rotation);
+      ofTranslate(-ofGetWindowWidth()/2, -ofGetWindowHeight()/2);
       line.draw();
-    }
+      ofPopMatrix();
+  } else{
+    line.draw();
+  }
 }
 
 void JLine::toRect(ofVec2f loc, ofVec2f size){
@@ -71,10 +76,10 @@ void JLine::toRect(ofVec2f loc, ofVec2f size){
 
 void JLine::fromBuffer(int bufferMode){
   // cout << "Fill from buffer" << endl;
-  mode = 2;
   line.clear();
   switch(bufferMode){
     case 0:{
+      mode = 2;
       line.addVertex(buffer[0], buffer[1]);
       for(int i=1; i<buffer.size()/2; i++){
         glm::vec2 v = glm::vec2(buffer[i*2], buffer[i*2+1]);
@@ -83,12 +88,38 @@ void JLine::fromBuffer(int bufferMode){
     }
     break;
     case 1:{
+      mode = 2;
       for(int i=0; i<buffer.size(); i++){
         float x = size.x / buffer.size();
         x *= i;
-        glm::vec2 v = glm::vec2(x, buffer[i]);
+        x += loc.x;
+        glm::vec2 v = glm::vec2(x, buffer[i] + loc.y);
         line.lineTo(ofPoint(v));
       }
+    }
+    break;
+    case 2:{
+      mode = 3;
+      path.clear();
+      glm::vec2 start = glm::vec2(loc.x, loc.y+4);
+      path.moveTo(ofPoint(start));
+      // path.lineTo(ofPoint(start));
+      for(int i=0; i<buffer.size(); i++){
+        float x = size.x / buffer.size();
+        x *= i;
+        x += loc.x;
+        if(buffer[i] < 0){
+          // glm::vec2 v = glm::vec2(x, buffer[i] + loc.y);
+          path.lineTo(x, buffer[i] + loc.y);
+        } else{
+          // glm::vec2 v = glm::vec2();
+          path.lineTo(x, 0 + loc.y+4);
+        }
+      }
+      path.lineTo(ofPoint(loc.x + size.x));
+      path.lineTo(start);
+      // path.setFilled(true);
+      path.close(); // Draw to first vertex?
     }
     break;
   }
@@ -130,3 +161,4 @@ void JLine::calcLine(){
 
 void JLine::customOne(float* v){fromBuffer(0);}
 void JLine::customTwo(float* v){fromBuffer(1);}
+void JLine::customThree(float* v){fromBuffer(2);}

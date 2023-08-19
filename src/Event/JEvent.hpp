@@ -140,6 +140,7 @@ public:
     virtual void setViaBusses(vector<float> busses){};
     void fillBuffer(ofxOscMessage& m);
     vector<float> buffer; // For JLine
+    virtual void parseBuffer(){};
 
     ofxJVisuals* v;
     JEvent* getEventById(unsigned int id, unsigned int subID=0);

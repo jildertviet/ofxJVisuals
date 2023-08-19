@@ -3,10 +3,9 @@ using namespace glm;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofSetWindowShape(1080, 1080);
+    ofSetWindowShape(1000, 280);
     bool bSC = true;
-    visualizer = new ofxJVisuals(vec2(1080), bSC); // Don't use SC
-    ofEnableSmoothing();
+    visualizer = new ofxJVisuals(vec2(1000, 280), bSC); // Don't use SC
     // visualizer->addEvent((JEvent*)new JPhysarum(glm::vec2(0,0), glm::vec2(512,512)));
     // visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(100,100), glm::vec2(100, 100)));
     // visualizer->last->color = ofColor(255, 0, 0, 255);

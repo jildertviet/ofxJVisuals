@@ -38,6 +38,7 @@
 #include "MultiMeshMaybeTomorrow.hpp"
 #include "JPhysarum.hpp"
 #include "JLine.hpp"
+#include "JWaveform.hpp"
 #include "JShader.hpp"
 #include "JShaderLines.hpp"
 #include "JVorm.h"

@@ -793,6 +793,7 @@ bool MsgParser::create(ofxOscMessage& m){
         case jevent::JModifierArray: e = new JModifierArray(); break;
         case jevent::JVorm: e = new JVorm(); bInit = true; break;
         case jevent::JLine: e = new JLine(); break;
+        case jevent::JWaveform: e = new JWaveform(); break;
         default:
             return false;
     }
@@ -854,8 +855,13 @@ bool MsgParser::trigger(ofxOscMessage& m){
 
 bool MsgParser::setBuffer(ofxOscMessage& m){
   int targetID;
-  float targetIDf = m.getArgAsFloat(0);
-  memcpy(&targetID, &targetIDf, sizeof(float));
+  if(m.getArgType(0) == 'i'){
+    targetID = m.getArgAsInt(0);
+  } else{
+    float targetIDf = m.getArgAsFloat(0);
+    cout << "targetIDf: " << targetIDf << endl;
+    memcpy(&targetID, &targetIDf, sizeof(float));
+  }
   JEvent* target = getEventById(targetID, m.getArgAsInt(1));
   if(target){
     target->buffer.clear();
@@ -865,6 +871,7 @@ bool MsgParser::setBuffer(ofxOscMessage& m){
       memcpy(&v, b.getData()+(i*sizeof(float)), sizeof(float));
       target->buffer.push_back(v);
     }
+    target->parseBuffer();
   } else{
     cout << "Target not found, " << targetID << ", " << m.getArgAsInt(1) << endl;
     return false;

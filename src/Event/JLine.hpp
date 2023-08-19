@@ -21,6 +21,7 @@ public:
     void display() override;
     void specificFunction() override;
     ofPolyline line;
+    ofPath path;
     int amplitude = 0;
     uint8 numPoints = 10;
     float seed;
@@ -39,5 +40,6 @@ public:
 
     void customOne(float* v = nullptr) override;
     void customTwo(float* v = nullptr) override;
+    void customThree(float* v = nullptr) override;
 };
 #endif /* JLine_hpp */
