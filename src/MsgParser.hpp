@@ -44,6 +44,7 @@
 #include "JVorm.h"
 #include "JNoise.hpp"
 #include "AlphaBlackScreen.hpp"
+#include "JModifierFact.hpp"
 
 #include "scSynth.hpp"
 

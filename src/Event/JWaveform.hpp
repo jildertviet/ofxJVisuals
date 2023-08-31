@@ -15,6 +15,7 @@ public:
     void display() override;
     void specificFunction() override;
     ofPath path;
+    ofMesh m;
 
     virtual void parseBuffer();
     // void customOne(float* v = nullptr) override;

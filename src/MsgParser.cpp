@@ -794,6 +794,7 @@ bool MsgParser::create(ofxOscMessage& m){
         case jevent::JVorm: e = new JVorm(); bInit = true; break;
         case jevent::JLine: e = new JLine(); break;
         case jevent::JWaveform: e = new JWaveform(); break;
+        case jevent::JModifierRedraw: e = new JModifierRedraw(); break;
         default:
             return false;
     }
@@ -811,6 +812,7 @@ bool MsgParser::create(ofxOscMessage& m){
 
 bool MsgParser::connect(ofxOscMessage& m){
   JEvent* e = getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
+  cout << "connect found: " << e << endl;
   if(!e)
     return false;
 
@@ -828,7 +830,6 @@ bool MsgParser::connect(ofxOscMessage& m){
 }
 
 bool MsgParser::trigger(ofxOscMessage& m){
-  // cout << m << endl;
   // for(int i=0; i<m.getNumArgs(); i++)
     // cout << m.getArgAsInt(i) << endl;
     int targetID;
@@ -854,6 +855,7 @@ bool MsgParser::trigger(ofxOscMessage& m){
 }
 
 bool MsgParser::setBuffer(ofxOscMessage& m){
+  cout << m << endl;
   int targetID;
   if(m.getArgType(0) == 'i'){
     targetID = m.getArgAsInt(0);

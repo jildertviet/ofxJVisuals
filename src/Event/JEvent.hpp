@@ -17,8 +17,6 @@
 #include "JEventBase.hpp"
 #include "config.h"
 
-//#include "JModifier.hpp"
-
 //#define USE_FRAMES_AS_CLOCK false
 class JModifier;
 class ofxJVisuals;

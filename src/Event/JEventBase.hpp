@@ -18,7 +18,8 @@ namespace jevent{
     JFunctionTrigger,
     JBufferSender,
     JLine,
-    JWaveform
+    JWaveform,
+    JModifierRedraw
   };
   enum ConnectionType{
     Modifier,
