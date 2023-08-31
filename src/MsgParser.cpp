@@ -855,7 +855,7 @@ bool MsgParser::trigger(ofxOscMessage& m){
 }
 
 bool MsgParser::setBuffer(ofxOscMessage& m){
-  cout << m << endl;
+  // cout << m << endl;
   int targetID;
   if(m.getArgType(0) == 'i'){
     targetID = m.getArgAsInt(0);

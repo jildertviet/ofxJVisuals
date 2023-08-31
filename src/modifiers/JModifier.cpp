@@ -24,9 +24,14 @@ void JModifier::display(JEvent* e, void (JEvent::*ptr) (void)){
 //     spacing.y = busses[3];
 // }
 
-void JEvent::displayModifier(){
+void JEvent::displayModifiers(){
     for(int i=0; i<modifiers.size(); i++){
         modifiers[i]->display(this, &JEvent::display);
+    }
+}
+void JEvent::updateModifiers(){
+    for(int i=0; i<modifiers.size(); i++){
+        modifiers[i]->update(this);
     }
 }
 

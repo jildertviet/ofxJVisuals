@@ -82,12 +82,15 @@ void JEvent::updateMain(){
     if(next)
         next->updateMain();
     specificFunction();
+    if(modifiers.size()){
+      updateModifiers();
+    }
     update();
 }
 
 void JEvent::displayMain(){
     if(modifiers.size()){
-        displayModifier();
+        displayModifiers();
     } else{
         display();
     }

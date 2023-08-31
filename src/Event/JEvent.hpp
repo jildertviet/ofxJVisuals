@@ -133,7 +133,8 @@ public:
     mapValue* mapValues[24];
     void setDefaultMappers();
     vector<JModifier*> modifiers;
-    void displayModifier();
+    void displayModifiers();
+    void updateModifiers();
     void deleteModifiers();
     virtual void setViaBusses(vector<float> busses){};
     void fillBuffer(ofxOscMessage& m);

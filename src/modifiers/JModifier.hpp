@@ -16,6 +16,7 @@ class JModifier: public JEvent{
 public:
     JModifier();
     virtual void display(JEvent* e, void (JEvent::*ptr) (void));
+    virtual void update(JEvent* e){};
 };
 
 #endif /* JModifier_hpp */
