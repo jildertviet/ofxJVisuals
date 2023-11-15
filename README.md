@@ -18,10 +18,7 @@ I'm moving config stuff to config.h
 
 Dependencies
 ------------
-
-- [ofxEasing](https://github.com/arturoc/ofxEasing)
 - ofxJVisuals
-- [ofxPostProcessing](https://github.com/neilmendoza/ofxPostProcessing)
 - [ofxOscBidirectional](https://github.com/elgiano/ofxOscBidirectional.git)
 
 Mac:  
@@ -29,6 +26,9 @@ Mac:
 - [ofxSyphon](https://github.com/astellato/ofxSyphon)
 - [ofxMSAPingPong](https://github.com/memo/ofxMSAPingPong)
 - [ofxMSAOpenCL](https://github.com/memo/ofxMSAOpenCL)
+Previously:
+- [ofxEasing](https://github.com/arturoc/ofxEasing)
+- [ofxPostProcessing](https://github.com/neilmendoza/ofxPostProcessing)
 
 Standard in OF:  
 
