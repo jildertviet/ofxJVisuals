@@ -2,40 +2,43 @@
 #define JEventBase_hpp
 
 // Should only be included in SC / cmake, right?
-#ifndef  OF_VERSION_MAJOR
-  #include "glm.hpp"
+#ifndef OF_VERSION_MAJOR
+#include "glm.hpp"
 #endif
 
 #include "ofColor.h"
 
-#define NUM_BUSSES  32
+#define NUM_BUSSES 32
 
-namespace jevent{
-  enum JEventType{
-    JRectangle,
-    JModifierArray,
-    JVorm,
-    JFunctionTrigger,
-    JBufferSender,
-    JLine,
-    JWaveform,
-    JModifierRedraw
-  };
-  enum ConnectionType{
-    Modifier,
-  };
+namespace jevent {
+enum JEventType {
+  JRectangle,
+  JModifierArray,
+  JVorm,
+  JFunctionTrigger,
+  JBufferSender,
+  JLine,
+  JWaveform,
+  JModifierRedraw,
+  JShader,       // 8
+  JEventDynamicS // This is only used for compilation of code. Object should be
+                 // not used.
 };
 
+enum ConnectionType {
+  Modifier,
+};
+}; // namespace jevent
 
-class JEventBase{
+class JEventBase {
 public:
-  JEventBase(){
-    for(int i=0; i<NUM_BUSSES; i++)
+  JEventBase() {
+    for (int i = 0; i < NUM_BUSSES; i++)
       values[i] = nullptr;
     linkValues();
   };
 
-  void linkValues(){
+  void linkValues() {
     values[0] = &loc.x;
     values[1] = &loc.y;
     values[2] = &loc.z;
@@ -78,29 +81,29 @@ public:
     values[31] = &busses[9];
   }
 
-  float* values[NUM_BUSSES];
+  float *values[NUM_BUSSES];
 
-  float* valuesToFloatArray(){
-    float* valuesToSend = new float[NUM_BUSSES];
-    for(int i=0; i<NUM_BUSSES; i++){
-      if(values[i]){
+  float *valuesToFloatArray() {
+    float *valuesToSend = new float[NUM_BUSSES];
+    for (int i = 0; i < NUM_BUSSES; i++) {
+      if (values[i]) {
         valuesToSend[i] = *values[i];
-      } else{
+      } else {
         valuesToSend[i] = 0.0;
       }
     }
     return valuesToSend;
   };
 
-  void setValuesFromFloatArray(float* a){
-    for(int i=0; i<NUM_BUSSES; i++){
-      if(values[i])
+  void setValuesFromFloatArray(float *a) {
+    for (int i = 0; i < NUM_BUSSES; i++) {
+      if (values[i])
         *values[i] = a[i];
     }
     color = ofColor(rgba[0], rgba[1], rgba[2], rgba[3] * 255);
   }
 
-  glm::vec3 loc = {0,0,0};
+  glm::vec3 loc = {0, 0, 0};
   glm::vec3 size = {100, 100, 100};
   glm::vec3 direction = {1, 0, 0};
   glm::vec3 rotation = {0, 0, 0};

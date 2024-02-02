@@ -2,35 +2,36 @@
 using namespace glm;
 
 //--------------------------------------------------------------
-void ofApp::setup(){
-    ofSetWindowShape(1080, 1080);
-    bool bSC = true;
-    visualizer = new ofxJVisuals(vec2(1080), bSC); // Don't use SC
-    ofEnableSmoothing();
-    // visualizer->addEvent((JEvent*)new JPhysarum(glm::vec2(0,0), glm::vec2(512,512)));
-    // visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(100,100), glm::vec2(100, 100)));
-    // visualizer->last->color = ofColor(255, 0, 0, 255);
-    // visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(200,100), glm::vec2(100, 100)));
-    // visualizer->last->color = ofColor(0, 255, 0, 255);
+void ofApp::setup() {
+  ofSetWindowShape(1080, 1080);
+  bool bSC = true;
+  visualizer = new ofxJVisuals(vec2(1080), bSC); //
+  ofEnableSmoothing();
+  // visualizer->addEvent((JEvent*)new JPhysarum(glm::vec2(0,0),
+  //
+  // glm::vec2(512,512))); visualizer->addEvent((JEvent*)new
+  // JRectangle(glm::vec2(100,100), glm::vec2(100, 100)));
+  // visualizer->last->color = ofColor(255, 0, 0, 255);
+  // visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(200,100),
+  // glm::vec2(100, 100))); visualizer->last->color = ofColor(0, 255, 0, 255);
 
-    // visualizer->shaders.push_back(new JShader());
-    // visualizer->shaders.back()->load("lines");
-    // s.load("../../../../../addons/ofxJVisuals/libs/shaders/JPhysarum/posUpdate");
+  // visualizer->shaders.push_back(new JShader());
+  // visualizer->shaders.back()->load("lines");
+  // s.load("../../../../../addons/ofxJVisuals/libs/shaders/JPhysarum/posUpdate");
 }
 
-
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update() {
 #ifndef TARGET_RASPBERRY_PI
-    ofSetWindowTitle(ofToString(ofGetFrameRate()));
+  ofSetWindowTitle(ofToString(ofGetFrameRate()));
 #else
 //    cout << ofGetFrameRate() << endl;
 #endif
-    visualizer->update();
+  visualizer->update();
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::draw() {
   visualizer->display();
   // visualizer->last->displayMain();
   // s.begin();
@@ -40,46 +41,28 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-    visualizer->keyPressed(key);
-}
+void ofApp::keyPressed(int key) { visualizer->keyPressed(key); }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
+void ofApp::keyReleased(int key) {}
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y){
-
-}
+void ofApp::mouseMoved(int x, int y) {}
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
+void ofApp::mouseDragged(int x, int y, int button) {}
 
 //--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
+void ofApp::mousePressed(int x, int y, int button) {}
 
 //--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
+void ofApp::mouseReleased(int x, int y, int button) {}
 
 //--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
+void ofApp::windowResized(int w, int h) {}
 
 //--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
+void ofApp::gotMessage(ofMessage msg) {}
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
-
-}
+void ofApp::dragEvent(ofDragInfo dragInfo) {}

@@ -1,6 +1,4 @@
 ofxSvg
 ofxJVisuals
-ofxPostProcessing
 ofxOscBidirectional
 ofxGui
-ofxAssimpModelLoader
