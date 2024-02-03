@@ -15,8 +15,7 @@ uniform float bus_8;
 uniform float bus_9;
 
 void main() {
-    // Background color (black)
-    vec3 bgColor = vec3(0.0);
+    vec4 bgColor = vec4(0.0);
 
     // Draw a grid of white horizontal lines centered on the screen
     float numLines = bus_1; // Adjust the number of lines // 10
@@ -47,6 +46,6 @@ void main() {
     float smoothness = bus_3; // Adjust the smoothness // 40
     float smoothStepValue = smoothstep(0.5 * lineWidth - smoothness, 0.5 * lineWidth + smoothness, distanceToLine);
 
-    gl_FragColor = vec4(mix(vec3(1.0), bgColor, smoothStepValue), 1.0);
+    gl_FragColor = mix(vec4(1.0, 1.0, 1.0, 1.0), bgColor, smoothStepValue);
 }
 

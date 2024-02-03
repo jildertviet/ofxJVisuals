@@ -159,7 +159,8 @@ public:
   vector<glm::vec2> texCoords;
   ofMesh mesh;
   void initMesh();
-  vector<JShader *> shaders;
+  vector<JShader *> generativeShaders;
+  vector<JShader *> fxShaders;
   bool bDrawNegativeLayer = false;
   JLayer *layers[NUMLAYERS]; // linked list, use AddEvent to add
   JLayer negativeLayer;

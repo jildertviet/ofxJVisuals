@@ -419,8 +419,9 @@ bool MsgParser::make(ofxOscMessage &m) {
     break;
   case 22: {
     JShaderLines *s = new JShaderLines();
-    getShaders()->push_back(s);
-    e = (JEvent *)s;
+    // getShaders()->push_back(s);
+    // e = (JEvent *)s;
+    addShader((JShader *)s, layer); // Layer should be 3 ...
     ((JShaderLines *)e)->load(m.getArgAsString(3));
   } break;
   }
@@ -773,6 +774,7 @@ bool MsgParser::kill(ofxOscMessage &m) {
   JEvent *e = getEventById(m.getArgAsInt(0), m.getArgAsInt(1));
   cout << e << endl;
   if (e) {
+    e->ownDtor();
     delete e;
     cout << "Done" << endl;
     return true;
@@ -810,8 +812,8 @@ bool MsgParser::create(ofxOscMessage &m) {
     e = new JModifierRedraw();
     break;
   case jevent::JShader:
-    e = new JShader();
-    getShaders()->push_back((JShader *)e);
+    e = addShader(new JShader());
+    // getShaders()->push_back((JShader *)e);
     break;
   default:
     return false;

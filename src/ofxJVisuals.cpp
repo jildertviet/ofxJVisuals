@@ -140,6 +140,7 @@ void ofxJVisuals::update() {
   negativeMask.end();
 
   fbo.begin();
+
 #if USE_PP
   glPushAttrib(GL_ENABLE_BIT);
   // setup gl state
@@ -158,6 +159,12 @@ void ofxJVisuals::update() {
 
   ofEnableBlendMode(OF_BLENDMODE_ALPHA);
   layers[1]->displayMain(); // Non-cam layer back
+  for (int i = 0; i < generativeShaders.size(); i++) {
+    generativeShaders[i]->begin();
+    generativeShaders[i]->update();
+    ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
+    generativeShaders[i]->end();
+  }
 
   //        if(bCam){
   //            ofPushMatrix();
@@ -185,9 +192,9 @@ void ofxJVisuals::update() {
   fbo.end();
 
   renderFbo.begin();
-  for (int i = 0; i < shaders.size(); i++) {
-    shaders[i]->begin();
-    shaders[i]->update();
+  for (int i = 0; i < fxShaders.size(); i++) {
+    fxShaders[i]->begin();
+    fxShaders[i]->update();
   }
   if (negativeLayer.next) {
     negative.begin();
@@ -198,8 +205,8 @@ void ofxJVisuals::update() {
   } else {
     fbo.draw(0, 0);
   }
-  for (int i = 0; i < shaders.size(); i++) {
-    shaders[i]->end();
+  for (int i = 0; i < fxShaders.size(); i++) {
+    fxShaders[i]->end();
   }
   renderFbo.end();
 }
@@ -564,7 +571,19 @@ JEvent *MsgParser::addEvent(JEvent *e, int layerIndex, int index,
   return v->addEvent(e, layerIndex, e->id, bOldVersion);
 }
 ofTrueTypeFont *MsgParser::getSelectedFont() { return v->selectedFont; }
-vector<JShader *> *MsgParser::getShaders() { return &(v->shaders); }
+// vector<JShader *> *MsgParser::getShaders() { return &(v->shaders); }
+JEvent *MsgParser::addShader(JShader *s, int layer) {
+  if (layer == 2) {
+    v->generativeShaders.push_back(s);
+    s->parent = &(v->generativeShaders);
+    return (JEvent *)s;
+  } else {
+    s->parent = &(v->generativeShaders);
+    v->fxShaders.push_back(s);
+    return (JEvent *)s;
+  }
+  return nullptr;
+}
 ofFbo *MsgParser::getFbo() { return &(v->fbo); }
 void MsgParser::killAll() { v->killAll(); }
 void MsgParser::getFreePointers(string host, int port) {

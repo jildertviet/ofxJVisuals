@@ -2,6 +2,20 @@
 
 JShader::JShader() {}
 
+void JShader::ownDtor() {
+  cout << "Deconstruct shader" << endl;
+  if (parent) {
+    for (int i = 0; i < parent->size(); i++) {
+      if (parent->at(i) == this) {
+        parent->at(i) = nullptr;
+        parent->erase(parent->begin() + i);
+        cout << "Shader found in parent at index: " << i << endl;
+        break;
+      }
+    }
+  }
+}
+
 void JShader::load(string name) {
   s.load("../../../../../addons/ofxJVisuals/libs/shaders/" + name);
 }

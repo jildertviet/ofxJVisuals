@@ -35,15 +35,15 @@ COLOR	src/modifiers/JModifierRedraw.hpp	/^  COLOR$/;"	e	enum:JModifierRedraw::Re
 Compatibility	README.md	/^Compatibility$/;"	s	chapter:ofxJVisuals
 ConnectionType	src/Event/JEventBase.hpp	/^enum ConnectionType {$/;"	g	namespace:jevent
 DEFAULT	src/Event/JImage.hpp	/^        DEFAULT$/;"	e	enum:JImage::DrawMode
-DEFAULT	src/MsgParser.hpp	/^    DEFAULT$/;"	e	enum:VisualizerLayer
+DEFAULT	src/MsgParser.hpp	/^  DEFAULT$/;"	e	enum:VisualizerLayer
 DENSITY	src/Wavetable.h	/^#define DENSITY /;"	d
 DRAW_VID	src/Event/JVecField.cpp	/^#define DRAW_VID /;"	d	file:
-DUMMY0	src/MsgParser.hpp	/^    DUMMY0,$/;"	e	enum:VisualizerLayer
-DUMMY1	src/MsgParser.hpp	/^    DUMMY1,$/;"	e	enum:VisualizerLayer
-DUMMY2	src/MsgParser.hpp	/^    DUMMY2,$/;"	e	enum:VisualizerLayer
-DUMMY3	src/MsgParser.hpp	/^    DUMMY3,$/;"	e	enum:VisualizerLayer
-DUMMY4	src/MsgParser.hpp	/^    DUMMY4,$/;"	e	enum:VisualizerLayer
-DUMMY5	src/MsgParser.hpp	/^    DUMMY5,$/;"	e	enum:VisualizerLayer
+DUMMY0	src/MsgParser.hpp	/^  DUMMY0,$/;"	e	enum:VisualizerLayer
+DUMMY1	src/MsgParser.hpp	/^  DUMMY1,$/;"	e	enum:VisualizerLayer
+DUMMY2	src/MsgParser.hpp	/^  DUMMY2,$/;"	e	enum:VisualizerLayer
+DUMMY3	src/MsgParser.hpp	/^  DUMMY3,$/;"	e	enum:VisualizerLayer
+DUMMY4	src/MsgParser.hpp	/^  DUMMY4,$/;"	e	enum:VisualizerLayer
+DUMMY5	src/MsgParser.hpp	/^  DUMMY5,$/;"	e	enum:VisualizerLayer
 Dependencies	README.md	/^Dependencies$/;"	s	chapter:ofxJVisuals
 DrawMode	src/Event/JImage.hpp	/^    enum DrawMode{$/;"	g	class:JImage
 Env	src/Env.cpp	/^Env::Env(){$/;"	f	class:Env
@@ -55,7 +55,7 @@ Env	src/Env.cpp	/^Env::Env(vector<float> levels, vector<float> times, ofColor* c
 Env	src/Env.hpp	/^class Env{$/;"	c
 Env_hpp	src/Env.hpp	/^#define Env_hpp$/;"	d
 FBOs	src/Event/JPPBuffer.h	/^    ofFbo   FBOs[2];    \/\/ Real addresses of ping\/pong FBO«s$/;"	m	struct:pingPongBuffer	typeref:typename:ofFbo[2]
-FUNCTIONAL	src/MsgParser.hpp	/^    FUNCTIONAL, \/\/ Should be deleted?$/;"	e	enum:VisualizerLayer
+FUNCTIONAL	src/MsgParser.hpp	/^  FUNCTIONAL, \/\/ Should be deleted?$/;"	e	enum:VisualizerLayer
 HIDE	src/Event/JVecField.hpp	/^    HIDE,$/;"	e	enum:VECFIELD_MODE
 HORIZONTAL	src/Event/JNoise.hpp	/^    HORIZONTAL,$/;"	e	enum:JNOISE_MODE
 How to use	README.md	/^## How to use$/;"	s	chapter:ofxJVisuals
@@ -170,7 +170,7 @@ MAX_EVENTS_PTRS	src/config.h	/^#define MAX_EVENTS_PTRS /;"	d
 MODE	src/modifiers/JModifierRedraw.hpp	/^  MODE,$/;"	e	enum:JModifierRedraw::RedrawMode
 Modifier	src/Event/JEventBase.hpp	/^  Modifier,$/;"	e	enum:jevent::ConnectionType
 MsgParser	src/MsgParser.cpp	/^MsgParser::MsgParser(ofxJVisuals *v, bool bUseSC) : v(v), bUseSC(bUseSC) {$/;"	f	class:MsgParser
-MsgParser	src/MsgParser.hpp	/^class MsgParser{$/;"	c
+MsgParser	src/MsgParser.hpp	/^class MsgParser {$/;"	c
 MsgParser_hpp	src/MsgParser.hpp	/^#define MsgParser_hpp$/;"	d
 MultiMesh	src/Event/MultiMesh.cpp	/^MultiMesh::MultiMesh(int size, ofFloatColor color){$/;"	f	class:MultiMesh
 MultiMesh	src/Event/MultiMesh.hpp	/^class MultiMesh: public JEvent{$/;"	c
@@ -178,9 +178,9 @@ MultiMeshMaybeTomorrow	src/Event/MultiMeshMaybeTomorrow.cpp	/^MultiMeshMaybeTomo
 MultiMeshMaybeTomorrow	src/Event/MultiMeshMaybeTomorrow.hpp	/^class MultiMeshMaybeTomorrow: public JEvent{$/;"	c
 MultiMeshMaybeTomorrow_hpp	src/Event/MultiMeshMaybeTomorrow.hpp	/^#define MultiMeshMaybeTomorrow_hpp$/;"	d
 MultiMesh_hpp	src/Event/MultiMesh.hpp	/^#define MultiMesh_hpp$/;"	d
-NEGATIVE	src/MsgParser.hpp	/^    NEGATIVE, \/\/ Dummies, otherwise this would be 3, and override layer 3...$/;"	e	enum:VisualizerLayer
-NON_CAM_BACK	src/MsgParser.hpp	/^    NON_CAM_BACK,$/;"	e	enum:VisualizerLayer
-NON_CAM_FRONT	src/MsgParser.hpp	/^    NON_CAM_FRONT,$/;"	e	enum:VisualizerLayer
+NEGATIVE	src/MsgParser.hpp	/^  NEGATIVE, \/\/ Dummies, otherwise this would be 3, and override layer 3...$/;"	e	enum:VisualizerLayer
+NON_CAM_BACK	src/MsgParser.hpp	/^  NON_CAM_BACK,$/;"	e	enum:VisualizerLayer
+NON_CAM_FRONT	src/MsgParser.hpp	/^  NON_CAM_FRONT,$/;"	e	enum:VisualizerLayer
 NSCameraUsageDescription	exampleSimple/openFrameworks-Info.plist	/^	<key>NSCameraUsageDescription<\/key>$/;"	k
 NSCameraUsageDescription	exampleSimpleTlFix/openFrameworks-Info.plist	/^	<key>NSCameraUsageDescription<\/key>$/;"	k
 NSHighResolutionCapable	exampleSimple/openFrameworks-Info.plist	/^	<key>NSHighResolutionCapable<\/key>$/;"	k
@@ -205,7 +205,7 @@ RectangleMask_hpp	src/Event/RectangleMask.hpp	/^#define RectangleMask_hpp$/;"	d
 RedrawMode	src/modifiers/JModifierRedraw.hpp	/^enum RedrawMode {$/;"	g	class:JModifierRedraw
 SC_FOLDER	src/config.h	/^#define SC_FOLDER /;"	d
 SC_PORT	src/config.h	/^#define SC_PORT /;"	d
-SCsender	src/MsgParser.hpp	/^    ofxOscSender* SCsender = nullptr;$/;"	m	class:MsgParser	typeref:typename:ofxOscSender *
+SCsender	src/MsgParser.hpp	/^  ofxOscSender *SCsender = nullptr;$/;"	m	class:MsgParser	typeref:typename:ofxOscSender *
 SCsender	src/ofxJVisuals.hpp	/^  ofxOscSender *SCsender = nullptr;$/;"	m	class:ofxJVisuals	typeref:typename:ofxOscSender *
 SHADER_PATH	src/config.h	/^#define SHADER_PATH /;"	d
 SpaceCube	src/Event/SpaceCube.cpp	/^SpaceCube::SpaceCube(ofVec3f loc_, ofVec3f size_, int points_amount_, int gridsize){$/;"	f	class:SpaceCube
@@ -261,6 +261,7 @@ addRadius	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::ad
 addRandomMesh	src/Event/MultiMesh.cpp	/^void MultiMesh::addRandomMesh(float radiusTemp, ofFloatColor color){$/;"	f	class:MultiMesh	typeref:typename:void
 addRandomMesh	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::addRandomMesh(float radiusTemp, ofFloatColor color){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
 addRect	src/Event/RectangleMask.cpp	/^void RectangleMask::addRect(JRectangle* r){$/;"	f	class:RectangleMask	typeref:typename:void
+addShader	src/ofxJVisuals.cpp	/^JEvent *MsgParser::addShader(JShader *s, int layer) {$/;"	f	class:MsgParser	typeref:typename:JEvent *
 addTo	src/MsgParser.cpp	/^void MsgParser::addTo(ofxOscMessage &m) {$/;"	f	class:MsgParser	typeref:typename:void
 addToCenter	src/Event/JVorm.cpp	/^void JVorm::addToCenter(glm::vec3 add){$/;"	f	class:JVorm	typeref:typename:void
 addVector	src/Event/JRectangle.cpp	/^void JRectangle::addVector(vector<JRectangle*>* v){$/;"	f	class:JRectangle	typeref:typename:void
@@ -322,7 +323,7 @@ bGray	src/Event/JVideoPlayer.hpp	/^    bool bGray = false;$/;"	m	class:Bin	typer
 bGrowRadius	src/Event/MultiMesh.hpp	/^    void growRadius(int direction, float speed); bool bGrowRadius=false;$/;"	m	class:MultiMesh	typeref:typename:bool
 bGrowRadius	src/Event/MultiMeshMaybeTomorrow.hpp	/^    void growRadius(int direction, float speed); bool bGrowRadius=false;$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:bool
 bHasEnv	src/Event/JDivisionGrid.hpp	/^    bool bHasEnv = false;$/;"	m	class:JPoly	typeref:typename:bool
-bIsNotified	src/MsgParser.hpp	/^    bool bIsNotified = false;$/;"	m	class:MsgParser	typeref:typename:bool
+bIsNotified	src/MsgParser.hpp	/^  bool bIsNotified = false;$/;"	m	class:MsgParser	typeref:typename:bool
 bLoadSucces	src/Event/JImage.hpp	/^    bool bLoadSucces = false;$/;"	m	class:JImage	typeref:typename:bool
 bMask	src/ofxJVisuals.hpp	/^  bool bMask = false;$/;"	m	class:ofxJVisuals	typeref:typename:bool
 bMirror	src/ofxJVisuals.hpp	/^  bool bMirror = false;$/;"	m	class:ofxJVisuals	typeref:typename:bool
@@ -346,7 +347,7 @@ bSave	src/Event/JDivisionGrid.hpp	/^    bool bSave = false;$/;"	m	class:JDivisio
 bSave	src/Event/JMesh.hpp	/^    bool bSave = false;$/;"	m	class:JMesh	typeref:typename:bool
 bSwitch	src/Event/JVideoPlayer.hpp	/^    bool bSwitch = false;$/;"	m	class:Bin	typeref:typename:bool
 bUseNormalImage	src/Event/meshLandscape.hpp	/^    bool bUseNormalImage = false;$/;"	m	class:meshLandscape	typeref:typename:bool
-bUseSC	src/MsgParser.hpp	/^    bool bUseSC = false;$/;"	m	class:MsgParser	typeref:typename:bool
+bUseSC	src/MsgParser.hpp	/^  bool bUseSC = false;$/;"	m	class:MsgParser	typeref:typename:bool
 balance	src/Event/JLine.hpp	/^    float balance = 0.5;$/;"	m	class:JLine	typeref:typename:float
 balance	src/Event/JPhysarum.hpp	/^    float balance = 0.5;$/;"	m	class:JPhysarum	typeref:typename:float
 begin	src/JShader.cpp	/^void JShader::begin() {$/;"	f	class:JShader	typeref:typename:void
@@ -410,7 +411,7 @@ colorAlphas	src/Event/MultiMesh.hpp	/^    float* colorAlphas;$/;"	m	class:MultiM
 colorAlphas	src/Event/MultiMeshMaybeTomorrow.hpp	/^    float* colorAlphas;$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:float *
 colorPtr	src/mapValue.h	/^    ofColor* colorPtr;$/;"	m	class:mapValue	typeref:typename:ofColor *
 colors	src/Event/dotsBlob.hpp	/^    vector<ofColor> colors;$/;"	m	class:dotsBlob	typeref:typename:vector<ofColor>
-commands	src/MsgParser.hpp	/^    map<string, short> commands;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
+commands	src/MsgParser.hpp	/^  map<string, short> commands;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
 common	addon_config.mk	/^common:$/;"	t
 complexity	src/Event/JVecField.hpp	/^    float complexity = 20; \/\/ wind complexity$/;"	m	class:JVecField	typeref:typename:float
 config_h	src/config.h	/^#define config_h$/;"	d
@@ -584,7 +585,7 @@ endPoint	src/Event/JDivisionGrid.hpp	/^    ofPoint endPoint;$/;"	m	class:JPoly	t
 endPointRotation	src/Event/dotsBlob.hpp	/^    float endPointRotation = 0;$/;"	m	class:dotsBlob	typeref:typename:float
 endSide	src/Event/JDivisionGrid.hpp	/^    int endSide;$/;"	m	class:JPoly	typeref:typename:int
 endTime	src/Event/JEvent.hpp	/^  unsigned int endTime = 1000;$/;"	m	class:JEvent	typeref:typename:unsigned int
-envValues	src/MsgParser.hpp	/^    map<string, short> envValues;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
+envValues	src/MsgParser.hpp	/^  map<string, short> envValues;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
 envelopes	src/Event/JEvent.hpp	/^  vector<vector<Env *>> envelopes;$/;"	m	class:JEvent	typeref:typename:vector<vector<Env * >>
 events	src/Event/JEvent.hpp	/^  JEvent **events = nullptr;$/;"	m	class:JEvent	typeref:typename:JEvent **
 events	src/ofxJVisuals.hpp	/^  JEvent *events[MAX_EVENTS_PTRS];$/;"	m	class:ofxJVisuals	typeref:typename:JEvent * []
@@ -613,6 +614,7 @@ formJVorm	src/Event/JVorm.cpp	/^void JVorm::formJVorm(){$/;"	f	class:JVorm	typer
 frame	src/Event/JVecField.hpp	/^    ofImage frame;$/;"	m	class:JVecField	typeref:typename:ofImage
 freq	src/Wavetable.h	/^    float freq=1;$/;"	m	class:Wavetable	typeref:typename:float
 fromBuffer	src/Event/JLine.cpp	/^void JLine::fromBuffer(int bufferMode){$/;"	f	class:JLine	typeref:typename:void
+fxShaders	src/ofxJVisuals.hpp	/^  vector<JShader *> fxShaders;$/;"	m	class:ofxJVisuals	typeref:typename:vector<JShader * >
 fxaaPP	src/ofxJVisuals.hpp	/^  FxaaPass::Ptr fxaaPP = nullptr;$/;"	m	class:ofxJVisuals	typeref:typename:FxaaPass::Ptr
 generateJildert	src/Event/MultiMesh.cpp	/^void MultiMesh::generateJildert(){$/;"	f	class:MultiMesh	typeref:typename:void
 generateJildert	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::generateJildert(){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
@@ -623,6 +625,7 @@ generateRandomRects	src/Event/JDivisionGrid.cpp	/^void JDivisionGrid::generateRa
 generateSeed	src/Event/JNoise.cpp	/^void JNoise::generateSeed(){$/;"	f	class:JNoise	typeref:typename:void
 generateSymmetricMeshes	src/Event/MultiMesh.cpp	/^void MultiMesh::generateSymmetricMeshes(int num, ofFloatColor color, float radiusTemp){$/;"	f	class:MultiMesh	typeref:typename:void
 generateSymmetricMeshes	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::generateSymmetricMeshes(int num, ofFloatColor color, float radiusTe/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
+generativeShaders	src/ofxJVisuals.hpp	/^  vector<JShader *> generativeShaders;$/;"	m	class:ofxJVisuals	typeref:typename:vector<JShader * >
 getAddr	src/Event/JEvent.hpp	/^  JEvent &getAddr() { return *this; };$/;"	f	class:JEvent	typeref:typename:JEvent &
 getAddrNext	src/Event/JEvent.hpp	/^  JEvent &getAddrNext() { return next->getAddr(); };$/;"	f	class:JEvent	typeref:typename:JEvent &
 getAllEvents	src/ofxJVisuals.cpp	/^ofxOscMessage ofxJVisuals::getAllEvents() {$/;"	f	class:ofxJVisuals	typeref:typename:ofxOscMessage
@@ -653,7 +656,6 @@ getNumParticles	src/Event/JVorm.cpp	/^uint16 JVorm::getNumParticles(){$/;"	f	cla
 getPtr	src/Env.cpp	/^void* Pointer::getPtr(){$/;"	f	class:Pointer	typeref:typename:void *
 getRandomBin	src/Event/JVideoPlayer.cpp	/^Bin* JVideoPlayer::getRandomBin(){$/;"	f	class:JVideoPlayer	typeref:typename:Bin *
 getSelectedFont	src/ofxJVisuals.cpp	/^ofTrueTypeFont *MsgParser::getSelectedFont() { return v->selectedFont; }$/;"	f	class:MsgParser	typeref:typename:ofTrueTypeFont *
-getShaders	src/ofxJVisuals.cpp	/^vector<JShader *> *MsgParser::getShaders() { return &(v->shaders); }$/;"	f	class:MsgParser	typeref:typename:vector<JShader * > *
 getSmaller	src/Event/SpaceCube.cpp	/^void SpaceCube::getSmaller(int size_){$/;"	f	class:SpaceCube	typeref:typename:void
 getTime	src/Env.cpp	/^unsigned long Env::getTime(){$/;"	f	class:Env	typeref:typename:unsigned long
 getTimeMillis	src/Event/JEvent.cpp	/^unsigned long JEvent::getTimeMillis(){$/;"	f	class:JEvent	typeref:typename:unsigned long
@@ -872,8 +874,10 @@ ownDtor	src/Event/JRectangle.cpp	/^void JRectangle::ownDtor(){$/;"	f	class:JRect
 ownDtor	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::ownDtor(){$/;"	f	class:JVideoPlayer	typeref:typename:void
 ownDtor	src/Event/JVorm.cpp	/^void JVorm::ownDtor(){$/;"	f	class:JVorm	typeref:typename:void
 ownDtor	src/Event/SpaceCube.cpp	/^void SpaceCube::ownDtor(){ removeFromVector(); }$/;"	f	class:SpaceCube	typeref:typename:void
+ownDtor	src/JShader.cpp	/^void JShader::ownDtor() {$/;"	f	class:JShader	typeref:typename:void
 p	src/Event/JDivisionGrid.hpp	/^    ofPolyline p;$/;"	m	class:JPoly	typeref:typename:ofPolyline
 p	src/Event/JVecField.hpp	/^    ofFloatPixels p;$/;"	m	class:JVecField	typeref:typename:ofFloatPixels
+parent	src/JShader.hpp	/^  vector<JShader *> *parent = nullptr;$/;"	m	class:JShader	typeref:typename:vector<JShader * > *
 parentContainer	src/Event/JEvent.hpp	/^  vector<JEvent *> *parentContainer = nullptr;$/;"	m	class:JEvent	typeref:typename:vector<JEvent * > *
 parentID	src/Env.hpp	/^    unsigned int* parentID = nullptr;$/;"	m	class:Env	typeref:typename:unsigned int *
 parseBuffer	src/Event/JEvent.hpp	/^  virtual void parseBuffer(){};$/;"	f	class:JEvent	typeref:typename:void
@@ -995,7 +999,7 @@ saveBuffer	src/Env.hpp	/^    float* saveBuffer = nullptr;$/;"	m	class:Env	typere
 saveBufferSize	src/Env.hpp	/^    int saveBufferSize = 0;$/;"	m	class:Env	typeref:typename:int
 saveBufferWritePos	src/Env.hpp	/^    int saveBufferWritePos = 0;$/;"	m	class:Env	typeref:typename:int
 saveValueToBuffer	src/Env.cpp	/^void Env::saveValueToBuffer(float v){$/;"	f	class:Env	typeref:typename:void
-scClient	src/MsgParser.hpp	/^    ofxOscSenderReceiver scClient;$/;"	m	class:MsgParser	typeref:typename:ofxOscSenderReceiver
+scClient	src/MsgParser.hpp	/^  ofxOscSenderReceiver scClient;$/;"	m	class:MsgParser	typeref:typename:ofxOscSenderReceiver
 scSynth	src/scSynth.hpp	/^class scSynth: public ofThread{$/;"	c
 scSynth_h	src/scSynth.hpp	/^#define scSynth_h$/;"	d
 scaleFact	src/Event/JImage.hpp	/^  glm::vec2 scaleFact = glm::vec2(1.0);$/;"	m	class:JSvg	typeref:typename:glm::vec2
@@ -1077,7 +1081,6 @@ setup	exampleSimple/src/ofApp.cpp	/^void ofApp::setup() {$/;"	f	class:ofApp	type
 setup	exampleSimpleTlFix/src/ofApp.cpp	/^void ofApp::setup(){$/;"	f	class:ofApp	typeref:typename:void
 setup	src/scSynth.hpp	/^    void setup(){$/;"	f	class:scSynth	typeref:typename:void
 shader	src/Event/JShaderTest.hpp	/^    ofShader shader;$/;"	m	class:JShaderTest	typeref:typename:ofShader
-shaders	src/ofxJVisuals.hpp	/^  vector<JShader *> shaders;$/;"	m	class:ofxJVisuals	typeref:typename:vector<JShader * >
 sideDiv	src/Event/JVorm.h	/^    float sideDiv;$/;"	m	class:JVorm	typeref:typename:float
 size	src/Event/JEventBase.hpp	/^  glm::vec3 size = {100, 100, 100};$/;"	m	class:JEventBase	typeref:typename:glm::vec3
 size	src/ofxJVisuals.hpp	/^  glm::vec2 size;$/;"	m	class:ofxJVisuals	typeref:typename:glm::vec2
@@ -1147,7 +1150,7 @@ switchMode	src/Event/MultiMesh.cpp	/^void MultiMesh::switchMode(){$/;"	f	class:M
 switchRadiusses	src/Event/JVorm.cpp	/^void JVorm::switchRadiusses(JVorm* JVorm){$/;"	f	class:JVorm	typeref:typename:void
 switchRandomBins	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::switchRandomBins(){$/;"	f	class:JVideoPlayer	typeref:typename:void
 switchState	src/Event/JVorm.cpp	/^void JVorm::switchState(){$/;"	f	class:JVorm	typeref:typename:void
-synth	src/MsgParser.hpp	/^    scSynth* synth;$/;"	m	class:MsgParser	typeref:typename:scSynth *
+synth	src/MsgParser.hpp	/^  scSynth *synth;$/;"	m	class:MsgParser	typeref:typename:scSynth *
 t	src/Event/JVecField.hpp	/^    float t;$/;"	m	class:JVecField	typeref:typename:float
 texCoords	src/ofxJVisuals.hpp	/^  vector<glm::vec2> texCoords;$/;"	m	class:ofxJVisuals	typeref:typename:vector<glm::vec2>
 texture	src/Event/JMirror.h	/^    ofTexture texture;$/;"	m	class:JMirror	typeref:typename:ofTexture
@@ -1173,7 +1176,7 @@ txt	src/Event/JText.hpp	/^    string txt;$/;"	m	class:JText	typeref:typename:str
 type	src/Event/JEvent.hpp	/^  string type = "JEvent";$/;"	m	class:JEvent	typeref:typename:string
 type	src/Event/JEventBase.hpp	/^  jevent::JEventType type;$/;"	m	class:JEventBase	typeref:typename:jevent::JEventType
 type	src/mapValue.h	/^    char type = 'f'; \/\/$/;"	m	class:mapValue	typeref:typename:char
-types	src/MsgParser.hpp	/^    map<string, short> types;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
+types	src/MsgParser.hpp	/^  map<string, short> types;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
 uint16	src/Event/JVorm.cpp	/^typedef unsigned short uint16;$/;"	t	typeref:typename:unsigned short	file:
 uint16	src/Event/JVorm.h	/^typedef unsigned short uint16;$/;"	t	class:JVorm	typeref:typename:unsigned short
 uint16	src/Event/dotsBlob.hpp	/^typedef unsigned short uint16;$/;"	t	class:dotsBlob	typeref:typename:unsigned short
@@ -1209,13 +1212,13 @@ updateVel	src/Event/particleSystem.h	/^    	ofShader    updateVel;$/;"	m	class:p
 v	src/Event/JEvent.hpp	/^  ofxJVisuals *v;$/;"	m	class:JEvent	typeref:typename:ofxJVisuals *
 v	src/Event/JRectangle.hpp	/^    vector<JRectangle*>* v = nullptr; \/\/ Zou ook nog in een vector van pointers naar vector<re/;"	m	class:JRectangle	typeref:typename:vector<JRectangle * > *
 v	src/Event/SpaceCube.h	/^    vector<SpaceCube*>* v = nullptr;$/;"	m	class:SpaceCube	typeref:typename:vector<SpaceCube * > *
-v	src/MsgParser.hpp	/^    ofxJVisuals* v = nullptr;$/;"	m	class:MsgParser	typeref:typename:ofxJVisuals *
+v	src/MsgParser.hpp	/^  ofxJVisuals *v = nullptr;$/;"	m	class:MsgParser	typeref:typename:ofxJVisuals *
 valC	src/Env.hpp	/^    ofColor* valC = nullptr;$/;"	m	class:Pointer	typeref:typename:ofColor *
 valF	src/Env.hpp	/^    float* valF = nullptr;$/;"	m	class:Pointer	typeref:typename:float *
 valI	src/Env.hpp	/^    int* valI = nullptr;$/;"	m	class:Pointer	typeref:typename:int *
 value	src/Env.hpp	/^    float value = 0;$/;"	m	class:Env	typeref:typename:float
 values	src/Event/JEventBase.hpp	/^  float *values[NUM_BUSSES];$/;"	m	class:JEventBase	typeref:typename:float * []
-values	src/MsgParser.hpp	/^    map<string, short> values;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
+values	src/MsgParser.hpp	/^  map<string, short> values;$/;"	m	class:MsgParser	typeref:typename:map<string,short>
 valuesToFloatArray	src/Event/JEventBase.hpp	/^  float *valuesToFloatArray() {$/;"	f	class:JEventBase	typeref:typename:float *
 vbo	src/Event/particleSystemOpenCL.hpp	/^    GLuint vbo, cbo;$/;"	m	class:particleSystem	typeref:typename:GLuint
 vecField	src/Event/particleSystem.h	/^    JVecField* vecField = nullptr;$/;"	m	class:particleSystem	typeref:typename:JVecField *
