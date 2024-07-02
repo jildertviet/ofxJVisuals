@@ -815,6 +815,9 @@ bool MsgParser::create(ofxOscMessage &m) {
     e = addShader(new JShader());
     // getShaders()->push_back((JShader *)e);
     break;
+  case jevent::JEventCircle:
+    e = new JCircle();
+    break;
   default:
     return false;
   }
@@ -823,6 +826,7 @@ bool MsgParser::create(ofxOscMessage &m) {
 
   e->id = m.getArgAsInt(0);
   e->subID = encodedIntToChar(m.getArgAsInt(1), 1);
+  // cout << "layerId: " << ofToString(e->layerID) << endl;
   addEvent(e, e->layerID, e->id, false);
 
   if (bInit)

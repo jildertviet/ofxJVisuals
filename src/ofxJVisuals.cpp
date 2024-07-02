@@ -196,15 +196,15 @@ void ofxJVisuals::update() {
     fxShaders[i]->begin();
     fxShaders[i]->update();
   }
-  if (negativeLayer.next) {
-    negative.begin();
-    negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
-    fbo.draw(0, 0);
-    negative.end();
-    // negativeMask.draw(0, 0);
-  } else {
-    fbo.draw(0, 0);
-  }
+  // if (negativeLayer.next) {
+  negative.begin();
+  negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
+  fbo.draw(0, 0);
+  negative.end();
+  // negativeMask.draw(0, 0);
+  // } else {
+  // fbo.draw(0, 0);
+  // }
   for (int i = 0; i < fxShaders.size(); i++) {
     fxShaders[i]->end();
   }
@@ -413,6 +413,14 @@ JEvent *ofxJVisuals::getEventById(unsigned int idToFind, unsigned int subID) {
   //
   // }
 
+  JEvent *toCheck = &negativeLayer; // Dummy
+  while (toCheck->next) {
+    if (toCheck->next->id == idToFind && toCheck->next->subID == subID) {
+      lastFound = toCheck->next;
+      return toCheck->next;
+    }
+    toCheck = toCheck->next;
+  }
   for (int i = 0; i < NUMLAYERS; i++) {
     JEvent *toCheck = layers[i]; // Dummy
     while (toCheck->next) {

@@ -20,9 +20,10 @@ enum JEventType {
   JLine,
   JWaveform,
   JModifierRedraw,
-  JShader,       // 8
-  JEventDynamicS // This is only used for compilation of code. Object should be
-                 // not used.
+  JShader,        // 8
+  JEventDynamicS, // This is only used for compilation of code. Object should be
+                  // not used in OF
+  JEventCircle
 };
 
 enum ConnectionType {
@@ -111,7 +112,7 @@ public:
   float speed = 1;
   float lineWidth = 1;
 
-  float bMove = true;
+  float bMove = false;
   float layerID = 2;
   float bFill = true;
   float mode = 0;

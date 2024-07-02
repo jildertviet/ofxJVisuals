@@ -63,8 +63,8 @@ Image_hpp	src/Event/JImage.hpp	/^#define Image_hpp$/;"	d
 Installation	README.md	/^Installation$/;"	s	chapter:ofxJVisuals
 Introduction	README.md	/^Introduction$/;"	s	chapter:ofxJVisuals
 JBufferSender	src/Event/JEventBase.hpp	/^  JBufferSender,$/;"	e	enum:jevent::JEventType
-JCircle	src/Event/JPrimitive.hpp	/^    JCircle(glm::vec3 loc = glm::vec3(0)){$/;"	f	class:JCircle
-JCircle	src/Event/JPrimitive.hpp	/^class JCircle: public JPrimitive{$/;"	c
+JCircle	src/Event/JPrimitive.hpp	/^  JCircle(glm::vec3 loc = glm::vec3(0)) {$/;"	f	class:JCircle
+JCircle	src/Event/JPrimitive.hpp	/^class JCircle : public JPrimitive {$/;"	c
 JDivisionGrid	src/Event/JDivisionGrid.cpp	/^JDivisionGrid::JDivisionGrid(glm::vec2 size){$/;"	f	class:JDivisionGrid
 JDivisionGrid	src/Event/JDivisionGrid.hpp	/^class JDivisionGrid: public JEvent{$/;"	c
 JDivisionGrid_hpp	src/Event/JDivisionGrid.hpp	/^#define JDivisionGrid_hpp$/;"	d
@@ -73,7 +73,8 @@ JEvent	src/Event/JEvent.hpp	/^class JEvent : public JEventBase {$/;"	c
 JEventBase	src/Event/JEventBase.hpp	/^  JEventBase() {$/;"	f	class:JEventBase
 JEventBase	src/Event/JEventBase.hpp	/^class JEventBase {$/;"	c
 JEventBase_hpp	src/Event/JEventBase.hpp	/^#define JEventBase_hpp$/;"	d
-JEventDynamicS	src/Event/JEventBase.hpp	/^  JEventDynamicS \/\/ This is only used for compilation of code. Object should be$/;"	e	enum:jevent::JEventType
+JEventCircle	src/Event/JEventBase.hpp	/^  JEventCircle$/;"	e	enum:jevent::JEventType
+JEventDynamicS	src/Event/JEventBase.hpp	/^  JEventDynamicS, \/\/ This is only used for compilation of code. Object should be$/;"	e	enum:jevent::JEventType
 JEventType	src/Event/JEventBase.hpp	/^enum JEventType {$/;"	g	namespace:jevent
 JEvent_hpp	src/Event/JEvent.hpp	/^#define JEvent_hpp$/;"	d
 JFunctionTrigger	src/Event/JEventBase.hpp	/^  JFunctionTrigger,$/;"	e	enum:jevent::JEventType
@@ -96,8 +97,8 @@ JMirror_h	src/Event/JMirror.h	/^#define JMirror_h$/;"	d
 JModifier	src/modifiers/JModifier.cpp	/^JModifier::JModifier(){$/;"	f	class:JModifier
 JModifier	src/modifiers/JModifier.hpp	/^class JModifier: public JEvent{$/;"	c
 JModifierArray	src/Event/JEventBase.hpp	/^  JModifierArray,$/;"	e	enum:jevent::JEventType
-JModifierArray	src/modifiers/JModifierArray.hpp	/^    JModifierArray(){$/;"	f	class:JModifierArray
-JModifierArray	src/modifiers/JModifierArray.hpp	/^class JModifierArray: public JModifier{$/;"	c
+JModifierArray	src/modifiers/JModifierArray.hpp	/^  JModifierArray() {$/;"	f	class:JModifierArray
+JModifierArray	src/modifiers/JModifierArray.hpp	/^class JModifierArray : public JModifier {$/;"	c
 JModifierArray_hpp	src/modifiers/JModifierArray.hpp	/^#define JModifierArray_hpp$/;"	d
 JModifierFact	src/modifiers/JModifierFact.hpp	/^    JModifierFact(){};$/;"	f	class:JModifierFact
 JModifierFact	src/modifiers/JModifierFact.hpp	/^class JModifierFact{$/;"	c
@@ -120,8 +121,8 @@ JPhysarum	src/Event/JPhysarum.hpp	/^class JPhysarum: public JEvent{$/;"	c
 JPhysarum_hpp	src/Event/JPhysarum.hpp	/^#define JPhysarum_hpp$/;"	d
 JPoly	src/Event/JDivisionGrid.hpp	/^    JPoly(){ m.clear(); m.setMode(OF_PRIMITIVE_TRIANGLES);}$/;"	f	class:JPoly
 JPoly	src/Event/JDivisionGrid.hpp	/^class JPoly: public JMesh{$/;"	c
-JPrimitive	src/Event/JPrimitive.hpp	/^    JPrimitive(){};$/;"	f	class:JPrimitive
-JPrimitive	src/Event/JPrimitive.hpp	/^class JPrimitive: public JEvent{$/;"	c
+JPrimitive	src/Event/JPrimitive.hpp	/^  JPrimitive(){};$/;"	f	class:JPrimitive
+JPrimitive	src/Event/JPrimitive.hpp	/^class JPrimitive : public JEvent {$/;"	c
 JPrimitive_hpp	src/Event/JPrimitive.hpp	/^#define JPrimitive_hpp$/;"	d
 JRectangle	src/Event/JEventBase.hpp	/^  JRectangle,$/;"	e	enum:jevent::JEventType
 JRectangle	src/Event/JRectangle.cpp	/^JRectangle::JRectangle(){$/;"	f	class:JRectangle
@@ -130,7 +131,7 @@ JRectangle	src/Event/JRectangle.cpp	/^JRectangle::JRectangle(glm::vec2 loc, glm:
 JRectangle	src/Event/JRectangle.cpp	/^JRectangle::JRectangle(glm::vec3 loc, glm::vec3 size) : JRectangle(){$/;"	f	class:JRectangle
 JRectangle	src/Event/JRectangle.hpp	/^class JRectangle: public JPrimitive, public JThickLine{ \/\/ Also inherits from Event$/;"	c
 JRectangle_hpp	src/Event/JRectangle.hpp	/^#define JRectangle_hpp$/;"	d
-JShader	src/Event/JEventBase.hpp	/^  JShader,       \/\/ 8$/;"	e	enum:jevent::JEventType
+JShader	src/Event/JEventBase.hpp	/^  JShader,        \/\/ 8$/;"	e	enum:jevent::JEventType
 JShader	src/JShader.cpp	/^JShader::JShader() {}$/;"	f	class:JShader
 JShader	src/JShader.hpp	/^class JShader : public JEvent {$/;"	c
 JShaderLines	src/JShaderLines.cpp	/^JShaderLines::JShaderLines(){$/;"	f	class:JShaderLines
@@ -157,7 +158,7 @@ JVideoPlayer	src/Event/JVideoPlayer.cpp	/^JVideoPlayer::JVideoPlayer(){$/;"	f	cl
 JVideoPlayer	src/Event/JVideoPlayer.hpp	/^class JVideoPlayer: public JEvent{$/;"	c
 JVideoPlayer_hpp	src/Event/JVideoPlayer.hpp	/^#define JVideoPlayer_hpp$/;"	d
 JVorm	src/Event/JEventBase.hpp	/^  JVorm,$/;"	e	enum:jevent::JEventType
-JVorm	src/Event/JVorm.cpp	/^JVorm::JVorm(uint8 numSides, int sideDiv, float radius, glm::vec3 loc, bool on_destination){$/;"	f	class:JVorm
+JVorm	src/Event/JVorm.cpp	/^JVorm::JVorm(uint8 numSides, int sideDiv, float radius, glm::vec3 loc,$/;"	f	class:JVorm
 JVorm	src/Event/JVorm.h	/^class JVorm: public JEvent{$/;"	c
 JWaveform	src/Event/JEventBase.hpp	/^  JWaveform,$/;"	e	enum:jevent::JEventType
 JWaveform	src/Event/JWaveform.cpp	/^JWaveform::JWaveform(){$/;"	f	class:JWaveform
@@ -236,7 +237,7 @@ __anonb680d16f0108	src/Event/JEvent.hpp	/^  struct {$/;"	s	class:JEvent
 acceleration	src/Event/JParticle.h	/^    glm::vec3 acceleration;$/;"	m	class:JParticle	typeref:typename:glm::vec3
 active	src/Env.hpp	/^    bool active = true;$/;"	m	class:Env	typeref:typename:bool
 active	src/Event/JEvent.hpp	/^  bool active = false;$/;"	m	class:JEvent	typeref:typename:bool
-addConnection	src/Event/JVorm.cpp	/^void JVorm::addConnection(JVorm* JVorm, bool repeat){ \/\/ repeat = true$/;"	f	class:JVorm	typeref:typename:void
+addConnection	src/Event/JVorm.cpp	/^void JVorm::addConnection(JVorm *JVorm, bool repeat) { \/\/ repeat = true$/;"	f	class:JVorm	typeref:typename:void
 addEnv	src/Event/JEvent.cpp	/^Env* JEvent::addEnv(Env* e){$/;"	f	class:JEvent	typeref:typename:Env *
 addEnv	src/Event/JEvent.cpp	/^Env* JEvent::addEnv(vector<float> levels, vector<float> times, float* f, char curve){$/;"	f	class:JEvent	typeref:typename:Env *
 addEnv	src/Event/JEvent.cpp	/^Env* JEvent::addEnv(vector<float> levels, vector<float> times, int* i, char curve){$/;"	f	class:JEvent	typeref:typename:Env *
@@ -263,9 +264,9 @@ addRandomMesh	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow
 addRect	src/Event/RectangleMask.cpp	/^void RectangleMask::addRect(JRectangle* r){$/;"	f	class:RectangleMask	typeref:typename:void
 addShader	src/ofxJVisuals.cpp	/^JEvent *MsgParser::addShader(JShader *s, int layer) {$/;"	f	class:MsgParser	typeref:typename:JEvent *
 addTo	src/MsgParser.cpp	/^void MsgParser::addTo(ofxOscMessage &m) {$/;"	f	class:MsgParser	typeref:typename:void
-addToCenter	src/Event/JVorm.cpp	/^void JVorm::addToCenter(glm::vec3 add){$/;"	f	class:JVorm	typeref:typename:void
+addToCenter	src/Event/JVorm.cpp	/^void JVorm::addToCenter(glm::vec3 add) {$/;"	f	class:JVorm	typeref:typename:void
 addVector	src/Event/JRectangle.cpp	/^void JRectangle::addVector(vector<JRectangle*>* v){$/;"	f	class:JRectangle	typeref:typename:void
-addVector	src/Event/JVorm.cpp	/^void JVorm::addVector(vector<JVorm*>* v){$/;"	f	class:JVorm	typeref:typename:void
+addVector	src/Event/JVorm.cpp	/^void JVorm::addVector(vector<JVorm *> *v) { this->connectionPointers = v; }$/;"	f	class:JVorm	typeref:typename:void
 addVector	src/Event/SpaceCube.cpp	/^void SpaceCube::addVector(vector<SpaceCube*>* v){$/;"	f	class:SpaceCube	typeref:typename:void
 allBinsVisible	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::allBinsVisible(){$/;"	f	class:JVideoPlayer	typeref:typename:void
 allRandomBrightness	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::allRandomBrightness(int min, int max){$/;"	f	class:JVideoPlayer	typeref:typename:void
@@ -332,7 +333,7 @@ bMirrorMouse	src/Event/particleSystemOpenCL.hpp	/^    bool bMirrorMouse = false;
 bMirrorV	src/Event/JVideoPlayer.hpp	/^    bool bMirrorH = false; bool bMirrorV = false;$/;"	m	class:Bin	typeref:typename:bool
 bMorph	src/Event/MultiMesh.hpp	/^    void morph(); bool bMorph = false; void doMorph(float angle, float time); float morphAngle, /;"	m	class:MultiMesh	typeref:typename:bool
 bMorph	src/Event/MultiMeshMaybeTomorrow.hpp	/^    void morph(); bool bMorph = false; void doMorph(float angle, float time); float morphAngle, /;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:bool
-bMove	src/Event/JEventBase.hpp	/^  float bMove = true;$/;"	m	class:JEventBase	typeref:typename:float
+bMove	src/Event/JEventBase.hpp	/^  float bMove = false;$/;"	m	class:JEventBase	typeref:typename:float
 bMoveHorizontal	src/Event/MultiMesh.hpp	/^    bool bMoveHorizontal = false; void moveHorizontal();$/;"	m	class:MultiMesh	typeref:typename:bool
 bMoveHorizontal	src/Event/MultiMeshMaybeTomorrow.hpp	/^    bool bMoveHorizontal = false; void moveHorizontal();$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:bool
 bMoveOutVertext	src/Event/MultiMeshMaybeTomorrow.hpp	/^    void moveOutVertex(int index); bool bMoveOutVertext = false;$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:bool
@@ -378,23 +379,23 @@ centerPulse	src/Event/MultiMesh.cpp	/^void MultiMesh::centerPulse(){$/;"	f	class
 centerPulse	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::centerPulse(){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
 centerPulseRadius	src/Event/MultiMesh.hpp	/^    int pulseMoveWidth; int centerPulseRadius = 50;$/;"	m	class:MultiMesh	typeref:typename:int
 centerPulseRadius	src/Event/MultiMeshMaybeTomorrow.hpp	/^    int pulseMoveWidth; int centerPulseRadius = 50;$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:int
-changeAngleOffset	src/Event/JVorm.cpp	/^void JVorm::changeAngleOffset(float angle_){$/;"	f	class:JVorm	typeref:typename:void
+changeAngleOffset	src/Event/JVorm.cpp	/^void JVorm::changeAngleOffset(float angle_) {$/;"	f	class:JVorm	typeref:typename:void
 changeColor	src/Event/MultiMesh.cpp	/^void MultiMesh::changeColor(ofFloatColor color){$/;"	f	class:MultiMesh	typeref:typename:void
 changeColor	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::changeColor(ofFloatColor color){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
 changeLocations	src/Event/MultiMesh.cpp	/^void MultiMesh::changeLocations(){$/;"	f	class:MultiMesh	typeref:typename:void
 changeLocations	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::changeLocations(){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
-changeMaxspeed	src/Event/JVorm.cpp	/^void JVorm::changeMaxspeed(float maxspeed_){$/;"	f	class:JVorm	typeref:typename:void
-changeMaxspeed	src/Event/JVorm.cpp	/^void JVorm::changeMaxspeed(float minspeed_, float maxspeed_){$/;"	f	class:JVorm	typeref:typename:void
+changeMaxspeed	src/Event/JVorm.cpp	/^void JVorm::changeMaxspeed(float maxspeed_) {$/;"	f	class:JVorm	typeref:typename:void
+changeMaxspeed	src/Event/JVorm.cpp	/^void JVorm::changeMaxspeed(float minspeed_, float maxspeed_) {$/;"	f	class:JVorm	typeref:typename:void
 changeMode	src/Event/JParticle.cpp	/^void JParticle::changeMode(){$/;"	f	class:JParticle	typeref:typename:void
 changeMode	src/Event/MultiMesh.cpp	/^void MultiMesh::changeMode(ofPrimitiveMode mode){$/;"	f	class:MultiMesh	typeref:typename:void
 changeMode	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::changeMode(ofPrimitiveMode mode){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
-changeRadius	src/Event/JVorm.cpp	/^void JVorm::changeRadius(float radius_){ \/\/ Could be improved by only adding radius increaseme/;"	f	class:JVorm	typeref:typename:void
-changeStateOfParticles	src/Event/JVorm.cpp	/^void JVorm::changeStateOfParticles(bool state){$/;"	f	class:JVorm	typeref:typename:void
+changeRadius	src/Event/JVorm.cpp	/^void JVorm::changeRadius($/;"	f	class:JVorm	typeref:typename:void
+changeStateOfParticles	src/Event/JVorm.cpp	/^void JVorm::changeStateOfParticles(bool state) {$/;"	f	class:JVorm	typeref:typename:void
 checkBorders	src/Event/JEvent.cpp	/^void JEvent::checkBorders(){$/;"	f	class:JEvent	typeref:typename:void
-checkBorders	src/Event/JPrimitive.hpp	/^    void checkBorders() override {$/;"	f	class:JCircle	typeref:typename:void
+checkBorders	src/Event/JPrimitive.hpp	/^  void checkBorders() override {$/;"	f	class:JCircle	typeref:typename:void
 checkIfConnected	src/Event/JParticle.cpp	/^bool JParticle::checkIfConnected(JParticle* p){$/;"	f	class:JParticle	typeref:typename:bool
 checkIfEnvExists	src/Event/JEvent.cpp	/^bool JEvent::checkIfEnvExists(char id){$/;"	f	class:JEvent	typeref:typename:bool
-checkIfInFormation	src/Event/JVorm.cpp	/^bool JVorm::checkIfInFormation(){$/;"	f	class:JVorm	typeref:typename:bool
+checkIfInFormation	src/Event/JVorm.cpp	/^bool JVorm::checkIfInFormation() {$/;"	f	class:JVorm	typeref:typename:bool
 checkIfNull	src/Event/RectangleMask.cpp	/^bool RectangleMask::checkIfNull(JRectangle* r){$/;"	f	class:RectangleMask	typeref:typename:bool
 checkIfNull	src/Event/SpaceCube.cpp	/^bool SpaceCube::checkIfNull(SpaceCube* s){$/;"	f	class:SpaceCube	typeref:typename:bool
 checkIfNull	src/ofxJVisuals.cpp	/^bool ofxJVisuals::checkIfNull(JEvent *e) { return (bool)e; }$/;"	f	class:ofxJVisuals	typeref:typename:bool
@@ -417,9 +418,9 @@ complexity	src/Event/JVecField.hpp	/^    float complexity = 20; \/\/ wind comple
 config_h	src/config.h	/^#define config_h$/;"	d
 connect	src/MsgParser.cpp	/^bool MsgParser::connect(ofxOscMessage &m) {$/;"	f	class:MsgParser	typeref:typename:bool
 connectParticle	src/Event/JParticle.cpp	/^void JParticle::connectParticle(JParticle* p){$/;"	f	class:JParticle	typeref:typename:void
-connectParticles	src/Event/JVorm.cpp	/^void JVorm::connectParticles(){$/;"	f	class:JVorm	typeref:typename:void
+connectParticles	src/Event/JVorm.cpp	/^void JVorm::connectParticles() {$/;"	f	class:JVorm	typeref:typename:void
 connectToSuperCollider	src/MsgParser.cpp	/^void MsgParser::connectToSuperCollider() {$/;"	f	class:MsgParser	typeref:typename:void
-connectWith	src/Event/JVorm.cpp	/^void JVorm::connectWith(){$/;"	f	class:JVorm	typeref:typename:void
+connectWith	src/Event/JVorm.cpp	/^void JVorm::connectWith() {$/;"	f	class:JVorm	typeref:typename:void
 connectable	src/Event/JParticle.h	/^    bool connectable = true;$/;"	m	class:JParticle	typeref:typename:bool
 connected	src/Event/JVorm.h	/^        bool connected = false;$/;"	m	class:JVorm::connection	typeref:typename:bool
 connectedParticles	src/Event/JParticle.h	/^    vector<JParticle*> connectedParticles;$/;"	m	class:JParticle	typeref:typename:vector<JParticle * >
@@ -442,13 +443,13 @@ createHollowRect	src/Event/JMesh.cpp	/^void JMesh::createHollowRect(glm::vec3 di
 curve	src/Env.hpp	/^    char curve = 0;$/;"	m	class:Env	typeref:typename:char
 curveType	src/Env.hpp	/^    ofxeasing::function curveType;$/;"	m	class:Env	typeref:typename:ofxeasing::function
 customFive	src/Event/JEvent.hpp	/^  virtual void customFive(float *v = nullptr){};$/;"	f	class:JEvent	typeref:typename:void
-customFive	src/Event/JVorm.cpp	/^void JVorm::customFive(float* v){$/;"	f	class:JVorm	typeref:typename:void
+customFive	src/Event/JVorm.cpp	/^void JVorm::customFive(float *v) { instantFormJVorm(); }$/;"	f	class:JVorm	typeref:typename:void
 customFive	src/Event/MultiMesh.cpp	/^void MultiMesh::customFive(float* v){$/;"	f	class:MultiMesh	typeref:typename:void
 customFive	src/Event/SpaceCube.cpp	/^void SpaceCube::customFive(float* v){ \/\/ Resize$/;"	f	class:SpaceCube	typeref:typename:void
 customFive	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::customFive(float* v){$/;"	f	class:particleSystem	typeref:typename:void
 customFour	src/Event/JDivisionGrid.cpp	/^void JDivisionGrid::customFour(float* v){$/;"	f	class:JDivisionGrid	typeref:typename:void
 customFour	src/Event/JEvent.hpp	/^  virtual void customFour(float *v = nullptr){};$/;"	f	class:JEvent	typeref:typename:void
-customFour	src/Event/JVorm.cpp	/^void JVorm::customFour(float* v){}$/;"	f	class:JVorm	typeref:typename:void
+customFour	src/Event/JVorm.cpp	/^void JVorm::customFour(float *v) {}$/;"	f	class:JVorm	typeref:typename:void
 customFour	src/Event/MultiMesh.cpp	/^void MultiMesh::customFour(float* v){$/;"	f	class:MultiMesh	typeref:typename:void
 customFour	src/Event/SpaceCube.cpp	/^void SpaceCube::customFour(float* v){$/;"	f	class:SpaceCube	typeref:typename:void
 customFour	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::customFour(float* v){ \/\/ Set alpha$/;"	f	class:particleSystem	typeref:typename:void
@@ -460,7 +461,7 @@ customOne	src/Event/JMesh.cpp	/^void JMesh::customOne(float* v){$/;"	f	class:JMe
 customOne	src/Event/JNoise.cpp	/^void JNoise::customOne(float* v){$/;"	f	class:JNoise	typeref:typename:void
 customOne	src/Event/JShaderTest.cpp	/^void JShaderTest::customOne(float* v){$/;"	f	class:JShaderTest	typeref:typename:void
 customOne	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::customOne(float* v){load(path);}$/;"	f	class:JVideoPlayer	typeref:typename:void
-customOne	src/Event/JVorm.cpp	/^void JVorm::customOne(float* values){$/;"	f	class:JVorm	typeref:typename:void
+customOne	src/Event/JVorm.cpp	/^void JVorm::customOne(float *values) {$/;"	f	class:JVorm	typeref:typename:void
 customOne	src/Event/MultiMesh.cpp	/^void MultiMesh::customOne(float* v){$/;"	f	class:MultiMesh	typeref:typename:void
 customOne	src/Event/SpaceCube.cpp	/^void SpaceCube::customOne(float* v){$/;"	f	class:SpaceCube	typeref:typename:void
 customOne	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::customOne(float* v){$/;"	f	class:particleSystem	typeref:typename:void
@@ -468,7 +469,7 @@ customThree	src/Event/JDivisionGrid.cpp	/^void JDivisionGrid::customThree(float*
 customThree	src/Event/JEvent.hpp	/^  virtual void customThree(float *v = nullptr){};$/;"	f	class:JEvent	typeref:typename:void
 customThree	src/Event/JLine.cpp	/^void JLine::customThree(float* v){fromBuffer(2);}$/;"	f	class:JLine	typeref:typename:void
 customThree	src/Event/JMesh.cpp	/^void JMesh::customThree(float* v){$/;"	f	class:JMesh	typeref:typename:void
-customThree	src/Event/JVorm.cpp	/^void JVorm::customThree(float* v){}$/;"	f	class:JVorm	typeref:typename:void
+customThree	src/Event/JVorm.cpp	/^void JVorm::customThree(float *v) {}$/;"	f	class:JVorm	typeref:typename:void
 customThree	src/Event/MultiMesh.cpp	/^void MultiMesh::customThree(float* v){$/;"	f	class:MultiMesh	typeref:typename:void
 customThree	src/Event/SpaceCube.cpp	/^void SpaceCube::customThree(float* v){$/;"	f	class:SpaceCube	typeref:typename:void
 customThree	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::customThree(float* v){ \/\/ Set traagheid$/;"	f	class:particleSystem	typeref:typename:void
@@ -477,7 +478,7 @@ customTwo	src/Event/JEvent.hpp	/^  virtual void customTwo(float *v = nullptr){};
 customTwo	src/Event/JLine.cpp	/^void JLine::customTwo(float* v){fromBuffer(1);}$/;"	f	class:JLine	typeref:typename:void
 customTwo	src/Event/JMesh.cpp	/^void JMesh::customTwo(float* v){$/;"	f	class:JMesh	typeref:typename:void
 customTwo	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::customTwo(float* v){$/;"	f	class:JVideoPlayer	typeref:typename:void
-customTwo	src/Event/JVorm.cpp	/^void JVorm::customTwo(float* v){$/;"	f	class:JVorm	typeref:typename:void
+customTwo	src/Event/JVorm.cpp	/^void JVorm::customTwo(float *v) {$/;"	f	class:JVorm	typeref:typename:void
 customTwo	src/Event/MultiMesh.cpp	/^void MultiMesh::customTwo(float* v){$/;"	f	class:MultiMesh	typeref:typename:void
 customTwo	src/Event/SpaceCube.cpp	/^void SpaceCube::customTwo(float* v){$/;"	f	class:SpaceCube	typeref:typename:void
 customTwo	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::customTwo(float* v){$/;"	f	class:particleSystem	typeref:typename:void
@@ -498,7 +499,7 @@ diagonalPow	src/JShaderLines.hpp	/^    float diagonalPow = 1.8;$/;"	m	class:JSha
 diagonalScale	src/JShaderLines.hpp	/^    float diagonalScale = 18.0;$/;"	m	class:JShaderLines	typeref:typename:float
 dilateFactor	src/Event/JVideoPlayer.hpp	/^    int dilateFactor = 4;$/;"	m	class:Bin	typeref:typename:int
 dimensions	src/Event/particleSystemOpenCL.hpp	/^    float2 dimensions;$/;"	m	class:particleSystem	typeref:typename:float2
-dimensions	src/modifiers/JModifierArray.hpp	/^    float* dimensions[2];$/;"	m	class:JModifierArray	typeref:typename:float * [2]
+dimensions	src/modifiers/JModifierArray.hpp	/^  float *dimensions[2];$/;"	m	class:JModifierArray	typeref:typename:float * [2]
 dir	src/Event/JDivisionGrid.hpp	/^    glm::vec3 dir;$/;"	m	class:JPoly	typeref:typename:glm::vec3
 dir	src/Event/dotsBlob.hpp	/^    ofVec3f dir;$/;"	m	class:dotsBlob	typeref:typename:ofVec3f
 direction	src/Env.hpp	/^    bool direction = 1;$/;"	m	class:Env	typeref:typename:bool
@@ -518,15 +519,15 @@ display	src/Event/JMirror.cpp	/^void JMirror::display(){$/;"	f	class:JMirror	typ
 display	src/Event/JNoise.cpp	/^void JNoise::display(){$/;"	f	class:JNoise	typeref:typename:void
 display	src/Event/JParticle.cpp	/^void JParticle::display(){$/;"	f	class:JParticle	typeref:typename:void
 display	src/Event/JPhysarum.cpp	/^void JPhysarum::display(){$/;"	f	class:JPhysarum	typeref:typename:void
-display	src/Event/JPrimitive.hpp	/^    virtual void display() override{$/;"	f	class:JCircle	typeref:typename:void
-display	src/Event/JPrimitive.hpp	/^    virtual void display(){};$/;"	f	class:JPrimitive	typeref:typename:void
+display	src/Event/JPrimitive.hpp	/^  virtual void display() override {$/;"	f	class:JCircle	typeref:typename:void
+display	src/Event/JPrimitive.hpp	/^  virtual void display(){};$/;"	f	class:JPrimitive	typeref:typename:void
 display	src/Event/JRectangle.cpp	/^void JRectangle::display(){$/;"	f	class:JRectangle	typeref:typename:void
 display	src/Event/JShaderTest.cpp	/^void JShaderTest::display(){$/;"	f	class:JShaderTest	typeref:typename:void
 display	src/Event/JText.cpp	/^void JText::display(){$/;"	f	class:JText	typeref:typename:void
 display	src/Event/JVecField.cpp	/^void JVecField::display(){$/;"	f	class:JVecField	typeref:typename:void
 display	src/Event/JVideoPlayer.cpp	/^void Bin::display(){$/;"	f	class:Bin	typeref:typename:void
 display	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::display(){$/;"	f	class:JVideoPlayer	typeref:typename:void
-display	src/Event/JVorm.cpp	/^void JVorm::display(){$/;"	f	class:JVorm	typeref:typename:void
+display	src/Event/JVorm.cpp	/^void JVorm::display() {$/;"	f	class:JVorm	typeref:typename:void
 display	src/Event/JWaveform.cpp	/^void JWaveform::display(){$/;"	f	class:JWaveform	typeref:typename:void
 display	src/Event/MultiMesh.cpp	/^void MultiMesh::display(){$/;"	f	class:MultiMesh	typeref:typename:void
 display	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::display(){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
@@ -539,7 +540,7 @@ display	src/Event/meshLandscape.cpp	/^void meshLandscape::display(){$/;"	f	class
 display	src/Event/particleSystem.cpp	/^void particleSystem::display(){$/;"	f	class:particleSystem	typeref:typename:void
 display	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::display(){$/;"	f	class:particleSystem	typeref:typename:void
 display	src/modifiers/JModifier.cpp	/^void JModifier::display(JEvent* e, void (JEvent::*ptr) (void)){$/;"	f	class:JModifier	typeref:typename:void
-display	src/modifiers/JModifierArray.hpp	/^    void display(JEvent* e, void (JEvent::*ptr) (void)){$/;"	f	class:JModifierArray	typeref:typename:void
+display	src/modifiers/JModifierArray.hpp	/^  void display(JEvent *e, void (JEvent::*ptr)(void)) {$/;"	f	class:JModifierArray	typeref:typename:void
 display	src/modifiers/JModifierRedraw.hpp	/^    void display(JEvent* e, void (JEvent::*ptr) (void)){$/;"	f	class:JModifierRedraw	typeref:typename:void
 display	src/ofxJVisuals.cpp	/^void ofxJVisuals::display() {$/;"	f	class:ofxJVisuals	typeref:typename:void
 displayCut	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::displayCut(){$/;"	f	class:JVideoPlayer	typeref:typename:void
@@ -569,7 +570,7 @@ draw	exampleSimple/src/ofApp.cpp	/^void ofApp::draw() {$/;"	f	class:ofApp	typere
 draw	exampleSimpleTlFix/src/ofApp.cpp	/^void ofApp::draw(){$/;"	f	class:ofApp	typeref:typename:void
 drawCircles	src/Event/dotsBlob.cpp	/^void dotsBlob::drawCircles(ofColor c){$/;"	f	class:dotsBlob	typeref:typename:void
 drawConnections	src/Event/dotsBlob.cpp	/^void dotsBlob::drawConnections(ofColor c){$/;"	f	class:dotsBlob	typeref:typename:void
-drawLines	src/Event/JVorm.cpp	/^void JVorm::drawLines(JParticle *p1, JParticle *p2){$/;"	f	class:JVorm	typeref:typename:void
+drawLines	src/Event/JVorm.cpp	/^void JVorm::drawLines(JParticle *p1, JParticle *p2) {$/;"	f	class:JVorm	typeref:typename:void
 drawMask	src/ofxJVisuals.cpp	/^void ofxJVisuals::drawMask() {$/;"	f	class:ofxJVisuals	typeref:typename:void
 drawMode	src/Event/JImage.hpp	/^    DrawMode drawMode = JImage::DrawMode::DEFAULT;$/;"	m	class:JImage	typeref:typename:DrawMode
 drawMode	src/Event/JVecField.hpp	/^    char drawMode = VECFIELD_MODE::TEXTURE;$/;"	m	class:JVecField	typeref:typename:char
@@ -605,12 +606,12 @@ fillMeshOneFrame	src/Event/SpaceCube.cpp	/^void SpaceCube::fillMeshOneFrame(int 
 fillMeshOneFrameFlag	src/Event/SpaceCube.h	/^    bool fillMeshOneFrameFlag = false;$/;"	m	class:SpaceCube	typeref:typename:bool
 filled	src/Event/SpaceCube.h	/^    bool filled = false;$/;"	m	class:SpaceCube	typeref:typename:bool
 findLeftAndRight	src/Event/RectangleMask.cpp	/^void RectangleMask::findLeftAndRight(){$/;"	f	class:RectangleMask	typeref:typename:void
-findSelf	src/Event/JVorm.cpp	/^JVorm::connection* JVorm::findSelf(JVorm* pointer){$/;"	f	class:JVorm	typeref:typename:JVorm::connection *
+findSelf	src/Event/JVorm.cpp	/^JVorm::connection *JVorm::findSelf(JVorm *pointer) {$/;"	f	class:JVorm	typeref:typename:JVorm::connection *
 floatPointer	src/mapValue.h	/^    float* floatPointer;$/;"	m	class:mapValue	typeref:typename:float *
 focus	src/cameraController.hpp	/^    ofVec3f* focus = nullptr;$/;"	m	class:cameraController	typeref:typename:ofVec3f *
 font	src/Event/JVideoPlayer.hpp	/^    ofTrueTypeFont  font;$/;"	m	class:JVideoPlayer	typeref:typename:ofTrueTypeFont
 forceMultiplier	src/Event/particleSystemOpenCL.hpp	/^    float2 forceMultiplier = float2(1, 1);$/;"	m	class:particleSystem	typeref:typename:float2
-formJVorm	src/Event/JVorm.cpp	/^void JVorm::formJVorm(){$/;"	f	class:JVorm	typeref:typename:void
+formJVorm	src/Event/JVorm.cpp	/^void JVorm::formJVorm() { changeStateOfParticles(1); }$/;"	f	class:JVorm	typeref:typename:void
 frame	src/Event/JVecField.hpp	/^    ofImage frame;$/;"	m	class:JVecField	typeref:typename:ofImage
 freq	src/Wavetable.h	/^    float freq=1;$/;"	m	class:Wavetable	typeref:typename:float
 fromBuffer	src/Event/JLine.cpp	/^void JLine::fromBuffer(int bufferMode){$/;"	f	class:JLine	typeref:typename:void
@@ -652,7 +653,7 @@ getLastFound	src/ofxJVisuals.hpp	/^  JEvent *getLastFound() { return lastFound; 
 getMeshName	src/Event/JMesh.cpp	/^string JMesh::getMeshName(){$/;"	f	class:JMesh	typeref:typename:string
 getNormalFromImg	src/Event/meshLandscape.cpp	/^ofVec3f getNormalFromImg(ofShortImage& img, int x, int y) {$/;"	f	typeref:typename:ofVec3f
 getNumEnv	src/Event/JEvent.cpp	/^short JEvent::getNumEnv(){$/;"	f	class:JEvent	typeref:typename:short
-getNumParticles	src/Event/JVorm.cpp	/^uint16 JVorm::getNumParticles(){$/;"	f	class:JVorm	typeref:typename:uint16
+getNumParticles	src/Event/JVorm.cpp	/^uint16 JVorm::getNumParticles() { return particles.size(); }$/;"	f	class:JVorm	typeref:typename:uint16
 getPtr	src/Env.cpp	/^void* Pointer::getPtr(){$/;"	f	class:Pointer	typeref:typename:void *
 getRandomBin	src/Event/JVideoPlayer.cpp	/^Bin* JVideoPlayer::getRandomBin(){$/;"	f	class:JVideoPlayer	typeref:typename:Bin *
 getSelectedFont	src/ofxJVisuals.cpp	/^ofTrueTypeFont *MsgParser::getSelectedFont() { return v->selectedFont; }$/;"	f	class:MsgParser	typeref:typename:ofTrueTypeFont *
@@ -691,7 +692,7 @@ imageFloating	src/Event/JRectangle.hpp	/^    virtual void imageFloating(){};$/;"
 imageFloating	src/Event/imageFloat.cpp	/^void imageFloater::imageFloating(){$/;"	f	class:imageFloater	typeref:typename:void
 img	src/Event/imageFloat.hpp	/^    imageFloat* img;$/;"	m	class:imageFloater	typeref:typename:imageFloat *
 init	src/Event/JEvent.hpp	/^  virtual void init(){};$/;"	f	class:JEvent	typeref:typename:void
-init	src/Event/JVorm.cpp	/^void JVorm::init(){$/;"	f	class:JVorm	typeref:typename:void
+init	src/Event/JVorm.cpp	/^void JVorm::init() {$/;"	f	class:JVorm	typeref:typename:void
 init	src/Event/particleSystem.cpp	/^void particleSystem::init(int numParticles){$/;"	f	class:particleSystem	typeref:typename:void
 init	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::init(int numParticles, string clFile){$/;"	f	class:particleSystem	typeref:typename:void
 initCam	src/ofxJVisuals.cpp	/^void MsgParser::initCam() { v->initCam(); }$/;"	f	class:MsgParser	typeref:typename:void
@@ -701,10 +702,10 @@ initMesh	src/ofxJVisuals.cpp	/^void ofxJVisuals::initMesh() {$/;"	f	class:ofxJVi
 initRect	src/Event/JDivisionGrid.cpp	/^void JDivisionGrid::initRect(){$/;"	f	class:JDivisionGrid	typeref:typename:void
 initSCsender	src/MsgParser.cpp	/^ofxOscSender *MsgParser::initSCsender(string ip, int port) {$/;"	f	class:MsgParser	typeref:typename:ofxOscSender *
 inkscape	exampleSimple/bin/data/test_0.svg	/^   xmlns:svg="http:\/\/www.w3.org\/2000\/svg">$/;"	n	uri:http://www.inkscape.org/namespaces/inkscape
-instantFormJVorm	src/Event/JVorm.cpp	/^void JVorm::instantFormJVorm(){$/;"	f	class:JVorm	typeref:typename:void
+instantFormJVorm	src/Event/JVorm.cpp	/^void JVorm::instantFormJVorm() {$/;"	f	class:JVorm	typeref:typename:void
 intPointer	src/mapValue.h	/^    int* intPointer;$/;"	m	class:mapValue	typeref:typename:int *
 ios	addon_config.mk	/^ios:$/;"	t
-isConnectable	src/Event/JVorm.cpp	/^bool JVorm::isConnectable(){$/;"	f	class:JVorm	typeref:typename:bool
+isConnectable	src/Event/JVorm.cpp	/^bool JVorm::isConnectable() {$/;"	f	class:JVorm	typeref:typename:bool
 is_sphere	src/Event/SpaceCube.h	/^    bool is_sphere = false;$/;"	m	class:SpaceCube	typeref:typename:bool
 jevent	src/Event/JEventBase.hpp	/^namespace jevent {$/;"	n
 jump	src/Event/JRectangle.cpp	/^void JRectangle::jump(glm::vec2 distance){$/;"	f	class:JRectangle	typeref:typename:void
@@ -761,7 +762,7 @@ m	src/Event/meshLandscape.hpp	/^    ofMesh m;$/;"	m	class:meshLandscape	typeref:
 main	exampleSimple/src/main.cpp	/^int main(){$/;"	f	typeref:typename:int
 main	exampleSimpleTlFix/src/main.cpp	/^int main(){$/;"	f	typeref:typename:int
 make	src/MsgParser.cpp	/^bool MsgParser::make(ofxOscMessage &m) {$/;"	f	class:MsgParser	typeref:typename:bool
-makeCoordinates	src/Event/JVorm.cpp	/^void JVorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_, bool onDestination){$/;"	f	class:JVorm	typeref:typename:void
+makeCoordinates	src/Event/JVorm.cpp	/^void JVorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_,$/;"	f	class:JVorm	typeref:typename:void
 makeFit	src/ofxJVisuals.cpp	/^void ofxJVisuals::makeFit(glm::vec2 size) {$/;"	f	class:ofxJVisuals	typeref:typename:void
 mapValue	src/mapValue.h	/^    mapValue(){$/;"	f	class:mapValue
 mapValue	src/mapValue.h	/^    mapValue(float* v){$/;"	f	class:mapValue
@@ -788,7 +789,7 @@ meshes	src/Event/MultiMesh.hpp	/^    ofMesh* meshes = nullptr;$/;"	m	class:Multi
 meshes	src/Event/MultiMeshMaybeTomorrow.hpp	/^    ofMesh* meshes;$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:ofMesh *
 meta	addon_config.mk	/^meta:$/;"	t
 minDistance	src/Event/dotsBlob.hpp	/^    float minDistance = 50;$/;"	m	class:dotsBlob	typeref:typename:float
-mirror	src/Event/JVorm.cpp	/^void JVorm::mirror(){$/;"	f	class:JVorm	typeref:typename:void
+mirror	src/Event/JVorm.cpp	/^void JVorm::mirror() {$/;"	f	class:JVorm	typeref:typename:void
 mirrorAllBins	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::mirrorAllBins(bool h, bool v){$/;"	f	class:JVideoPlayer	typeref:typename:void
 mode	src/Event/JEventBase.hpp	/^  float mode = 0;$/;"	m	class:JEventBase	typeref:typename:float
 mode	src/Event/JVecField.hpp	/^    char mode = VECFIELD_MODE::UNDERLAYING;$/;"	m	class:JVecField	typeref:typename:char
@@ -811,9 +812,9 @@ mousePressed	exampleSimpleTlFix/src/ofApp.cpp	/^void ofApp::mousePressed(int x, 
 mousePressed	src/ofxJVisuals.cpp	/^void ofxJVisuals::mousePressed(int x, int y, int button) {$/;"	f	class:ofxJVisuals	typeref:typename:void
 mouseReleased	exampleSimple/src/ofApp.cpp	/^void ofApp::mouseReleased(int x, int y, int button) {}$/;"	f	class:ofApp	typeref:typename:void
 mouseReleased	exampleSimpleTlFix/src/ofApp.cpp	/^void ofApp::mouseReleased(int x, int y, int button){$/;"	f	class:ofApp	typeref:typename:void
-move	src/Event/JPrimitive.hpp	/^    void move(){$/;"	f	class:JPrimitive	typeref:typename:void
+move	src/Event/JPrimitive.hpp	/^  void move() {$/;"	f	class:JPrimitive	typeref:typename:void
 moveBackwards	src/Event/JMirror.h	/^    bool moveBackwards;$/;"	m	class:JMirror	typeref:typename:bool
-moveCorner	src/Event/JVorm.cpp	/^void JVorm::moveCorner(int corner_, glm::vec3 distance_){$/;"	f	class:JVorm	typeref:typename:void
+moveCorner	src/Event/JVorm.cpp	/^void JVorm::moveCorner(int corner_, glm::vec3 distance_) {$/;"	f	class:JVorm	typeref:typename:void
 moveHorizontal	src/Event/MultiMesh.cpp	/^void MultiMesh::moveHorizontal(){$/;"	f	class:MultiMesh	typeref:typename:void
 moveHorizontal	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::moveHorizontal(){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
 moveOutVertex	src/Event/MultiMesh.cpp	/^void MultiMesh::moveOutVertex(int index){$/;"	f	class:MultiMesh	typeref:typename:void
@@ -872,7 +873,7 @@ osx	addon_config.mk	/^osx:$/;"	t
 ownDtor	src/Event/JEvent.hpp	/^  virtual void ownDtor(){};$/;"	f	class:JEvent	typeref:typename:void
 ownDtor	src/Event/JRectangle.cpp	/^void JRectangle::ownDtor(){$/;"	f	class:JRectangle	typeref:typename:void
 ownDtor	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::ownDtor(){$/;"	f	class:JVideoPlayer	typeref:typename:void
-ownDtor	src/Event/JVorm.cpp	/^void JVorm::ownDtor(){$/;"	f	class:JVorm	typeref:typename:void
+ownDtor	src/Event/JVorm.cpp	/^void JVorm::ownDtor() {$/;"	f	class:JVorm	typeref:typename:void
 ownDtor	src/Event/SpaceCube.cpp	/^void SpaceCube::ownDtor(){ removeFromVector(); }$/;"	f	class:SpaceCube	typeref:typename:void
 ownDtor	src/JShader.cpp	/^void JShader::ownDtor() {$/;"	f	class:JShader	typeref:typename:void
 p	src/Event/JDivisionGrid.hpp	/^    ofPolyline p;$/;"	m	class:JPoly	typeref:typename:ofPolyline
@@ -933,7 +934,7 @@ pulseMoveWidth	src/Event/MultiMeshMaybeTomorrow.hpp	/^    int pulseMoveWidth; in
 pulseOsc	src/Event/MultiMesh.hpp	/^    void moveWithPulse(); Wavetable* pulseOsc;$/;"	m	class:MultiMesh	typeref:typename:Wavetable *
 pulseOsc	src/Event/MultiMeshMaybeTomorrow.hpp	/^    bool bMoveWithPulse = false; void moveWithPulse(); Wavetable* pulseOsc;$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:Wavetable *
 pulseWidth	src/Wavetable.h	/^    float pulseWidth=0.5;$/;"	m	class:Wavetable	typeref:typename:float
-r	src/Event/JPrimitive.hpp	/^    float r(){$/;"	f	class:JCircle	typeref:typename:float
+r	src/Event/JPrimitive.hpp	/^  float r() { return size.x * 0.5; }$/;"	f	class:JCircle	typeref:typename:float
 r	src/Event/dotsBlob.hpp	/^    float r = ofRandom(10, 50);$/;"	m	struct:dotsCircle	typeref:typename:float
 r	src/scSynth.hpp	/^    string r = "";$/;"	m	class:scSynth	typeref:typename:string
 radius	src/Event/JVorm.h	/^    float radius, angle, angleOffset;$/;"	m	class:JVorm	typeref:typename:float
@@ -953,9 +954,9 @@ reSpawn	src/Event/JMirror.cpp	/^void JMirror::reSpawn(){$/;"	f	class:JMirror	typ
 receiver	src/ofxJVisuals.hpp	/^  ofxOscReceiver receiver;$/;"	m	class:ofxJVisuals	typeref:typename:ofxOscReceiver
 rect1882	exampleSimple/bin/data/test_0.svg	/^       \/>$/;"	i
 rects	src/Event/RectangleMask.hpp	/^    vector<JRectangle*> rects;$/;"	m	class:RectangleMask	typeref:typename:vector<JRectangle * >
-removeConnection	src/Event/JVorm.cpp	/^void JVorm::removeConnection(JVorm* v){$/;"	f	class:JVorm	typeref:typename:void
+removeConnection	src/Event/JVorm.cpp	/^void JVorm::removeConnection(JVorm *v) {$/;"	f	class:JVorm	typeref:typename:void
 removeFromVector	src/Event/JRectangle.cpp	/^void JRectangle::removeFromVector(){$/;"	f	class:JRectangle	typeref:typename:void
-removeFromVector	src/Event/JVorm.cpp	/^void JVorm::removeFromVector(){$/;"	f	class:JVorm	typeref:typename:void
+removeFromVector	src/Event/JVorm.cpp	/^void JVorm::removeFromVector() {$/;"	f	class:JVorm	typeref:typename:void
 removeFromVector	src/Event/SpaceCube.cpp	/^void SpaceCube::removeFromVector(){$/;"	f	class:SpaceCube	typeref:typename:void
 removeLastVertex	src/Event/SpaceCube.cpp	/^void SpaceCube::removeLastVertex(){$/;"	f	class:SpaceCube	typeref:typename:void
 renderFBO	src/Event/particleSystem.h	/^    	ofFbo   renderFBO;$/;"	m	class:particleSystem	typeref:typename:ofFbo
@@ -970,7 +971,7 @@ roi	src/Event/imageFloat.hpp	/^    ofVec2f roi, roiSpeed;$/;"	m	class:imageFloat
 roiSpeed	src/Event/imageFloat.hpp	/^    ofVec2f roi, roiSpeed;$/;"	m	class:imageFloater	typeref:typename:ofVec2f
 rotX	src/Event/SpaceCube.h	/^    bool rotX = false;$/;"	m	class:SpaceCube	typeref:typename:bool
 rotY	src/Event/SpaceCube.h	/^    bool rotY = false;$/;"	m	class:SpaceCube	typeref:typename:bool
-rotateCoordinates	src/Event/JVorm.cpp	/^void JVorm::rotateCoordinates(int places, int direction){$/;"	f	class:JVorm	typeref:typename:void
+rotateCoordinates	src/Event/JVorm.cpp	/^void JVorm::rotateCoordinates(int places, int direction) {$/;"	f	class:JVorm	typeref:typename:void
 rotateRotationSpeed	src/Event/SpaceCube.cpp	/^void SpaceCube::rotateRotationSpeed(){$/;"	f	class:SpaceCube	typeref:typename:void
 rotateSpeed	src/cameraController.hpp	/^    ofVec3f rotateSpeed = ofVec3f(0,0,0);$/;"	m	class:cameraController	typeref:typename:ofVec3f
 rotateX	src/Event/SpaceCube.cpp	/^void SpaceCube::rotateX(){$/;"	f	class:SpaceCube	typeref:typename:void
@@ -1022,7 +1023,7 @@ setBrightness	src/ofxJVisuals.cpp	/^void MsgParser::setBrightness(float b) { v->
 setBrightness	src/ofxJVisuals.cpp	/^void ofxJVisuals::setBrightness(unsigned char b) { brightness = b; }$/;"	f	class:ofxJVisuals	typeref:typename:void
 setBuffer	src/MsgParser.cpp	/^bool MsgParser::setBuffer(ofxOscMessage &m) {$/;"	f	class:MsgParser	typeref:typename:bool
 setCameraState	src/ofxJVisuals.cpp	/^void MsgParser::setCameraState(bool bState) { v->bCam = bState; }$/;"	f	class:MsgParser	typeref:typename:void
-setCenter	src/Event/JVorm.cpp	/^void JVorm::setCenter(glm::vec3 newLoc){$/;"	f	class:JVorm	typeref:typename:void
+setCenter	src/Event/JVorm.cpp	/^void JVorm::setCenter(glm::vec3 newLoc) {$/;"	f	class:JVorm	typeref:typename:void
 setCirclularMaskState	src/ofxJVisuals.cpp	/^void MsgParser::setCirclularMaskState(bool bState) {$/;"	f	class:MsgParser	typeref:typename:void
 setColor	src/Event/JDivisionGrid.cpp	/^void JDivisionGrid::setColor(ofColor c){$/;"	f	class:JDivisionGrid	typeref:typename:void
 setColor	src/Event/JEvent.cpp	/^void JEvent::setColor(ofColor color){$/;"	f	class:JEvent	typeref:typename:void
@@ -1040,7 +1041,7 @@ setHeight	src/Event/JRectangle.cpp	/^void JRectangle::setHeight(int height){ siz
 setLoc	src/Event/JEvent.cpp	/^void JEvent::setLoc(glm::vec3 loc){this->loc = loc;}$/;"	f	class:JEvent	typeref:typename:void
 setLoc	src/Event/JLine.cpp	/^void JLine::setLoc(glm::vec3 loc){$/;"	f	class:JLine	typeref:typename:void
 setLoc	src/Event/JMesh.cpp	/^void JMesh::setLoc(glm::vec3 loc){$/;"	f	class:JMesh	typeref:typename:void
-setLoc	src/Event/JVorm.cpp	/^void JVorm::setLoc(glm::vec3 newLoc){ \/\/ Get distance from new loc$/;"	f	class:JVorm	typeref:typename:void
+setLoc	src/Event/JVorm.cpp	/^void JVorm::setLoc(glm::vec3 newLoc) { \/\/ Get distance from new loc$/;"	f	class:JVorm	typeref:typename:void
 setLocation	src/Event/MultiMesh.cpp	/^void MultiMesh::setLocation(int index, int index2, ofVec2f loc){$/;"	f	class:MultiMesh	typeref:typename:void
 setLoop	src/Env.cpp	/^void Env::setLoop(bool b){$/;"	f	class:Env	typeref:typename:void
 setLoopPoint	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::setLoopPoint(int point){$/;"	f	class:JVideoPlayer	typeref:typename:void
@@ -1065,7 +1066,7 @@ setSpeed	src/Event/JEvent.cpp	/^void JEvent::setSpeed(float speed){this->speed =
 setSpeed	src/Event/MultiMesh.cpp	/^void MultiMesh::setSpeed(float speed){$/;"	f	class:MultiMesh	typeref:typename:void
 setStartTime	src/Env.cpp	/^void Env::setStartTime(){$/;"	f	class:Env	typeref:typename:void
 setStartTime	src/Event/JEvent.cpp	/^void JEvent::setStartTime(){$/;"	f	class:JEvent	typeref:typename:void
-setState	src/Event/JVorm.cpp	/^void JVorm::setState(bool state){$/;"	f	class:JVorm	typeref:typename:void
+setState	src/Event/JVorm.cpp	/^void JVorm::setState(bool state) {$/;"	f	class:JVorm	typeref:typename:void
 setText	src/Event/JText.cpp	/^void JText::setText(string txt){$/;"	f	class:JText	typeref:typename:void
 setType	src/Event/JEvent.cpp	/^void JEvent::setType(string type){$/;"	f	class:JEvent	typeref:typename:void
 setVal	src/MsgParser.cpp	/^void MsgParser::setVal($/;"	f	class:MsgParser	typeref:typename:void
@@ -1076,7 +1077,7 @@ setVecField	src/Event/particleSystem.cpp	/^void particleSystem::setVecField(JVec
 setVecField	src/Event/particleSystemOpenCL.cpp	/^void particleSystem::setVecField(JVecField* vF){$/;"	f	class:particleSystem	typeref:typename:void
 setViaBusses	src/Event/JEvent.hpp	/^  virtual void setViaBusses(vector<float> busses){};$/;"	f	class:JEvent	typeref:typename:void
 setWidth	src/Event/JRectangle.cpp	/^void JRectangle::setWidth(int width){ size.x = width; }$/;"	f	class:JRectangle	typeref:typename:void
-setZ	src/Event/JVorm.cpp	/^void JVorm::setZ(int z){$/;"	f	class:JVorm	typeref:typename:void
+setZ	src/Event/JVorm.cpp	/^void JVorm::setZ(int z) {$/;"	f	class:JVorm	typeref:typename:void
 setup	exampleSimple/src/ofApp.cpp	/^void ofApp::setup() {$/;"	f	class:ofApp	typeref:typename:void
 setup	exampleSimpleTlFix/src/ofApp.cpp	/^void ofApp::setup(){$/;"	f	class:ofApp	typeref:typename:void
 setup	src/scSynth.hpp	/^    void setup(){$/;"	f	class:scSynth	typeref:typename:void
@@ -1089,7 +1090,7 @@ skip	src/Event/meshLandscape.hpp	/^    int skip = 8;$/;"	m	class:meshLandscape	t
 sodipodi	exampleSimple/bin/data/test_0.svg	/^   xmlns:svg="http:\/\/www.w3.org\/2000\/svg">$/;"	n	uri:http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd
 sortAndSplit	src/Event/JDivisionGrid.cpp	/^void JDivisionGrid::sortAndSplit(){$/;"	f	class:JDivisionGrid	typeref:typename:void
 sortByAreaSize	src/Event/JDivisionGrid.cpp	/^bool sortByAreaSize(JPoly* a, JPoly* b){$/;"	f	typeref:typename:bool
-spacing	src/modifiers/JModifierArray.hpp	/^    float* spacing[2];$/;"	m	class:JModifierArray	typeref:typename:float * [2]
+spacing	src/modifiers/JModifierArray.hpp	/^  float *spacing[2];$/;"	m	class:JModifierArray	typeref:typename:float * [2]
 spawnPos	src/Event/JDivisionGrid.hpp	/^    ofPoint spawnPos;$/;"	m	class:JPoly	typeref:typename:ofPoint
 spawnPos	src/Event/particleSystemOpenCL.cpp	/^    float2 spawnPos;$/;"	m	struct:__anon240f87380108	typeref:typename:float2	file:
 specificFunction	src/AlphaBlackScreen.cpp	/^void AlphaBlackScreen::specificFunction(){$/;"	f	class:AlphaBlackScreen	typeref:typename:void
@@ -1100,14 +1101,14 @@ specificFunction	src/Event/JLine.cpp	/^void JLine::specificFunction(){$/;"	f	cla
 specificFunction	src/Event/JMesh.cpp	/^void JMesh::specificFunction(){$/;"	f	class:JMesh	typeref:typename:void
 specificFunction	src/Event/JMirror.cpp	/^void JMirror::specificFunction(){$/;"	f	class:JMirror	typeref:typename:void
 specificFunction	src/Event/JPhysarum.cpp	/^void JPhysarum::specificFunction(){$/;"	f	class:JPhysarum	typeref:typename:void
-specificFunction	src/Event/JPrimitive.hpp	/^    virtual void specificFunction(){};$/;"	f	class:JPrimitive	typeref:typename:void
-specificFunction	src/Event/JPrimitive.hpp	/^    void specificFunction() override{$/;"	f	class:JCircle	typeref:typename:void
+specificFunction	src/Event/JPrimitive.hpp	/^  virtual void specificFunction(){};$/;"	f	class:JPrimitive	typeref:typename:void
+specificFunction	src/Event/JPrimitive.hpp	/^  void specificFunction() override {$/;"	f	class:JCircle	typeref:typename:void
 specificFunction	src/Event/JRectangle.cpp	/^void JRectangle::specificFunction(){$/;"	f	class:JRectangle	typeref:typename:void
 specificFunction	src/Event/JShaderTest.cpp	/^void JShaderTest::specificFunction(){$/;"	f	class:JShaderTest	typeref:typename:void
 specificFunction	src/Event/JVecField.cpp	/^void JVecField::specificFunction(){$/;"	f	class:JVecField	typeref:typename:void
 specificFunction	src/Event/JVideoPlayer.cpp	/^void Bin::specificFunction(){$/;"	f	class:Bin	typeref:typename:void
 specificFunction	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::specificFunction(){$/;"	f	class:JVideoPlayer	typeref:typename:void
-specificFunction	src/Event/JVorm.cpp	/^void JVorm::specificFunction(){$/;"	f	class:JVorm	typeref:typename:void
+specificFunction	src/Event/JVorm.cpp	/^void JVorm::specificFunction() {$/;"	f	class:JVorm	typeref:typename:void
 specificFunction	src/Event/JWaveform.cpp	/^void JWaveform::specificFunction(){$/;"	f	class:JWaveform	typeref:typename:void
 specificFunction	src/Event/MultiMesh.cpp	/^void MultiMesh::specificFunction(){$/;"	f	class:MultiMesh	typeref:typename:void
 specificFunction	src/Event/MultiMeshMaybeTomorrow.cpp	/^void MultiMeshMaybeTomorrow::specificFunction(){$/;"	f	class:MultiMeshMaybeTomorrow	typeref:typename:void
@@ -1144,12 +1145,12 @@ switchAllBinColor	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::switchAllBinCo
 switchBinColor	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::switchBinColor(){$/;"	f	class:JVideoPlayer	typeref:typename:void
 switchBinState	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::switchBinState(){$/;"	f	class:JVideoPlayer	typeref:typename:void
 switchBins	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::switchBins(vector<int> array){$/;"	f	class:JVideoPlayer	typeref:typename:void
-switchConnectableness	src/Event/JVorm.cpp	/^void JVorm::switchConnectableness(){$/;"	f	class:JVorm	typeref:typename:void
+switchConnectableness	src/Event/JVorm.cpp	/^void JVorm::switchConnectableness() {$/;"	f	class:JVorm	typeref:typename:void
 switchDilate	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::switchDilate(bool all){$/;"	f	class:JVideoPlayer	typeref:typename:void
 switchMode	src/Event/MultiMesh.cpp	/^void MultiMesh::switchMode(){$/;"	f	class:MultiMesh	typeref:typename:void
-switchRadiusses	src/Event/JVorm.cpp	/^void JVorm::switchRadiusses(JVorm* JVorm){$/;"	f	class:JVorm	typeref:typename:void
+switchRadiusses	src/Event/JVorm.cpp	/^void JVorm::switchRadiusses(JVorm *JVorm) {$/;"	f	class:JVorm	typeref:typename:void
 switchRandomBins	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::switchRandomBins(){$/;"	f	class:JVideoPlayer	typeref:typename:void
-switchState	src/Event/JVorm.cpp	/^void JVorm::switchState(){$/;"	f	class:JVorm	typeref:typename:void
+switchState	src/Event/JVorm.cpp	/^void JVorm::switchState() {$/;"	f	class:JVorm	typeref:typename:void
 synth	src/MsgParser.hpp	/^  scSynth *synth;$/;"	m	class:MsgParser	typeref:typename:scSynth *
 t	src/Event/JVecField.hpp	/^    float t;$/;"	m	class:JVecField	typeref:typename:float
 texCoords	src/ofxJVisuals.hpp	/^  vector<glm::vec2> texCoords;$/;"	m	class:ofxJVisuals	typeref:typename:vector<glm::vec2>
@@ -1171,7 +1172,7 @@ trigger	src/Env.cpp	/^void Env::trigger(vector<float> levels, vector<float> time
 trigger	src/MsgParser.cpp	/^bool MsgParser::trigger(ofxOscMessage &m) {$/;"	f	class:MsgParser	typeref:typename:bool
 truckSpeed	src/cameraController.hpp	/^    float truckSpeed = 0;$/;"	m	class:cameraController	typeref:typename:float
 turnAngle	src/Event/JPhysarum.hpp	/^    float turnAngle = 45;$/;"	m	class:JPhysarum	typeref:typename:float
-tussenCoordinaten	src/Event/JVorm.cpp	/^void JVorm::tussenCoordinaten(){$/;"	f	class:JVorm	typeref:typename:void
+tussenCoordinaten	src/Event/JVorm.cpp	/^void JVorm::tussenCoordinaten() {$/;"	f	class:JVorm	typeref:typename:void
 txt	src/Event/JText.hpp	/^    string txt;$/;"	m	class:JText	typeref:typename:string
 type	src/Event/JEvent.hpp	/^  string type = "JEvent";$/;"	m	class:JEvent	typeref:typename:string
 type	src/Event/JEventBase.hpp	/^  jevent::JEventType type;$/;"	m	class:JEventBase	typeref:typename:jevent::JEventType
@@ -1185,7 +1186,7 @@ uint8	src/Env.hpp	/^typedef unsigned char uint8;$/;"	t	class:Env	typeref:typenam
 uint8	src/Event/JLine.hpp	/^typedef unsigned char uint8;$/;"	t	typeref:typename:unsigned char
 uint8	src/Event/JVorm.h	/^typedef unsigned char uint8;$/;"	t	class:JVorm	typeref:typename:unsigned char
 uint8	src/ofxJVisuals.hpp	/^  typedef unsigned char uint8;$/;"	t	class:ofxJVisuals	typeref:typename:unsigned char
-unConnect	src/Event/JVorm.cpp	/^void JVorm::unConnect(){ \/\/ Say to all connected objects: remove me from your vector$/;"	f	class:JVorm	typeref:typename:void
+unConnect	src/Event/JVorm.cpp	/^void JVorm::unConnect() { \/\/ Say to all connected objects: remove me from your$/;"	f	class:JVorm	typeref:typename:void
 underlayer	src/Event/JVecField.hpp	/^    ofFbo* underlayer;$/;"	m	class:JVecField	typeref:typename:ofFbo *
 update	exampleSimple/src/ofApp.cpp	/^void ofApp::update() {$/;"	f	class:ofApp	typeref:typename:void
 update	exampleSimpleTlFix/src/ofApp.cpp	/^void ofApp::update(){$/;"	f	class:ofApp	typeref:typename:void
@@ -1256,7 +1257,7 @@ zoomPP	src/ofxJVisuals.hpp	/^  ZoomBlurPass::Ptr zoomPP = nullptr;$/;"	m	class:o
 ~Env	src/Env.cpp	/^Env::~Env(){$/;"	f	class:Env
 ~JEvent	src/Event/JEvent.cpp	/^JEvent::~JEvent(){$/;"	f	class:JEvent
 ~JMirror	src/Event/JMirror.cpp	/^JMirror::~JMirror(){$/;"	f	class:JMirror
-~JVorm	src/Event/JVorm.cpp	/^JVorm::~JVorm(){$/;"	f	class:JVorm
+~JVorm	src/Event/JVorm.cpp	/^JVorm::~JVorm() {$/;"	f	class:JVorm
 ~MsgParser	src/MsgParser.cpp	/^MsgParser::~MsgParser() {$/;"	f	class:MsgParser
 ~ofxJVisuals	src/ofxJVisuals.cpp	/^ofxJVisuals::~ofxJVisuals() {$/;"	f	class:ofxJVisuals
 ~scSynth	src/scSynth.hpp	/^    ~scSynth(){$/;"	f	class:scSynth
