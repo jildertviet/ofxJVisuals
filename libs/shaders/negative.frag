@@ -26,11 +26,13 @@ void main()
           // if(bDrawSource == 1){
             // outColor = mix(outColor, maskColor, 0.5);
           // }
-        gl_FragColor = outColor;
+        // gl_FragColor = outColor;
         // } else{
-            // gl_FragColor = color;
+            gl_FragColor = color;
         // }
     } else{
         gl_FragColor = color;
     }
+
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }

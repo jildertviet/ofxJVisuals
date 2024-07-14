@@ -15,8 +15,8 @@ void ofApp::setup() {
   // visualizer->addEvent((JEvent*)new JRectangle(glm::vec2(200,100),
   // glm::vec2(100, 100))); visualizer->last->color = ofColor(0, 255, 0, 255);
 
-  // visualizer->shaders.push_back(new JShader());
-  // visualizer->shaders.back()->load("lines");
+  // visualizer->generativeShaders.push_back(new JShader());
+  // visualizer->generativeShaders.back()->load("shaderTest3");
   // s.load("../../../../../addons/ofxJVisuals/libs/shaders/JPhysarum/posUpdate");
 }
 

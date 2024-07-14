@@ -16,9 +16,10 @@ uniform float bus_9;
 
 void main() {
     vec4 col = vec4(0.0);
-    if(gl_FragCoord.y > iResolution.y * 0.5){
-      col = vec4(1.0, 0.0, 0.0, 1.0);
+    if(gl_FragCoord.y > iResolution.y * bus_0){
+      col = vec4(bus_1, bus_2, bus_3, 1.0);
     }
     gl_FragColor = col;
+    // gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
 }
 

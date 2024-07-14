@@ -11,7 +11,7 @@ ofxJVisuals::ofxJVisuals(glm::vec2 size, bool bUseSC) : size(size) {
   for (int i = 0; i < NUMLAYERS; i++)
     layers[i] = new JLayer(); // Dummy events
 
-  negative.load((string)SHADER_PATH + "/negative");
+  negative.load((string)SHADER_PATH + "/negative150");
   brightnessAndSaturation.load((string)SHADER_PATH +
                                "/brightnessAndSaturation");
 
@@ -162,6 +162,7 @@ void ofxJVisuals::update() {
   for (int i = 0; i < generativeShaders.size(); i++) {
     generativeShaders[i]->begin();
     generativeShaders[i]->update();
+    ofSetColor(255);
     ofDrawRectangle(0, 0, ofGetWidth(), ofGetHeight());
     generativeShaders[i]->end();
   }
@@ -201,6 +202,7 @@ void ofxJVisuals::update() {
   negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
   fbo.draw(0, 0);
   negative.end();
+  //
   // negativeMask.draw(0, 0);
   // } else {
   // fbo.draw(0, 0);
@@ -581,17 +583,12 @@ JEvent *MsgParser::addEvent(JEvent *e, int layerIndex, int index,
 ofTrueTypeFont *MsgParser::getSelectedFont() { return v->selectedFont; }
 // vector<JShader *> *MsgParser::getShaders() { return &(v->shaders); }
 JEvent *MsgParser::addShader(JShader *s, int layer) {
-  if (layer == 2) {
-    v->generativeShaders.push_back(s);
-    s->parent = &(v->generativeShaders);
-    return (JEvent *)s;
-  } else {
-    s->parent = &(v->generativeShaders);
-    v->fxShaders.push_back(s);
-    return (JEvent *)s;
-  }
-  return nullptr;
+  auto &shaderList = (layer == 2) ? v->generativeShaders : v->fxShaders;
+  shaderList.push_back(s);
+  s->parent = &(v->generativeShaders);
+  return (JEvent *)s;
 }
+
 ofFbo *MsgParser::getFbo() { return &(v->fbo); }
 void MsgParser::killAll() { v->killAll(); }
 void MsgParser::getFreePointers(string host, int port) {

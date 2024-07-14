@@ -1,6 +1,6 @@
 #include "JShader.hpp"
 
-JShader::JShader() {}
+JShader::JShader() { setType("JShader"); }
 
 void JShader::ownDtor() {
   cout << "Deconstruct shader" << endl;
@@ -24,8 +24,8 @@ void JShader::begin() {
   s.begin();
   s.setUniform2f("iResolution", ofGetWindowSize());
   s.setUniform1f("iTime", ofGetElapsedTimeMillis());
-  for (int i = 0; i < 10; i++) {
-    s.setUniform1f("bus_" + ofToString(i), busses[i]);
+  for (int i = 1; i < 10; i++) { // Bus 1 is for type...
+    s.setUniform1f("bus_" + ofToString(i - 1), busses[i]);
   }
 }
 
@@ -39,5 +39,6 @@ void JShader::parseBuffer() {
   }
   string path(p);
   cout << "Load shader: " << path << endl;
-  s.load(p);
+  if (s.load(p))
+    cout << "Shader loaded" << endl;
 }

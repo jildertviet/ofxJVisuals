@@ -132,7 +132,7 @@ JRectangle	src/Event/JRectangle.cpp	/^JRectangle::JRectangle(glm::vec3 loc, glm:
 JRectangle	src/Event/JRectangle.hpp	/^class JRectangle: public JPrimitive, public JThickLine{ \/\/ Also inherits from Event$/;"	c
 JRectangle_hpp	src/Event/JRectangle.hpp	/^#define JRectangle_hpp$/;"	d
 JShader	src/Event/JEventBase.hpp	/^  JShader,        \/\/ 8$/;"	e	enum:jevent::JEventType
-JShader	src/JShader.cpp	/^JShader::JShader() {}$/;"	f	class:JShader
+JShader	src/JShader.cpp	/^JShader::JShader() { setType("JShader"); }$/;"	f	class:JShader
 JShader	src/JShader.hpp	/^class JShader : public JEvent {$/;"	c
 JShaderLines	src/JShaderLines.cpp	/^JShaderLines::JShaderLines(){$/;"	f	class:JShaderLines
 JShaderLines	src/JShaderLines.hpp	/^class JShaderLines: public JShader{$/;"	c
@@ -759,7 +759,7 @@ m	src/Event/JMesh.hpp	/^    ofMesh m;$/;"	m	class:JMesh	typeref:typename:ofMesh
 m	src/Event/JRectangle.hpp	/^    ofMesh* m = nullptr;$/;"	m	class:JRectangle	typeref:typename:ofMesh *
 m	src/Event/JWaveform.hpp	/^    ofMesh m;$/;"	m	class:JWaveform	typeref:typename:ofMesh
 m	src/Event/meshLandscape.hpp	/^    ofMesh m;$/;"	m	class:meshLandscape	typeref:typename:ofMesh
-main	exampleSimple/src/main.cpp	/^int main(){$/;"	f	typeref:typename:int
+main	exampleSimple/src/main.cpp	/^int main() {$/;"	f	typeref:typename:int
 main	exampleSimpleTlFix/src/main.cpp	/^int main(){$/;"	f	typeref:typename:int
 make	src/MsgParser.cpp	/^bool MsgParser::make(ofxOscMessage &m) {$/;"	f	class:MsgParser	typeref:typename:bool
 makeCoordinates	src/Event/JVorm.cpp	/^void JVorm::makeCoordinates(uint8 numSides, int sideDiv, float radius_,$/;"	f	class:JVorm	typeref:typename:void
