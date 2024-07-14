@@ -302,7 +302,7 @@ bDisplayMirror	src/Event/JMirror.h	/^    bool bDisplayMirror = true;$/;"	m	class
 bDisplayRange	src/Event/dotsBlob.hpp	/^    bool bDisplayRange = true;$/;"	m	class:dotsBlob	typeref:typename:bool
 bDisplayWireFrame	src/Event/meshLandscape.hpp	/^    bool bDisplayWireFrame = false;$/;"	m	class:meshLandscape	typeref:typename:bool
 bDoAlphaBlend	src/AlphaBlackScreen.hpp	/^    bool bDoAlphaBlend = false;$/;"	m	class:AlphaBlackScreen	typeref:typename:bool
-bDoOnce	src/scSynth.hpp	/^    bool bDoOnce = false;$/;"	m	class:scSynth	typeref:typename:bool
+bDoOnce	src/scSynth.hpp	/^  bool bDoOnce = false;$/;"	m	class:scSynth	typeref:typename:bool
 bDone	src/Env.hpp	/^    bool bDone = false;$/;"	m	class:Env	typeref:typename:bool
 bDrawCirclularMask	src/ofxJVisuals.hpp	/^  bool bDrawCirclularMask = false;$/;"	m	class:ofxJVisuals	typeref:typename:bool
 bDrawColors	src/Event/JVecField.hpp	/^    bool bDrawColors = false;$/;"	m	class:JVecField	typeref:typename:bool
@@ -936,7 +936,7 @@ pulseOsc	src/Event/MultiMeshMaybeTomorrow.hpp	/^    bool bMoveWithPulse = false;
 pulseWidth	src/Wavetable.h	/^    float pulseWidth=0.5;$/;"	m	class:Wavetable	typeref:typename:float
 r	src/Event/JPrimitive.hpp	/^  float r() { return size.x * 0.5; }$/;"	f	class:JCircle	typeref:typename:float
 r	src/Event/dotsBlob.hpp	/^    float r = ofRandom(10, 50);$/;"	m	struct:dotsCircle	typeref:typename:float
-r	src/scSynth.hpp	/^    string r = "";$/;"	m	class:scSynth	typeref:typename:string
+r	src/scSynth.hpp	/^  string r = "";$/;"	m	class:scSynth	typeref:typename:string
 radius	src/Event/JVorm.h	/^    float radius, angle, angleOffset;$/;"	m	class:JVorm	typeref:typename:float
 radius	src/Event/MultiMesh.hpp	/^    float radius;$/;"	m	class:MultiMesh	typeref:typename:float
 radius	src/Event/MultiMeshMaybeTomorrow.hpp	/^    float radius;$/;"	m	class:MultiMeshMaybeTomorrow	typeref:typename:float
@@ -1001,7 +1001,7 @@ saveBufferSize	src/Env.hpp	/^    int saveBufferSize = 0;$/;"	m	class:Env	typeref
 saveBufferWritePos	src/Env.hpp	/^    int saveBufferWritePos = 0;$/;"	m	class:Env	typeref:typename:int
 saveValueToBuffer	src/Env.cpp	/^void Env::saveValueToBuffer(float v){$/;"	f	class:Env	typeref:typename:void
 scClient	src/MsgParser.hpp	/^  ofxOscSenderReceiver scClient;$/;"	m	class:MsgParser	typeref:typename:ofxOscSenderReceiver
-scSynth	src/scSynth.hpp	/^class scSynth: public ofThread{$/;"	c
+scSynth	src/scSynth.hpp	/^class scSynth : public ofThread {$/;"	c
 scSynth_h	src/scSynth.hpp	/^#define scSynth_h$/;"	d
 scaleFact	src/Event/JImage.hpp	/^  glm::vec2 scaleFact = glm::vec2(1.0);$/;"	m	class:JSvg	typeref:typename:glm::vec2
 seed	src/Event/JLine.hpp	/^    float seed;$/;"	m	class:JLine	typeref:typename:float
@@ -1080,7 +1080,7 @@ setWidth	src/Event/JRectangle.cpp	/^void JRectangle::setWidth(int width){ size.x
 setZ	src/Event/JVorm.cpp	/^void JVorm::setZ(int z) {$/;"	f	class:JVorm	typeref:typename:void
 setup	exampleSimple/src/ofApp.cpp	/^void ofApp::setup() {$/;"	f	class:ofApp	typeref:typename:void
 setup	exampleSimpleTlFix/src/ofApp.cpp	/^void ofApp::setup(){$/;"	f	class:ofApp	typeref:typename:void
-setup	src/scSynth.hpp	/^    void setup(){$/;"	f	class:scSynth	typeref:typename:void
+setup	src/scSynth.hpp	/^  void setup() {}$/;"	f	class:scSynth	typeref:typename:void
 shader	src/Event/JShaderTest.hpp	/^    ofShader shader;$/;"	m	class:JShaderTest	typeref:typename:ofShader
 sideDiv	src/Event/JVorm.h	/^    float sideDiv;$/;"	m	class:JVorm	typeref:typename:float
 size	src/Event/JEventBase.hpp	/^  glm::vec3 size = {100, 100, 100};$/;"	m	class:JEventBase	typeref:typename:glm::vec3
@@ -1127,14 +1127,14 @@ split	src/Event/JDivisionGrid.hpp	/^    bool split(vector<JPoly*>* rects){$/;"	f
 src	src/Event/JPPBuffer.h	/^    ofFbo   *src;       \/\/ Source       ->  Ping$/;"	m	struct:pingPongBuffer	typeref:typename:ofFbo *
 src	src/Event/JShaderTest.hpp	/^    ofFbo src;$/;"	m	class:JShaderTest	typeref:typename:ofFbo
 start	src/Event/JVecField.hpp	/^    ofVec2f start, end; \/\/ For each line$/;"	m	class:JVecField	typeref:typename:ofVec2f
-start	src/scSynth.hpp	/^    void start(){$/;"	f	class:scSynth	typeref:typename:void
+start	src/scSynth.hpp	/^  void start() { startThread(); }$/;"	f	class:scSynth	typeref:typename:void
 startFromLoopPoint	src/Event/JVideoPlayer.cpp	/^void JVideoPlayer::startFromLoopPoint(){$/;"	f	class:JVideoPlayer	typeref:typename:void
 startPointRotation	src/Event/dotsBlob.hpp	/^    float startPointRotation = 0;$/;"	m	class:dotsBlob	typeref:typename:float
 startSide	src/Event/JDivisionGrid.hpp	/^    int startSide;$/;"	m	class:JPoly	typeref:typename:int
 startTime	src/Env.hpp	/^    int startTime;$/;"	m	class:Env	typeref:typename:int
 startTime	src/Event/JEvent.hpp	/^  unsigned int startTime = 0;$/;"	m	class:JEvent	typeref:typename:unsigned int
 state	src/Event/JParticle.h	/^    bool state = false;$/;"	m	class:JParticle	typeref:typename:bool
-stop	src/scSynth.hpp	/^    void stop(){$/;"	f	class:scSynth	typeref:typename:void
+stop	src/scSynth.hpp	/^  void stop() {$/;"	f	class:scSynth	typeref:typename:void
 subID	src/Event/JEventBase.hpp	/^  unsigned int subID = 0;$/;"	m	class:JEventBase	typeref:typename:unsigned int
 svg	exampleSimple/bin/data/test_0.svg	/^   xmlns:svg="http:\/\/www.w3.org\/2000\/svg">$/;"	n	uri:http://www.w3.org/2000/svg
 svg	src/Event/JImage.hpp	/^    JSvg* svg = nullptr;$/;"	m	class:JImage	typeref:typename:JSvg *
@@ -1157,7 +1157,7 @@ texCoords	src/ofxJVisuals.hpp	/^  vector<glm::vec2> texCoords;$/;"	m	class:ofxJV
 texture	src/Event/JMirror.h	/^    ofTexture texture;$/;"	m	class:JMirror	typeref:typename:ofTexture
 textureRes	src/Event/JPhysarum.hpp	/^    int textureRes;$/;"	m	class:JPhysarum	typeref:typename:int
 textureRes	src/Event/particleSystem.h	/^    	int     textureRes;$/;"	m	class:particleSystem	typeref:typename:int
-threadedFunction	src/scSynth.hpp	/^    void threadedFunction(){$/;"	f	class:scSynth	typeref:typename:void
+threadedFunction	src/scSynth.hpp	/^  void threadedFunction() {$/;"	f	class:scSynth	typeref:typename:void
 timeStep	src/Event/particleSystem.h	/^    	float   timeStep;$/;"	m	class:particleSystem	typeref:typename:float
 times	src/Env.hpp	/^    vector<float> times;$/;"	m	class:Env	typeref:typename:vector<float>
 timesIndex	src/Env.hpp	/^    uint8 timesIndex = 0;$/;"	m	class:Env	typeref:typename:uint8
@@ -1199,7 +1199,7 @@ update	src/MsgParser.cpp	/^void MsgParser::update() {$/;"	f	class:MsgParser	type
 update	src/modifiers/JModifier.hpp	/^    virtual void update(JEvent* e){};$/;"	f	class:JModifier	typeref:typename:void
 update	src/modifiers/JModifierRedraw.hpp	/^    void update(JEvent* e) override{$/;"	f	class:JModifierRedraw	typeref:typename:void
 update	src/ofxJVisuals.cpp	/^void ofxJVisuals::update() {$/;"	f	class:ofxJVisuals	typeref:typename:void
-update	src/scSynth.hpp	/^    void update(){$/;"	f	class:scSynth	typeref:typename:void
+update	src/scSynth.hpp	/^  void update() {}$/;"	f	class:scSynth	typeref:typename:void
 updateCircles	src/Event/dotsBlob.cpp	/^void dotsBlob::updateCircles(){$/;"	f	class:dotsBlob	typeref:typename:void
 updateMain	src/Event/JEvent.cpp	/^void JEvent::updateMain(){$/;"	f	class:JEvent	typeref:typename:void
 updateModifiers	src/modifiers/JModifier.cpp	/^void JEvent::updateModifiers(){$/;"	f	class:JEvent	typeref:typename:void
@@ -1260,4 +1260,4 @@ zoomPP	src/ofxJVisuals.hpp	/^  ZoomBlurPass::Ptr zoomPP = nullptr;$/;"	m	class:o
 ~JVorm	src/Event/JVorm.cpp	/^JVorm::~JVorm() {$/;"	f	class:JVorm
 ~MsgParser	src/MsgParser.cpp	/^MsgParser::~MsgParser() {$/;"	f	class:MsgParser
 ~ofxJVisuals	src/ofxJVisuals.cpp	/^ofxJVisuals::~ofxJVisuals() {$/;"	f	class:ofxJVisuals
-~scSynth	src/scSynth.hpp	/^    ~scSynth(){$/;"	f	class:scSynth
+~scSynth	src/scSynth.hpp	/^  ~scSynth() {$/;"	f	class:scSynth
