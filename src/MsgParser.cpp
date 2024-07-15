@@ -812,7 +812,9 @@ bool MsgParser::create(ofxOscMessage &m) {
     e = new JModifierRedraw();
     break;
   case jevent::JShader:
-    e = addShader(new JShader());
+    e = new JShader();
+    updateValues(m, e);
+    e = addShader((JShader *)e, e->layerID);
     // getShaders()->push_back((JShader *)e);
     break;
   case jevent::JEventCircle:

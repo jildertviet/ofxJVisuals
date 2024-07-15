@@ -198,10 +198,10 @@ void ofxJVisuals::update() {
     fxShaders[i]->update();
   }
   // if (negativeLayer.next) {
-  negative.begin();
-  negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
+  // negative.begin();
+  // negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
   fbo.draw(0, 0);
-  negative.end();
+  // negative.end();
   //
   // negativeMask.draw(0, 0);
   // } else {
