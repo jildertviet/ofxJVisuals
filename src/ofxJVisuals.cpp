@@ -152,11 +152,6 @@ void ofxJVisuals::update() {
   //        ofEnableSmoothing();
   alphaScreen->displayMain();
 
-  // brightnessAndSaturation.begin();
-  // brightnessAndSaturation.setUniform1f("brightness", 0); // 0 = normal
-  // brightnessAndSaturation.setUniform1f("contrast", 1.0); // 1 = normal
-  // brightnessAndSaturation.setUniform1f("saturation", 1); // 1 = normal
-
   ofEnableBlendMode(OF_BLENDMODE_ALPHA);
   layers[1]->displayMain(); // Non-cam layer back
   for (int i = 0; i < generativeShaders.size(); i++) {
@@ -189,7 +184,6 @@ void ofxJVisuals::update() {
   // set gl state back to original
   glPopAttrib();
 #endif
-  // brightnessAndSaturation.end();
   fbo.end();
 
   renderFbo.dst->begin();
@@ -197,6 +191,17 @@ void ofxJVisuals::update() {
   negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
   fbo.draw(0, 0);
   negative.end();
+  renderFbo.dst->end();
+
+  renderFbo.swap();
+
+  renderFbo.dst->begin();
+  brightnessAndSaturation.begin();
+  brightnessAndSaturation.setUniform1f("brightness", 0); // 0 = normal
+  brightnessAndSaturation.setUniform1f("contrast", 1.0); // 1 = normal
+  brightnessAndSaturation.setUniform1f("saturation", 1.0);
+  renderFbo.src->draw(0, 0);
+  brightnessAndSaturation.end();
   renderFbo.dst->end();
 
   renderFbo.swap();
