@@ -201,27 +201,18 @@ void ofxJVisuals::update() {
 
   renderFbo.swap();
 
-  renderFbo.dst->begin();
-  ofSetColor(255);
   for (int i = 0; i < fxShaders.size(); i++) {
+    renderFbo.dst->begin();
+    ofSetColor(255);
     fxShaders[i]->begin();
     fxShaders[i]->update();
-  }
-  renderFbo.src->draw(0, 0);
-  // if (negativeLayer.next) {
-  // negative.begin();
-  // negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
-  // fbo.draw(0, 0);
-  // negative.end();
-  //
-  // negativeMask.draw(0, 0);
-  // } else {
-  // fbo.draw(0, 0);
-  // }
-  for (int i = 0; i < fxShaders.size(); i++) {
+
+    renderFbo.src->draw(0, 0);
     fxShaders[i]->end();
+    renderFbo.dst->end();
+    renderFbo.swap();
   }
-  renderFbo.dst->end();
+  renderFbo.swap();
 }
 
 void ofxJVisuals::display() {
@@ -596,7 +587,7 @@ ofTrueTypeFont *MsgParser::getSelectedFont() { return v->selectedFont; }
 JEvent *MsgParser::addShader(JShader *s, int layer) {
   auto &shaderList = (layer == 2) ? v->generativeShaders : v->fxShaders;
   shaderList.push_back(s);
-  s->parent = &(v->generativeShaders);
+  s->parent = &shaderList;
   return (JEvent *)s;
 }
 
