@@ -53,6 +53,30 @@ public:
   JLayer(){};
   JEvent &operator[](size_t i) { return this->at(i); }
 };
+class JPingpong {
+public:
+  ofFbo *src;
+  ofFbo *dst;
+  void allocate(int width, int height, int internalformat, int numSamples = 0) {
+    src = new ofFbo();
+    dst = new ofFbo();
+    src->allocate(width, height, internalformat, numSamples);
+    dst->allocate(width, height, internalformat, numSamples);
+  }
+  void allocate(ofFboSettings settings) {
+    src = new ofFbo();
+    dst = new ofFbo();
+    src->allocate(settings);
+    dst->allocate(settings);
+  }
+  void swap() {
+    ofFbo *temp = src;
+    src = dst;
+    dst = temp;
+  }
+  void draw(int x, int y) { dst->draw(0, 0); }
+  ofTexture &getTexture() { return dst->getTexture(); }
+};
 
 char encodedIntToChar(int i, char index = 0);
 
@@ -61,7 +85,8 @@ public:
   typedef unsigned char uint8;
   ofxJVisuals(glm::vec2 size = glm::vec2(1920, 1080), bool bUseSC = true);
   ~ofxJVisuals();
-  ofFbo fbo, renderFbo;
+  ofFbo fbo;
+  JPingpong renderFbo;
   void deconstructor();
   void update();
   void display();

@@ -192,15 +192,26 @@ void ofxJVisuals::update() {
   // brightnessAndSaturation.end();
   fbo.end();
 
-  renderFbo.begin();
+  renderFbo.dst->begin();
+  negative.begin();
+  negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
+  fbo.draw(0, 0);
+  negative.end();
+  renderFbo.dst->end();
+
+  renderFbo.swap();
+
+  renderFbo.dst->begin();
+  ofSetColor(255);
   for (int i = 0; i < fxShaders.size(); i++) {
     fxShaders[i]->begin();
     fxShaders[i]->update();
   }
+  renderFbo.src->draw(0, 0);
   // if (negativeLayer.next) {
   // negative.begin();
   // negative.setUniformTexture("mask", negativeMask.getTexture(), 1);
-  fbo.draw(0, 0);
+  // fbo.draw(0, 0);
   // negative.end();
   //
   // negativeMask.draw(0, 0);
@@ -210,7 +221,7 @@ void ofxJVisuals::update() {
   for (int i = 0; i < fxShaders.size(); i++) {
     fxShaders[i]->end();
   }
-  renderFbo.end();
+  renderFbo.dst->end();
 }
 
 void ofxJVisuals::display() {
