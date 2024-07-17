@@ -17,7 +17,8 @@ void JShader::ownDtor() {
 }
 
 void JShader::load(string name) {
-  s.load("../../../../../addons/ofxJVisuals/libs/shaders/" + name);
+  // s.load("../../../../../addons/ofxJVisuals/libs/shaders/" + name);
+  s.load(ofFilePath::getAbsolutePath(name, false));
 }
 
 void JShader::begin() {
