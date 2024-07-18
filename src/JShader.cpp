@@ -25,7 +25,7 @@ void JShader::begin() {
   s.begin();
   s.setUniform2f("iResolution", ofGetWindowSize());
   s.setUniform1f("iTime", ofGetElapsedTimeMillis());
-  for (int i = 1; i < 10; i++) { // Bus 1 is for type...
+  for (int i = 1; i < numBusses; i++) { // Bus 1 is for type...
     s.setUniform1f("bus_" + ofToString(i - 1), busses[i]);
   }
 }

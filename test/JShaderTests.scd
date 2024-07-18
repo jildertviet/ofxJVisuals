@@ -31,7 +31,8 @@ g = Buffer.alloc(~of, 100);
 g.setn(0, "../../../libs/shaders/addred".ascii); // Doesn't work?
 y = {JBufferSender.kr(g, 1, e.nodeID, 0); EnvGate.new(1, Impulse.kr(0), 1)}.play(~of) // Load the shader...
 e.free
+s.plotTree
 
 // Two rectangles, as subject for the FX shaders above
-x = {JRectangleS.kr(0, loc: [0, 0, 0], size: [200, 200, 0], rgba: [125, 0, 0, 1]); 1; }.play(~of);
+x = {JRectangleS.kr(0, loc: [0, 0, 0], size: [200, 200, 0], rgba: [125, 0, 0, 1], busses: [1, 1]); 1; }.play(~of);
 x = {JRectangleS.kr(0, layer: 9, loc: [100, 100, 0], size: [200, 200, 0]); 1; }.play(~of);

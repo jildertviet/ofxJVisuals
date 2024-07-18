@@ -7,8 +7,8 @@
 #endif
 
 #include "ofColor.h"
-
-#define NUM_BUSSES 32
+#include <iostream>
+#define NUM_VALUES 23
 
 namespace jevent {
 enum JEventType {
@@ -33,13 +33,16 @@ enum ConnectionType {
 
 class JEventBase {
 public:
-  JEventBase() {
-    for (int i = 0; i < NUM_BUSSES; i++)
-      values[i] = nullptr;
-    linkValues();
-  };
+  JEventBase(){};
 
-  void linkValues() {
+  void linkValues(float numBusses) {
+    this->numBusses = numBusses;
+    totalNumValues = numBusses + NUM_VALUES;
+    busses = new float[(int)numBusses];
+    values = new float *[totalNumValues];
+    for (int i = 0; i < totalNumValues; i++)
+      values[i] = nullptr;
+
     values[0] = &loc.x;
     values[1] = &loc.y;
     values[2] = &loc.z;
@@ -69,24 +72,23 @@ public:
 
     values[20] = &bFill;
     values[21] = &mode;
+    values[22] = &numBusses;
 
-    values[22] = &busses[0];
-    values[23] = &busses[1];
-    values[24] = &busses[2];
-    values[25] = &busses[3];
-    values[26] = &busses[4];
-    values[27] = &busses[5];
-    values[28] = &busses[6];
-    values[29] = &busses[7];
-    values[30] = &busses[8];
-    values[31] = &busses[9];
+    for (int i = 0; i < numBusses; i++) {
+      values[23 + i] = &busses[i];
+    }
   }
 
-  float *values[NUM_BUSSES];
+  float **values = nullptr;
 
   float *valuesToFloatArray() {
-    float *valuesToSend = new float[NUM_BUSSES];
-    for (int i = 0; i < NUM_BUSSES; i++) {
+    std::cout << "valuesToFloatArray" << std::endl;
+    // float *valuesToSend = new float[totalNumValues];
+    for (int i = 0; i < totalNumValues; i++) {
+      if (!values) {
+        std::cout << "Values is nullptr" << std::endl;
+        return nullptr;
+      }
       if (values[i]) {
         valuesToSend[i] = *values[i];
       } else {
@@ -97,7 +99,7 @@ public:
   };
 
   void setValuesFromFloatArray(float *a) {
-    for (int i = 0; i < NUM_BUSSES; i++) {
+    for (int i = 0; i < totalNumValues; i++) {
       if (values[i])
         *values[i] = a[i];
     }
@@ -123,6 +125,9 @@ public:
 
   jevent::JEventType type;
 
-  float busses[10];
+  float *busses;
+  int totalNumValues = 0;
+  float valuesToSend[64];
+  float numBusses = 10;
 };
 #endif // JEventBase

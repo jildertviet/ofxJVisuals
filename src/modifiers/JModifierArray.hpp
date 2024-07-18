@@ -5,7 +5,11 @@
 
 class JModifierArray : public JModifier {
 public:
-  JModifierArray() {
+  JModifierArray() {}
+  void init() {
+    if (busses == nullptr) {
+      cout << "Busses are nullptr!" << endl;
+    }
     dimensions[0] = &busses[1];
     dimensions[1] = &busses[2];
     spacing[0] = &busses[3];
