@@ -82,7 +82,7 @@ public:
   float **values = nullptr;
 
   float *valuesToFloatArray() {
-    std::cout << "valuesToFloatArray" << std::endl;
+    // std::cout << "valuesToFloatArray" << std::endl;
     // float *valuesToSend = new float[totalNumValues];
     for (int i = 0; i < totalNumValues; i++) {
       if (!values) {
