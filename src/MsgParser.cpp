@@ -109,17 +109,19 @@ void MsgParser::connectToSuperCollider() {
 }
 
 bool MsgParser::updateValues(ofxOscMessage &m, JEvent *e) {
-  if (m.getNumArgs() < NUM_BUSSES)
-    return false; // No values[] added to msg, ignore
-  float valuesToUpdate[NUM_BUSSES];
-  for (int i = 0; i < NUM_BUSSES; i++) {
-    valuesToUpdate[i] = m.getArgAsFloat(i + 2); // Offset nodeID and replyID
-  }
   if (!e)
     e = getEventById(m.getArgAsInt(0), m.getArgAsInt(1)); // Use subID
   if (!e)
     return false;
+
+  if (m.getNumArgs() < e->totalNumValues)
+    return false; // No values[] added to msg, ignore
+  float *valuesToUpdate = new float[e->totalNumValues];
+  for (int i = 0; i < e->totalNumValues; i++) {
+    valuesToUpdate[i] = m.getArgAsFloat(i + 2); // Offset nodeID and replyID
+  }
   e->setValuesFromFloatArray(valuesToUpdate);
+  delete valuesToUpdate;
   return true;
 }
 
@@ -797,6 +799,7 @@ bool MsgParser::create(ofxOscMessage &m) {
     break;
   case jevent::JModifierArray:
     e = new JModifierArray();
+    bInit = true;
     break;
   case jevent::JVorm:
     e = new JVorm();
@@ -813,6 +816,7 @@ bool MsgParser::create(ofxOscMessage &m) {
     break;
   case jevent::JShader:
     e = new JShader();
+    e->linkValues(m.getArgAsFloat(22 + 2)); // Right?
     updateValues(m, e);
     e = addShader((JShader *)e, e->layerID);
     // getShaders()->push_back((JShader *)e);
@@ -823,7 +827,7 @@ bool MsgParser::create(ofxOscMessage &m) {
   default:
     return false;
   }
-
+  e->linkValues(m.getArgAsFloat(22 + 2)); // Right?
   updateValues(m, e);
 
   e->id = m.getArgAsInt(0);

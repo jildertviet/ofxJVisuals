@@ -22,7 +22,6 @@ JVorm::JVorm(uint8 numSides, int sideDiv, float radius, glm::vec3 loc,
   this->radius = radius;
   this->loc = loc;
   size = glm::vec3(radius);
-  maxDistance = &busses[4];
 
   makeCoordinates(numSides, sideDiv, radius, on_destination); // Coordinates
 
@@ -33,6 +32,8 @@ void JVorm::init() {
   // makeCoordinates(numSides, sideDiv, radius, on_destination);
   makeCoordinates(busses[0], busses[1], busses[2], busses[3]);
   changeMaxspeed(speed);
+
+  maxDistance = &busses[4];
 }
 
 void JVorm::specificFunction() {
