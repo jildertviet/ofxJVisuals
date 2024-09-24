@@ -4,9 +4,10 @@
 (
 x = {JShaderS.kr(0, rgba: [255, 255, 255, 1.0], numBusses: 21, busses: 
 [8, 
-  LFTri.kr(0.4).range(0.1, 0.2),
+  // LFTri.kr(0.4).range(0.1, 0.2),
+  0.2,
   0.2, 0.5, 0.5,
-  1.0, 0.0, 0.0,
+  0.0, 0.0, 0.0,
   1.0, 1.0, 1.0
 ], mode: 0
 ); 1; }.play(~of);
@@ -24,17 +25,20 @@ x.free
 // Test with Ndefs. Have to reload each time... 
 (
 Ndef(\a -> \of, {
-  JShaderS.kr(0, rgba: [255, 0, 255, SinOsc.ar(1).abs], numBusses: 20, busses: 
+  JShaderS.kr(0, rgba: [255, 0, 255, 1.0], numBusses: 21, busses: 
   [
     8, 
-    Env.perc(0.1, 0.4, level: LFDNoise1.ar(1).abs).ar(gate: Impulse.kr(1)), 
+    // Env.perc(0.1, 0.4, level: LFDNoise1.kr(1).abs).kr(gate: Impulse.kr(1)), 
+    // 0.0,
+   LFTri.kr(0.4).range(0.1, 0.2),
     0.0, 
     1.0, 
-    1/8.0,
+    1.0,
     1.0, 1.0, 1.0,
     0.0, 0.0, 1.0
-  ]
+  ], mode: 0, size: [100, 100, 0]
 ); 1; }).play;
 )
+s.plotTree
 y = {JBufferSender.kr(b, 1, Ndef(\a->\of).objects[0].nodeID, 0); EnvGate.new(1, Impulse.kr(0), 1)}.play(~of);//  Load the shader...
 [0,1,2].at((0..2))
