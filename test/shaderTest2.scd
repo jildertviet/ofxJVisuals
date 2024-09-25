@@ -25,20 +25,32 @@ x.free
 // Test with Ndefs. Have to reload each time... 
 (
 Ndef(\a -> \of, {
+// Ndef(\a, {
+var n = LFDNoise3.kr(1/2).abs;
+var d = CombC.kr(n, 0.5, delaytime: 0.5, decaytime: 0);
+var e = CombC.kr(n, 1.0, delaytime: 1.0, decaytime: 0);
   JShaderS.kr(0, rgba: [255, 0, 255, 1.0], numBusses: 21, busses: 
   [
     8, 
     // Env.perc(0.1, 0.4, level: LFDNoise1.kr(1).abs).kr(gate: Impulse.kr(1)), 
     // 0.0,
-   LFTri.kr(0.4).range(0.1, 0.2),
-    0.0, 
-    1.0, 
-    1.0,
-    1.0, 1.0, 1.0,
-    0.0, 0.0, 1.0
+   // LFTri.kr(0.4).range(0.1, 0.4),
+   // LFDNoise3.kr(1),
+   n,
+    n, 
+    1.0 - d, 
+    1.0 - e,
+    d, 1.0 - n, d.pow(2),
+    0.4, e, e.pow(2) 
   ], mode: 0, size: [100, 100, 0]
-); 1; }).play;
+); Impulse.kr(1); }).play;
+Ndef(\b -> \of, {
+JBufferSender.kr(b,\trig.kr(1), Ndef(\a->\of).objects[0].nodeID, 0); 
+}).play;
+
+Ndef(\b -> \of).map(\trig, Ndef(\a->\of)); // Shader gets loaded each second...
 )
-s.plotTree
-y = {JBufferSender.kr(b, 1, Ndef(\a->\of).objects[0].nodeID, 0); EnvGate.new(1, Impulse.kr(0), 1)}.play(~of);//  Load the shader...
-[0,1,2].at((0..2))
+
+Ndef.clear
+~of.freeAll
+~of.plotTree

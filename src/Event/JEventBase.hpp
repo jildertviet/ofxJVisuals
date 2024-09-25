@@ -9,6 +9,8 @@
 #include "ofColor.h"
 #include <iostream>
 #define NUM_VALUES 23
+#define MAX_VALUES 64
+#define MAX_BUSSES MAX_VALUES - NUM_VALUES
 
 namespace jevent {
 enum JEventType {
@@ -38,8 +40,8 @@ public:
   void linkValues(float numBusses) {
     this->numBusses = numBusses;
     totalNumValues = numBusses + NUM_VALUES;
-    busses = new float[(int)numBusses];
-    values = new float *[totalNumValues];
+    // busses = new float[(int)numBusses];
+    // values = new float *[totalNumValues];
     for (int i = 0; i < totalNumValues; i++)
       values[i] = nullptr;
 
@@ -79,7 +81,7 @@ public:
     }
   }
 
-  float **values = nullptr;
+  // float **values = nullptr;
 
   float *valuesToFloatArray() {
     // std::cout << "valuesToFloatArray" << std::endl;
@@ -95,7 +97,9 @@ public:
         valuesToSend[i] = 0.0;
       }
     }
+    // std::cout << "valuesToFloatArrayEnd" << std::endl;
     return valuesToSend;
+    // return values;
   };
 
   void setValuesFromFloatArray(float *a) {
@@ -125,9 +129,11 @@ public:
 
   jevent::JEventType type;
 
-  float *busses;
+  // float *busses;
   int totalNumValues = 0;
-  float valuesToSend[64];
+  float valuesToSend[MAX_VALUES];
+  float *values[MAX_VALUES];
+  float busses[MAX_VALUES - NUM_VALUES];
   float numBusses = 10;
 };
 #endif // JEventBase
