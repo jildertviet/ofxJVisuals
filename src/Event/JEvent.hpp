@@ -9,9 +9,15 @@
 #ifndef JEvent_hpp
 #define JEvent_hpp
 
+#include "config.h"
+
+#ifdef JV_SHAREDMEM
+#include "libsharedmemory.hpp"
+#include <memory>
+#endif
+
 #include "Env.hpp" // USE_FRAMES_AS_CLOCK is set here
 #include "JEventBase.hpp"
-#include "config.h"
 #include "mapValue.h"
 #include "ofMain.h"
 #include "ofxOscBidirectional.h"
@@ -157,6 +163,10 @@ public:
     }
     return *this;
   }
+#ifdef JV_SHAREDMEM
+  std::shared_ptr<lsm::SharedMemoryReadStream> reader;
+  void createMemoryReader(int id, int subID);
+#endif
 
 private:
 };

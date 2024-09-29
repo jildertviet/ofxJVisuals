@@ -3,8 +3,8 @@
 (
 Ndef(\a -> \of, {
   var env = Env.adsr(1e-3, 1e-4, 1, \fadeTime.kr(1)).ar(gate: \gate.kr(1), doneAction: 2);
-  JRectangleS.kr(0, 
-    loc: [\x.kr(0).lag(1), 100, 0],
+  JRectangleS.kr((0..2), 
+    loc: [\x.kr(0).lag(1), 100  * TRand.kr(0, 8, 1!3), 0],
     size: [100, 100, 0], 
     rgba: [255, 255, 255, \br.kr(1) * env]); 1;
   }

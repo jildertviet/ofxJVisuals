@@ -36,7 +36,7 @@ void main() {
         float factor = (uv.x - minPoint.x) / (maxPoint.x - minPoint.x);
         // Interpolate color based on the factor
         vec3 color = mix(colorA, colorB, factor);
-        gl_FragColor = vec4(color, 1.0);
+        gl_FragColor = vec4(color, 0.7);
     } else {
         gl_FragColor = vec4(0.0); // Outside the rectangle
     }

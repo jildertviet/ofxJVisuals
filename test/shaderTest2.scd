@@ -54,3 +54,6 @@ Ndef(\b -> \of).map(\trig, Ndef(\a->\of)); // Shader gets loaded each second...
 Ndef.clear
 ~of.freeAll
 ~of.plotTree
+
+{JRectangleS.kr(id: (0..5), loc: [((0..5)*(1080/6)) + (1080/24), (LFDNoise3.kr(1!5)*800)+500, 0], speed: 0, rgba: [255, 255, 255, SinOsc.kr(1/4).abs]);}.play(~of);
+~of.freeAll

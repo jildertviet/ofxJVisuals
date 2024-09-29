@@ -2,3 +2,4 @@ ofxSvg
 ofxJVisuals
 ofxOscBidirectional
 ofxGui
+ofxSharedMemory

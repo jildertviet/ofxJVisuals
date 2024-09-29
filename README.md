@@ -20,6 +20,7 @@ Dependencies
 ------------
 - ofxJVisuals
 - [ofxOscBidirectional](https://github.com/elgiano/ofxOscBidirectional.git)
+- [ofxSharedMemory](https://github.com/funatsufumiya/ofxSharedMemory)
 
 Mac:  
 
