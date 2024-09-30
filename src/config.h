@@ -27,6 +27,6 @@
 #endif
 #define SC_PORT 9993
 
-#define JV_SHAREDMEM true
+// #define JV_SHAREDMEM true
 
 #endif /* config_h */

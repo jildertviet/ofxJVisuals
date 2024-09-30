@@ -164,8 +164,8 @@ public:
     return *this;
   }
 #ifdef JV_SHAREDMEM
-  std::shared_ptr<lsm::SharedMemoryReadStream> reader;
-  void createMemoryReader(int id, int subID);
+  std::shared_ptr<lsm::SharedMemoryReadStream> reader = nullptr;
+  void createMemoryReader();
 #endif
 
 private:

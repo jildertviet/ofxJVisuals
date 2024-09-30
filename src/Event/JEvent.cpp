@@ -61,8 +61,15 @@ void JEvent::update() {
   }
 #ifdef JV_SHAREDMEM
   if (reader) {
-    float *r = reader->readFloatArray();
-    setValuesFromFloatArray(r);
+    // float *r = reader->readFloatArray();
+    // if (r) {
+    // setValuesFromFloatArray(r);
+    // }
+    reader->readFloatArrayBuf(valuesToSend); // Re-use array
+    cout << "Set " << ofToString(id) << ", " << ofToString(subID) << endl;
+    setValuesFromFloatArray(valuesToSend);
+    cout << "Done set " << endl;
+    // delete r;
   }
 #endif
 
@@ -379,12 +386,14 @@ void JEvent::doFunc(int id, float *v) {
 }
 
 #ifdef JV_SHAREDMEM
-void JEvent::createMemoryReader(int id, int subID) {
+void JEvent::createMemoryReader() {
   string idString = "";
   idString += ofToString(id);
   idString += ",";
   idString += ofToString(subID);
+  cout << "Subscribe to shared mem: " << idString << endl;
   reader =
       std::make_shared<lsm::SharedMemoryReadStream>(idString, 64 * 4, false);
+  cout << "After subscribe" << endl;
 }
 #endif

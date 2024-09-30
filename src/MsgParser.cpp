@@ -833,6 +833,9 @@ bool MsgParser::create(ofxOscMessage &m) {
   e->id = m.getArgAsInt(0);
   e->subID = encodedIntToChar(m.getArgAsInt(1), 1);
   // cout << "layerId: " << ofToString(e->layerID) << endl;
+#ifdef JV_SHAREDMEM
+  e->createMemoryReader();
+#endif
   addEvent(e, e->layerID, e->id, false);
 
   if (bInit)
