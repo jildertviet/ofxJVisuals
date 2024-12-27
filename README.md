@@ -25,9 +25,6 @@ Dependencies
 - ofxJVisuals
 - [ofxOscBidirectional](https://github.com/elgiano/ofxOscBidirectional.git)
 
-Optional? (It should be optional...)
-- [ofxSharedMemory](https://github.com/funatsufumiya/ofxSharedMemory)
-
 Mac (2024: not sure if this is outdated)
 
 - [ofxSyphon](https://github.com/astellato/ofxSyphon)
