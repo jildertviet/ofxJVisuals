@@ -2,11 +2,12 @@
 
 // JShaderS uses JEventDynamic and therefore busses[0] is reserved for the Event-id (8 in this case)
 (
-x = {JShaderS.kr(0, rgba: [255, 255, 255, 1.0], numBusses: 21, busses: 
+n = 30;
+x = {JShaderS.kr((0..(n-1)), rgba: [255, 255, 255,1], numBusses: 21, busses: 
 [8, 
   // LFTri.kr(0.4).range(0.1, 0.2),
-  0.2,
-  0.2, 0.5, 0.5,
+  TRand.kr(0.0, 1.0, 1!n),
+  0.5 + LFDNoise3.kr(1/4!n), 0.5, 0.5,
   0.0, 0.0, 0.0,
   1.0, 1.0, 1.0
 ], mode: 0
@@ -15,6 +16,8 @@ x = {JShaderS.kr(0, rgba: [255, 255, 255, 1.0], numBusses: 21, busses:
 b = Buffer.alloc(~of, 100);
 b.setn(0, "/home/jildert/of_v0.12.0-rc1_linux64gcc6_release/addons/ofxJVisuals/test/gradientRect".ascii);
 y = {JBufferSender.kr(b, 1, x.nodeID, 0); EnvGate.new(1, Impulse.kr(0), 1)}.play(~of) // Load the shader...
+// Multichannel
+y = {JBufferSender.kr(b, 1, x.nodeID, (0..(n-1))); EnvGate.new(1, Impulse.kr(0), 1)}.play(~of) // Load the shader...
 
 b.setn(0, 0!100); // Reset buffer
 
@@ -55,5 +58,5 @@ Ndef.clear
 ~of.freeAll
 ~of.plotTree
 
-{JRectangleS.kr(id: (0..5), loc: [((0..5)*(1080/6)) + (1080/24), (LFDNoise3.kr(1!5)*800)+500, 0], speed: 0, rgba: [255, 255, 255, SinOsc.kr(1/4).abs]);}.play(~of);
+{JRectangleS.kr(id: (0..5), loc: [((0..5)*(1080/6)) + (1080/24), (LFDNoise3.kr(1!5)*200)+500, 0], speed: 0, rgba: [255, 255, 255, SinOsc.kr(1/4).abs]);}.play(~of);
 ~of.freeAll

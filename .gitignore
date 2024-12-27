@@ -19,3 +19,4 @@ README_AUTHOR.md
 **.compiler_flags
 *.gch
 tags
+tags.*
