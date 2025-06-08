@@ -13,7 +13,7 @@
 
 class scSynth : public ofThread {
 public:
-  string r = "";
+  string r;
   bool bDoOnce = false;
   ~scSynth() {
     stop();
@@ -44,11 +44,6 @@ public:
 #endif
         string cmd = "pw-jack " + ofToString(SC_FOLDER) + "scsynth -u " +
                      ofToString(SC_PORT) + " -l 4 -i 0";
-        // for(auto d : devices){
-        // if(ofStringTimesInString(d.name, "WH-1000XM4")){
-        // cmd += " -H Sony";
-        // }
-        // }
         cout << cmd << endl;
         r = ofSystem(cmd.c_str());
       }

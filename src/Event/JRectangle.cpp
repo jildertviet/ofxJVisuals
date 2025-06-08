@@ -43,35 +43,35 @@ JRectangle::JRectangle(glm::vec2 loc, glm::vec2 size)
 void JRectangle::ownDtor() { removeFromVector(); }
 
 void JRectangle::setAlpha(unsigned char alpha) {
-  if (m) {
-    for (char i = 0; i < m->getNumColors(); i++) {
-      ofColor c = m->getColor(i);
+  if (mesh) {
+    for (char i = 0; i < mesh->getNumColors(); i++) {
+      ofColor c = mesh->getColor(i);
       c.a = alpha;
-      m->setColor(i, c);
+      mesh->setColor(i, c);
     }
   }
 }
 
 void JRectangle::setQuadColor(ofColor a, ofColor b, ofColor c, ofColor d) {
-  if (m)
-    delete m;
-  m = new ofMesh();
-  m->setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
-  m->addVertex(glm::vec3(0, 0, 0));
-  m->addColor(a);
-  m->addVertex(glm::vec3(size.x, 0, 0));
-  m->addColor(b);
-  m->addVertex(glm::vec3(0, size.y, 0));
-  m->addColor(d); // Swapped, so color adding is clockwise
-  m->addVertex(glm::vec3(size.x, size.y, 0));
-  m->addColor(c);
+  if (mesh)
+    delete mesh;
+  mesh = new ofMesh();
+  mesh->setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+  mesh->addVertex(glm::vec3(0, 0, 0));
+  mesh->addColor(a);
+  mesh->addVertex(glm::vec3(size.x, 0, 0));
+  mesh->addColor(b);
+  mesh->addVertex(glm::vec3(0, size.y, 0));
+  mesh->addColor(d); // Swapped, so color adding is clockwise
+  mesh->addVertex(glm::vec3(size.x, size.y, 0));
+  mesh->addColor(c);
 }
 
 void JRectangle::display() {
   ofSetColor(color);
   ofPushMatrix();
 
-  if (!m) {
+  if (!mesh) {
     switch ((int)mode) {
     case 0:
       ofTranslate(loc + (size * 0.5));
@@ -110,7 +110,7 @@ void JRectangle::display() {
     ofRotateZDeg(rotation.z);
     ofTranslate(-(size * 0.5));
 
-    m->draw();
+    mesh->draw();
   }
 
   ofPopMatrix();
@@ -120,7 +120,7 @@ void JRectangle::display() {
 
 void JRectangle::specificFunction() {
   if (getNumEnv()) {
-    if (m) {
+    if (mesh) {
       setAlpha(color.a); // Transfer color alpha to mesh alpha
     }
   }

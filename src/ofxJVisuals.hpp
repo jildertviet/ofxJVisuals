@@ -47,12 +47,14 @@ class JPhysarum;
 #endif
 
 #include "MsgParser.hpp"
+typedef unsigned char uint8;
 
 class JLayer : public JEvent { // What does it do?
 public:
   JLayer(){};
   JEvent &operator[](size_t i) { return this->at(i); }
 };
+
 class JPingpong {
 public:
   ofFbo *src;
@@ -82,9 +84,9 @@ char encodedIntToChar(int i, char index = 0);
 
 class ofxJVisuals {
 public:
-  typedef unsigned char uint8;
   ofxJVisuals(glm::vec2 size = glm::vec2(1920, 1080), bool bUseSC = true);
   ~ofxJVisuals();
+
   ofFbo fbo;
   JPingpong renderFbo;
   void deconstructor();
@@ -119,8 +121,6 @@ public:
   JEvent *getEventById(unsigned int id, unsigned int subID = 0);
   JEvent *lastCalled = nullptr;
 
-  static bool checkIfNull(JEvent *e);
-
   bool bMirror = false;
   bool bAddMirror = false;
 
@@ -148,15 +148,6 @@ public:
   MsgParser *msgParser;
   ofxOscSender *SCsender = nullptr;
   ofxOscReceiver receiver;
-  //
-  ////    vector<Pointer*> receivingPointers;
-  //    vector<float> vec(float a);
-  //    vector<float> vec(float a, float b);
-  //    vector<float> vec(float a, float b, float c);
-  //    vector<float> vec(float a, float b, float c, float d);
-  //    vector<float> vec(float a, float b, float c, float d, float e);
-
-  //    Wavetables wavetable;
 
   bool bMask = false;
   ofImage mask;
@@ -191,6 +182,7 @@ public:
   JLayer negativeLayer;
 
 private:
+  static bool checkIfNull(JEvent *e);
   void loadLastMaskFile();
   ofShader negative;
   ofShader brightnessAndSaturation;
