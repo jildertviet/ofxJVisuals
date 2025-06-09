@@ -99,7 +99,7 @@ public:
 
   void setAlpha(int alpha, bool bDo = true);
   void setBrightness(unsigned char b);
-  int brightness = 255;
+  uint8_t brightness = 255;
 
   void killAll();
 

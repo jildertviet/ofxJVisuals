@@ -292,9 +292,7 @@ void JEvent::addEnvAlpha(float a, float s, float r, float alpha) {
 short JEvent::getNumEnv() {
   short num = 0;
   for (int i = 0; i < envelopes.size(); i++) {
-    for (int j = 0; j < envelopes[i].size(); j++) {
-      num++;
-    }
+    num += envelopes[i].size();
   }
   return num;
 }
