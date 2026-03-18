@@ -6,6 +6,7 @@
 //
 
 #include "MsgParser.hpp"
+#include "ofxJVisuals.hpp"
 
 char encodedIntToChar(int i, char index) { return (*(((char *)&i) + index)); }
 
@@ -39,6 +40,7 @@ MsgParser::MsgParser(ofxJVisuals *v, bool bUseSC) : v(v), bUseSC(bUseSC) {
       "setBackground",
       "fillBuffer",
       "setBDrawNegative",
+      "saveScreenshot",
   };
   for (short i = 0; i < commandKeys.size(); i++) {
     string key = "/";
@@ -255,6 +257,9 @@ bool MsgParser::parseMsg(ofxOscMessage &m) {
   case 24: { // setBDrawNegative
              // v->bDrawNegativeLayer = m.getArgAsInt(0);
   } break;
+  case 25: // saveScreenshot
+    v->saveScreenshot();
+    break;
   }
   return false;
 }

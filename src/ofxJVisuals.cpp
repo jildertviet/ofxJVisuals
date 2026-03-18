@@ -1,6 +1,9 @@
 //  Created by Jildert Viet on 24-01-16.
 
 #include "ofxJVisuals.hpp"
+#include <ctime>
+#include <iomanip>
+#include <sstream>
 
 #define RECEIVER_PORT 6061
 
@@ -317,6 +320,17 @@ void ofxJVisuals::setAlpha(int alpha, bool bDo) {
 }
 
 void ofxJVisuals::setBrightness(unsigned char b) { brightness = b; }
+
+void ofxJVisuals::saveScreenshot() {
+  auto t = std::time(nullptr);
+  auto tm = *std::localtime(&t);
+  std::ostringstream oss;
+  oss << std::put_time(&tm, "ofxJVisuals_%Y-%m-%d_%H-%M-%S.png");
+  ofPixels pixels;
+  fbo.readToPixels(pixels);
+  ofSaveImage(pixels, oss.str());
+  ofLog() << "Screenshot saved: " << oss.str();
+}
 
 void ofxJVisuals::killAll() {
   alphaScreen->bGradient = false;

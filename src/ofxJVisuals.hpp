@@ -102,6 +102,7 @@ public:
   uint8_t brightness = 255;
 
   void killAll();
+  void saveScreenshot();
 
   int numEvents = 0;
   JEvent *last = nullptr;
